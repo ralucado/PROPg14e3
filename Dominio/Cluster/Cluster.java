@@ -1,10 +1,10 @@
-package TestCluster;
+package Dominio;
 
 import java.util.*;
 
 /**
  * 
- * La classe <tt>Cluster</tt> representa un conjunt d'entitats. Un cluster té un <i>medoide</i>, que és l'element més similar a la resta.
+ * La classe <tt>Cluster</tt> representa un conjunt d'elements. Un cluster té un <i>medoide</i>, que és l'element més similar a la resta.
  * @author Arnau Blanch
  * 
  */
@@ -88,11 +88,6 @@ public class Cluster {
 	}
 	
 	/**
-	 * Recalcula el <i>medoide</i> del clúster segons la rellevància entre els elements.
-	 * @param M matriu de rellevància
-	 */
-	
-	/**
 	 * Retorna la posició del medoide del clúster a la matriu de rellevància
 	 * @return medoide del clúster
 	 * @throws Exception si no hi ha cap medoide assignat
@@ -120,7 +115,10 @@ public class Cluster {
 	}
 
 	
-	
+	/**
+	 * Recalcula el medoide del clúster segons la rellevància entre elements
+	 * @param M matriu de rellevància
+	 */
 	public void updateMedoid(ArrayList<ArrayList<Double> > M) {
 		HashMap<Integer,Double> relevances = new HashMap<Integer,Double>();
 		
@@ -131,6 +129,7 @@ public class Cluster {
 				if (i != j)  sum += M.get(i).get(j);
 			relevances.put(i, sum);
 		}
+		// No cal l'if que hi ha a ConjuntClusters perquè no pot ser que els elements del cluster no es relacionin entre ells 
 		
 		Map<Integer,Double> orderedRelev = ordenaPerValor(relevances);
 		// Tenim un map ordenat per la suma de similaritats (ordre descendent)
