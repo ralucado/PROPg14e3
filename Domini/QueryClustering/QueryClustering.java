@@ -27,10 +27,7 @@ public class QueryClustering extends Query {
 		super.cami = cami;
 		this.k = k;
 		this.hs = hs;
-		try {
-			this.cjt = new ConjuntClusters(k);
-		} catch(Exception e) {throw e;}
-		
+		this.cjt = new ConjuntClusters(k);		
 	}
 	
 	/**
@@ -45,12 +42,24 @@ public class QueryClustering extends Query {
 	 * Retorna una matriu d'entitats corresponent al conjunt de clústers resultant de la query de clustering
 	 * @param g graf de dades
 	 * @return matriu d'entitats resultant
-	 * @throws Exception
+	 * @throws Exception pot retornar les excepcions de clúster i conjunt de clústers
 	 */
 	public ArrayList<ArrayList<Entitat>> getResultatClusters(Graf g) throws Exception {
 		if (!executat) executaKMedoids();
 		
 		return cjt.getListEntitats(g, cami.getPath().charAt(0));
+	}
+	
+	/**
+	 * Retorna la llista d'entitats no assignades a cap clúster resultant de la query de clustering
+	 * @param g graf de dades
+	 * @return llista d'entitats no assinades resultant
+	 * @throws Exception pot retornar les excepcions de clúster i conjunt de clústers
+	 */
+	public ArrayList<Entitat> getNoAssig(Graf g) throws Exception {
+		if (!executat) executaKMedoids();
+		
+		return cjt.getNoAssigEntitats(g, cami.getPath().charAt(0));
 	}
 	
 	/**
