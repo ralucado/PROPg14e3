@@ -160,7 +160,7 @@ public class ConjuntClusters {
 	 * @throws Exception si el tipus d'entitat no és vàl·lid
 	 */
 	public ArrayList<Entitat> getEntitatsFromPositions(Graf g, ArrayList<Integer> listPos, char tipus) throws Exception {
-		if (tipus != 'A' || tipus != 'C' || tipus != 'P' || tipus != 'T') throw new Exception("Tipus d'entitat no vàl·lid");
+		if (tipus != 'A' && tipus != 'C' && tipus != 'P' && tipus != 'T') throw new Exception("Tipus d'entitat no vàl·lid");
 		else {
 			ArrayList<Entitat> listEntitats = new ArrayList<Entitat>();
 			
