@@ -1,4 +1,4 @@
-package Dominio;
+package Domini;
 
 public class Matrix{
 	private final int M;             // number of rows

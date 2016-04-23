@@ -1,4 +1,4 @@
-package Dominio;
+package Domini;
 
 public class QueryNormal extends Query {
 	private Entitat eIni;
