@@ -1,4 +1,4 @@
-package TestFitxers;
+package TestCtrlPersistencia;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -12,11 +12,11 @@ import java.util.Scanner;
  * La classe ControladorFitxers és el controlador de persistència del programa. S'encarrega l'importació i exportació dels conjunts de dades del programa a través de matrius d'strings.
  * @author Arnau Blanch Cortès
  */
-public class ControladorFitxers {
+public class CtrlPersistencia {
 	private String dataLocation = "DATA/";
 	private String fileExtension = ".txt";
 	
-	public ControladorFitxers() {
+	public CtrlPersistencia() {
 		
 	}
 	
@@ -128,65 +128,83 @@ public class ControladorFitxers {
 	 * @return matriu d'strings amb l'id i el nom del paper
 	 * @throws Exception ...
 	 */
-	public ArrayList<ArrayList<String>> importarPapers() throws Exception {
+/*	public ArrayList<ArrayList<String>> importarPapers() throws Exception {
 		return importar("Dades/Entitats/paper");
 	}
-	
+	*/
 	/**
 	 * Importar les conferències
 	 * @return matriu d'strings amb l'id i el nom de la conferència
 	 * @throws Exception ...
 	 */
-	public ArrayList<ArrayList<String>> importarConferences() throws Exception {
+	/*public ArrayList<ArrayList<String>> importarConferences() throws Exception {
 		return importar("Dades/Entitats/conf");
 	}
-	
+	*/
 	/**
 	 * Importar els autors 
 	 * @return matriu d'strings amb l'id i el nom de l'autor
 	 * @throws Exception ...
 	 */
-	public ArrayList<ArrayList<String>> importarAuthors() throws Exception {
+	/*public ArrayList<ArrayList<String>> importarAuthors() throws Exception {
 		return importar("Dades/Entitats/author");
 	}
-	
+	*/
 	/**
 	 * Importar els termes
 	 * @return matriu d'strings amb l'id i el nom del term
 	 * @throws Exception ...
 	 */
-	public ArrayList<ArrayList<String>> importarTerms() throws Exception {
+	/*public ArrayList<ArrayList<String>> importarTerms() throws Exception {
 		return importar("Dades/Entitats/term");
+	}*/
+	
+	/**
+	 * Importa les entitats
+	 * @return matriu d'strings amb l'id, el nom de l'entitat i el label (opcional)
+	 * @throws Exception ...
+	 */
+	public ArrayList<ArrayList<String>> importarEntitats() throws Exception {
+		return importar("Dades/Entitats");
 	}
 	
 	// Graf (dades): relacions
+	
+	/**
+	 * Importa les relacions entre entitats
+	 * @return matriu d'strings amb l'id del paper i l'id de l'altra entitat
+	 * @throws Exception ...
+	 */
+	public ArrayList<ArrayList<String>> importarRelacions() throws Exception {
+		return importar("Dades/Relacions");
+	}
 	
 	/**
 	 * Importar les relacions paper-autor
 	 * @return matriu d'strings amb l'id del paper i l'id de l'autor 
 	 * @throws Exception ...
 	 */
-	public ArrayList<ArrayList<String>> importarPaperAuthor() throws Exception {
+/*	public ArrayList<ArrayList<String>> importarPaperAuthor() throws Exception {
 		return importar("Dades/Relacions/paper_author");
 	}
-	
+	*/
 	/**
 	 * Importar les relacions paper-conferència
 	 * @return matriu d'strings amb l'id del paper i l'id de la conferència
 	 * @throws Exception ...
 	 */
-	public ArrayList<ArrayList<String>> importarPaperConference() throws Exception {
+/*	public ArrayList<ArrayList<String>> importarPaperConference() throws Exception {
 		return importar("Dades/Relacions/paper_conf");
-	}
+	}*/
 	
 	/**
 	 * Importar les relacions paper-terme
 	 * @return matriu d'strings amb l'id del paper i l'id del terme
 	 * @throws Exception ...
 	 */
-	public ArrayList<ArrayList<String>> importarPaperTerm() throws Exception {
+/*	public ArrayList<ArrayList<String>> importarPaperTerm() throws Exception {
 		return importar("Dades/Relacions/paper_term");
-	}
+	}*/
 	
 	// Graf (dades): labels
 	
@@ -195,27 +213,27 @@ public class ControladorFitxers {
 	 * @return matriu d'strings amb l'id del paper, la label [i el nom del paper]
 	 * @throws Exception ...
 	 */
-	public ArrayList<ArrayList<String>> importarPaperLabel() throws Exception {
+/*	public ArrayList<ArrayList<String>> importarPaperLabel() throws Exception {
 		return importar("Dades/Labels/paper_label");
 	}
-	
+	*/
 	/**
 	 * Importar les labels de les conferències
 	 * @return matriu d'strings amb l'id de la conferència, la label [i el nom de la conferència]
 	 * @throws Exception ...
 	 */
-	public ArrayList<ArrayList<String>> importarConferenceLabel() throws Exception {
+/*	public ArrayList<ArrayList<String>> importarConferenceLabel() throws Exception {
 		return importar("Dades/Labels/conf_label");
-	}
+	}*/
 	
 	/**
 	 * Importar les labels dels autors
 	 * @return matriu d'strings amb l'id de l'autor, la label [i el nom de l'autor]
 	 * @throws Exception ...
 	 */
-	public ArrayList<ArrayList<String>> importarAuthorLabel() throws Exception {
+	/*public ArrayList<ArrayList<String>> importarAuthorLabel() throws Exception {
 		return importar("Dades/Labels/author_label");
-	}
+	}*/
 	
 	// EXPORTACIÓ ESPECÍFICA
 	
@@ -262,12 +280,21 @@ public class ControladorFitxers {
 	 * @param terms matriu d'strings amb l'id i el nom de cada terme del conjunt
 	 * @throws Exception ...
 	 */
-	public void exportarEntitats(ArrayList<ArrayList<String>> papers, ArrayList<ArrayList<String>> authors,
+	/*public void exportarEntitats(ArrayList<ArrayList<String>> papers, ArrayList<ArrayList<String>> authors,
 			ArrayList<ArrayList<String>> conferences, ArrayList<ArrayList<String>> terms) throws Exception {
 		exportar("Dades/Entitats/paper", papers);
 		exportar("Dades/Entitats/author", authors);
 		exportar("Dades/Entitats/conf", conferences);
 		exportar("Dades/Entitats/term", terms);
+	}*/
+	
+	/**
+	 * Exporta un conjunt d'entitats
+	 * @param entitats matriu d'strings amb l'id, el nom i el label (opcional)
+	 * @throws Exception
+	 */
+	public void exportarEntitats(ArrayList<ArrayList<String>> entitats) throws Exception {
+		exportar("Dades/Entitats", entitats);
 	}
 	
 	/**
@@ -277,11 +304,20 @@ public class ControladorFitxers {
 	 * @param pt matriu d'strings amb l'id del paper i l'id del terme de cada relació paper-terme
 	 * @throws Exception ...
 	 */
-	public void exportarRelacions(ArrayList<ArrayList<String>> pa, ArrayList<ArrayList<String>> pc,
+	/*public void exportarRelacions(ArrayList<ArrayList<String>> pa, ArrayList<ArrayList<String>> pc,
 			ArrayList<ArrayList<String>> pt) throws Exception {
 		exportar("Dades/Relacions/paper", pa);
 		exportar("Dades/Relacions/author", pc);
 		exportar("Dades/Relacions/conf", pt);
+	}*/
+	
+	/**
+	 * Exporta un conjunt de relacions
+	 * @param relacions matriu d'strings amb l'id del paper i de l'altra entitat
+	 * @throws Exception ...
+	 */
+	public void exportarRelacions(ArrayList<ArrayList<String>> relacions) throws Exception {
+		exportar("Dades/Relacions", relacions);
 	}
 	
 	/**
@@ -291,11 +327,11 @@ public class ControladorFitxers {
 	 * @param labelP matriu d'strings amb l'id, la label [i el nom] de cada paper amb label
 	 * @throws Exception ...
 	 */
-	public void exportarLabels(ArrayList<ArrayList<String>> labelA, ArrayList<ArrayList<String>> labelC, 
+	/*public void exportarLabels(ArrayList<ArrayList<String>> labelA, ArrayList<ArrayList<String>> labelC, 
 			ArrayList<ArrayList<String>> labelP) throws Exception {
 		exportar("Dades/Labels/author_label", labelA);
 		exportar("Dades/Labels/conf_label", labelC);
 		exportar("Dades/Labels/paper_label", labelP);
-	}
+	}*/
 
 }

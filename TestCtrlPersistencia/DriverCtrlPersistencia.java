@@ -1,14 +1,14 @@
-package TestFitxers;
+package TestCtrlPersistencia;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class DriverCtrlFitxers {
+public class DriverCtrlPersistencia {
 	public static void main(String[] args) {
-		ControladorFitxers cf = new ControladorFitxers();
+		CtrlPersistencia cf = new CtrlPersistencia();
 		
 		System.out.print("#######################################################\n"
-				+ "DRIVER ControladorFitxers. Selecciona una de les següents proves:\n"
+				+ "DRIVER CtrlPersistencia. Selecciona una de les següents proves:\n"
 				+ "  1. Creadora\n"
 				+ "  2. Importar conjunt d'usuaris\n"
 				+ "  3. Exportar conjunt d'usuaris\n"
@@ -19,16 +19,15 @@ public class DriverCtrlFitxers {
 				+ "  8. Importar entitats\n"
 				+ "  9. Exportar entitats\n"
 				+ " 10. Importar relacions entre entitats\n"
-				+ " 11. Exportar relacions entre entitats\n"
-				+ " 12. Importar labels d'entitats\n"
-				+ " 13. Exportar labels d'entitats\n\n");
+				+ " 11. Exportar relacions entre entitats\n\n");
+			//	+ " 12. Importar labels d'entitats\n"
+			//	+ " 13. Exportar labels d'entitats\n\n");
 		
 		Scanner s = new Scanner(System.in);
 		switch (s.nextInt()) {
 		case 1:
-			System.out.println("\nProva 1 - Creem un ControladorFitxers:");
-			@SuppressWarnings("unused")
-			ControladorFitxers cf2 = new ControladorFitxers();
+			System.out.println("\nProva 1 - Creem un CtrlPersistencia:");
+			CtrlPersistencia cf2 = new CtrlPersistencia();
 			try {
 				System.out.println("S'ha creat correctament.");
 			}
@@ -137,7 +136,7 @@ public class DriverCtrlFitxers {
 			}
 			break;
 		case 8:
-			System.out.println("\nProva 8.1 - Importem un conjunt d'autors (si no existeix, tenim excepció!):");
+	/*		System.out.println("\nProva 8.1 - Importem un conjunt d'autors (si no existeix, tenim excepció!):");
 			try {
 				ArrayList<ArrayList<String>> authors = cf.importarAuthors();
 				System.out.println("Conjunt d'autors importat (/DATA/Dades/Entitats/author.txt):");
@@ -175,53 +174,63 @@ public class DriverCtrlFitxers {
 			}
 			catch (Exception e) {
 				System.out.println("EXCEPCIÓ: "+e.getMessage());
+			}*/
+			
+			System.out.println("\nProva 8 - Importem un conjunt d'entitats (si no existeix, tenim excepció!):");
+			try {
+				ArrayList<ArrayList<String>> entitats = cf.importarEntitats();
+				System.out.println("Conjunt d'entitats importat (/DATA/Dades/Entitats.txt):");
+				for (ArrayList<String> entitat : entitats) System.out.println(entitat);
 			}
+			catch (Exception e) {System.out.println("EXCEPCIÓ: "+e.getMessage());}
+			
 			break;
 			
 			
 		case 9:
 			System.out.println("\nProva 9: Exportem un conjunt d'entitats (autors, papers, conferències i termes) que hem generat:");
-			ArrayList<ArrayList<String>> authors = new ArrayList<ArrayList<String>>();
-			System.out.println("Conjunt d'autors generat:");
+			//ArrayList<ArrayList<String>> authors = new ArrayList<ArrayList<String>>();
+			//System.out.println("Conjunt d'autors generat:");
+			ArrayList<ArrayList<String>> entitats = new ArrayList<ArrayList<String>>();
+			System.out.println("Conjunt d'entitats generat:");
 			for (int i = 0; i < 10; ++i) {
 				ArrayList<String> a = new ArrayList<String>();
-				a.add("idAutor"+i); a.add("nomAutor"+i);
+				a.add("idAutor"+i); a.add("nomAutor"+i); a.add("label"+i%5);
 				System.out.println(a);
-				authors.add(a);
+				entitats.add(a);
 			}
 			
-			ArrayList<ArrayList<String>> papers = new ArrayList<ArrayList<String>>();
-			System.out.println("\nConjunt de papers generat:");
+//			ArrayList<ArrayList<String>> papers = new ArrayList<ArrayList<String>>();
+//			System.out.println("\nConjunt de papers generat:");
 			for (int i = 0; i < 10; ++i) {
 				ArrayList<String> a = new ArrayList<String>();
-				a.add("idPaper"+i); a.add("nomPaper"+i);
+				a.add("idPaper"+i); a.add("nomPaper"+i); a.add("label"+i%5);
 				System.out.println(a);
-				papers.add(a);
+				entitats.add(a);
 			}
 			
-			ArrayList<ArrayList<String>> conferences = new ArrayList<ArrayList<String>>();
-			System.out.println("\nConjunt de conferències generat:");
+		//	ArrayList<ArrayList<String>> conferences = new ArrayList<ArrayList<String>>();
+		//	System.out.println("\nConjunt de conferències generat:");
 			for (int i = 0; i < 10; ++i) {
 				ArrayList<String> a = new ArrayList<String>();
-				a.add("idConferència"+i); a.add("nomConferència"+i);
+				a.add("idConferència"+i); a.add("nomConferència"+i); a.add("label"+i%5);
 				System.out.println(a);
-				conferences.add(a);
+				entitats.add(a);
 			}
 			
-			ArrayList<ArrayList<String>> terms = new ArrayList<ArrayList<String>>();
-			System.out.println("\nConjunt de termes generat:");
+			//ArrayList<ArrayList<String>> terms = new ArrayList<ArrayList<String>>();
+			//System.out.println("\nConjunt de termes generat:");
 			for (int i = 0; i < 10; ++i) {
 				ArrayList<String> a = new ArrayList<String>();
 				a.add("idTerme"+i); a.add("nomTerme"+i);
 				System.out.println(a);
-				terms.add(a);
+				entitats.add(a);
 			}
 			
 			try {
-				cf.exportarEntitats(papers, authors, conferences, terms);
-				System.out.println("\nS'han exportat correctament: \n * /DATA/Dades/Entitats/paper.txt"
-						+ "\n * /DATA/Dades/Entitats/author.txt\n * /DATA/Dades/Entitats/conf.txt"
-						+ "\n * /DATA/Dades/Entitats/term.txt");
+				//cf.exportarEntitats(papers, authors, conferences, terms);
+				cf.exportarEntitats(entitats);
+				System.out.println("\nS'han exportat correctament (/DATA/Dades/Entitats.txt).");
 			}
 			catch (Exception e) {
 				System.out.println("EXCEPCIÓ: "+e.getMessage());
@@ -229,7 +238,7 @@ public class DriverCtrlFitxers {
 			break;
 			
 		case 10:
-			System.out.println("\nProva 10.1 - Importem un conjunt de relacions paper-autor (si no existeix, tenim excepció!):");
+			/*System.out.println("\nProva 10.1 - Importem un conjunt de relacions paper-autor (si no existeix, tenim excepció!):");
 			try {
 				ArrayList<ArrayList<String>> pa = cf.importarPaperAuthor();
 				System.out.println("Conjunt de relacions paper-autor importat (/DATA/Dades/Relacions/paper_author.txt):");
@@ -257,48 +266,57 @@ public class DriverCtrlFitxers {
 			}
 			catch (Exception e) {
 				System.out.println("EXCEPCIÓ: "+e.getMessage());
+			}*/
+			System.out.println("\nProva 10 - Importem un conjunt de relacions (paper-terme, paper-conferència i paper-autor):");
+			try{
+				ArrayList<ArrayList<String>> relacions = cf.importarRelacions();
+				System.out.println("Conjunt de relacions importat (/DATA/Dades/Relacions.txt):");
+				for (ArrayList<String> relacio : relacions)	System.out.println(relacio);
 			}
+			catch (Exception e) {System.out.println("EXCEPCIÓ: "+e.getMessage());}
 			break;
 			
 		case 11:
 			System.out.println("\nProva 11: Exportem un conjunt de relacions (paper-autor, paper-conferència i paper-terme) que hem generat:");
-			ArrayList<ArrayList<String>> pa = new ArrayList<ArrayList<String>>();
-			System.out.println("Conjunt de relacions paper-autor generat:");
+			//ArrayList<ArrayList<String>> pa = new ArrayList<ArrayList<String>>();
+			//System.out.println("Conjunt de relacions paper-autor generat:");
+			ArrayList<ArrayList<String>> relacions2 = new ArrayList<ArrayList<String>>();
+			System.out.println("Conjunt de relacions generat:");
 			for (int i = 0; i < 10; ++i) {
 				ArrayList<String> a = new ArrayList<String>();
 				a.add("idPaper"+i); a.add("idAutor"+i);
 				System.out.println(a);
-				pa.add(a);
+				relacions2.add(a);
 			}
 			
-			ArrayList<ArrayList<String>> pc = new ArrayList<ArrayList<String>>();
-			System.out.println("\nConjunt de relacions paper-conferència generat:");
+			//ArrayList<ArrayList<String>> pc = new ArrayList<ArrayList<String>>();
+			//System.out.println("\nConjunt de relacions paper-conferència generat:");
 			for (int i = 0; i < 10; ++i) {
 				ArrayList<String> a = new ArrayList<String>();
 				a.add("idPaper"+i); a.add("idConferència"+i);
 				System.out.println(a);
-				pc.add(a);
+				relacions2.add(a);
 			}
 			
-			ArrayList<ArrayList<String>> pt = new ArrayList<ArrayList<String>>();
-			System.out.println("\nConjunt de relacions paper-terme generat:");
+			//ArrayList<ArrayList<String>> pt = new ArrayList<ArrayList<String>>();
+			//System.out.println("\nConjunt de relacions paper-terme generat:");
 			for (int i = 0; i < 10; ++i) {
 				ArrayList<String> a = new ArrayList<String>();
 				a.add("idPaper"+i); a.add("idTerme"+i);
 				System.out.println(a);
-				pt.add(a);
+				relacions2.add(a);
 			}
 			
 			try {
-				cf.exportarRelacions(pa, pc, pt);
-				System.out.println("\nS'han exportat correctament: \n * /DATA/Dades/Relacions/paper_author.txt"
-						+ "\n * /DATA/Dades/Relacions/paper_conf.txt\n * /DATA/Dades/Relacions/paper_term.txt");
+				//cf.exportarRelacions(pa, pc, pt);
+				cf.exportarRelacions(relacions2);
+				System.out.println("\nS'han exportat correctament (/DATA/Dades/Relacions.txt):");
 			}
 			catch (Exception e) {
 				System.out.println("EXCEPCIÓ: "+e.getMessage());
 			}
 			break;
-		case 12:
+		/*case 12:
 			System.out.println("\nProva 12.1 - Importem un conjunt d'autors amb label (si no existeix, tenim excepció!):");
 			try {
 				ArrayList<ArrayList<String>> labelA = cf.importarAuthorLabel();
@@ -368,7 +386,7 @@ public class DriverCtrlFitxers {
 			catch (Exception e) {
 				System.out.println("EXCEPCIÓ: "+e.getMessage());
 			}
-			break;
+			break;*/
 		}
 		s.close();
 	}
