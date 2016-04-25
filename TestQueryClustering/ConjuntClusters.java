@@ -139,15 +139,15 @@ public class ConjuntClusters {
 	public int getClusterMesProper(int e, SparseMatrix M) throws Exception {
 		if (M.getNRows() != M.getNCols()) throw new Exception("Matriu no quadrada");
 		if (e < 0 || e >= M.getNRows()) throw new Exception("Posició d'entitat passada com a paràmetre no vàl·lida a la matriu");
-		
+				
 		HashMap<Integer, Float> relevClusters = new HashMap<Integer, Float>();
 		for (int j = 0; j < k; ++j) {
 			int med = cjt.get(j).getMedoid();
 			if (med < 0 || med >= M.getNRows()) throw new Exception ("Elements no vàl·lids al conjunt per a la matriu donada");
-			Float relev = M.getRow(med).get(e);
+			Float relev = M.getValue(med, e);
 			if (relev != 0) relevClusters.put(j, relev);
 		} // Agafem la rellevància cada medoide amb 'e' (si en té)
-		
+				
 		int clustProper;
 		if (relevClusters.size() == 0) clustProper = -1; // No és rellevant amb cap medoide (no es podrà assignar)
 		else {

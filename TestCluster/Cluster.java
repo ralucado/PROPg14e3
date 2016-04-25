@@ -90,7 +90,7 @@ public class Cluster {
 	 */
 	
 	public int get(int i) throws Exception {
-		if (i < 0 || i >= list.size()) throw new IndexOutOfBoundsException("'i' fora de rang");
+		if (i < 0 || i >= list.size()) throw new IndexOutOfBoundsException("índex fora de rang");
 		return list.get(i);
 	}
 	
@@ -147,16 +147,14 @@ public class Cluster {
 			Float sum = new Float(0.0);
 			for (Integer j : list) {
 				if (j < 0 || j >= M.getNRows()) throw new Exception ("Elements no vàl·lids al clúster per a la matriu donada");
-				else if (i != j)  sum += M.getRow(i).get(j);
+				else if (i != j)  sum += M.getValue(i, j);
 			}
 			relevances.put(i, sum);
 		}
-
 		// No cal l'if que hi ha a ConjuntClusters perquè no pot ser que els elements del cluster no es relacionin entre ells 
 		
 		HashMap<Integer,Float> orderedRelev = ordenaPerValor(relevances);
 		// Tenim un map ordenat per la suma de similaritats (ordre descendent)
-		
 		//System.out.println("Test: "+orderedRelev);
 		
 		// Agafem els elements que tenen el valor màxim de la suma de rellevàncies

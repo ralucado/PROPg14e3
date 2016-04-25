@@ -65,11 +65,11 @@ public class QueryClustering extends Query {
 	
 	/**
 	 * Executa la query i guarda el conjunt de clústers resultant
-	 * @throws pot retornar les excepcions de clúster i conjunt de clústers
+	 * @throws pot retornar les excepcions de clúster i conjunt de clústers i si la k > núm. entitats de la matriu resultant de HeteSim
 	 */
 	private void executaKMedoids() throws Exception {
 		SparseMatrix M = hs.getHeteSim(cami);
-		
+		if (k > M.getNRows()) throw new Exception("k > núm. d'entitats de la matriu");
 		Random r = new Random();
 		ArrayList<Integer> assignats = new ArrayList<Integer>();
 		
@@ -83,18 +83,18 @@ public class QueryClustering extends Query {
 			//System.out.println("Medoide inicial clúster "+i+" = "+rand);
 		}
 		
+		
 		for (int j = 0; j < M.getNRows(); ++j) {
 			if (!assignats.contains(j)) {
 				int clProper = cjt.getClusterMesProper(j, M);
 				if (clProper == -1) cjt.getNoAssig().add(j);
-				else cjt.get(clProper).add(j);
 				
-				//System.out.println("Clúster més proper a "+j+" = "+clProper);
-				//if (clProper != -1) System.out.println("Medoide clúster "+clProper+" = "+cjt.get(clProper).getMedoid());
+				else cjt.get(clProper).add(j);
+//				System.out.println("Clúster més proper a "+j+" = "+clProper);
+//				if (clProper != -1) System.out.println("Medoide clúster "+clProper+" = "+cjt.get(clProper).getMedoid());
 			}
 		}
-		
-		
+				
 		Boolean changed = true;
 		while (changed) {
 			//System.out.println("No convergeix!!!!");
@@ -104,6 +104,7 @@ public class QueryClustering extends Query {
 				System.out.println("Medoide = "+cjt.get(i).getMedoid());
 				
 			}*/
+
 			changed = false;
 			// Intentem moure els elements del conjunt al clúster que tingui més proper
 			for (int i = 0; i < k; ++i) {
