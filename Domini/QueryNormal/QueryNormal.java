@@ -1,9 +1,5 @@
 package Domini;
-package ProvaQN;
 import java.util.ArrayList;
-import ProvaCU.Cami;
-
-import Dominio.Pair;
 
 public class QueryNormal extends Query{
 	private String cami;
@@ -29,6 +25,14 @@ public class QueryNormal extends Query{
 		return cami;
 	}
 	
+	
+	public int getEI(){
+		return posEI;
+	}
+	
+	public int getEF(){
+		return posEF;
+	}
 	
 	public Entitat getEntitatInicial(){
 		return EntitatInicial;
@@ -88,8 +92,7 @@ public class QueryNormal extends Query{
 		if(cami!=null){
 			if(EntitatInicial != null){
 				if(EntitatNoInicial != null){
-					 System.out.println("a");
-					 Cami c =  new Cami("cami", this.cami, "descripcio");
+					 Cami c =  new Cami("cami", cami, "descripcio");
 					 Float f = HS.getHeteSim(c, posEI, posEF);
 					 Pair<Integer,Float> p= new Pair<Integer,Float>(EntitatNoInicial.getId(), f);
 					 ArrayList<Pair<Integer,Float> > A = new ArrayList<Pair<Integer,Float>>();
@@ -98,13 +101,12 @@ public class QueryNormal extends Query{
 				}
 				else{
 					Cami c =  new Cami("cami", cami, "descripcio");
-					System.out.println("abans");
 					return HS.getHeteSim(c, posEI);
 				}
 			}
 			else throw new Exception("No hi ha entitat inicial");
 		}
-		else throw new Exception("No hi ha camí");
+		else throw new Exception("No hi ha cam�");
 		
 	}
 }
