@@ -1,10 +1,7 @@
-package ProvaQN;
+package Domini;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import Dominio.Pair;
-import ProvaCU.Cami;
 
 public class DriverQueryNormal {
 	public static void main(String[] args) {
@@ -36,6 +33,8 @@ public class DriverQueryNormal {
 		cg.afegirRelacioTP("t1", "p2");
 		cg.afegirRelacioTP("t2", "p1");
 		cg.afegirRelacioTP("t3", "p3");
+		
+	
 
 		System.out.println("prova");
 		QueryNormal q = new QueryNormal(new Cami("nom", "APA", "descr"));
@@ -44,13 +43,13 @@ public class DriverQueryNormal {
 		boolean menu = true;
 		while(menu){
 			System.out.print("#######################################################\n"
-							+ "DRIVER QueryNormal. Selecciona una de les següents proves:\n"
+							+ "DRIVER QueryNormal. Selecciona una de les segï¿½ents proves:\n"
 							+ " 1. Inicialitzar query\n"
-							+ " 2. Comprovar si és clustering\n"
-							+ " 3. Comprovar si és normal\n"
+							+ " 2. Comprovar si ï¿½s clustering\n"
+							+ " 3. Comprovar si ï¿½s normal\n"
 							+ " 4. Seleccionar entitat final\n"
 							+ " 5. Seleccionar entitat inicial\n"
-							+ " 6. Consultar camí\n"
+							+ " 6. Consultar camï¿½\n"
 							+ " 7. Consultar entitat final\n"
 							+ " 8. Consultar entitat inicial\n"
 							+ " 9. Executar query\n"
@@ -61,17 +60,17 @@ public class DriverQueryNormal {
 
 			switch (n) {
 			case 1: 
-					System.out.println("Escriu el camí de la teva query\n");
+					System.out.println("Escriu el camï¿½ de la teva query\n");
 					String cami = s.next();
 					q = new QueryNormal(new Cami("nom",cami,"descr"));
 					break;
 			case 2:
-					if(q.esClustering()) System.out.println("La query és de clustering");
-					else System.out.println("La query no és de clustering");
+					if(q.esClustering()) System.out.println("La query ï¿½s de clustering");
+					else System.out.println("La query no ï¿½s de clustering");
 					break;
 			case 3:
-					if(q.esNormal()) System.out.println("La query és normal");
-					else System.out.println("La query no és normal");
+					if(q.esNormal()) System.out.println("La query ï¿½s normal");
+					else System.out.println("La query no ï¿½s normal");
 					break;
 			case 4:
 					System.out.println("Escriu el nom de l'entitat final");
@@ -81,21 +80,22 @@ public class DriverQueryNormal {
 					int id = 0;
 					int posFi = 0;
 					if(c=='A'){ 
-						id =  cg.consultarGraf().getIdByNameAndType(nomEntFin, c+"utor"); 
+						id =  cg.consultarGraf().getIdByNameAndType(nomEntFin, "Autor"); 
 						posFi = cg.consultarGraf().getPositionByIdAutor(id);
 					}
 					else if(c=='P'){
-						id = cg.consultarGraf().getIdByNameAndType(nomEntFin, c+"aper");
+						id = cg.consultarGraf().getIdByNameAndType(nomEntFin, "Paper");
 						posFi = cg.consultarGraf().getPositionByIdPaper(id);
 					}
 					else if(c=='C'){
-						id = cg.consultarGraf().getIdByNameAndType(nomEntFin, c+"onferencia");
+						id = cg.consultarGraf().getIdByNameAndType(nomEntFin, "Conferencia");
 						posFi = cg.consultarGraf().getPositionByIdConferencia(id);
 					}
 					else if(c=='T'){
-						id = cg.consultarGraf().getIdByNameAndType(nomEntFin, c+"erme");
+						id = cg.consultarGraf().getIdByNameAndType(nomEntFin, "Terme");
 						posFi = cg.consultarGraf().getPositionByIdTerme(id);
 					}
+					System.out.println(c+" "+posFi+" "+id);
 					q.setEntitatNoInicial(cg.consultarGraf().consultarEntitat(id), posFi);
 					break;
 			case 5: 
@@ -105,21 +105,29 @@ public class DriverQueryNormal {
 					int idIni = 0;
 					int posIni = 0;
 					if(cIni=='A'){ 
-						idIni =  cg.consultarGraf().getIdByNameAndType(nomEntIni, cIni+"utor"); 
+						idIni =  cg.consultarGraf().getIdByNameAndType(nomEntIni, "Autor"); 
 						posIni = cg.consultarGraf().getPositionByIdAutor(idIni);
+						System.out.println(cIni+" "+posIni+" "+idIni);
 					}
 					else if(cIni=='P'){
-						idIni = cg.consultarGraf().getIdByNameAndType(nomEntIni, cIni+"aper");
+						idIni = cg.consultarGraf().getIdByNameAndType(nomEntIni, "Paper");
 						posIni = cg.consultarGraf().getPositionByIdPaper(idIni);
+						System.out.println(cIni+" "+posIni+" "+idIni);
+
 					}
 					else if(cIni=='C'){
-						idIni = cg.consultarGraf().getIdByNameAndType(nomEntIni, cIni+"onferencia");
+						idIni = cg.consultarGraf().getIdByNameAndType(nomEntIni, "Conferencia");
 						posIni = cg.consultarGraf().getPositionByIdConferencia(idIni);
+						System.out.println(cIni+" "+posIni+" "+idIni);
+
 					}
 					else if(cIni=='T'){
-						idIni = cg.consultarGraf().getIdByNameAndType(nomEntIni, cIni+"erme");
+						idIni = cg.consultarGraf().getIdByNameAndType(nomEntIni, "Terme");
 						posIni = cg.consultarGraf().getPositionByIdTerme(idIni);
+						System.out.println(cIni+" "+posIni+" "+idIni);
+
 					}
+					System.out.println(posIni);
 					q.setEntitatInicial(cg.consultarGraf().consultarEntitat(idIni), posIni);
 					break;
 			case 6:
@@ -144,7 +152,6 @@ public class DriverQueryNormal {
 			case 9:
 					
 					ArrayList<Pair<Integer,Float>> resultat = q.executa(hs);
-					System.out.println(resultat.size());
 					for(int i = 0; i<resultat.size(); i++){
 						char c1 = q.getPath().charAt(q.getPath().length()-1);
 						int id1 = 0;
@@ -154,7 +161,6 @@ public class DriverQueryNormal {
 						else if(c1=='C') id1 = cg.consultarGraf().getIdByPositionConferencia(resultat.get(i).first);
 						
 						System.out.println("Resultat "+i+": "+cg.consultarGraf().consultarEntitat(id1).getNom()+"       "+resultat.get(i).second+"\n");
-						System.out.println(resultat.get(i).second);
 					}
 					break;
 			case 10:
