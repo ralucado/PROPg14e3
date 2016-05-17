@@ -2,7 +2,7 @@ package domini.ctrl;
 
 import domini.camins.*;
 import domini.graf.*;
-import domini.camins.*;
+import domini.usuaris.*;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -11,18 +11,18 @@ public class CtrlDomini {
 	protected Graf graf;
 	
 	protected Usuari usuari;
-        protected ConjuntUsuaris conjuntUsuaris;
+    protected ConjuntUsuaris conjuntUsuaris;
     
-        protected ConjuntCamins caminsUsuari;
+    protected ConjuntCamins caminsUsuari;
 	protected ConjuntCamins caminsPredefinits;
 	
-	protected myCtrlUsuaris ctrlUsuari;
+	protected CtrlUsuaris ctrlUsuari;
 	protected CtrlGraf ctrlGraf;
-	protected myCtrlCamins ctrlCamins;
+	protected ControladorCamins ctrlCamins;
 	
 	public CtrlDomini() throws Exception {
             
-            ctrlUsuari = new myCtrlUsuaris();
+            ctrlUsuari = new CtrlUsuaris();
             ctrlGraf = new CtrlGraf();
 		
             usuari = new Usuari();
@@ -40,7 +40,7 @@ public class CtrlDomini {
             if (aux.getContrasenya().equals(constrasenya)){
                 usuari = aux;
                 ctrlUsuari.setUsuari(usuari);
-                ctrlCamins = new myCtrlCamins(usuari.getNom());
+                ctrlCamins = new ControladorCamins(usuari.getNom());
                 caminsUsuari = crearConjunt(ctrlCamins.consultarCaminsUsuari());
                 caminsPredefinits = crearConjunt(ctrlCamins.consultarCaminsPredefinits());
             }

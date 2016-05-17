@@ -1,5 +1,5 @@
 package presentacio;
-package domini.ctrl.*;
+import domini.ctrl.*;
 
 public class CtrlPresentacio {
 

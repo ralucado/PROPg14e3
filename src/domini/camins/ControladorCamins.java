@@ -1,5 +1,6 @@
 package domini.camins;
 import java.util.*;
+import persistencia.*;
 
 public class ControladorCamins {
 	private ConjuntCamins usuari;
