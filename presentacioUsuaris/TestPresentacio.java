@@ -12,9 +12,8 @@ public class TestPresentacio {
 					  CtrlPresentacio ctrlPresentacio = new CtrlPresentacio();
 	        	  }
 	        	  catch (Exception exc) {
-	        		  VistaDialog dialog = new VistaDialog();
 	        		  String[] botons = {"D'acord"};
-	      			  dialog.setDialog("No s'ha pogut iniciar sessió", "HOLA", botons, JOptionPane.WARNING_MESSAGE);
+	      			  (new VistaDialog()).setDialog("No s'ha pogut iniciar sessió", "HOLA", botons, JOptionPane.WARNING_MESSAGE);
 	        	  }
       	}});
 	}

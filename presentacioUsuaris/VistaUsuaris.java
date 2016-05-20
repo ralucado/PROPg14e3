@@ -64,15 +64,9 @@ public class VistaUsuaris {
 		btnAfegirUsuari.setFont(new Font("Lucida Grande", Font.BOLD, 12));
 		btnAfegirUsuari.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					ctrl.getDomini().altaUsuari("nou1", "contrasenyaNou1");
-					usersData.updateData();
-				}
-				catch (Exception exc) {
-					VistaDialog dialog = new VistaDialog();
-					String[] botons = {"D'acord"};
-					dialog.setDialog("No s'ha pogut afegir l'usuari", exc.getMessage(), botons, JOptionPane.WARNING_MESSAGE);
-				}
+				new VistaAfegirUsuari(ctrl, frame);
+				System.out.println("Addició acabada");
+				usersData.updateData();
 			}
 		});
 		frame.getContentPane().add(btnAfegirUsuari, "flowx,cell 0 0,alignx right");
@@ -83,7 +77,13 @@ public class VistaUsuaris {
 		btnModificarUsuari.setFont(new Font("Lucida Grande", Font.BOLD, 12));
 		btnModificarUsuari.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				String[] botons = {"D'acord"};
+				if (table.getSelectedRow() == -1)
+					(new VistaDialog()).setDialog("Usuari no seleccionat", "No has seleccionat cap usuari a modificar!", botons, JOptionPane.WARNING_MESSAGE);
+				else {
+					new VistaModificarUsuari(ctrl, frame, usersData.getValueAt(table.getSelectedRow(), 0));
+					System.out.println("Modificació acabada");
+				}
 			}
 		});
 		frame.getContentPane().add(btnModificarUsuari, "cell 0 0,alignx right");
@@ -94,24 +94,26 @@ public class VistaUsuaris {
 		btnEliminarUsuari.setFont(new Font("Lucida Grande", Font.BOLD, 12));
 		btnEliminarUsuari.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String user = usersData.getValueAt(table.getSelectedRow(), 0);
-				VistaDialog dialog = new VistaDialog();
-				if (user == ctrl.getDomini().getUsuariActual()) {
-					String[] botons = {"D'acord"};
-					dialog.setDialog("Operació no permesa", "No pots esborrar el teu usuari!", botons, JOptionPane.WARNING_MESSAGE);
-				}
+				String[] botons = {"D'acord"};
+				if (table.getSelectedRow() == -1)
+					(new VistaDialog()).setDialog("Usuari no seleccionat", "No has seleccionat cap usuari a eliminar!", botons, JOptionPane.WARNING_MESSAGE);
 				else {
-					try {
-						String[] botonsConfirma = {"No", "Sí"};
-						int isel = dialog.setDialog("Eliminant usuari", "Estàs segur que vols eliminar l'usuari "+user+"?", botonsConfirma, JOptionPane.YES_NO_OPTION);
-						if (isel == 1) {
-							ctrl.getDomini().baixaUsuari(usersData.getValueAt(table.getSelectedRow(), 0));
-							usersData.updateData();
-						}
+					String user = usersData.getValueAt(table.getSelectedRow(), 0);
+					if (user == ctrl.getDomini().getUsuariActual()) {
+						(new VistaDialog()).setDialog("Operació no permesa", "No pots esborrar el teu usuari!", botons, JOptionPane.WARNING_MESSAGE);
 					}
-					catch (Exception exc) {
-						String[] botons = {"D'acord"};
-						dialog.setDialog("No s'ha pogut eliminar l'usuari", exc.getMessage(), botons, JOptionPane.ERROR_MESSAGE);
+					else {
+						try {
+							String[] botonsConfirma = {"No", "Sí"};
+							int isel = (new VistaDialog()).setDialog("Eliminant usuari", "Estàs segur que vols eliminar l'usuari "+user+"?", botonsConfirma, JOptionPane.YES_NO_OPTION);
+							if (isel == 1) {
+								ctrl.getDomini().baixaUsuari(usersData.getValueAt(table.getSelectedRow(), 0));
+								usersData.updateData();
+							}
+						}
+						catch (Exception exc) {
+							(new VistaDialog()).setDialog("No s'ha pogut eliminar l'usuari", exc.getMessage(), botons, JOptionPane.ERROR_MESSAGE);
+						}
 					}
 				}
 			}
@@ -129,7 +131,6 @@ public class VistaUsuaris {
 	
 	
 	
-	@SuppressWarnings("unused")
 	private class UsersTableModel extends AbstractTableModel {
 		private static final long serialVersionUID = 1L;
 		protected String[] columnNames = {"Nom d'usuari", "Contrasenya", "és admin."};

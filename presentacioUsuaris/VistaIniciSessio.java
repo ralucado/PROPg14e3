@@ -104,12 +104,11 @@ public class VistaIniciSessio {
 					ctrl.openUsuaris();
 				}
 				catch (Exception e2) {
-					VistaDialog dialog = new VistaDialog();
 					String[] botons = {"D'acord"};
 					if (!e2.getMessage().equals("Contrasenya incorrecta") && !e2.getMessage().equals("No existeix cap usuari amb el nom " + usuari)) {
-						dialog.setDialog("No s'ha pogut iniciar sessió", "L'usuari "+usuari+" no té fitxer de camins!", botons, JOptionPane.QUESTION_MESSAGE);
+						(new VistaDialog()).setDialog("No s'ha pogut iniciar sessió", "L'usuari "+usuari+" no té fitxer de camins!", botons, JOptionPane.QUESTION_MESSAGE);
 					}
-					else dialog.setDialog("No s'ha pogut iniciar sessió", e2.getMessage(), botons, JOptionPane.WARNING_MESSAGE);
+					else (new VistaDialog()).setDialog("No s'ha pogut iniciar sessió", e2.getMessage(), botons, JOptionPane.WARNING_MESSAGE);
 				}
 			}
 		});
