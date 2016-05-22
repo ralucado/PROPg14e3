@@ -3,6 +3,7 @@ import java.util.*;
 public class Resultat {
 	private ArrayList<Pair<Entitat,Float>> entitats;
 	private ArrayList<Pair<Entitat,Float>> entitats_visibles;
+	private ArrayList<Pair<Entitat,Float>> anterior;
     private static final int VISIBLES_PER_DEFECTE = 20;
 
 /*
@@ -12,6 +13,7 @@ public class Resultat {
     public Resultat (ArrayList<Pair<Entitat,Float>> entitats) {
         this.entitats = entitats;
         entitats_visibles = new ArrayList<Pair<Entitat,Float>>();
+        anterior = new ArrayList<Pair<Entitat,Float>>();
         for(int i = 0; i < entitats.size() && i < VISIBLES_PER_DEFECTE; ++i) {
             entitats_visibles.add(entitats.get(i));
         }
@@ -39,6 +41,7 @@ public class Resultat {
      */
     
     public void filtrarN(int n) {
+    	anterior = (ArrayList<Pair<Entitat,Float>>)entitats_visibles.clone();
     	if (n > entitats_visibles.size()){
     		for (; n < entitats.size(); ++n){
     			entitats_visibles.add(entitats.get(n-1));
@@ -58,6 +61,7 @@ public class Resultat {
     public void filtrarLabelEq(int idLabel) throws Exception {
     	if (idLabel < 0 || idLabel > 4) throw new Exception("idLabel ha d'estar entre 0 i 4 (inclosos)");
     	if (entitats.get(0).first.isTerme()) return;
+    	anterior = (ArrayList<Pair<Entitat,Float>>)entitats_visibles.clone();
     	Entitat e;
         for(int i = 0; i < entitats.size(); ++i) {
         	e = entitats.get(i).first;
@@ -76,6 +80,7 @@ public class Resultat {
     public void filtrarLabelDif(int idLabel) throws Exception {
     	if (idLabel < 0 || idLabel > 4) throw new Exception("S'incompleix 0 <= idLabel <= 4");
     	if (entitats.get(0).first.isTerme()) return;
+    	anterior = (ArrayList<Pair<Entitat,Float>>)entitats_visibles.clone();
     	Entitat e;
         for(int i = 0; i < entitats.size(); ++i) {
         	e = entitats.get(i).first;
@@ -93,6 +98,7 @@ public class Resultat {
      */
     public void filtrarEntitat(int idEntitat) throws Exception {
     	boolean trobat = false;
+    	anterior = (ArrayList<Pair<Entitat,Float>>)entitats_visibles.clone();
         for(int i = 0; i < entitats.size() && !trobat; ++i) {
         	if(entitats.get(i).first.getId() == idEntitat) {
         		entitats_visibles.remove(i);
@@ -111,10 +117,15 @@ public class Resultat {
        possibles.
      */
     public void netejaFiltres() {
+    	anterior = (ArrayList<Pair<Entitat,Float>>)entitats_visibles.clone();
         entitats_visibles.clear();
     	for (int i = 0; i < entitats.size() && i < VISIBLES_PER_DEFECTE; ++i){
     		entitats_visibles.add(entitats.get(i));
     	}
+    }
+    
+    public void desferFiltre(){
+    	entitats_visibles = anterior;
     }
     
     /*
