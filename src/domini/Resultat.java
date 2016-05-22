@@ -1,17 +1,17 @@
 import java.util.*;
 
 public class Resultat {
-	private ArrayList<Entitat> entitats;
-	private ArrayList<Entitat> entitats_visibles;
+	private ArrayList<Pair<Entitat,Float>> entitats;
+	private ArrayList<Pair<Entitat,Float>> entitats_visibles;
     private static final int VISIBLES_PER_DEFECTE = 20;
 
 /*
  * PRE: L'array entitats esta plena de Entitats del mateix tipus (Autor, Paper, Conferencia, Terme).
  * POST: Es crea el Resultat a partir de l'array entitats.
  */
-    public Resultat (ArrayList<Entitat> entitats) {
+    public Resultat (ArrayList<Pair<Entitat,Float>> entitats) {
         this.entitats = entitats;
-        entitats_visibles = new ArrayList<Entitat>();
+        entitats_visibles = new ArrayList<Pair<Entitat,Float>>();
         for(int i = 0; i < entitats.size() && i < VISIBLES_PER_DEFECTE; ++i) {
             entitats_visibles.add(entitats.get(i));
         }
@@ -23,9 +23,9 @@ public class Resultat {
      * POST: Es crea el Resultata partir de l'array entitats i el nombre maxim
        d'entitats visibles es canvia per filtreN.
      */
-    public Resultat (ArrayList<Entitat> entitats, int filtreN) {
+    public Resultat (ArrayList<Pair<Entitat,Float>> entitats, int filtreN) {
         this.entitats = entitats;
-        entitats_visibles = new ArrayList<Entitat>();
+        entitats_visibles = new ArrayList<Pair<Entitat,Float>>();
         for(int i = 0; i < entitats.size() && i < filtreN; ++i) {
         	entitats_visibles.add(entitats.get(i));
         }
@@ -57,10 +57,10 @@ public class Resultat {
      */
     public void filtrarLabelEq(int idLabel) throws Exception {
     	if (idLabel < 0 || idLabel > 4) throw new Exception("idLabel ha d'estar entre 0 i 4 (inclosos)");
-    	if (entitats.get(0).isTerme()) return;
+    	if (entitats.get(0).first.isTerme()) return;
     	Entitat e;
         for(int i = 0; i < entitats.size(); ++i) {
-        	e = entitats.get(i);
+        	e = entitats.get(i).first;
         	if(e.isAutor() || e.isConferencia() || e.isPaper()) {
         		if(e.getLabel() != idLabel){
         			entitats_visibles.remove(i);
@@ -75,10 +75,10 @@ public class Resultat {
      */
     public void filtrarLabelDif(int idLabel) throws Exception {
     	if (idLabel < 0 || idLabel > 4) throw new Exception("S'incompleix 0 <= idLabel <= 4");
-    	if (entitats.get(0).isTerme()) return;
+    	if (entitats.get(0).first.isTerme()) return;
     	Entitat e;
         for(int i = 0; i < entitats.size(); ++i) {
-        	e = entitats.get(i);
+        	e = entitats.get(i).first;
         	if(e.isAutor() || e.isConferencia() || e.isPaper()) {
         		if(e.getLabel() == idLabel){
         			entitats_visibles.remove(i);
@@ -94,7 +94,7 @@ public class Resultat {
     public void filtrarEntitat(int idEntitat) throws Exception {
     	boolean trobat = false;
         for(int i = 0; i < entitats.size() && !trobat; ++i) {
-        	if(entitats.get(i).getId() == idEntitat) {
+        	if(entitats.get(i).first.getId() == idEntitat) {
         		entitats_visibles.remove(i);
         		trobat = true;
         	}
@@ -122,7 +122,7 @@ public class Resultat {
      * POST: Es retorna cert si el resultat conté Autors.
      */
     public boolean isAutor() {
-    	return (entitats.get(0).isAutor());
+    	return (entitats.get(0).first.isAutor());
     }
     
     /*
@@ -130,7 +130,7 @@ public class Resultat {
      * POST: Es retorna cert si el resultat conté Papers.
      */
     public boolean isPaper() {
-    	return (entitats.get(0).isPaper());	
+    	return (entitats.get(0).first.isPaper());	
     }
     
     /*
@@ -138,7 +138,7 @@ public class Resultat {
      * POST: Es retorna cert si el resultat conté Conferencies.
      */
     public boolean isConferencia() {
-    	return (entitats.get(0).isConferencia());	
+    	return (entitats.get(0).first.isConferencia());	
     }
     
     /*
@@ -146,14 +146,14 @@ public class Resultat {
      * POST: Es retorna cert si el resultat conté Termes.
      */
     public boolean isTerme() {
-    	return (entitats.get(0).isTerme());
+    	return (entitats.get(0).first.isTerme());
     }
     
     /*
      * PRE: Cert.
      * POST: Es retorna l'array d'entitats.
      */
-    public ArrayList<Entitat> getEntitats() {
+    public ArrayList<Pair<Entitat,Float>> getEntitats() {
     	return entitats;
     }
     
@@ -161,7 +161,7 @@ public class Resultat {
      * PRE: Cert.
      * POST: Es retorna l'array que indica les entitats visibles.
      */
-    public ArrayList<Entitat> getVisibles() {
+    public ArrayList<Pair<Entitat,Float>> getVisibles() {
     	return entitats_visibles;
     }
     
@@ -171,15 +171,8 @@ public class Resultat {
      */
     public void print() {
     	for(int i = 0; i < entitats_visibles.size(); ++i) {
-    		System.out.println(entitats_visibles.get(i));
+    		System.out.println(entitats_visibles.get(i).toString());
     	}	 
     	
     }   
-    	
-    public static void main(String[] args){
-    	ArrayList<Entitat> A = new ArrayList<Entitat>();
-    	Terme T = new Terme("Hola!");
-    	A.add(T);
-    	Resultat R = new Resultat(A);
-    }
 }
