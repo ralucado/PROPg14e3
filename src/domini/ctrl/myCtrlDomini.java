@@ -46,10 +46,6 @@ public class myCtrlDomini extends CtrlDomini {
 		return ctrlUsuari.consultarConjunt().contains(username);
 	}
 	
-	public void creaFitxersCamins(String user) throws Exception {
-		persistencia.creaFitxerCamins(user);
-	}
-	
 	public void altaUsuari(String nom, String contrasenya) throws Exception {
         ctrlUsuari.altaUsuari(nom, contrasenya);
         persistencia.creaFitxerCamins(nom);
