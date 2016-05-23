@@ -8,8 +8,8 @@ public class ConjuntUsuaris {
 	
   //ATRIBUTS	
 	
-	private HashMap<String, Usuari> conjunt_usuaris;
-	private int nb_admins;
+	protected HashMap<String, myUsuari> conjunt_usuaris;
+	protected int nb_admins;
 	
 	
   //CREADORES	
@@ -17,7 +17,7 @@ public class ConjuntUsuaris {
 	/*Pre: -
 	  Post: Crea un conjunt d'usuaris buit, amb nº d'admins a 0.*/
 	public ConjuntUsuaris(){
-		conjunt_usuaris=new HashMap<String, Usuari>();
+		conjunt_usuaris=new HashMap<String, myUsuari>();
 		nb_admins=0;
 	}
 	
@@ -31,7 +31,7 @@ public class ConjuntUsuaris {
 			throw new Exception("Ja existeix un usuari amb el nom "+nom);
 		}
 		else {
-			Usuari u=new Usuari(nom,contrasenya);
+			myUsuari u=new myUsuari(nom,contrasenya);
 			conjunt_usuaris.put(nom,u);
 		}
 	}
@@ -43,7 +43,7 @@ public class ConjuntUsuaris {
 			throw new Exception("Ja existeix un usuari amb el nom "+nom);
 		}
 		else {
-			Usuari u=new Usuari(nom,contrasenya);
+			myUsuari u=new myUsuari(nom,contrasenya);
 			u.fesAdmin();
 			++nb_admins;
 			conjunt_usuaris.put(nom,u);
@@ -70,7 +70,7 @@ public class ConjuntUsuaris {
 	  Post: Modifica el nom de l'usuari amb nom=nomActual per tal que nom=nomNou.*/
 	public void modificarNom(String nomActual,String nomNou) throws Exception{
 		if (conjunt_usuaris.containsKey(nomActual)){
-			Usuari u=conjunt_usuaris.get(nomActual);
+			myUsuari u=conjunt_usuaris.get(nomActual);
 			u.setNom(nomNou);
 			conjunt_usuaris.remove(nomActual);
 			conjunt_usuaris.put(nomNou,u);
@@ -84,7 +84,7 @@ public class ConjuntUsuaris {
 	  Post: Modifica la contrasenya de l'usuari amb nom=nom per tal que contrasenya=nova_contra.*/
 	public void modificarContrasenya(String nom, String nova_contra) throws Exception{
 		if (conjunt_usuaris.containsKey(nom)){
-			Usuari u=conjunt_usuaris.get(nom);
+			myUsuari u=conjunt_usuaris.get(nom);
 			u.setContrasenya(nova_contra);
 			conjunt_usuaris.put(nom, u);
 		}
@@ -97,7 +97,7 @@ public class ConjuntUsuaris {
 	  Post: Modifica l'usuari amb nom=nom per tal que admin=true.*/
 	public void ferAdmin(String nom) throws Exception{
 		if (conjunt_usuaris.containsKey(nom)){
-			Usuari u=conjunt_usuaris.get(nom);
+			myUsuari u=conjunt_usuaris.get(nom);
 			if (u.esAdmin()) throw new Exception("L'usuari "+nom+ " ja és Administrador.");
 			else {
 				u.fesAdmin();
@@ -122,7 +122,7 @@ public class ConjuntUsuaris {
 	
 	/*Pre: Ha d'existir l'usuari amb nom=nom dins del conjunt d'usuaris.
 	  Post: Retorna l'usuari amb nom=nom.*/
-	public Usuari consultarUsuari(String nom) throws Exception{
+	public myUsuari consultarUsuari(String nom) throws Exception{
 		if (!conjunt_usuaris.containsKey(nom)) throw new Exception("No existeix cap usuari amb el nom "+nom);
 		return conjunt_usuaris.get(nom);
 	}

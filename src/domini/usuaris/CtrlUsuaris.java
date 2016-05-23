@@ -5,8 +5,8 @@ import java.util.*;
 
 public class CtrlUsuaris {
     
-    private Usuari usuari;
-    private ConjuntUsuaris conjuntUsuaris;
+    protected myUsuari usuari;
+    protected myConjuntUsuaris conjuntUsuaris;
     
     private void carregarConjunt(ArrayList<ArrayList<String>> array) throws Exception{
         for (int i = 0; i < array.size(); ++i) {
@@ -21,7 +21,7 @@ public class CtrlUsuaris {
         CtrlPersistencia ctrlPersistencia = new CtrlPersistencia();
         ArrayList<ArrayList<String>> ret = new ArrayList<>();
         for (String s: set) {
-            ArrayList<String> aux = new ArrayList();
+            ArrayList<String> aux = new ArrayList<String>();
             aux.add(s);
             aux.add(conjuntUsuaris.consultarContrasenya(s));
             if (conjuntUsuaris.esAdmin(s)) aux.add("1");
@@ -33,28 +33,28 @@ public class CtrlUsuaris {
     
     public CtrlUsuaris() throws Exception{
         CtrlPersistencia ctrlPersistencia = new CtrlPersistencia();
-        usuari = new Usuari();
-        conjuntUsuaris = new ConjuntUsuaris();
+        usuari = new myUsuari();
+        conjuntUsuaris = new myConjuntUsuaris();
         carregarConjunt(ctrlPersistencia.importarUsuaris());
     }
     
-    public void setUsuari(Usuari usuari) {
+    public void setUsuari(myUsuari usuari) {
         this.usuari = usuari;
     }
     
-    public Usuari getUsuari() {
+    public myUsuari getUsuari() {
         return usuari;
     }
     
-    public void setConjuntUsuaris(ConjuntUsuaris conjuntUsuaris) {
+    public void setConjuntUsuaris(myConjuntUsuaris conjuntUsuaris) {
         this.conjuntUsuaris = conjuntUsuaris;
     }
     
-    public ConjuntUsuaris getCjtUsuaris() {
+    public myConjuntUsuaris getCjtUsuaris() {
         return conjuntUsuaris;
     }
     
-    public Usuari carregarUsuari(String nom) throws Exception {
+    public myUsuari carregarUsuari(String nom) throws Exception {
         return conjuntUsuaris.consultarUsuari(nom);
     }
     
@@ -71,8 +71,9 @@ public class CtrlUsuaris {
     }
 
     public void altaAdmin(String nom, String contrasenya) throws Exception {
-        if (usuari.esAdmin())
+        if (usuari.esAdmin()) {
             conjuntUsuaris.afegirAdmin(nom, contrasenya);
+    	}
         else
             throw new Exception("No tens permis per afegir un administrador");
     }
@@ -106,7 +107,7 @@ public class CtrlUsuaris {
     } 
     
     public ArrayList<String> consultarUsuari(String nom) throws Exception {
-        ArrayList<String> ret = new ArrayList();
+        ArrayList<String> ret = new ArrayList<String>();
         ret.add(nom);
         if (conjuntUsuaris.esAdmin(nom)) ret.add("EsAdmin");
         else ret.add("NoEsAdmin");

@@ -10,22 +10,22 @@ public class CtrlDomini {
 	
 	protected Graf graf;
 	
-	protected Usuari usuari;
-    protected ConjuntUsuaris conjuntUsuaris;
+	protected myUsuari usuari;
+    protected myConjuntUsuaris conjuntUsuaris;
     
     protected ConjuntCamins caminsUsuari;
 	protected ConjuntCamins caminsPredefinits;
 	
-	protected CtrlUsuaris ctrlUsuari;
+	protected myCtrlUsuaris ctrlUsuari;
 	protected CtrlGraf ctrlGraf;
 	protected ControladorCamins ctrlCamins;
 	
 	public CtrlDomini() throws Exception {
             
-            ctrlUsuari = new CtrlUsuaris();
+            ctrlUsuari = new myCtrlUsuaris();
             ctrlGraf = new CtrlGraf();
 		
-            usuari = new Usuari();
+            usuari = new myUsuari();
             caminsUsuari = new ConjuntCamins();
             caminsPredefinits = new ConjuntCamins();
             
@@ -36,7 +36,7 @@ public class CtrlDomini {
 	}
 	
 	public void logIn(String nom, String constrasenya) throws Exception {
-            Usuari aux = ctrlUsuari.carregarUsuari(nom);
+            myUsuari aux = ctrlUsuari.carregarUsuari(nom);
             if (aux.getContrasenya().equals(constrasenya)){
                 usuari = aux;
                 ctrlUsuari.setUsuari(usuari);
@@ -54,11 +54,12 @@ public class CtrlDomini {
 		
 	}
 	
-	public void setUsuari(Usuari usuari) throws Exception {
+	public void setUsuari(myUsuari usuari) throws Exception {
             this.usuari = usuari;
             ctrlUsuari.setUsuari(usuari);
 	}
 	
+	@SuppressWarnings("unused")
 	private Usuari carregarUsuari(String nom) throws Exception {
             return ctrlUsuari.carregarUsuari(nom);
 	}
@@ -97,7 +98,7 @@ public class CtrlDomini {
 	
 	public ArrayList<String> consultarUsuari(String nom) throws Exception {
             Usuari u1 = ctrlUsuari.carregarUsuari(nom);
-            ArrayList<String> ret = new ArrayList();
+            ArrayList<String> ret = new ArrayList<String>();
             ret.add(nom);
             if(conjuntUsuaris.esAdmin(nom)) ret.add("1");
             else ret.add("0");

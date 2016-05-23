@@ -2,9 +2,9 @@ package domini.usuaris;
 
 public class Usuari {
 	
-	private String nom;
-	private String contrasenya;
-	private boolean admin;
+	protected String nom;
+	protected String contrasenya;
+	protected boolean admin;
 	
 	public Usuari(){}
 	

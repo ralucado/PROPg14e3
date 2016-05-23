@@ -1,0 +1,14 @@
+user1	pwd1	0
+user11	pwd11	0
+user2	pwd2	0
+user10	pwd10	0
+user12	pwd12	0
+user9	pwd9	0
+admin	test	1
+user7	pwd7	0
+user8	pwd8	0
+user5	pwd5	0
+user6	pwd6	0
+user3	pwd3	0
+user4	pwd4	0
+arnau	test	0

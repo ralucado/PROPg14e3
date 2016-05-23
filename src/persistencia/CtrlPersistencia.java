@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -281,5 +282,27 @@ public class CtrlPersistencia {
 		exportar("DadesNoves/Entitats", entitats);
 		exportar("DadesNoves/Relacions", relacions);
 		System.out.println("EXPORTAT!");
+	}
+	
+	/**
+	 * Crea un nou fitxer de camins per a l'usuari <tt>user</tt>
+	 * @param user nom d'usuari
+	 * @throws Exception pot retornar IOException
+	 */
+	public void creaFitxerCamins(String user) throws Exception {
+		File f = new File (dataLocation + "Camins/dUsuari/" + user + fileExtension);
+		f.getParentFile().mkdirs();
+		f.createNewFile();
+	}
+
+	public void esborraFitxerCamins(String nom) {
+		File f = new File(dataLocation + "Camins/dUsuari/" + nom + fileExtension);
+		f.delete();
+	}
+
+	public void reanomenaFitxerCamins(String nomActual, String nomNou) {
+		File orig = new File(dataLocation + "Camins/dUsuari/" + nomActual + fileExtension);
+		File nou = new File(dataLocation + "Camins/dUsuari/" + nomNou + fileExtension);
+		orig.renameTo(nou);
 	}
 }
