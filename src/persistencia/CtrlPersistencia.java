@@ -17,6 +17,12 @@ public class CtrlPersistencia {
 	private String dataLocation = "DATA/";
 	private String fileExtension = ".txt";
 	
+	public static void main(String[] args) {
+		CtrlPersistencia ctrl = new CtrlPersistencia();
+		try {ctrl.esborrarMatrius('C');}
+		catch (Exception e) {System.out.println(e.getMessage());}
+	}
+	
 	public CtrlPersistencia() {
 		
 	}
@@ -295,14 +301,72 @@ public class CtrlPersistencia {
 		f.createNewFile();
 	}
 
+	/**
+	 * Esborra el fitxer de camins de l'usuari amb nom d'usuari <tt>nom</tt>
+	 * @param nom nom d'usuari
+	 */
 	public void esborraFitxerCamins(String nom) {
 		File f = new File(dataLocation + "Camins/dUsuari/" + nom + fileExtension);
 		f.delete();
 	}
 
+	/**
+	 * Reanomena el fitxer de camins de l'usuari antic <tt>nomActual</tt> amb el nom de l'usuari nou <tt>nomNou</tt>
+	 * @param nomActual nom d'usuari antic
+	 * @param nomNou nom d'usuari nou
+	 */
 	public void reanomenaFitxerCamins(String nomActual, String nomNou) {
 		File orig = new File(dataLocation + "Camins/dUsuari/" + nomActual + fileExtension);
 		File nou = new File(dataLocation + "Camins/dUsuari/" + nomNou + fileExtension);
 		orig.renameTo(nou);
+	}
+	
+	/**
+	 * Exporta la matriu que correspon al camí <tt>cami</tt>
+	 * @param matrixLeft matriu esquerra a exportar
+	 * @param matrixRight matriu dreta a exportar
+	 * @param cami camí de la matriu
+	 * @throws Exception pot retornar IOException
+	 */
+	public void exportarMatrius(ArrayList<ArrayList<String>> matrixLeft, ArrayList<ArrayList<String>> matrixRight, String cami) throws Exception {
+		exportar("Camins/Matrius" + cami + "/left", matrixLeft);
+		exportar("Camins/Matrius" + cami + "/right", matrixRight);
+	}
+	
+	/**
+	 * Importa la matriu esquerra que correspon al camí <tt>cami</tt>
+	 * @param cami camí de la matriu
+	 * @return matriu esquerra del camí <tt>cami</tt>
+	 * @throws Exception pot retornar IOException
+	 */
+	public ArrayList<ArrayList<String>> importarMatriuLeft(String cami) throws Exception {
+		return importar("Camins/Matrius" + cami + "/left");
+	}
+	
+	/**
+	 * Importa la matriu dreta que correspon al camí <tt>cami</tt>
+	 * @param cami camí de la matriu
+	 * @return matriu dreta del camí <tt>cami</tt>
+	 * @throws Exception pot retornar IOException
+	 */
+	public ArrayList<ArrayList<String>> importarMatriuRight(String cami) throws Exception {
+		return importar("Camins/Matrius" + cami + "/right");
+	}
+	
+	/**
+	 * Esborra les matrius desades que corresponguin a un camí que contingui <tt>c</tt>
+	 * @param c caràcter a buscar
+	 */
+	public void esborrarMatrius(char c) {
+		File carpetaMatrius = new File(dataLocation + "Camins/Matrius/");
+		carpetaMatrius.getParentFile().mkdirs();
+		carpetaMatrius.mkdir();
+		File[] matrius = carpetaMatrius.listFiles();
+		for (File carpeta : matrius) {
+			if (carpeta.isDirectory() && carpeta.getName().indexOf(c) != -1) {
+				for (File f : carpeta.listFiles()) f.delete();
+				carpeta.delete();
+			}
+		}
 	}
 }
