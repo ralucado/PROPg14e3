@@ -8,50 +8,62 @@ public class ConjuntUsuaris {
 	
   //ATRIBUTS	
 	
-	protected HashMap<String, myUsuari> conjunt_usuaris;
+	protected HashMap<String,Usuari> conjunt_usuaris;
 	protected int nb_admins;
 	
 	
   //CREADORES	
-	
-	/*Pre: -
-	  Post: Crea un conjunt d'usuaris buit, amb nº d'admins a 0.*/
+
+	/**
+	 * Crea un conjunt d'usuaris but, amb nº d'admins a 0.
+	 */
 	public ConjuntUsuaris(){
-		conjunt_usuaris=new HashMap<String, myUsuari>();
+		conjunt_usuaris=new HashMap<String, Usuari>();
 		nb_admins=0;
 	}
 	
 	
   //MODIFICADORES	
 	
-	/*Pre: No existeix cap usuari amb nom=nom.
-	  Post: Crea un usuari amb nom=nom, contrasenya=contrasenya i admin=false, i l'afegeix al conjunt.*/
+	/**
+	 * Crea un usuari amb nom = <tt>nom</tt>, contrasenya = <tt>contrasenya</tt> i admin = <tt>false</tt>, i l'afegeix al conjunt.
+	 * @param nom nom de l'usuari a crear
+	 * @param contrasenya contrasenya de l'usuari a crear
+	 * @throws Exception retorna excepció si el conjunt d'usuaris ja conté un usuari amb el mateix nom
+	 */
 	public void afegirUsuari(String nom,String contrasenya) throws Exception{
 		if (conjunt_usuaris.containsKey(nom)){
 			throw new Exception("Ja existeix un usuari amb el nom "+nom);
 		}
 		else {
-			myUsuari u=new myUsuari(nom,contrasenya);
+			Usuari u=new Usuari(nom,contrasenya);
 			conjunt_usuaris.put(nom,u);
 		}
 	}
 	
-	/*Pre: No existeix cap usuari amb nom=nom.
-	  Post: Crea un usuari amb nom=nom, contrasenya=contrasenya i admin=true, i l'afegeix al conjunt, augmentant el nº d'admins.*/
+	/**
+	 * Crea un usuari amb nom = <tt>nom</tt>, contrasenya = <tt>contrasenya</tt> i admin = <tt>false</tt>, i l'afegeix al conjunt, augmentant el nº d'admins.
+	 * @param nom nom de l'usuari a crear
+	 * @param contrasenya contrasenya de l'usuari a crear
+	 * @throws Exception retorna excepció si el conjunt d'usuaris ja conté un usuari amb el mateix nom
+	 */
 	public void afegirAdmin(String nom, String contrasenya) throws Exception{
 		if (conjunt_usuaris.containsKey(nom)){
 			throw new Exception("Ja existeix un usuari amb el nom "+nom);
 		}
 		else {
-			myUsuari u=new myUsuari(nom,contrasenya);
+			Usuari u=new Usuari(nom,contrasenya);
 			u.fesAdmin();
 			++nb_admins;
 			conjunt_usuaris.put(nom,u);
 		}
 	}
 	
-	/*Pre: Si l'usuari amb nom=nom és Admin, nb_admins>1. Existeix un usuari amb nom=nom.
-	  Post: Elimina del conjunt l'usuari nom=nom i en cas de ser Admin, disminueix el nº d'admins.*/
+	/**
+	 * Elimina del conjunt l'usuari nom = <tt>nom</tt> i en cas de ser Admin, disminueix el nº d'admins.
+	 * @param nom nom de l'usuari a eliminar
+	 * @throws Exception retorna excepció si el conjunt no conté cap usuari amb el mateix nom o si l'usuari és l'únic administrador del conjunt
+	 */
 	public void eliminarUsuari(String nom) throws Exception{
 		if (conjunt_usuaris.containsKey(nom)){
 			Usuari u=conjunt_usuaris.get(nom);
@@ -66,11 +78,15 @@ public class ConjuntUsuaris {
 		}
 	}
 	
-	/*Pre: Existeix un usuari amb nom=nomActual.
-	  Post: Modifica el nom de l'usuari amb nom=nomActual per tal que nom=nomNou.*/
+	/**
+	 * Modifica el nom de l'usuari amb nom=nomActual per tal que nom=nomNou.
+	 * @param nomActual nom actual de l'usuari
+	 * @param nomNou nom nou de l'usuari
+	 * @throws Exception retorna excepció si el conjunt no conté cap usuari amb nom = <tt>nomActual</tt>
+	 */
 	public void modificarNom(String nomActual,String nomNou) throws Exception{
 		if (conjunt_usuaris.containsKey(nomActual)){
-			myUsuari u=conjunt_usuaris.get(nomActual);
+			Usuari u=conjunt_usuaris.get(nomActual);
 			u.setNom(nomNou);
 			conjunt_usuaris.remove(nomActual);
 			conjunt_usuaris.put(nomNou,u);
@@ -80,11 +96,15 @@ public class ConjuntUsuaris {
 		}
 	}
 	
-	/*Pre: Existeix un usuari amb nom=nom.
-	  Post: Modifica la contrasenya de l'usuari amb nom=nom per tal que contrasenya=nova_contra.*/
+	/**
+	 * Modifica la contrasenya de l'usuari amb nom = <tt>nom</tt> per tal que contrasenya = <tt>nova_contra</tt>.
+	 * @param nom nom de l'usuari a modificar
+	 * @param nova_contra nova contrasenya de l'usuari
+	 * @throws Exception retorna excepció si el conjunt no conté cap usuari amb nom = <tt>nom</tt>
+	 */
 	public void modificarContrasenya(String nom, String nova_contra) throws Exception{
 		if (conjunt_usuaris.containsKey(nom)){
-			myUsuari u=conjunt_usuaris.get(nom);
+			Usuari u=conjunt_usuaris.get(nom);
 			u.setContrasenya(nova_contra);
 			conjunt_usuaris.put(nom, u);
 		}
@@ -93,11 +113,14 @@ public class ConjuntUsuaris {
 		}
 	}
 	
-	/*Pre: Existeix un usuari amb nom=nom i no és Admin.
-	  Post: Modifica l'usuari amb nom=nom per tal que admin=true.*/
+	/**
+	 * Modifica l'usuari amb nom = <tt>nom</tt> per tal que admin = <tt>true</tt>.
+	 * @param nom nom de l'usuari a modificar
+	 * @throws Exception retorna excepció si el conjunt no conté cap usuari amb nom = <tt>nom</tt> o si l'usuari ja és administrador
+	 */
 	public void ferAdmin(String nom) throws Exception{
 		if (conjunt_usuaris.containsKey(nom)){
-			myUsuari u=conjunt_usuaris.get(nom);
+			Usuari u=conjunt_usuaris.get(nom);
 			if (u.esAdmin()) throw new Exception("L'usuari "+nom+ " ja és Administrador.");
 			else {
 				u.fesAdmin();
@@ -110,8 +133,9 @@ public class ConjuntUsuaris {
 		}
 	}
 	
-	/*Pre: -
-	  Post: conjunt_usuaris no conté cap usuari.*/
+	/**
+	 * Buida el conjunt d'usuaris
+	 */
 	public void buidar(){
 		nb_admins=0;
 		conjunt_usuaris.clear();
@@ -120,41 +144,60 @@ public class ConjuntUsuaris {
 	
   //CONSULTORES	
 	
-	/*Pre: Ha d'existir l'usuari amb nom=nom dins del conjunt d'usuaris.
-	  Post: Retorna l'usuari amb nom=nom.*/
-	public myUsuari consultarUsuari(String nom) throws Exception{
+	/**
+	 * Retorna l'usuari amb nom = <tt>nom</tt>
+	 * @param nom nom de l'usuari a consultar
+	 * @return usuari amb nom = <tt>nom</tt>
+	 * @throws Exception retorna excepció si el conjunt no conté cap usuari amb nom = <tt>nom</tt>
+	 */
+	public Usuari consultarUsuari(String nom) throws Exception{
 		if (!conjunt_usuaris.containsKey(nom)) throw new Exception("No existeix cap usuari amb el nom "+nom);
 		return conjunt_usuaris.get(nom);
 	}
 	
-	/*Pre: Ha d'existir l'usuari amb nom=nom dins del conjunt d'usuaris.
-	  Post: Retorna la contrasenya de l'usuari amb nom=nom.*/
+	/**
+	 * Retorna la contrasenya de l'usuari amb nom = <tt>nom</tt>
+	 * @param nom nom de l'usuari a consultar
+	 * @return contrasenya de l'usuari amb nom = <tt>nom</tt>
+	 * @throws Exception retorna excepció si el conjunt no conté cap usuari amb nom = <tt>nom</tt>
+	 */
 	public String consultarContrasenya(String nom) throws Exception{
 		if (!conjunt_usuaris.containsKey(nom)) throw new Exception("No existeix cap usuari amb el nom "+nom);
 		return conjunt_usuaris.get(nom).getContrasenya();
 	}
 	
-	/*Pre: Ha d'existir l'usuari amb nom=nom dins del conjunt d'usuaris.
-	  Post: Retorna true si l'usuari amb nom=nom és Admin, i false en cas contrari.*/
+	/**
+	 * Retorna true si l'usuari amb nom = <tt>nom</tt> és Admin, i false en cas contrari.
+	 * @param nom nom de l'usuari a consultar
+	 * @return si l'usuari amb nom = <tt>nom</tt> és Admin retorna 'true', altrament 'false'
+	 * @throws Exception retorna excepció si el conjunt no conté cap usuari amb nom = <tt>nom</tt>
+	 */
 	public boolean esAdmin(String nom) throws Exception{
 		if (!conjunt_usuaris.containsKey(nom)) throw new Exception("No existeix cap usuari amb el nom "+nom);
 		return conjunt_usuaris.get(nom).esAdmin();
 	}
 	
-	/*Pre: -
-	  Post: Retorna true si existeix un usuari amb nom=nom, i retorna false en cas contrari.*/
+	/**
+	 * Retorna si existeix un usuari amb nom = <tt>nom</tt>
+	 * @param nom nom de l'usuari a consultar
+	 * @return retorna 'true' si existeix l'usuari amb nom = <tt>nom</tt>, altrament 'false'
+	 */
 	public boolean existeixUsuari(String nom){
 		return conjunt_usuaris.containsKey(nom);
 	}
 	
-	/*Pre: -
-	  Post: Retorna el nº d'admins.*/
+	/**
+	 * Retorna el nº d'admins del conjunt
+	 * @return nº admins
+	 */
 	public int getNb_admins(){
 		return nb_admins;
 	}
 	
-	/*Pre: -
-	  Post: Retorna un Set amb tots els noms dels usuaris del conjunt.*/
+	/**
+	 * Retorna un Set amb tots els noms dels usuaris del conjunt
+	 * @return noms dels usuaris del conjunt
+	 */
 	public Set<String> consultarNoms(){
 		return conjunt_usuaris.keySet();
 	}
