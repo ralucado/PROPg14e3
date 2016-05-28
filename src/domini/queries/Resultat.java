@@ -1,6 +1,8 @@
 package domini.queries;
-import domini.graf.*;
-import java.util.*;
+
+import java.util.ArrayList;
+
+import domini.graf.Entitat;
 
 public class Resultat {
 	private ArrayList<Pair<Entitat,Float>> entitats;
@@ -38,8 +40,8 @@ public class Resultat {
     /*
      * PRE: Cert.
      * POST: El nombre maxim d'entitats visibles del resultat es canvia per quantsVisibles.
-       Si quantsVisibles ï¿½s mï¿½s gran que el nombre total d'entitats, es faran visibles el 
-       nombre mï¿½xim d'entitats possibles.
+       Si quantsVisibles és més gran que el nombre total d'entitats, es faran visibles el 
+       nombre màxim d'entitats possibles.
      */
     
     public void filtrarN(int n) {
@@ -114,8 +116,8 @@ public class Resultat {
     /*
      * PRE: Cert.
      * POST: Es netegen tots els filtres existents i el nombre maxim d'entitats 
-       visibles es canvia pel definit per defecte. Si el definit per defecte ï¿½s mï¿½s 
-       gran que el nombre total d'entitats, es faran visibles el nombre mï¿½xim d'entitats 
+       visibles es canvia pel definit per defecte. Si el definit per defecte és més 
+       gran que el nombre total d'entitats, es faran visibles el nombre màxim d'entitats 
        possibles.
      */
     public void netejaFiltres() {
@@ -132,7 +134,7 @@ public class Resultat {
     
     /*
      * PRE: Cert.
-     * POST: Es retorna cert si el resultat contï¿½ Autors.
+     * POST: Es retorna cert si el resultat conté Autors.
      */
     public boolean isAutor() {
     	return (entitats.get(0).first.isAutor());
@@ -140,7 +142,7 @@ public class Resultat {
     
     /*
      * PRE: Cert.
-     * POST: Es retorna cert si el resultat contï¿½ Papers.
+     * POST: Es retorna cert si el resultat conté Papers.
      */
     public boolean isPaper() {
     	return (entitats.get(0).first.isPaper());	
@@ -148,7 +150,7 @@ public class Resultat {
     
     /*
      * PRE: Cert.
-     * POST: Es retorna cert si el resultat contï¿½ Conferencies.
+     * POST: Es retorna cert si el resultat conté Conferencies.
      */
     public boolean isConferencia() {
     	return (entitats.get(0).first.isConferencia());	
@@ -156,7 +158,7 @@ public class Resultat {
     
     /*
      * PRE: Cert.
-     * POST: Es retorna cert si el resultat contï¿½ Termes.
+     * POST: Es retorna cert si el resultat conté Termes.
      */
     public boolean isTerme() {
     	return (entitats.get(0).first.isTerme());
@@ -188,4 +190,31 @@ public class Resultat {
     	}	 
     	
     }   
+    
+    public String[][] getDadesString(){
+    	String[][] resultat = new String[entitats_visibles.size()][3];
+    	for(int i = 0; i < entitats_visibles.size(); ++i){
+    		resultat[i][0] = entitats_visibles.get(i).first.getNom();
+    		resultat[i][1] = entitats_visibles.get(i).first.getNameLabel();
+    		resultat[i][2] = entitats_visibles.get(i).second.toString();
+    	}
+    	
+    	return resultat;
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
