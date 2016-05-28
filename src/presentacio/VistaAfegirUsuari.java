@@ -36,13 +36,29 @@ public class VistaAfegirUsuari extends VistaCanvisUsuari {
 		btnAccepta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					if (cbEsAdmin.isSelected()) {
+					String username = nomField.getText();
+					String password = String.valueOf(passwordField.getPassword());
+					boolean esAdmin = cbEsAdmin.isSelected();
+					String[] botons = {"D'acord"};
+					
+					if (username.equals("") && password.equals("")) {
+						(new VistaDialog()).setDialog("Nom d'usuari i contrasenya buits", "Has d'escriure un nom d'usuari i una contrasenya", botons, JOptionPane.WARNING_MESSAGE);
+					}
+					else if (password.equals("")) {
+						(new VistaDialog()).setDialog("Contrasenya buida", "Has d'escriure una contrasenya", botons, JOptionPane.WARNING_MESSAGE);
+					}
+					else if (username.equals("")) {
+						(new VistaDialog()).setDialog("Nom d'usuari buit", "Has d'escriure un nom d'usuari", botons, JOptionPane.WARNING_MESSAGE);
+					}
+					else {
+					if (esAdmin) {
 						ctrl.getDomini().altaAdmin(nomField.getText(), String.valueOf(passwordField.getPassword()));
 					}
 					else {
 						ctrl.getDomini().altaUsuari(nomField.getText(), String.valueOf(passwordField.getPassword()));
 					}
 					dispose();
+					}
 				}
 				catch (Exception e2) {
 					VistaDialog dialog = new VistaDialog();

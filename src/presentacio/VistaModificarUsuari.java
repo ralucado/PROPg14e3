@@ -38,14 +38,14 @@ public class VistaModificarUsuari extends VistaCanvisUsuari {
 		
 		try {
 			ArrayList<String> dades = ctrl.getDomini().consultarUsuari(usernameIni);
-			passwordIni = dades.get(1);
-			if (dades.get(2) == "1") esAdminIni = true;
+			if (dades.get(1) == "1") esAdminIni = true;
 			else esAdminIni = false;
+			passwordIni = ctrl.getDomini().getContrasenya(usernameIni);
 			// Controlar que no quedin 0 admins
 			System.out.println("usernameIni: "+usernameIni+"; passwordIni: "+passwordIni+"; esAdminIni: "+esAdminIni);
 			
 			
-			if (usernameIni == ctrl.getDomini().getUsuariActual()) cbEsAdmin.setEnabled(false);
+			if (usernameIni == ctrl.getDomini().getUsuariActual() || esAdminIni) cbEsAdmin.setEnabled(false);
 			nomField.setText(usernameIni);
 			passwordField.setText(passwordIni);
 			cbEsAdmin.setSelected(esAdminIni);
@@ -65,28 +65,34 @@ public class VistaModificarUsuari extends VistaCanvisUsuari {
 					boolean esAdmin = cbEsAdmin.isSelected();
 					String[] botons = {"D'acord"};
 					
-					
+					if (username.equals("") && password.equals("")) {
+						(new VistaDialog()).setDialog("Nom d'usuari i contrasenya buits", "Has d'escriure un nom d'usuari i una contrasenya", botons, JOptionPane.WARNING_MESSAGE);
+					}
+					else if (password.equals("")) {
+						(new VistaDialog()).setDialog("Contrasenya buida", "Has d'escriure una contrasenya", botons, JOptionPane.WARNING_MESSAGE);
+					}
+					else if (username.equals("")) {
+						(new VistaDialog()).setDialog("Nom d'usuari buit", "Has d'escriure un nom d'usuari", botons, JOptionPane.WARNING_MESSAGE);
+					}
+					else {
 					// EN PROCEEEES
 					if (!username.equals(usernameIni)) {
-						System.out.println("Check username: "+usernameIni+ " - " + username);
-						if (ctrl.getDomini().existeixUsuari(username))
-							(new VistaDialog()).setDialog("Nom d'usuari no disponible", "El nom d'usuari ja s'està utilitzant!", botons, JOptionPane.WARNING_MESSAGE);
-						else {
+						try {
 							ctrl.getDomini().modificarNomUsuari(usernameIni, username);
+						} catch (Exception ex) {
+							(new VistaDialog()).setDialog("Error al modificar nom d'usuari", ex.getMessage(), botons, JOptionPane.WARNING_MESSAGE);
 						}
 					}
 					
 					if (!password.equals(passwordIni)) {
-						System.out.println("Check password: "+passwordIni+" - "+password);
 						ctrl.getDomini().modificarContrasenya(username, password);
 					}
 					
 					if (esAdmin != esAdminIni) {
-						System.out.println("Check esAdmin: "+esAdminIni+ " - "+esAdmin);
-						if (esAdmin) ctrl.getDomini().ferAdmin(username);
-						else if (ctrl.getDomini().getNumAdmins() > 1) {ctrl.getDomini().ferNoAdmin(username); System.out.println("Fent noAdmin");}
+						ctrl.getDomini().ferAdmin(username);
 					}
 					dispose();
+					}
 				}
 				catch (Exception e2) {
 					String[] botons = {"D'acord"};

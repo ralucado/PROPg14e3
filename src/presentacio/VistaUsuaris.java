@@ -2,6 +2,9 @@ package presentacio;
 
 import java.awt.EventQueue;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -140,11 +143,30 @@ public class VistaUsuaris {
 	
 	private class UsersTableModel extends AbstractTableModel {
 		private static final long serialVersionUID = 1L;
-		protected String[] columnNames = {"Nom d'usuari", "Contrasenya", "és admin."};
+		protected String[] columnNames = {"Nom d'usuari", "és admin."};
 		protected ArrayList<ArrayList<String>> data;
 		
 		public UsersTableModel() {
-			this.data = ctrl.getDomini().getDadesUsuaris();
+			this.data = new ArrayList<ArrayList<String>>();
+			this.data = new ArrayList<ArrayList<String>>();
+			TreeMap<String,String> d = new TreeMap<String,String>();
+			try {
+				Set<String> nomsUsuaris = ctrl.getDomini().consultarConjunt();
+				for (String nom : nomsUsuaris) {
+					System.out.println("EI");
+					ArrayList<String> usuari = ctrl.getDomini().consultarUsuari(nom);
+					d.put(usuari.get(0), usuari.get(1));
+				}
+			} catch (Exception e) {
+				String[] botons = {"D'acord"};
+				(new VistaDialog()).setDialog("Error al carregar usuaris", e.getMessage(), botons, JOptionPane.WARNING_MESSAGE);
+			}
+			for (Map.Entry<String, String> u : d.entrySet()) {
+				ArrayList<String> uu = new ArrayList<String>();
+				uu.add(u.getKey()); uu.add(u.getValue());
+				this.data.add(uu);
+			}
+			
 		}
 		
 		public String getColumnName(int column) {
@@ -160,7 +182,24 @@ public class VistaUsuaris {
 		}
 		
 		public void updateData() {
-			data = ctrl.getDomini().getDadesUsuaris();
+			this.data = new ArrayList<ArrayList<String>>();
+			TreeMap<String,String> d = new TreeMap<String,String>();
+			try {
+				Set<String> nomsUsuaris = ctrl.getDomini().consultarConjunt();
+				for (String nom : nomsUsuaris) {
+					System.out.println("EI");
+					ArrayList<String> usuari = ctrl.getDomini().consultarUsuari(nom);
+					d.put(usuari.get(0), usuari.get(1));
+				}
+			} catch (Exception e) {
+				String[] botons = {"D'acord"};
+				(new VistaDialog()).setDialog("Error al carregar usuaris", e.getMessage(), botons, JOptionPane.WARNING_MESSAGE);
+			}
+			for (Map.Entry<String, String> u : d.entrySet()) {
+				ArrayList<String> uu = new ArrayList<String>();
+				uu.add(u.getKey()); uu.add(u.getValue());
+				this.data.add(uu);
+			}
 			fireTableDataChanged();
 		}
 
