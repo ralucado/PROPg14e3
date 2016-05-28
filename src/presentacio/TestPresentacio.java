@@ -2,7 +2,6 @@ package presentacio;
 
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
-import com.jtattoo.plaf.fast.*;
 
 public class TestPresentacio {
 	public static void main(String[] args) {
@@ -10,7 +9,6 @@ public class TestPresentacio {
 	      new Runnable() {
 	          public void run() {
 	        	  try {
-	        		  UIManager.setLookAndFeel("com.jtattoo.plaf.fast.FastLookAndFeel");
 					  CtrlPresentacio ctrlPresentacio = new CtrlPresentacio();
 					  ctrlPresentacio.openLogIn();
 	        	  }

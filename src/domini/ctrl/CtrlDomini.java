@@ -10,22 +10,22 @@ public class CtrlDomini {
 	
 	protected Graf graf;
 	
-	protected myUsuari usuari;
-    protected myConjuntUsuaris conjuntUsuaris;
+	protected Usuari usuari;
+    protected ConjuntUsuaris conjuntUsuaris;
     
     protected ConjuntCamins caminsUsuari;
 	protected ConjuntCamins caminsPredefinits;
 	
-	protected myCtrlUsuaris ctrlUsuari;
+	protected CtrlUsuaris ctrlUsuari;
 	protected CtrlGraf ctrlGraf;
 	protected ControladorCamins ctrlCamins;
 	
 	public CtrlDomini() throws Exception {
             
-            ctrlUsuari = new myCtrlUsuaris();
+            ctrlUsuari = new CtrlUsuaris();
             ctrlGraf = new CtrlGraf();
 		
-            usuari = new myUsuari();
+            usuari = new Usuari();
             caminsUsuari = new ConjuntCamins();
             caminsPredefinits = new ConjuntCamins();
             
@@ -36,7 +36,7 @@ public class CtrlDomini {
 	}
 	
 	public void logIn(String nom, String constrasenya) throws Exception {
-            myUsuari aux = ctrlUsuari.carregarUsuari(nom);
+            Usuari aux = ctrlUsuari.carregarUsuari(nom);
             if (aux.getContrasenya().equals(constrasenya)){
                 usuari = aux;
                 ctrlUsuari.setUsuari(usuari);
@@ -54,7 +54,7 @@ public class CtrlDomini {
 		
 	}
 	
-	public void setUsuari(myUsuari usuari) throws Exception {
+	public void setUsuari(Usuari usuari) throws Exception {
             this.usuari = usuari;
             ctrlUsuari.setUsuari(usuari);
 	}
