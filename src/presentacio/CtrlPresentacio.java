@@ -7,6 +7,8 @@ public class CtrlPresentacio {
 	private myCtrlDomini ctrlDomini;
 	private VistaUsuaris vUsuaris;
 	private VistaIniciSessio vIniciSessio;
+	private VistaMenu vMenu;
+	private VistaCamins vCamins;
 	
 	public CtrlPresentacio() {
 		try {
@@ -58,6 +60,30 @@ public class CtrlPresentacio {
 			VistaDialog dialog = new VistaDialog();
 			String[] botons = {"D'acord"};
 			dialog.setDialog("Error al iniciar programa", exc.getMessage(), botons, JOptionPane.WARNING_MESSAGE);
+		}
+	}
+
+	public void openMenu() {
+		try{
+			vMenu = new VistaMenu(this);
+			vMenu.fesVisible();
+
+		} catch (Exception e) {
+			VistaDialog dialog = new VistaDialog();
+			String[] botons = {"D'acord"};
+			dialog.setDialog("Error al iniciar programa", e.getMessage(), botons, JOptionPane.WARNING_MESSAGE);
+		}
+	}
+
+	public void openCamins() {
+		try{
+			vCamins = new VistaCamins(this);
+			vCamins.fesVisible();
+
+		} catch (Exception e) {
+			VistaDialog dialog = new VistaDialog();
+			String[] botons = {"D'acord"};
+			dialog.setDialog("Error al iniciar programa", e.getMessage(), botons, JOptionPane.WARNING_MESSAGE);
 		}
 	}
 }
