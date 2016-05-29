@@ -86,9 +86,9 @@ public class VistaGestioEntitats{
 		frame = new JFrame();
 		frame.setBackground(SystemColor.control);
 		frame.setForeground(Color.BLACK);
-		frame.setSize(500, 400);
+		frame.setSize(800, 600);
 		frame.setLocationRelativeTo(null);
-		frame.getContentPane().setLayout(new MigLayout("", "[62px,grow][62px,grow][62px,grow][62px,grow][][]", "[50px,grow][300px,grow][50px,grow][50px,grow]"));
+		frame.getContentPane().setLayout(new MigLayout("", "[62px,grow][62px,grow][62px,grow][62px,grow][][]", "[50px,grow][][][300px,grow][50px,grow][50px,grow][][][][][][][][]"));
 		
 		//taula / scrollpane
 				JScrollPane scrollPane = new JScrollPane();
@@ -109,6 +109,84 @@ public class VistaGestioEntitats{
 						}
 					}
 				});
+				
+		//Botó papers
+		btnPapers = new JButton("Papers");
+		frame.getContentPane().add(btnPapers, "cell 0 0,growx,aligny center");
+		btnPapers.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				btnPapers.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+				btnConferencies.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+				btnTermes.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+				btnAutors.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+				tipusActual = "Paper";
+				model.updateData(tipusActual);
+			}
+		});
+		btnPapers.setBounds(37, 22, 143, 25);
+		btnPapers.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+				
+				//Botó autors
+				btnAutors = new JButton("Autors");
+				btnAutors.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+
+						btnPapers.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+						btnConferencies.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+						btnTermes.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+						btnAutors.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+						tipusActual = "Autor";
+						model.updateData(tipusActual);
+					}
+				});
+				btnAutors.setBounds(37, 59, 143, 25);
+				frame.getContentPane().add(btnAutors, "flowx,cell 1 0,growx,aligny center");
+				btnAutors.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+				
+				//Botó termes
+				btnTermes = new JButton("Termes");
+				btnTermes.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+
+						btnPapers.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+						btnConferencies.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+						btnTermes.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+						btnAutors.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+						tipusActual = "Terme";
+						model.updateData(tipusActual);
+					}
+				});
+				btnTermes.setBounds(37, 96, 143, 25);
+				frame.getContentPane().add(btnTermes, "cell 2 0,growx,aligny center");
+				btnTermes.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+				
+				
+				
+				
+				
+				//Botó conferencies
+				btnConferencies = new JButton("Conferencies");
+				btnConferencies.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						btnPapers.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+						btnConferencies.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+						btnTermes.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+						btnAutors.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+						tipusActual = "Conferencia";
+						model.updateData(tipusActual);
+					}
+				});
+				btnConferencies.setBounds(37, 133, 143, 25);
+				frame.getContentPane().add(btnConferencies, "cell 3 0,growx,aligny center");
+				btnConferencies.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+				table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);				
+				table.setFillsViewportHeight(true);
+				
+				scrollPane.setViewportView(table);
+				frame.getContentPane().add(scrollPane, "cell 0 3 6 5,grow");
 		
 		//barra cerca
 		textField = new JTextField();
@@ -123,7 +201,7 @@ public class VistaGestioEntitats{
 				  }
 			}
 		});
-		frame.getContentPane().add(textField, "cell 0 6 6 1,growx");
+		frame.getContentPane().add(textField, "cell 0 8 6 1,growx");
 		textField.setColumns(10);
 		
 		
@@ -165,84 +243,7 @@ public class VistaGestioEntitats{
 				}
 			}
 		});
-				  
-		//Botó papers
-		btnPapers = new JButton("Papers");
-		frame.getContentPane().add(btnPapers, "cell 1 0,growx,aligny center");
-		btnPapers.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				
-				btnPapers.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-				btnConferencies.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-				btnTermes.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-				btnAutors.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-				tipusActual = "Paper";
-				model.updateData(tipusActual);
-			}
-		});
-		btnPapers.setBounds(37, 22, 143, 25);
-		btnPapers.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 		
-		//Botó autors
-		btnAutors = new JButton("Autors");
-		btnAutors.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				btnPapers.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-				btnConferencies.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-				btnTermes.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-				btnAutors.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-				tipusActual = "Autor";
-				model.updateData(tipusActual);
-			}
-		});
-		btnAutors.setBounds(37, 59, 143, 25);
-		frame.getContentPane().add(btnAutors, "flowx,cell 2 0,growx,aligny center");
-		btnAutors.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-		
-		//Botó termes
-		btnTermes = new JButton("Termes");
-		btnTermes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				btnPapers.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-				btnConferencies.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-				btnTermes.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-				btnAutors.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-				tipusActual = "Terme";
-				model.updateData(tipusActual);
-			}
-		});
-		btnTermes.setBounds(37, 96, 143, 25);
-		frame.getContentPane().add(btnTermes, "cell 3 0,growx,aligny center");
-		btnTermes.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-		
-		
-		
-		
-		
-		//Botó conferencies
-		btnConferencies = new JButton("Conferencies");
-		btnConferencies.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				btnPapers.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-				btnConferencies.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-				btnTermes.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-				btnAutors.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-				tipusActual = "Conferencia";
-				model.updateData(tipusActual);
-			}
-		});
-		btnConferencies.setBounds(37, 133, 143, 25);
-		frame.getContentPane().add(btnConferencies, "cell 4 0,growx,aligny center");
-		btnConferencies.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);				
-		table.setFillsViewportHeight(true);
-		
-		scrollPane.setViewportView(table);
-		frame.getContentPane().add(scrollPane, "cell 0 1 8,grow");
 		
 		//Botó modificar entitat
 		JButton btnModificarEntitat = new JButton();
@@ -263,6 +264,8 @@ public class VistaGestioEntitats{
 				}
 			}
 		});
+		btnModificarEntitat.setBounds(37, 230, 146, 25);
+		frame.getContentPane().add(btnModificarEntitat, "cell 2 23,grow");
 		
 		//Botó afegir entitat
 		JButton btnAfegirEntitat = new JButton();
@@ -273,6 +276,9 @@ public class VistaGestioEntitats{
 				model.updateData(tipusActual);
 			}
 		});
+		btnAfegirEntitat.setBounds(37, 160, 143, 31);
+		frame.getContentPane().add(btnAfegirEntitat, "cell 1 23,grow");
+		
 
 		
 		
@@ -305,12 +311,9 @@ public class VistaGestioEntitats{
 			}
 		});
 		btnEsborrarEntitat.setBounds(37, 195, 143, 31);
-		frame.getContentPane().add(btnEsborrarEntitat, "cell 3 21,grow");
+		frame.getContentPane().add(btnEsborrarEntitat, "cell 3 23,grow");
 		
-		btnAfegirEntitat.setBounds(37, 160, 143, 31);
-		frame.getContentPane().add(btnAfegirEntitat, "cell 1 21,grow");
-		btnModificarEntitat.setBounds(37, 230, 146, 25);
-		frame.getContentPane().add(btnModificarEntitat, "cell 2 21,growx,aligny baseline");
+		
 	}
 	
 
