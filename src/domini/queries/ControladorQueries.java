@@ -9,7 +9,6 @@ public class ControladorQueries{
 	private ArrayList<Query> UltimesQueries;
 	private Query QueryActual;
 	private Resultat ResultatActual;
-	private ArrayList<Float> valors;
 	private CtrlGraf CtrlGraf;
 	private HeteSim HS;
 	
@@ -88,12 +87,11 @@ public class ControladorQueries{
 		}
 	}
 	
-	public ArrayList<Pair<Integer, Float>> executarQuery() throws Exception{ // String -> Integer
+	public ArrayList<Pair<Entitat, Float>> executarQuery() throws Exception{ // String -> Integer
 		if(QueryActual instanceof QueryNormal){
 			ArrayList<Pair<Integer, Float>> resultat = ((QueryNormal) QueryActual).executa(HS);
-			/*
-			ArrayList<Entitat> entitats = new ArrayList<Entitat>();
-			ArrayList<Float> hetesimValors = new ArrayList<Float>();
+			ArrayList<Pair<Entitat, Float>> r = new ArrayList<Pair<Entitat,Float>>();
+		
 			char c = QueryActual.getPath().charAt(0); 
 			for(int i = 0; i<resultat.size();i++){
 				int id = 0;
@@ -113,62 +111,49 @@ public class ControladorQueries{
 				}
 				Entitat e = CtrlGraf.consultarGraf().consultarEntitat(id);
 				
-				
-				entitats.add(e);
-				hetesimValors.add(hs);		
+				Pair<Entitat, Float> p = new Pair<Entitat,Float>(e,hs);
+				r.add(p);
 				
 			}
-			ResultatActual = new Resultat(entitats);
-			valors = hetesimValors;
-			ArrayList<Boolean> visibles = ResultatActual.getVisibles();
-			ArrayList<Pair<String,Float>> R = new ArrayList<Pair<String,Float>>();
-			for(int i = 0; i<entitats.size();i++){
-				if(visibles.get(i)){
-					Pair<String,Float> p = new Pair<String,Float>(entitats.get(i).getNom(), hetesimValors.get(i));
-					R.add(p);
-				}
-			}
-			afegirQueryRecent();*/
-			return resultat;
+			ResultatActual = new Resultat(r);
+			afegirQueryRecent();
+			return ResultatActual.getVisibles();
 		} 	
 		else{
 			throw new Exception("La query no es normal");
 		}
 	}
 	
-	public ArrayList<Pair<String, Float>> filtrarResultatN(String n) throws Exception{
+	public ArrayList<Pair<Entitat, Float>> filtrarResultatN(String n) throws Exception{
 		if(ResultatActual != null){
 			ResultatActual.filtrarN(Integer.valueOf(n));
-			ArrayList<Entitat> entitats = ResultatActual.getEntitats();
-			ArrayList<Boolean> visibles = ResultatActual.getVisibles();
-			ArrayList<Pair<String,Float>> R = new ArrayList<Pair<String,Float>>();
-			for(int i = 0; i<entitats.size();i++){
-				if(visibles.get(i)){
-					Pair<String,Float> p = new Pair<String,Float>(entitats.get(i).getNom(), valors.get(i));
-					R.add(p);
-				}
-			}
-			return R;
+			ArrayList<Pair<Entitat, Float>> entitats = ResultatActual.getVisibles();
+			
+			return entitats;
 		}
 		else{
 			throw new Exception("No hi ha resultat");
 		}
 	}
 	
-	public ArrayList<Pair<String, Float>> filtrarResultatLabel(int label) throws Exception{
+	public ArrayList<Pair<Entitat, Float>> filtrarResultatLabel(int label) throws Exception{
 		if(ResultatActual != null){
 			ResultatActual.filtrarLabelEq(label);
+			ArrayList<Pair<Entitat, Float>> entitats = ResultatActual.getVisibles();
 			
-			ArrayList<Entitat> entitats = ResultatActual.getEntitats();
-			ArrayList<Boolean> visibles = ResultatActual.getVisibles();
-			ArrayList<Pair<String,Float>> R = new ArrayList<Pair<String,Float>>();
-			for(int i = 0; i<entitats.size();i++){
-				if(visibles.get(i)){
-					Pair<String,Float> p = new Pair<String,Float>(entitats.get(i).getNom(), valors.get(i));
-					R.add(p);
-				}
-			}
-			return R;
+			return entitats;
+		}
+		else{
+			throw new Exception("No hi ha resultat");
+		}
+	}
+	
+	public ArrayList<Pair<Entitat, Float>> filtrarResultatNoLabel(int label) throws Exception{
+		if(ResultatActual != null){
+			ResultatActual.filtrarLabelDif(label);
+			ArrayList<Pair<Entitat, Float>> entitats = ResultatActual.getVisibles();
+			
+			return entitats;
 		}
 		else{
 			throw new Exception("No hi ha resultat");
