@@ -2,7 +2,7 @@ package domini.queries;
 
 import domini.camins.Cami;
 
-public class Query {
+public abstract class Query {
 	protected Cami cami;
 	
 	public Query(Cami c) {
@@ -19,11 +19,8 @@ public class Query {
 
 	
 	
-	public boolean esClustering(){
-		return false;
-	}
+	public abstract boolean esClustering();
 	
-	public boolean esNormal(){
-		return false;
-	}
+	public abstract boolean esNormal();
 }
+
