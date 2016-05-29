@@ -1,23 +1,23 @@
 package presentacio;
 
-import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.JScrollPane;
-import net.miginfocom.swing.MigLayout;
 import javax.swing.JTable;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.ActionEvent;
-import java.awt.Font;
+import javax.swing.table.AbstractTableModel;
+
+import net.miginfocom.swing.MigLayout;
 
 public class VistaUsuaris {
 
@@ -54,7 +54,7 @@ public class VistaUsuaris {
 					String[] botons = {"D'acord"};
 					(new VistaDialog()).setDialog("No s'ha pogut desar el conjunt d'usuaris", exc.getMessage(), botons, JOptionPane.ERROR_MESSAGE);
 				}
-				ctrl.openLogIn();
+				ctrl.openMenu();
 			}
 		});
 		frame.setLocationRelativeTo(null);
@@ -141,8 +141,8 @@ public class VistaUsuaris {
 	
 	
 	
+	@SuppressWarnings("serial")
 	private class UsersTableModel extends AbstractTableModel {
-		private static final long serialVersionUID = 1L;
 		protected String[] columnNames = {"Nom d'usuari", "és admin."};
 		protected ArrayList<ArrayList<String>> data;
 		
@@ -187,7 +187,6 @@ public class VistaUsuaris {
 			try {
 				Set<String> nomsUsuaris = ctrl.getDomini().consultarConjunt();
 				for (String nom : nomsUsuaris) {
-					System.out.println("EI");
 					ArrayList<String> usuari = ctrl.getDomini().consultarUsuari(nom);
 					d.put(usuari.get(0), usuari.get(1));
 				}

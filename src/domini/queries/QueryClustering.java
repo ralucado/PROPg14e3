@@ -145,4 +145,18 @@ public class QueryClustering extends Query {
 		// Ja ha convergit
 		executat = true;
 	}
+	
+	/**
+	 * Retorna si la query és de clústering
+	 */
+	public boolean esClustering() {
+		return true;
+	}
+
+	/**
+	 * Retorna si la query és normal
+	 */
+	public boolean esNormal() {
+		return false;
+	}
 }

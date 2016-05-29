@@ -1,6 +1,7 @@
 user11	pwd11	0
 user2	pwd2	0
 user12	pwd12	1
+user1022	pwd10	0
 user9	pwd9	0
 admin	test2	1
 user7	pwd7	0
@@ -9,5 +10,4 @@ user5	pwd5	0
 user6	pwd6	0
 user3	pwd3	0
 user4	pwd4	0
-user102	pwd10	0
 arnau	test	0

@@ -1,6 +1,7 @@
 package domini.camins;
+
+import persistencia.CtrlPersistencia;
 import java.util.*;
-import persistencia.*;
 
 public class ControladorCamins {
 	private ConjuntCamins usuari;
@@ -162,17 +163,16 @@ public class ControladorCamins {
 	 */
 	public void guardarCamins(String nomUsuari) throws Exception{		
 		ArrayList<ArrayList<String>> caminsUsuari = new ArrayList<ArrayList<String>>();
-		
-		for(int i = 0; i<usuari.getTamany();i++){
+		for (Cami c : usuari.getConjunt().values()) {
 			ArrayList<String> s = new ArrayList<String>();
-			s.add(usuari.getConjunt().get(i).getNom());
-			s.add(usuari.getConjunt().get(i).getPath());
-			s.add(usuari.getConjunt().get(i).getDescripcio());
+			s.add(c.getNom());
+			s.add(c.getPath());
+			s.add(c.getDescripcio());
 			caminsUsuari.add(s);
 		}
-		
 		CtrlDad.exportarCaminsUsuari(nomUsuari, caminsUsuari);
 	}
+	
 	
 	/**
 	 * Consulta el camí de l'usuari número n ordenat per nom
