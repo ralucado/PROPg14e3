@@ -25,6 +25,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListModel;
+import javax.swing.UIManager;
 
 public class VistaDetallsEntitat extends JDialog {
 
@@ -36,40 +37,40 @@ public class VistaDetallsEntitat extends JDialog {
 
 
 	private void initComponents(){
+		
+		try{
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+		}
+		catch(Exception e){}
+		
 		//frame
 		
 		setBackground(SystemColor.control);
 		setForeground(Color.BLACK);
-		setSize(800, 200);
+		setSize(800, 150);
 		setLocationRelativeTo(null);
 		
-		getContentPane().setLayout(new MigLayout("", "[250px,grow][250px,grow]", "[50px,grow][50px,grow][50px,grow][50px,grow][50px,grow][50px,grow]"));
+		getContentPane().setLayout(new MigLayout("", "[800px,grow]", "[30px,grow][30px,grow][30px,grow][30px,grow][30px,grow][30px,grow]"));
 		
 		//label label
-		if(tipusE!="Terme"){
-			
-			
-		
-			
-
-			
-			JLabel lblLabel = new JLabel("La label de l'entitat és:  "+labelE);
+		if(tipusE!="Terme"){	
+			JLabel lblLabel = new JLabel("<html><b>La label de l'entitat és:  </b>"+labelE+"</html>");
 			lblLabel.setBounds(255, 10, 136, 15);
 			getContentPane().add(lblLabel, "cell 0 6,alignx left,aligny center");
 		}
 		
 		//label nom
-		JLabel lblNomDeLentitat = new JLabel("El nom de l'entitat és:  "+nomE);
+		JLabel lblNomDeLentitat = new JLabel("<html><b>El nom de l'entitat és:  </b>"+nomE+"</html>");
 		lblNomDeLentitat.setBounds(30, 71, 136, 15);
 		getContentPane().add(lblNomDeLentitat, "cell 0 0,alignx left,aligny center");
 		
 		//label tipus
-		JLabel lblTipusDentitat = new JLabel("L'entitat és del tipus:  "+tipusE);
+		JLabel lblTipusDentitat = new JLabel("<html><b>L'entitat és del tipus:  </b>"+tipusE+"</html");
 		lblTipusDentitat.setBounds(30, 10, 136, 15);
 		getContentPane().add(lblTipusDentitat, "cell 0 4,alignx left,aligny center");
 		
 		//label id
-		JLabel lblId = new JLabel("L'Id de l'entitat és:  "+idE);
+		JLabel lblId = new JLabel("<html><b>L'Id de l'entitat és:  </b>"+idE+"</html>");
 		getContentPane().add(lblId, "cell 0 2");
 		
 		//boto cancelar
@@ -79,7 +80,7 @@ public class VistaDetallsEntitat extends JDialog {
 				dispose();
 			}
 		});
-		getContentPane().add(cancelButton, "cell 1 8,alignx left,aligny center");
+		getContentPane().add(cancelButton, "cell 0 6,alignx left,aligny center");
 	}
 	
 	
@@ -96,24 +97,8 @@ public class VistaDetallsEntitat extends JDialog {
 		this.idE = id;
 		this.ctrl = ctrl;
 		initComponents();
-		int l = maxLength();
-		this.setSize(330+7*l, 200);
+		this.setSize(500, 300);
 		setVisible(true);
 		setLocationRelativeTo(owner);
-	}
-	
-	private int maxLength(){
-		int l1 = idE.length();
-		int l2 = nomE.length();
-		int l3 = labelE.length();
-		int l4 = tipusE.length();
-		int la, lb;
-		if(l1>l2) la = l1;
-		else la = l2;
-		if(l3>l4) lb = l3;
-		else lb = l4;
-		
-		if(la>lb) return la;
-		else return lb;
 	}
 }
