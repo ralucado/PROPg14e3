@@ -250,7 +250,7 @@ public class CtrlDomini {
             return ctrlCamins.consultarCaminsPredefinits();
 	}
         
-        public void guardarCamins(String nomUsuari) throws Exception {
+    public void guardarCamins(String nomUsuari) throws Exception {
             ctrlCamins.guardarCamins(nomUsuari);
 	}
         

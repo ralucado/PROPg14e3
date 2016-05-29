@@ -1,22 +1,18 @@
 package presentacio;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
-import java.awt.Font;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
-import javax.swing.JCheckBox;
-import javax.swing.JDialog;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JPasswordField;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+@SuppressWarnings("serial")
 public class VistaCanvisCami extends JDialog {
 	
 	protected CtrlPresentacio ctrl;
@@ -120,4 +116,6 @@ public class VistaCanvisCami extends JDialog {
 		gbc_btnCancella.gridy = 4;
 		getContentPane().add(btnCancella, gbc_btnCancella);
 	}
+	
+
 }

@@ -25,7 +25,7 @@ public class VistaModificarUsuari extends VistaCanvisUsuari {
 		setVisible(true);
 	}
 
-	private void inicialitzaCompPropis() {
+	protected void inicialitzaCompPropis() {
 		JLabel lblTitle = new JLabel("Modifica l'usuari");
 		lblTitle.setHorizontalAlignment(SwingConstants.LEFT);
 		lblTitle.setFont(new Font("Lucida Grande", Font.BOLD, 15));
@@ -74,14 +74,15 @@ public class VistaModificarUsuari extends VistaCanvisUsuari {
 					else if (username.equals("")) {
 						(new VistaDialog()).setDialog("Nom d'usuari buit", "Has d'escriure un nom d'usuari", botons, JOptionPane.WARNING_MESSAGE);
 					}
-					else {
-					// EN PROCEEEES
-					if (!username.equals(usernameIni)) {
-						try {
-							ctrl.getDomini().modificarNomUsuari(usernameIni, username);
-						} catch (Exception ex) {
-							(new VistaDialog()).setDialog("Error al modificar nom d'usuari", ex.getMessage(), botons, JOptionPane.WARNING_MESSAGE);
-						}
+					else if (username.indexOf('/') != -1) {
+						(new VistaDialog()).setDialog("Caràcter no permès", "El nom d'usuari no pot contenir el caràcter '/'.", botons, JOptionPane.WARNING_MESSAGE);
+					} else {
+						if (!username.equals(usernameIni)) {
+							try {
+								ctrl.getDomini().modificarNomUsuari(usernameIni, username);
+							} catch (Exception ex) {
+								(new VistaDialog()).setDialog("Error al modificar nom d'usuari", ex.getMessage(), botons, JOptionPane.WARNING_MESSAGE);
+							}
 					}
 					
 					if (!password.equals(passwordIni)) {

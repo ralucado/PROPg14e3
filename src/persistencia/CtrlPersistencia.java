@@ -4,7 +4,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -14,8 +13,8 @@ import java.util.Scanner;
  * @author Arnau Blanch Cortès
  */
 public class CtrlPersistencia {
-	private String dataLocation = "DATA/";
-	private String fileExtension = ".txt";
+	private String dataLocation = "DATA/";	// Ubicació carpeta de dades
+	private String fileExtension = ".txt";	// Extensió dels fitxers
 	
 	public static void main(String[] args) {
 		CtrlPersistencia ctrl = new CtrlPersistencia();
@@ -23,22 +22,41 @@ public class CtrlPersistencia {
 		catch (Exception e) {System.out.println(e.getMessage());}
 	}
 	
+	/**
+	 * Crea un nou CtrlPersistencia
+	 */
 	public CtrlPersistencia() {
 		
 	}
 	
+	/**
+	 * Retorna la ubicació de la carpeta amb les dades
+	 * @return ubiciació carpeta de dades
+	 */
 	public String getDataLocation() {
 		return dataLocation;
 	}
 	
+	/**
+	 * Canvia la ubicació de la carpeta amb les dades
+	 * @param dir nova ubicació carpeta de dades
+	 */
 	public void setDataLocation(String dir) {
 		dataLocation = dir;
 	}
 	
+	/**
+	 * Retorna l'extensió dels fitxers
+	 * @return
+	 */
 	public String getFileExtension() {
 		return fileExtension;
 	}
 	
+	/**
+	 * Canvia l'extensió dels fitxers
+	 * @param ext
+	 */
 	public void setFileExtension(String ext) {
 		fileExtension = ext;
 	}
@@ -46,62 +64,60 @@ public class CtrlPersistencia {
 	/**
 	 * Importa dades des de fitxer
 	 * @param filename nom (i directori) del fitxer a importar
-	 * @throws Exception ...
+	 * @throws Exception pot retornar IOException
 	 * @return matriu d'strings importades des del fitxer
 	 */
 	private ArrayList<ArrayList<String>> importar(String filename) throws Exception {
 		FileReader fr = new FileReader(dataLocation + filename + fileExtension);
 		Scanner s = new Scanner(fr);
 		
-		ArrayList<ArrayList<String>> t = new ArrayList<ArrayList<String>>();
+		ArrayList<ArrayList<String>> linies = new ArrayList<ArrayList<String>>();
 		
 		while (s.hasNextLine()) {
 			ArrayList<String> linia = new ArrayList<String>();
 			String[] liniaArray = null;
-			String line = s.nextLine();
-			liniaArray = line.split("\t");
-			for (String str : liniaArray) {
-				linia.add(str);
+			String liniaString = s.nextLine();
+			liniaArray = liniaString.split("\t");
+			for (String element : liniaArray) {
+				linia.add(element);
 			}
-			t.add(linia);
+			linies.add(linia);
 		}
 		
 		s.close(); fr.close();
-		return t;
+		return linies;
 	}
 	
 	/**
 	 * Exporta matriu d'strings a fitxer
 	 * @param filename nom (i directori) del fitxer a exportar
-	 * @param cjt martiu d'strings a exportar
-	 * @throws Exception ...
+	 * @param cjt matriu d'strings a exportar
+	 * @throws Exception pot retornar IOException
 	 */
 	private void exportar(String filename, ArrayList<ArrayList<String>> cjt) throws Exception {
 		File f = new File (dataLocation + filename + fileExtension);
-		f.getParentFile().mkdirs();
-		f.createNewFile();
-		FileWriter fw = new FileWriter(f);
-		PrintWriter pw = new PrintWriter(new BufferedWriter(fw));
+		f.getParentFile().mkdirs(); // Va creant directoris enrere, si no existien
+		f.createNewFile(); // Crea nou fitxer
+		PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(f)));
 		
-		for (int i = 0; i < cjt.size(); ++i) {
-			for (int j = 0; j < cjt.get(i).size(); ++j) {
+		for (ArrayList<String> linia : cjt) {
+			for (int j = 0; j < linia.size(); ++j) {
 				if (j != 0) pw.print("\t");
-				pw.print(cjt.get(i).get(j));
+				pw.print(linia.get(j));
 			}
-			pw.println("");
+			pw.println();
 		}
 		
-		pw.close(); fw.close();
+		pw.close();
 	}
 	
 	// IMPORTACIÓ ESPECÍFICA
-	
 	// Camins
 	
 	/**
 	 * Importa els camins predefinits
 	 * @return matriu d'strings amb els camins predefinits
-	 * @throws Exception ...
+	 * @throws Exception pot retornar IOException
 	 */
 	public ArrayList<ArrayList<String>> importarCaminsPredefinits() throws Exception {
 		return importar("Camins/Predefinits");
@@ -111,7 +127,7 @@ public class CtrlPersistencia {
 	 * Importa els camins de l'usuari especificat
 	 * @param usuari nom d'usuari
 	 * @return matriu d'strings amb els camins de l'usuari especificat
-	 * @throws Exception ...
+	 * @throws Exception pot retornar IOException
 	 */
 	public ArrayList<ArrayList<String>> importarCaminsUsuari(String usuari) throws Exception {
 		return importar("Camins/dUsuari/"+usuari);
@@ -122,7 +138,7 @@ public class CtrlPersistencia {
 	/**
 	 * Importa el conjunt d'usuaris
 	 * @return matriu d'strings amb l'usuari i la contrasenya de cada usuari
-	 * @throws Exception ...
+	 * @throws Exception pot retornar IOException
 	 */
 	public ArrayList<ArrayList<String>> importarUsuaris() throws Exception {
 		return importar("Usuaris/Usuaris");
@@ -133,7 +149,7 @@ public class CtrlPersistencia {
 	/**
 	 * Importa les entitats
 	 * @return matriu d'strings amb l'id, el nom de l'entitat i el label (opcional)
-	 * @throws Exception ...
+	 * @throws Exception pot retornar IOException
 	 */
 	public ArrayList<ArrayList<String>> importarEntitats() throws Exception {
 		return importar("Dades/Entitats");
@@ -144,33 +160,22 @@ public class CtrlPersistencia {
 	/**
 	 * Importa les relacions entre entitats
 	 * @return matriu d'strings amb l'id del paper i l'id de l'altra entitat
-	 * @throws Exception ...
+	 * @throws Exception pot retornar IOException
 	 */
 	public ArrayList<ArrayList<String>> importarRelacions() throws Exception {
 		return importar("Dades/Relacions");
 	}
 	
 	// EXPORTACIÓ ESPECÍFICA
-	
 	// Camins
-	
-	/**
-	 * Exporta el conjunt de camins predefinits
-	 * @param cjt matrius d'strings amb el nom d'usuari i la contrasenya de cada usuari del conjunt
-	 * @throws Exception ...
-	 */
-	public void exportarCaminsPredefinits(ArrayList<ArrayList<String>> cjt) throws Exception {
-		exportar("Camins/Predefinits", cjt);
-	}
 	
 	/**
 	 * Exporta el conjunt de camins de l'usuari especificat
 	 * @param usuari nom de l'usuari
 	 * @param cjt matriu d'strings amb el nom, el path i la descripció de cada camí del conjunt
-	 * @throws Exception ...
+	 * @throws Exception pot retornar IOException
 	 */
 	public void exportarCaminsUsuari(String usuari, ArrayList<ArrayList<String>> cjt) throws Exception {
-		// S'ha de limitar que un nom d'usuari només tingui lletres o números (si es diu ../XXX o ../predefinits, malament)
 		exportar("Camins/dUsuari/"+usuari, cjt);
 	}
 	
@@ -179,7 +184,7 @@ public class CtrlPersistencia {
 	/**
 	 * Exporta el conjunt d'usuaris
 	 * @param cjt matrius d'strings amb el nom d'usuari i la contrasenya de cada usuari del conjunt
-	 * @throws Exception ...
+	 * @throws Exception pot retornar IOException
 	 */
 	public void exportarUsuaris(ArrayList<ArrayList<String>> cjt) throws Exception {
 		exportar("Usuaris/Usuaris", cjt);
@@ -189,8 +194,8 @@ public class CtrlPersistencia {
 	
 	/**
 	 * Exporta un conjunt d'entitats
-	 * @param entitats matriu d'strings amb l'id, el nom i el label (opcional)
-	 * @throws Exception
+	 * @param entitats matriu d'strings amb l'id, el nom i el label
+	 * @throws Exception pot retornar IOException
 	 */
 	public void exportarEntitats(ArrayList<ArrayList<String>> entitats) throws Exception {
 		exportar("Dades/Entitats", entitats);
@@ -200,7 +205,7 @@ public class CtrlPersistencia {
 	/**
 	 * Exporta un conjunt de relacions
 	 * @param relacions matriu d'strings amb l'id del paper i de l'altra entitat
-	 * @throws Exception ...
+	 * @throws Exception pot retornar IOException
 	 */
 	public void exportarRelacions(ArrayList<ArrayList<String>> relacions) throws Exception {
 		exportar("Dades/Relacions", relacions);
@@ -229,6 +234,10 @@ public class CtrlPersistencia {
 		}
 	}
 	
+	/**
+	 * Transforma el dataset DBLP estàndard al format d'entitats i relacions requerit pel programa
+	 * @throws Exception pot retornar IOException
+	 */
 	public void transformaEntitats() throws Exception {
 		ArrayList<ArrayList<String>> autors = importar("Dades/author");
 		ArrayList<ArrayList<String>> conferencies = importar("Dades/conf");
@@ -242,11 +251,9 @@ public class CtrlPersistencia {
 		ArrayList<ArrayList<String>> pa = importar("Dades/paper_author");
 		ArrayList<ArrayList<String>> pc = importar("Dades/paper_conf");
 		ArrayList<ArrayList<String>> pt = importar("Dades/paper_term");
-		System.out.println("IMPORTAT!");
 	
 		// Author
 		assignaLabel(autors, autorsL);
-		System.out.println("ep");
 		ultimaXifra(autors, 0, 'A');
 		// Conference
 		assignaLabel(conferencies, conferenciesL);
@@ -266,28 +273,20 @@ public class CtrlPersistencia {
 		// PaperTerm
 		ultimaXifra(pt, 0, 'P');
 		ultimaXifra(pt, 1, 'T');
-		
-		System.out.println("CANVIAT!");
-		
+				
 		ArrayList<ArrayList<String>> entitats = new ArrayList<ArrayList<String>>();
 		entitats.addAll(autors);
 		entitats.addAll(papers);
 		entitats.addAll(conferencies);
-		entitats.addAll(termes); System.out.println("ent: "+ entitats.size());
+		entitats.addAll(termes);
 		
 		ArrayList<ArrayList<String>> relacions = new ArrayList<ArrayList<String>>();
 		relacions.addAll(pa);
 		relacions.addAll(pc);
-		relacions.addAll(pt); System.out.println("rel: "+ relacions.size());
-		
-		/*exportar("DadesNoves/author", autors);
-		exportar("DadesNoves/paper", papers);
-		exportar("DadesNoves/conf", conferencies);
-		exportar("DadesNoves/term", termes);*/
+		relacions.addAll(pt);
 		
 		exportar("DadesNoves/Entitats", entitats);
 		exportar("DadesNoves/Relacions", relacions);
-		System.out.println("EXPORTAT!");
 	}
 	
 	/**

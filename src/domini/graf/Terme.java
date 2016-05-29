@@ -1,11 +1,13 @@
 package domini.graf;
 
-
+/**
+ * Representa un Terme
+ */
 public class Terme extends Entitat {
 	
 	/**
-	 * PRE: -
-	 * POST: Crea una entitat de tipus Terme amb nom el parametre i li assigna una id
+	 * Crea una entitat del tipus Terme amb el nom <tt>nom</tt> i li assigna una id
+	 * @param nom nom del terme 
 	 */
 	public Terme(String nom) {
 		super(nom);
@@ -14,8 +16,10 @@ public class Terme extends Entitat {
 	}
 	
 	/**
-	 * PRE: -
-	 * POST: Retorna un terme amb id i nom dels parametres
+	 * Crea una entitat del tipus Terme amb l'identificador <tt>id</tt> i el nom <tt>nom</tt>
+	 * @param id identificador del terme
+	 * @param nom nom del terme
+	 * @throws Exception si l'identificador és invàl·lid
 	 */
 	public Terme(int id, String nom) throws Exception {
 		super(id, nom, 3);
@@ -25,8 +29,7 @@ public class Terme extends Entitat {
 	}
 	
 	/**
-	 * PRE: -
-	 * POST: Retorna el label del parametre implicit
+	 * Assigna un identificador al terme
 	 */
 	public void setId() {
 		super.setId(getMaxIdTerme()+10);

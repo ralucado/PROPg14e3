@@ -1,7 +1,6 @@
 package presentacio;
 
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
 
 public class TestPresentacio {
 	public static void main(String[] args) {

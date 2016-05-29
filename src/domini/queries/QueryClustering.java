@@ -86,7 +86,6 @@ public class QueryClustering extends Query {
 			}
 			assignats.add(rand);	// Marquem "rand" com a assignat
 			cjt.get(i).addMedoid(rand);	// Assignem com a medoide del clúster "i" l'element triat aleatòriament
-			//System.out.println("Medoide inicial clúster "+i+" = "+rand);
 		}
 		
 		
@@ -96,20 +95,13 @@ public class QueryClustering extends Query {
 				if (clProper == -1) cjt.getNoAssig().add(j);
 				
 				else cjt.get(clProper).add(j);
-//				System.out.println("Clúster més proper a "+j+" = "+clProper);
-//				if (clProper != -1) System.out.println("Medoide clúster "+clProper+" = "+cjt.get(clProper).getMedoid());
 			}
 		}
 				
 		Boolean changed = true;
-		while (changed) {
-			//System.out.println("No convergeix!!!!");
+		int it = 0;
+		while (changed && it < 1000) { // Atura si ha convergit o s'ha arribat a la 10.000a iteració
 			cjt.updateMedoids(M); // Recalculem els medoides de cada clúster
-			/*for (int i = 0; i < cjt.getK(); ++i) {
-				System.out.println("Clúster "+i+": "+cjt.get(i).getList());
-				System.out.println("Medoide = "+cjt.get(i).getMedoid());
-				
-			}*/
 
 			changed = false;
 			// Intentem moure els elements del conjunt al clúster que tingui més proper
@@ -117,7 +109,6 @@ public class QueryClustering extends Query {
 				for (int j = 0; j < cjt.get(i).size(); ++j) { // Si esborrem element, podem saltar-ne algun
 					int elem = cjt.get(i).get(j);
 					int c = cjt.getClusterMesProper(elem, M);
-					//System.out.println("Clúster més proper a "+elem+" = "+c);
 					if (c == -1) { // l'eliminem i el guardem amb els no assignats
 						cjt.get(i).deleteElem(elem);
 						cjt.getNoAssig().add(elem);
@@ -141,6 +132,7 @@ public class QueryClustering extends Query {
 					--j; // Al eliminar un element, cal tirar enrere l'índex (tot es mou enrere)
 				}
 			}
+			++it;
 		}
 		// Ja ha convergit
 		executat = true;

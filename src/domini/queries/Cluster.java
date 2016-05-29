@@ -147,7 +147,6 @@ public class Cluster {
 		
 		HashMap<Integer,Float> orderedRelev = ordenaPerValor(relevances);
 		// Tenim un map ordenat per la suma de similaritats (ordre descendent)
-		//System.out.println("Test: "+orderedRelev);
 		
 		// Agafem els elements que tenen el valor màxim de la suma de rellevàncies
 		Iterator<HashMap.Entry<Integer,Float>> it = orderedRelev.entrySet().iterator();

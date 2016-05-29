@@ -20,7 +20,7 @@ public class VistaAfegirUsuari extends VistaCanvisUsuari {
 	}
 	
 	
-	void inicialitzaCompPropis() {
+	protected void inicialitzaCompPropis() {
 		JLabel lblTitle = new JLabel("Afegir nou usuari");
 		lblTitle.setHorizontalAlignment(SwingConstants.LEFT);
 		lblTitle.setFont(new Font("Lucida Grande", Font.BOLD, 15));
@@ -50,7 +50,9 @@ public class VistaAfegirUsuari extends VistaCanvisUsuari {
 					else if (username.equals("")) {
 						(new VistaDialog()).setDialog("Nom d'usuari buit", "Has d'escriure un nom d'usuari", botons, JOptionPane.WARNING_MESSAGE);
 					}
-					else {
+					else if (username.indexOf('/') != -1) {
+						(new VistaDialog()).setDialog("Caràcter no permès", "El nom d'usuari no pot contenir el caràcter '/'.", botons, JOptionPane.WARNING_MESSAGE);
+					} else {
 					if (esAdmin) {
 						ctrl.getDomini().altaAdmin(nomField.getText(), String.valueOf(passwordField.getPassword()));
 					}

@@ -1,10 +1,13 @@
 package domini.graf;
 
+/**
+ * Representa un paper
+ */
 public class Paper extends Entitat {
 
 	/**
-	 * PRE: -
-	 * POST: Crea una entitat de tipus Paper amb nom el parametre i li assigna una id
+	 * Crea una entitat del tipus Paper amb el nom <tt>nom</tt> i li assigna una id
+	 * @param nom nom del paper 
 	 */
 	public Paper(String nom) {
 		super(nom);
@@ -13,8 +16,10 @@ public class Paper extends Entitat {
 	}
 	
 	/**
-	 * PRE: -
-	 * POST: Retorna un Paper amb id i nom dels parametres
+	 * Crea una entitat del tipus Paper amb l'identificador <tt>id</tt> i el nom <tt>nom</tt>
+	 * @param id identificador del paper
+	 * @param nom nom del paper
+	 * @throws Exception si l'identificador és invàl·lid
 	 */
 	public Paper(int id, String nom) throws Exception {
 		super(id, nom,1);
@@ -24,8 +29,7 @@ public class Paper extends Entitat {
 	
 	
 	/**
-	 * PRE: -
-	 * POST: Retorna el label del parametre implicit
+	 * Assigna un identificador del paper
 	 */
 	public void setId() {
 		super.setId(getMaxIdPaper()+10);

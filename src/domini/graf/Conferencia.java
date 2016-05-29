@@ -1,10 +1,13 @@
 package domini.graf;
 
+/**
+ * Representa una conferència
+ */
 public class Conferencia extends Entitat {
 	
 	/**
-	 * PRE: -
-	 * POST: Crea una entitat de tipus Conferencia amb nom el parametre i li assigna una id
+	 * Crea una entitat del tipus Conferencia amb el nom <tt>nom</tt> i li assigna una id
+	 * @param nom nom de la conferència 
 	 */
 	public Conferencia(String nom) {
 		super(nom);
@@ -13,8 +16,10 @@ public class Conferencia extends Entitat {
 	}
 	
 	/**
-	 * PRE: -
-	 * POST: Retorna una Conferencia amb id i nom dels parametres
+	 * Crea una entitat del tipus Conferencia amb l'identificador <tt>id</tt> i el nom <tt>nom</tt>
+	 * @param id identificador de la conferència
+	 * @param nom nom de la conferència
+	 * @throws Exception si l'identificador és invàl·lid
 	 */
 	public Conferencia(int id, String nom) throws Exception {
 		super(id, nom, 2);
@@ -23,15 +28,7 @@ public class Conferencia extends Entitat {
 	}
 	
 	/**
-	 * PRE: labelId ha de ser un identificador de label valid
-	 * POST: Afegeix al parametre implicit el label amb id del parametre
-	 */
-	
-	
-	
-	/**
-	 * PRE: -
-	 * POST: Retorna el label del parametre implicit
+	 * Assigna un identificador a la conferència
 	 */
 	public void setId() {
 		super.setId(getMaxIdConferencia()+10);

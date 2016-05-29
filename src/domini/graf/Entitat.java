@@ -1,5 +1,8 @@
 package domini.graf;
 
+/**
+ * Representa una entitat
+ */
 public class Entitat {
 	protected int id;
 	protected String nom;
@@ -17,10 +20,13 @@ public class Entitat {
         maxIdTerme = 3;
 	}
 	
+	/**
+	 * Crea una nova Entitat amb nom = <tt>nom</tt>
+	 * @param nom nom de l'entitat
+	 */
 	public Entitat(String nom) {
 		this.nom = nom;
 	}
-	
 	
 	protected Entitat(int id, String nom, int modul) throws Exception{
 		if(id % 10 != modul) throw new Exception("ID invalid");
@@ -28,14 +34,26 @@ public class Entitat {
 		this.nom = nom;
 	}
 	
+	/**
+	 * Retorna l'ID de l'entitat
+	 * @return ID de l'entitat
+	 */
 	public int getId() {
 		return id;
 	}
 	
+	/**
+	 * Assigna el nom <tt>nom</tt> a l'Entitat
+	 * @param nom nou nom de l'entitat
+	 */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 	
+	/**
+	 * Retorna el nom de l'Entitat
+	 * @return nom de l'entitat
+	 */
 	public String getNom() {
 		return this.nom;
 	}
@@ -76,22 +94,42 @@ public class Entitat {
         this.id = id;
     }
     
+    /**
+     * Retorna si l'Entitat és un autor
+     * @return si és autor 'true', altrament 'false'
+     */
     public boolean isAutor() {
         return this.getId() % 10 == 0;
     }
     
+    /**
+     * Retorna si l'Entitat és un paper
+     * @return si és paper 'true', altrament 'false'
+     */
     public boolean isPaper() {
         return this.getId() % 10 == 1;
     }
 
+    /**
+     * Retorna si l'Entitat és una conferència
+     * @return si és conferència 'true', altrament 'false'
+     */
     public boolean isConferencia() {
         return this.getId() % 10 == 2;
     }
+    
+    /**
+     * Retorna si l'Entitat és un terme
+     * @return si és terme 'true', altrament 'false'
+     */
     public boolean isTerme() {
         return this.getId() % 10 == 3;
     }
     
-    
+    /**
+     * Canvia el label de l'Entitat
+     * @param labelId ID del nou label de l'entitat
+     */
     public void setLabel(int labelId) {
 		Label l;
 		switch(labelId) {
@@ -108,11 +146,10 @@ public class Entitat {
 		this.label = l;
 	}
 	
-	
-	/**
-	 * PRE: El label del parametre ha de ser valid
-	 * POST: Afegeix al parametre implicit el label del parametre
-	 */
+    /**
+     * Canvia el label de l'Entitat
+     * @param l nou label de l'entitat
+     */
 	public void setLabel(Label l) {
 		switch(l) {
 		case DATABASE: 
@@ -133,8 +170,8 @@ public class Entitat {
 	}
 	
 	/**
-	 * PRE: -
-	 * POST: Retorna el identificador del label del parametre implicit
+	 * Retorna l'ID del label de l'Entitat
+	 * @return ID del label de l'entitat
 	 */
 	public int getLabel() {
 		return this.label.ordinal();
@@ -142,8 +179,8 @@ public class Entitat {
 	
 	
 	/**
-	 * PRE: -
-	 * POST: Retorna el nom del label del parametre implicit
+	 * Retorna el label de l'Entitat
+	 * @return nom del label de l'entitat
 	 */
 	public String getNameLabel() {
 		return this.label.name();
@@ -151,6 +188,10 @@ public class Entitat {
     
     
     @Override
+    /**
+     * Retorna un string que representa l'Entitat
+     * @return representació escrita de l'entitat
+     */
     public String toString() {
     	String returnString;
     	if (this.isTerme()) returnString = ("Nom: " + this.getNom() + ", Tipus: Terme");

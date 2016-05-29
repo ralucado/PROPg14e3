@@ -17,7 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
-public class VistaCanvisUsuari extends JDialog {
+public abstract class VistaCanvisUsuari extends JDialog {
 	
 	protected CtrlPresentacio ctrl;
 	protected JTextField nomField;
@@ -35,7 +35,7 @@ public class VistaCanvisUsuari extends JDialog {
 	}
 
 
-	private void inicialitzaCompComuns() {
+	protected void inicialitzaCompComuns() {
 		setResizable(false);
 		setBounds(100, 100, 314, 220);
 		setLocationRelativeTo(null);

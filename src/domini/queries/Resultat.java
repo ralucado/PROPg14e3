@@ -59,8 +59,8 @@ public class Resultat {
     /*
      * PRE: Cert.
      * POST: El nombre maxim d'entitats visibles del resultat es canvia per quantsVisibles.
-       Si quantsVisibles és més gran que el nombre total d'entitats, es faran visibles el 
-       nombre màxim d'entitats possibles.
+       Si quantsVisibles Ã©s mÃ©s gran que el nombre total d'entitats, es faran visibles el 
+       nombre mÃ xim d'entitats possibles.
      */
     
     public void filtrarN(int n) {
@@ -135,8 +135,8 @@ public class Resultat {
     /*
      * PRE: Cert.
      * POST: Es netegen tots els filtres existents i el nombre maxim d'entitats 
-       visibles es canvia pel definit per defecte. Si el definit per defecte és més 
-       gran que el nombre total d'entitats, es faran visibles el nombre màxim d'entitats 
+       visibles es canvia pel definit per defecte. Si el definit per defecte ï¿½s mï¿½s 
+       gran que el nombre total d'entitats, es faran visibles el nombre mï¿½xim d'entitats 
        possibles.
      */
     public void netejaFiltres() {
@@ -153,7 +153,7 @@ public class Resultat {
     
     /*
      * PRE: Cert.
-     * POST: Es retorna cert si el resultat conté Autors.
+     * POST: Es retorna cert si el resultat contÃ© Autors.
      */
     public boolean isAutor() {
     	return (entitats.get(0).first.isAutor());
@@ -161,7 +161,7 @@ public class Resultat {
     
     /*
      * PRE: Cert.
-     * POST: Es retorna cert si el resultat conté Papers.
+     * POST: Es retorna cert si el resultat contÃ© Papers.
      */
     public boolean isPaper() {
     	return (entitats.get(0).first.isPaper());	
@@ -169,7 +169,7 @@ public class Resultat {
     
     /*
      * PRE: Cert.
-     * POST: Es retorna cert si el resultat conté Conferencies.
+     * POST: Es retorna cert si el resultat contÃ© Conferencies.
      */
     public boolean isConferencia() {
     	return (entitats.get(0).first.isConferencia());	
@@ -177,7 +177,7 @@ public class Resultat {
     
     /*
      * PRE: Cert.
-     * POST: Es retorna cert si el resultat conté Termes.
+     * POST: Es retorna cert si el resultat contÃ© Termes.
      */
     public boolean isTerme() {
     	return (entitats.get(0).first.isTerme());

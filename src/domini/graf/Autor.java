@@ -1,11 +1,14 @@
 package domini.graf;
 
+/**
+ * Representa un Autor
+ */
 public class Autor extends Entitat {
 
 	
 	/**
-	 * PRE: -
-	 * POST: Crea una entitat de tipus Autor amb nom el parametre i li assigna una id
+	 * Crea una entitat del tipus Autor amb el nom <tt>nom</tt> i li assigna una id
+	 * @param nom nom de l'autor 
 	 */
 	public Autor(String nom) {
 		super(nom);
@@ -14,10 +17,11 @@ public class Autor extends Entitat {
 	}
 	
 	/**
-	 * PRE: -
-	 * POST: Retorna un Autor amb id i nom dels parametres
+	 * Crea una entitat del tipus Paper amb l'identificador <tt>id</tt> i el nom <tt>nom</tt>
+	 * @param id identificador del paper
+	 * @param nom nom del paper
+	 * @throws Exception si l'identificador és invàl·lid
 	 */
-	
 	public Autor(int id, String nom) throws Exception {
 		super(id, nom, 0);
 		if(id > maxIdAutor) maxIdAutor = id + 10;
@@ -27,8 +31,7 @@ public class Autor extends Entitat {
 	
 	
 	/**
-	 * PRE: -
-	 * POST: Retorna el label del parametre implicit
+	 * Assigna un identificador a l'autor
 	 */
 	public void setId() {
 		super.setId(getMaxIdAutor()+10);

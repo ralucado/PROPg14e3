@@ -157,7 +157,6 @@ public class ConjuntClusters {
 		else {
 			
 			HashMap<Integer, Float> ordenat = Cluster.ordenaPerValor(relevClusters);
-			//System.out.println(ordenat);
 			// Ara tenim un map ordenat per la suma de similaritats (descendent)
 			
 			// Agafem els elements que tenen el valor màxim de la suma de rellevàncies
@@ -189,7 +188,7 @@ public class ConjuntClusters {
 	 * Eliminar element d'un clúster o dels no assignats
 	 * @param cl número de clústers (-1 correspon als no assignats)
 	 * @param e element a eliminar
-	 * @throws si el núm. de clúster és invàl·lid o l'element no estava al clúster (o no assignats)
+	 * @throws Exception si el núm. de clúster és invàl·lid o l'element no estava al clúster (o no assignats)
 	 */
 	public void eliminarElem(int cl, Integer e) throws Exception {
 		if (cl < -1 || cl >= k) throw new Exception("Número de clúster invàl·lid");
