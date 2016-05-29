@@ -2,7 +2,7 @@ package domini.queries;
 
 import java.util.ArrayList;
 
-import domini.graf.Entitat;
+import domini.graf.*;
 
 public class Resultat {
 	private ArrayList<Pair<Entitat,Float>> entitats;
@@ -10,6 +10,25 @@ public class Resultat {
 	private ArrayList<Pair<Entitat,Float>> anterior;
     private static final int VISIBLES_PER_DEFECTE = 20;
 
+    public static void main (String[] args){
+    	ArrayList<Pair<Entitat,Float>> A = new ArrayList<Pair<Entitat,Float>>();
+    	A.add(new Pair<Entitat,Float>(new Autor("Burlao"),0.1F));
+    	A.add(new Pair<Entitat,Float>(new Autor("Burlao2"),0.2F));
+    	A.add(new Pair<Entitat,Float>(new Autor("Marti"),0.6F));
+    	A.add(new Pair<Entitat,Float>(new Autor("Pacoo"),0.5F));
+    	Resultat R = new Resultat(A);
+    	System.out.println(R.entitats_visibles.size());
+    	R.print();
+    	R.filtrarN(2);
+    	System.out.println(R.entitats_visibles.size());
+    	R.print();
+    	R.filtrarN(3);
+    	System.out.println(R.entitats_visibles.size());
+    	R.print();
+    }
+    
+    
+    
 /*
  * PRE: L'array entitats esta plena de Entitats del mateix tipus (Autor, Paper, Conferencia, Terme).
  * POST: Es crea el Resultat a partir de l'array entitats.
@@ -47,12 +66,12 @@ public class Resultat {
     public void filtrarN(int n) {
     	anterior = (ArrayList<Pair<Entitat,Float>>)entitats_visibles.clone();
     	if (n > entitats_visibles.size()){
-    		for (; n < entitats.size(); ++n){
-    			entitats_visibles.add(entitats.get(n-1));
+    		for (int i = entitats_visibles.size(); i < n; ++i){
+    			entitats_visibles.add(entitats.get(i));
     		}
     	}
     	else {
-    		for (; n < entitats_visibles.size(); ++n){
+    		while (n < entitats_visibles.size()){
     			entitats_visibles.remove(n);
     		}
     	}
