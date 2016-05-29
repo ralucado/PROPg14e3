@@ -81,13 +81,13 @@ public class VistaGestioRelacions{
 		frame.setBackground(SystemColor.control);
 		frame.setForeground(Color.BLACK);
 		frame.setLocationRelativeTo(null);
-		frame.setSize(500, 400);
-		frame.getContentPane().setLayout(new MigLayout("", "[62px][62px,grow][62px,grow][62px,grow][][][]", "[50px][][350px,grow][][]"));
+		frame.setSize(800, 600);
+		frame.getContentPane().setLayout(new MigLayout("", "[62px][62px,grow][62px,grow][62px,grow][][][]", "[50px][][350px,grow][][][][][][]"));
 		
 		//taula
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(201, 26, 225, 212);
-		frame.getContentPane().add(scrollPane, "cell 0 2 5 1");
+		frame.getContentPane().add(scrollPane, "cell 0 2 6 4,grow");
 		
 		model = new RelTableModel();
 		table = new JTable(model);
