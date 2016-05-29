@@ -45,10 +45,10 @@ public class VistaGestioGraf{
 		frame = new JFrame();
 		frame.getContentPane().setBackground(SystemColor.control);
 		frame.getContentPane().setForeground(Color.BLACK);
-		frame.setSize(500, 400);
+		frame.setSize(800, 600);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new MigLayout("", "[400px,grow]", "[10px,grow][][400px,grow]"));
+		frame.getContentPane().setLayout(new MigLayout("", "[400px,grow]", "[10px][][400px,grow]"));
 		
 		//label titol
 		JLabel titol = new JLabel("Gestió del graf");
@@ -86,3 +86,4 @@ public class VistaGestioGraf{
 	}
 
 }
+
