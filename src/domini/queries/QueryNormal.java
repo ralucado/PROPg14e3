@@ -97,7 +97,7 @@ public class QueryNormal extends Query{
 				if(EntitatNoInicial != null){
 					 Cami c =  new Cami("cami", cami, "descripcio");
 					 Float f = HS.getHeteSim(c, posEI, posEF);
-					 Pair<Integer,Float> p= new Pair<Integer,Float>(EntitatNoInicial.getId(), f);
+					 Pair<Integer,Float> p= new Pair<Integer,Float>(posEF, f);
 					 ArrayList<Pair<Integer,Float> > A = new ArrayList<Pair<Integer,Float>>();
 					 A.add(p);
 					 return A;
