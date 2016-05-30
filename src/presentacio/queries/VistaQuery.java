@@ -11,10 +11,15 @@ import net.miginfocom.swing.MigLayout;
 import presentacio.ctrl.CtrlPresentacio;
 import presentacio.ctrl.VistaDialog;
 
-public class VistaQuery implements ActionListener{
+public class VistaQuery{
 	private CtrlPresentacio ctrl;
-	private JFrame frame;
-	private JButton btnAfegirCami;
+	public JFrame frame;
+	public String cami;
+	
+	public static void main(String[] args){
+		try{new VistaQuery(new CtrlPresentacio());}catch(Exception e){}
+	}
+	
 	
 	public VistaQuery(CtrlPresentacio ctrl) throws Exception {
 		this.ctrl = ctrl;
@@ -23,11 +28,6 @@ public class VistaQuery implements ActionListener{
 	}
 	
 	private void init() {
-		init_frame();
-		init_afegirCami();
-	}
-	
-	private void init_frame() {
 		frame = new JFrame();
 		frame.setSize(600, 400);
 		frame.addWindowListener(new WindowAdapter() {
@@ -45,13 +45,15 @@ public class VistaQuery implements ActionListener{
 		});
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(new MigLayout("", "[452px,grow]", "[][218px,grow]"));
-	}
-	
-	private void init_afegirCami() {
-		btnAfegirCami = new JButton("Afegir cami");
-		btnAfegirCami.setFont(new Font("Lucida Grande", Font.BOLD, 12));
-		btnAfegirCami.addActionListener(this);
-		frame.getContentPane().add(btnAfegirCami, "flowx,cell 0 0,alignx right");
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		frame.getContentPane().add(tabbedPane, "cell 0 1,grow");
+		//Normal
+		VistaCrearQuery qN = new VistaCrearQuery(ctrl, this);
+		tabbedPane.addTab("Query Normal", qN.frame.getContentPane());
+		//Clustering
+		VistaCrearClustering qC = new VistaCrearClustering(ctrl, this);
+		tabbedPane.addTab("Query Clustering", qC.frame.getContentPane());
 	}
 	
 	public void fesVisible() {
@@ -59,20 +61,20 @@ public class VistaQuery implements ActionListener{
 	}
 
 	public void setCami(String nom) {
-		System.out.println(nom);
+		this.cami = nom;
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource().equals(btnAfegirCami)){
-			try {
-				new VistaSeleccionarCami(ctrl, frame, this);
-			} catch (Exception exc) {
-				String[] botons = {"D'acord"};
-				(new VistaDialog()).setDialog("No s'ha pogut obrir la finestra de seleccio", exc.getMessage(), botons, JOptionPane.ERROR_MESSAGE);
-			}
-			System.out.println("Addició acabada");
-		}
+	
+	public void executarNormal(){
+		try{
+			ctrl.getDomini().inicialitzarQuerynormalNom(cami);
+			ctrl.getDomini().executarQuery();
+		}catch(Exception E){}
+	}
+	
+	public void executarClustering(){
+		try{
+			ctrl.getDomini().inicialitzarQueryClusteringlNom(cami);
+		}catch (Exception E){}
 	}
 
 }
