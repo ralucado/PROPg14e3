@@ -338,7 +338,7 @@ public class CtrlPersistencia {
 	 * @throws Exception pot retornar IOException
 	 */
 	public ArrayList<ArrayList<String>> importarMatriuLeft(String cami) throws Exception {
-		return importar("Camins/Matrius" + cami + "/left");
+		return importar("Camins/Matrius/" + cami + "/left");
 	}
 	
 	/**
@@ -348,7 +348,7 @@ public class CtrlPersistencia {
 	 * @throws Exception pot retornar IOException
 	 */
 	public ArrayList<ArrayList<String>> importarMatriuRight(String cami) throws Exception {
-		return importar("Camins/Matrius" + cami + "/right");
+		return importar("Camins/Matrius/" + cami + "/right");
 	}
 	
 	/**
