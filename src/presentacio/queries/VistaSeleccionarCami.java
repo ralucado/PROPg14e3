@@ -1,28 +1,18 @@
 package presentacio.queries;
 
-import java.awt.Color;
 import java.awt.Font;
-import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 
 import net.miginfocom.swing.MigLayout;
@@ -34,96 +24,91 @@ public class VistaSeleccionarCami extends JDialog{
 
 	private CtrlPresentacio ctrl;
 	private VistaQuery vq;
-	private String camins[];
+	private CaminsTableModel caminsData;
 	private JTable table;
 	private JButton btnSeleccionar;
-	private JButton btnCancelar;
-	String nom;
 	
 	public VistaSeleccionarCami(CtrlPresentacio ctrl, JFrame parent, VistaQuery vq) throws Exception {
 		super(parent, true);
 		this.ctrl = ctrl;
 		this.vq = vq;
-		importarCamins();
+		this.caminsData = new CaminsTableModel();
 		init();
-		setVisible(true);
-
+		setVisible(true);admin
 	}
 
-	private void importarCamins() {
-		ArrayList<String[]> dades= new ArrayList<String[]>();
-		try {
-			dades = ctrl.getDomini().consultarCaminsPredefinits();
-			dades.addAll(ctrl.getDomini().consultarCaminsUsuari());
-			camins = new String[dades.size()];
-		} catch (Exception e) {
-			VistaDialog d = new VistaDialog();
-			d.setDialog("Error en carregar els camins!", e.getMessage(),new String[]{"Acceptar"}, JOptionPane.ERROR_MESSAGE);
-		}
-		for (int i = 0; i < dades.size(); ++i){
-			camins[i] = dades.get(i)[0];
-		}
+	private void init_table() {
+		getContentPane().setLayout(new MigLayout("", "[][438px,grow][]", "[25px][229px,grow][]"));
+		table = new JTable(caminsData);
+		table.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		JScrollPane scrollPane = new JScrollPane(table);
+		getContentPane().add(scrollPane, "cell 1 1,grow");
 	}
-
-	private void init(){
-		//frame
-		
-		setBackground(SystemColor.control);
-		setForeground(Color.BLACK);
-		setSize(300, 400);
-		setLocationRelativeTo(null);
-				
-		getContentPane().setLayout(new MigLayout("", "[100px,grow][20px,grow][30px,grow][50px,grow][][]", "[100px,grow][100px,grow][100px,grow][100px,grow][100px,grow][][][][][][][][][]"));
-		
-		
-		
-		//boto afegir
+	
+	
+	private void init_Seleccionar() {
 		btnSeleccionar = new JButton("Seleccionar");
+		btnSeleccionar.setFont(new Font("Lucida Grande", Font.BOLD, 12));
 		btnSeleccionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(nom == null){
-					VistaDialog d = new VistaDialog();
-					d.setDialog("Error", "No has seleccionat cap cami!",new String[]{"Acceptar"}, JOptionPane.ERROR_MESSAGE);
-				}
-				else{
-					try{
-						vq.setCami(nom);
-						dispose();
-					}
-					catch(Exception e2){
-						VistaDialog d = new VistaDialog();
-						d.setDialog("Error", e2.getMessage(),new String[]{"Acceptar"}, JOptionPane.ERROR_MESSAGE);
-					}
+				System.out.println("clicat boto selecciona cami");
+				String[] botons = {"D'acord"};
+				if (table.getSelectedRow() == -1)
+					(new VistaDialog()).setDialog("Cami no seleccionat", "No has seleccionat cap cami!", botons, JOptionPane.WARNING_MESSAGE);
+				else {
+					vq.setCami(caminsData.getValueAt(table.getSelectedRow(), 0));
+					dispose();
+					ctrl.openQuery();
 				}
 			}
 		});
+		getContentPane().add(btnSeleccionar, "cell 1 2,alignx center,aligny center");
+	}
+
+	private void init() {
+		setSize(600, 400);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		init_table();
+		init_Seleccionar();
+	}
+	
+	
+	
+	private class CaminsTableModel extends AbstractTableModel {
+		private static final long serialVersionUID = 1L;
+		protected String[] columnNames = {"Nom", "Path", "Descripció"};
+		protected ArrayList<String[]> data;
 		
-		//llista entitat2
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(337, 85, 200, 300);
-		getContentPane().add(scrollPane_1, "cell 0 0 6 9,grow");
-		
-		JList list = new JList();
-		scrollPane_1.setViewportView(list);
-		list.setListData(camins);
-		list.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
-				nom = (String) list.getSelectedValue();
+		public CaminsTableModel() {
+			try {
+				this.data = ctrl.getDomini().consultarCaminsPredefinits();
+				this.data.addAll(ctrl.getDomini().consultarCaminsUsuari());
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println(e.getMessage());
 			}
-		});
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list.setLayoutOrientation(JList.VERTICAL);
+		}
 		
-		getContentPane().add(btnSeleccionar, "cell 0 12,alignx center");
-		
-		//boto cancelar
-		btnCancelar = new JButton("Cancelar");
-		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
-		});
-		getContentPane().add(btnCancelar, "cell 4 12");
-		
+		public String getColumnName(int column) {
+			return columnNames[column];
+		}
+	
+		public boolean isCellEditable(int row, int column) {
+			return false;
+		}
+
+		public int getRowCount() {
+			return data.size();
+		}
+
+		public int getColumnCount() {
+			return columnNames.length;
+		}
+
+		public String getValueAt(int rowIndex, int columnIndex) {
+			return data.get(rowIndex)[columnIndex];
+		}
 	}
 }
