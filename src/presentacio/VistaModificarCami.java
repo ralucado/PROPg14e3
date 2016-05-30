@@ -64,16 +64,16 @@ public class VistaModificarCami extends VistaCanvisCami {
 						if (ctrl.getDomini().existeixCami(nom))
 							(new VistaDialog()).setDialog("Nom no disponible", "El nom del camí ja s'està utilitzant!", botons, JOptionPane.WARNING_MESSAGE);
 						else {
-							ctrl.getDomini().modificarNomCami(nomIni, nom);
+							ctrl.getDomini().modificarNom(nomIni, nom);
 						}
 					}
 					
 					if (!path.equals(pathIni)) {
-						ctrl.getDomini().modificarPathCami(nom, path);
+						ctrl.getDomini().modificarPath(nom, path);
 					}
 					
 					if (!desc.equals(descIni)) {
-						ctrl.getDomini().modificarDescrCami(nom, desc);
+						ctrl.getDomini().modificarDescr(nom, desc);
 					}
 					dispose();
 				}
