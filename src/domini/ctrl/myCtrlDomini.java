@@ -1,12 +1,15 @@
 package domini.ctrl;
 import java.util.ArrayList;
 
+import domini.camins.Cami;
 import domini.camins.ConjuntCamins;
 import domini.camins.myCtrlCamins;
 import domini.graf.Entitat;
 import domini.graf.myCtrlGraf;
 import domini.queries.ControladorQueries;
 import domini.queries.Pair;
+import domini.queries.QueryClustering;
+import domini.queries.QueryNormal;
 import domini.usuaris.CtrlUsuaris;
 import domini.usuaris.Usuari;
 import persistencia.CtrlPersistencia;
@@ -106,17 +109,51 @@ public class myCtrlDomini extends CtrlDomini {
     }
     
     
-    public void inicialitzarQueryClustering(String cami, int k) throws Exception{
+    /**
+	 * Inicialitza una query de tipus clustering
+	 * @param cami Camí sobre el que fer la query
+	 * @param k Número de clústers
+	 * @throws Exception 
+	 */
+	public void inicialitzarQueryClustering(String cami, int k) throws Exception{
 		queries.inicialitzarQueryClustering(cami, k);
 	}
 	
 	/**
-	 * Inicialitza una query de tipus normal
+	 * Inicialitza una query de tipus clustering amb un camí existent
+	 * @param nom Nom del camí que ja existeix
+	 * @throws Exception
+	 */
+	public void inicialitzarQueryClusteringlNom(String nom) throws Exception{
+		queries.inicialitzarQueryClusteringlNom(nom);
+	}
+	
+	/**
+	 * Inicialitza una query de tipus normal amb un camí no existent
 	 * @param cami Camí sobre el que fer la query
 	 * @throws Exception
 	 */
 	public void inicialitzarQuerynormal(String cami) throws Exception{
 		queries.inicialitzarQuerynormal(cami);
+	}
+	
+	/**
+	 * Inicialitza una query de tipus normal amb un camí existent
+	 * @param nom Nom del camí que ja existeix
+	 * @throws Exception
+	 */
+	public void inicialitzarQuerynormalNom(String nom) throws Exception{
+		queries.inicialitzarQueryClusteringlNom(nom);
+	}
+	
+	/**
+	 * Guarda el camí de la query actual al conjunt de l'usuari
+	 * @param nom Nom del camí que es guardarà
+	 * @param descr Descripció del camí que es guardarà
+	 * @throws Exception
+	 */
+	public void guardarCamiQuery(String nom, String descr) throws Exception{
+		queries.guardarCamiQuery(nom, descr);
 	}
 	
 	/**
