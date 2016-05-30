@@ -25,12 +25,13 @@ public class ControladorCamins {
 		for(int i = 0; i<caminsUsuari.size(); i++){
 			Cami c = new Cami(caminsUsuari.get(i).get(0), caminsUsuari.get(i).get(1), caminsUsuari.get(i).get(2));
 			this.usuari.afegirCami(c);
-			importarMatriusCami(c.getNom(), "Usuari");
+			importarMatriusCami(c);
 		}
 		
 		for(int i = 0; i<caminsPredefinits.size(); i++){
 			Cami c = new Cami(caminsPredefinits.get(i).get(0), caminsPredefinits.get(i).get(1), caminsPredefinits.get(i).get(2));
 			this.predefinits.afegirCami(c);
+			importarMatriusCami(c);
 		}
 	}
 	
@@ -187,110 +188,102 @@ public class ControladorCamins {
 			s.add(c.getPath());
 			s.add(c.getDescripcio());
 			caminsUsuari.add(s);
-			exportarMatriusCami(c.getNom(), "Usuari");
+			exportarMatriusCami(c);
 		}
 		CtrlDad.exportarCaminsUsuari(nomUsuari, caminsUsuari);
 		
 		for(Cami c : predefinits.getConjunt().values()){
-			exportarMatriusCami(c.getNom(),"Predefinit");
+			exportarMatriusCami(c);
 		}
 	}
 	
 	/**
 	 * Guarda les matrius d'un camí en un fitxer
-	 * @param nom Nom del camí
-	 * @param tipus Tipus del camí (Predefinit o Usuari)
+	 * @param c Camí que es vol guardar les matrius
 	 */
-	public void exportarMatriusCami(String nom, String tipus) throws Exception{
-		Cami c;
-		if(tipus=="Predefinit") c = predefinits.consultarCami(nom);
-		else if(tipus=="Usuari") c = usuari.consultarCami(nom);
-		else throw new Exception("El tipus de camí no és correcte");
-		
+	public void exportarMatriusCami(Cami c) throws Exception{
+
 		SparseMatrixBool matriuE, matriuD;
 		Pair<SparseMatrixBool, SparseMatrixBool> matrius = c.getMatrius();
 		matriuE = matrius.first;
 		matriuD = matrius.second;
-		
-		//matriuE
-		ArrayList<ArrayList<String>> matriuE2 = new ArrayList<ArrayList<String>>();
-		ArrayList<HashMap<Integer,Boolean>> rowsE = matriuE.getRows();
-		
-		for(int i = 0; i<rowsE.size(); i++){
-			ArrayList<String> aux = new ArrayList<String>();
-			for(Integer k : rowsE.get(i).keySet()){
-				String clau = String.valueOf(k);
-				aux.add(clau);
+		if(matriuE != null && matriuD != null){
+			//matriuE
+			ArrayList<ArrayList<String>> matriuE2 = new ArrayList<ArrayList<String>>();
+			ArrayList<HashMap<Integer,Boolean>> rowsE = matriuE.getRows();
+			
+			for(int i = 0; i<rowsE.size(); i++){
+				ArrayList<String> aux = new ArrayList<String>();
+				for(Integer k : rowsE.get(i).keySet()){
+					String clau = String.valueOf(k);
+					aux.add(clau);
+				}
+				matriuE2.add(aux);
 			}
-			matriuE2.add(aux);
-		}
-		ArrayList<String> midesE = new ArrayList<String>();
-		midesE.add(String.valueOf(matriuE.getNRows()));
-		midesE.add(String.valueOf(matriuE.getNCols()));
-		matriuE2.add(midesE);
-		
-		//matriuD
-		ArrayList<ArrayList<String>> matriuD2 = new ArrayList<ArrayList<String>>();
-		ArrayList<HashMap<Integer,Boolean>> rowsD = matriuE.getRows();
-		
-		for(int i = 0; i<rowsD.size(); i++){
-			ArrayList<String> aux = new ArrayList<String>();
-			for(Integer k : rowsD.get(i).keySet()){
-				String clau = String.valueOf(k);
-				aux.add(clau);
+			ArrayList<String> midesE = new ArrayList<String>();
+			midesE.add(String.valueOf(matriuE.getNRows()));
+			midesE.add(String.valueOf(matriuE.getNCols()));
+			matriuE2.add(midesE);
+			
+			//matriuD
+			ArrayList<ArrayList<String>> matriuD2 = new ArrayList<ArrayList<String>>();
+			ArrayList<HashMap<Integer,Boolean>> rowsD = matriuE.getRows();
+			
+			for(int i = 0; i<rowsD.size(); i++){
+				ArrayList<String> aux = new ArrayList<String>();
+				for(Integer k : rowsD.get(i).keySet()){
+					String clau = String.valueOf(k);
+					aux.add(clau);
+				}
+				matriuE2.add(aux);
 			}
-			matriuE2.add(aux);
+			
+			ArrayList<String> midesD = new ArrayList<String>();
+			midesD.add(String.valueOf(matriuD.getNRows()));
+			midesD.add(String.valueOf(matriuD.getNCols()));
+			matriuD2.add(midesD);
+			
+			CtrlDad.exportarMatrius(matriuE2, matriuD2, c.getPath());
 		}
-		
-		ArrayList<String> midesD = new ArrayList<String>();
-		midesD.add(String.valueOf(matriuD.getNRows()));
-		midesD.add(String.valueOf(matriuD.getNCols()));
-		matriuD2.add(midesD);
-		
-		CtrlDad.exportarMatrius(matriuE2, matriuD2, c.getNom());
 		
 	}
 	
 	/**
 	 * Carrega les matrius d'un camí des d'un fitxer
-	 * @param nom Nom del camí
-	 * @param tipus Tipus del camí (Predefinit o Usuari)
+	 * @param c Camí a importar les matrius
 	 */
-	public void importarMatriusCami(String nom, String tipus) throws Exception{
-		Cami c;
-		if(tipus=="Predefinit") c = predefinits.consultarCami(nom);
-		else if(tipus=="Usuari") c = usuari.consultarCami(nom);
-		else throw new Exception("El tipus de camí no és correcte");
-		
-		ArrayList<ArrayList<String>> matriuE = CtrlDad.importarMatriuLeft(c.getPath());
-		ArrayList<ArrayList<String>> matriuD = CtrlDad.importarMatriuRight(c.getPath());
-		
-		//matriuE
-		int nRowsE = Integer.valueOf(matriuE.get(matriuE.size()-1).get(0));
-		int nColsE = Integer.valueOf(matriuE.get(matriuE.size()-1).get(1));
-		SparseMatrixBool matriuE2 = new SparseMatrixBool(nRowsE, nColsE);
-		
-		for(int i = 0; i<matriuE.size()-1;i++){
-			for(int j = 0; j<matriuE.get(i).size(); j++){
-				
-				matriuE2.set(i, j, true);
+	public void importarMatriusCami(Cami c) throws Exception{
+		if(CtrlDad.existeixenMatrius(c.getPath())){
+			ArrayList<ArrayList<String>> matriuE = CtrlDad.importarMatriuLeft(c.getPath());
+			ArrayList<ArrayList<String>> matriuD = CtrlDad.importarMatriuRight(c.getPath());
+			
+			//matriuE
+			int nRowsE = Integer.valueOf(matriuE.get(matriuE.size()-1).get(0));
+			int nColsE = Integer.valueOf(matriuE.get(matriuE.size()-1).get(1));
+			SparseMatrixBool matriuE2 = new SparseMatrixBool(nRowsE, nColsE);
+			
+			for(int i = 0; i<matriuE.size()-1;i++){
+				for(int j = 0; j<matriuE.get(i).size(); j++){
+					
+					matriuE2.set(i, j, true);
+				}
 			}
-		}
+			
+			
+			//matriuD
+			int nRowsD = Integer.valueOf(matriuE.get(matriuE.size()-1).get(0));
+			int nColsD = Integer.valueOf(matriuE.get(matriuE.size()-1).get(1));
+			SparseMatrixBool matriuD2 = new SparseMatrixBool(nRowsD, nColsD);
 		
-		
-		//matriuD
-		int nRowsD = Integer.valueOf(matriuE.get(matriuE.size()-1).get(0));
-		int nColsD = Integer.valueOf(matriuE.get(matriuE.size()-1).get(1));
-		SparseMatrixBool matriuD2 = new SparseMatrixBool(nRowsD, nColsD);
-	
-				
-		for(int i = 0; i<matriuD.size();i++){
-			for(int j = 0; j<matriuD.get(i).size(); j++){
-				matriuD2.set(i, j, true);
+					
+			for(int i = 0; i<matriuD.size();i++){
+				for(int j = 0; j<matriuD.get(i).size(); j++){
+					matriuD2.set(i, j, true);
+				}
 			}
+			
+			c.setMatrius(matriuE2, matriuD2);
 		}
-		
-		c.setMatrius(matriuE2, matriuD2);	
 		
 	}
 
