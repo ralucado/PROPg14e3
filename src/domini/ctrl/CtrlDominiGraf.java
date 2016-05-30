@@ -168,4 +168,21 @@ public class CtrlDominiGraf extends CtrlDomini{
     	}
     	return termes;
     }
+    
+    public void esborrarEntitat(String nom, String tipus) throws Exception{
+    	int id = graf.getIdByNameAndType(nom, tipus);
+    	graf.eliminarEntitat(id);
+    }
+    
+    public void esborrarRelacioAP (String nomA, String nomP) throws Exception{
+        ctrlGraf.esborrarRelacioAP(nomA, nomP);
+    }
+
+    public void esborrarRelacioCP (String nomC, String nomP) throws Exception{
+        ctrlGraf.esborrarRelacioCP(nomC, nomP);
+    }
+
+    public void esborrarRelacioTP (String nomT, String nomP) throws Exception{
+        ctrlGraf.esborrarRelacioTP(nomT, nomP);
+    }
 }
