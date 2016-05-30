@@ -27,6 +27,7 @@ public class VistaSeleccionarCami extends JDialog{
 	private CaminsTableModel caminsData;
 	private JTable table;
 	private JButton btnSeleccionar;
+	private JButton btnCancelar;
 	
 	public VistaSeleccionarCami(CtrlPresentacio ctrl, JFrame parent, VistaQuery vq) throws Exception {
 		super(parent, true);
@@ -34,7 +35,7 @@ public class VistaSeleccionarCami extends JDialog{
 		this.vq = vq;
 		this.caminsData = new CaminsTableModel();
 		init();
-		setVisible(true);admin
+		setVisible(true);
 	}
 
 	private void init_table() {
@@ -42,7 +43,7 @@ public class VistaSeleccionarCami extends JDialog{
 		table = new JTable(caminsData);
 		table.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		JScrollPane scrollPane = new JScrollPane(table);
-		getContentPane().add(scrollPane, "cell 1 1,grow");
+		getContentPane().add(scrollPane, "cell 0 0 3 2,grow");
 	}
 	
 	
@@ -58,19 +59,29 @@ public class VistaSeleccionarCami extends JDialog{
 				else {
 					vq.setCami(caminsData.getValueAt(table.getSelectedRow(), 0));
 					dispose();
-					ctrl.openQuery();
 				}
 			}
 		});
-		getContentPane().add(btnSeleccionar, "cell 1 2,alignx center,aligny center");
+		getContentPane().add(btnSeleccionar, "cell 2 2,alignx center,aligny center");
 	}
 
+	private void init_Cancelar(){
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		getContentPane().add(btnCancelar, "cell 0 2,alignx center,aligny center");
+	}
+	
 	private void init() {
 		setSize(600, 400);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		init_table();
 		init_Seleccionar();
+		init_Cancelar();
 	}
 	
 	
