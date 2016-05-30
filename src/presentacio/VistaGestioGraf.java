@@ -78,11 +78,11 @@ public class VistaGestioGraf{
 	/**
 	 * Create the frame.
 	 */
-	public VistaGestioGraf(CtrlPresentacio ctrl, JFrame owner) {
+	public VistaGestioGraf(CtrlPresentacio ctrl) {
 		this.ctrl = ctrl;
 		initComponents();	
 		this.frame.setVisible(true);
-		frame.setLocationRelativeTo(owner);
+		frame.setLocationRelativeTo(null);
 	}
 
 }
