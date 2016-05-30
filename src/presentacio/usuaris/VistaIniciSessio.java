@@ -117,9 +117,8 @@ public class VistaIniciSessio {
 					ctrl.openMenu();
 				}
 				catch (Exception e2) {
-					if (!e2.getMessage().equals("Contrasenya incorrecta") && !e2.getMessage().equals("No existeix cap usuari amb el nom " + usuari)) {
-						//(new VistaDialog()).setDialog("No s'ha pogut iniciar sessió", "L'usuari " + usuari+" no té fitxer de camins!", botons, JOptionPane.QUESTION_MESSAGE);
-						(new VistaDialog()).setDialog("No s'ha pogut iniciar sessió", e2.getMessage(), botons, JOptionPane.QUESTION_MESSAGE);
+					if (e2.getMessage().equals("DATA/Camins/dUsuari/"+usuari+".txt (No such file or directory)")) {
+						(new VistaDialog()).setDialog("No s'ha pogut iniciar sessió", "L'usuari " + usuari+" no té fitxer de camins!", botons, JOptionPane.QUESTION_MESSAGE);
 					}
 					else (new VistaDialog()).setDialog("No s'ha pogut iniciar sessió", e2.getMessage(), botons, JOptionPane.WARNING_MESSAGE);
 				}}

@@ -2,6 +2,9 @@ package domini.graf;
 
 import java.util.*;
 
+/**
+ * Representa un graf (conjunt de dades) que conté entitats i les relacions entre elles
+ */
 public class Graf {
 
 	private Map<Integer,Entitat> conjuntEntitats; //id,Entitat
@@ -23,6 +26,9 @@ public class Graf {
 
     private Matriu paperAutor, paperConferencia, paperTerme;
 
+    /**
+     * Crea un nou Graf buit
+     */
     public Graf() {
         conjuntEntitats =    new HashMap<Integer,Entitat>(); //id,Entitat
 
@@ -43,6 +49,11 @@ public class Graf {
         paperTerme = new Matriu(0);
     }
 
+    /**
+     * Crea un nou Graf amb les entitats i relacions que es passen com a paràmetre
+     * @param entitats entitats a afegir al graf
+     * @param relacions relacions a afegir al graf
+     */
     public Graf(TreeMap<Integer,Entitat> entitats, ArrayList<ArrayList<String>> relacions) { //Para cargarlo desde fichero
         conjuntEntitats = entitats;
         nPapers = nConferencies = nAutors = nTermes = 0;
@@ -125,6 +136,11 @@ public class Graf {
         if (errors > 0) System.out.println("La carrega desde fitxer ha finalitzat amb "+errors+" errors");
     }
 
+    /**
+     * Afegeix una entitat al graf
+     * @param e entitat a afegir
+     * @throws Exception ...
+     */
 	public void afegirEntitat(Entitat e) throws Exception {
         if (!existeixEntitat(e.getId())) {
             if (e.isPaper()) {
@@ -177,15 +193,31 @@ public class Graf {
         }
 	}
 
+	/**
+	 * Retorna si el graf conté una entitat amb l'identificador <tt>id</tt>
+	 * @param id identificador d'entitat
+	 * @return si el graf conté una entitat amb id = <tt>id</tt>, 'true'; altrament, 'false'
+	 */
 	public boolean existeixEntitat(int id) {
         return conjuntEntitats.containsKey(id);
     }
 
+	/**
+	 * Retorna l'entitat del graf amb id = <tt>id</tt>
+	 * @param id identificador de l'entitat
+	 * @return entitat amb id = <tt>id</tt>
+	 * @throws Exception ...
+	 */
 	public Entitat consultarEntitat(int id) throws Exception {
 		if (existeixEntitat(id)) return conjuntEntitats.get(id);
         else throw new Exception("L'entitat amb id " + id + " no existeix");
 	}
 
+	/**
+	 * Elimina l'entitat amb id = <tt>id</tt> del graf
+	 * @param id identificador d'entitat
+	 * @throws Exception ...
+	 */
 	public void eliminarEntitat(int id) throws Exception {
 		if (existeixEntitat(id)) {
             Entitat victima = conjuntEntitats.get(id);
@@ -282,7 +314,13 @@ public class Graf {
         }
 	}
 
-
+	/**
+	 * Retorna si existeix al graf una relació entre les entitats amb identificador <tt>id1</tt> i <tt>id2</tt>
+	 * @param id1 identificador d'entitat 1
+	 * @param id2 identificador d'entitat 2
+	 * @return si existeix la relació 'true'; altrament, 'false'
+	 * @throws Exception ...
+	 */
 	public boolean existeixRelacio(int id1, int id2) throws Exception {
         if (existeixEntitat(id1)) {
             if (existeixEntitat(id2)) {
@@ -316,6 +354,12 @@ public class Graf {
         return false;
     }
 
+	/**
+	 * Afegeix al graf una relació entre les entitats amb identificador <tt>id1</tt> i <tt>id2</tt>
+	 * @param id1 identificador d'entitat 1
+	 * @param id2 identificador d'entitat 2
+	 * @throws Exception ...
+	 */
 	public void afegirRelacio(int id1, int id2) throws Exception {
         if (existeixEntitat(id1)) {
             if (existeixEntitat(id2)) {
@@ -348,6 +392,12 @@ public class Graf {
         else  throw new Exception("L'entitat amb id " + id1 + " no existeix");
     }
 
+	/**
+	 * Esborra del graf la relació entre les entitats amb identificador <tt>id1</tt> i <tt>id2</tt>
+	 * @param id1 identificador d'entitat 1
+	 * @param id2 identificador d'entitat 2
+	 * @throws Exception ...
+	 */
 	public void esborrarRelacio(int id1, int id2) throws Exception {
         if (existeixEntitat(id1)) {
             if (existeixEntitat(id2)) {
@@ -420,51 +470,101 @@ public class Graf {
     }
 
 
-
+    /**
+     * Retorna el conjunt de relacions paper-autor
+     * @return relacions paper-autor
+     */
     public Map<Integer,HashSet<Integer>> getPaperAutor() {
         return paperAutor.getMatriu();
     }
 
+    /**
+     * Retorna el conjunt de relacions paper-conferència
+     * @return relacions paper-conferència
+     */
     public Map<Integer,HashSet<Integer>> getPaperConferencia() {
         return paperConferencia.getMatriu();
     }
 
+    /**
+     * Retorna el conjunt de relacions paper-terme
+     * @return relacions paper-terme
+     */
     public Map<Integer,HashSet<Integer>> getPaperTerme() {
         return paperTerme.getMatriu();
     }
 
 
-
+    /**
+     * Retorna una llista amb l'identificador de tots els autors i les seves posicions al graf
+     * @return llista d'IDs i posicions d'autors
+     */
     public Map<Integer, Integer> getPosicioAutor() {
         return posicioAutor;
     }
 
+    /**
+     * Retorna una llista amb l'identificador de tots els papers i les seves posicions al graf
+     * @return llista de posicions i IDs de papers
+     */
     public Map<Integer, Integer> getPosicioPaper() {
         return posicioPaper;
     }
-
+    
+    /**
+     * Retorna una llista amb l'identificador de totes les conferències i les seves posicions al graf
+     * @return llista d'IDs i posicions de conferències
+     */
     public Map<Integer, Integer> getPosicioConferencia() {
         return posicioConferencia;
     }
 
+    /**
+     * Retorna una llista amb l'identificador de tots els termes i les seves posicions al graf
+     * @return llista d'IDs i posicions de termes
+     */
     public Map<Integer, Integer> getPosicioTerme() {
         return posicioTerme;
     }
 
 
-
+    /**
+     * Retorna una llista amb les posicions de tots els termes al graf i els seus identificadors
+     * @return llista de posicions i IDs de termes
+     */
     public Map<Integer, Integer> getPosicioAIdTerme() {return posicioAIdTerme;}
 
+    /**
+     * Retorna una llista amb les posicions de totes les conferències al graf i els seus identificadors
+     * @return llista de posicions i IDs de conferències
+     */
     public Map<Integer, Integer> getPosicioAIdConferencia() {return posicioAIdConferencia;}
-
+    
+    /**
+     * Retorna una llista amb les posicions de tots els papers al graf i els seus identificadors
+     * @return llista de posicions i IDs de papers
+     */
     public Map<Integer, Integer> getPosicioAIdPaper() {return posicioAIdPaper;}
 
+    /**
+     * Retorna una llista amb les posicions de tots els autors al graf i els seus identificadors
+     * @return llista de posicions i IDs d'autors
+     */
     public Map<Integer, Integer> getPosicioAIdAutor() {return posicioAIdAutor;}
 
-
+    /**
+     * Retorna el conjunt d'entitats del graf
+     * @return conjunt d'entitats
+     */
     public Map<Integer, Entitat> getConjuntEntitats() {return conjuntEntitats;}
 
-
+    /**
+     * Retorna l'ID d'una entitat a partir del nom i el tipus
+     * @param nomEntitat nom d'entitat
+     * @param tipus tipus d'entitat
+     * @return ID de l'entitat
+     * @throws Exception ...
+     */
     public int getIdByNameAndType(String nomEntitat, String tipus) throws Exception {
         for (Map.Entry<Integer, Entitat> e: conjuntEntitats.entrySet()) {
             if (e.getValue().getNom().equals(nomEntitat)) {
@@ -481,7 +581,12 @@ public class Graf {
         throw new Exception("L'entitat de tipus " + tipus+ " i nom " + nomEntitat + " no existeix");
     }
 
-
+    /**
+     * Retorna si el graf ja té una entitat del tipus <tt>tipus</tt> amb el nom <tt>nomEntitat</tt> 
+     * @param nomEntitat nom d'entitat
+     * @param tipus tipus d'entitat
+     * @return 'true' si ja existeix; altrament, 'false'
+     */
     public boolean nomDisponible(String nomEntitat, String tipus) {
         for (Map.Entry<Integer, Entitat> e: conjuntEntitats.entrySet()) {
             if (e.getValue().getNom().equals(nomEntitat) && (
@@ -495,7 +600,6 @@ public class Graf {
         }
         return true;
     }
-
 
     public int getIdByPositionPaper(int pos) throws Exception {
         if (pos < nPapers && pos >= 0) return posicioAIdPaper.get(pos);
