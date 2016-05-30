@@ -252,40 +252,42 @@ public class ControladorCamins {
 	 * Carrega les matrius d'un camí des d'un fitxer
 	 * @param c Camí a importar les matrius
 	 */
-	public void importarMatriusCami(Cami c) throws Exception{
+	 public void importarMatriusCami(Cami c) throws Exception{
 		if(CtrlDad.existeixenMatrius(c.getPath())){
 			ArrayList<ArrayList<String>> matriuE = CtrlDad.importarMatriuLeft(c.getPath());
 			ArrayList<ArrayList<String>> matriuD = CtrlDad.importarMatriuRight(c.getPath());
-			
-			//matriuE
-			int nRowsE = Integer.valueOf(matriuE.get(matriuE.size()-1).get(0));
-			int nColsE = Integer.valueOf(matriuE.get(matriuE.size()-1).get(1));
-			SparseMatrixBool matriuE2 = new SparseMatrixBool(nRowsE, nColsE);
-			
-			for(int i = 0; i<matriuE.size()-1;i++){
-				for(int j = 0; j<matriuE.get(i).size(); j++){
-					
-					matriuE2.set(i, j, true);
+			if(!matriuE.isEmpty() || !matriuD.isEmpty()){
+				//matriuE
+				int nRowsE = Integer.valueOf(matriuE.get(matriuE.size()-1).get(0));
+				int nColsE = Integer.valueOf(matriuE.get(matriuE.size()-1).get(1));
+				SparseMatrixBool matriuE2 = new SparseMatrixBool(nRowsE, nColsE);
+				
+				for(int i = 0; i<matriuE.size()-1;i++){
+					for(int j = 0; j<matriuE.get(i).size(); j++){
+						
+						matriuE2.set(i, j, true);
+					}
 				}
-			}
+				
+				
+				//matriuD
+				int nRowsD = Integer.valueOf(matriuE.get(matriuE.size()-1).get(0));
+				int nColsD = Integer.valueOf(matriuE.get(matriuE.size()-1).get(1));
+				SparseMatrixBool matriuD2 = new SparseMatrixBool(nRowsD, nColsD);
 			
-			
-			//matriuD
-			int nRowsD = Integer.valueOf(matriuE.get(matriuE.size()-1).get(0));
-			int nColsD = Integer.valueOf(matriuE.get(matriuE.size()-1).get(1));
-			SparseMatrixBool matriuD2 = new SparseMatrixBool(nRowsD, nColsD);
-		
-					
-			for(int i = 0; i<matriuD.size();i++){
-				for(int j = 0; j<matriuD.get(i).size(); j++){
-					matriuD2.set(i, j, true);
+						
+				for(int i = 0; i<matriuD.size();i++){
+					for(int j = 0; j<matriuD.get(i).size(); j++){
+						matriuD2.set(i, j, true);
+					}
 				}
+				
+				c.setMatrius(matriuE2, matriuD2);
 			}
-			
-			c.setMatrius(matriuE2, matriuD2);
 		}
 		
 	}
+
 
 	/**
 	 * Reseteja les matrius necessaries quan s'ha realitzat un canvi en el graf
