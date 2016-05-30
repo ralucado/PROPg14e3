@@ -2,6 +2,7 @@ package domini.queries;
 import java.util.ArrayList;
 
 import domini.camins.Cami;
+import domini.camins.ControladorCamins;
 import domini.graf.CtrlGraf;
 import domini.graf.Entitat;
 
@@ -16,13 +17,15 @@ public class ControladorQueries{
 	private Resultat ResultatActual;
 	private CtrlGraf CtrlGraf;
 	private HeteSim HS;
+	private ControladorCamins CtrlCamins;
 	
 	/**
 	 * Creadora de ControladorQueries
 	 * @param CtrlGraf Controlador del graf
 	 */
-	public ControladorQueries(CtrlGraf CtrlGraf){
+	public ControladorQueries(CtrlGraf CtrlGraf, ControladorCamins CtrlCamins){
 		this.CtrlGraf = CtrlGraf;
+		this.CtrlCamins = CtrlCamins;
 		HS = new HeteSim(CtrlGraf.consultarGraf());
 		UltimesQueries = new ArrayList<Query>();
 	}
@@ -39,13 +42,46 @@ public class ControladorQueries{
 	}
 	
 	/**
-	 * Inicialitza una query de tipus normal
+	 * Inicialitza una query de tipus clustering amb un camí existent
+	 * @param nom Nom del camí que ja existeix
+	 * @throws Exception
+	 */
+	public void inicialitzarQueryClusteringlNom(String nom) throws Exception{
+		Cami c = CtrlCamins.consultarCamiExt(nom);
+		QueryActual = new QueryNormal(c);
+	}
+	
+	/**
+	 * Inicialitza una query de tipus normal amb un camí no existent
 	 * @param cami Camí sobre el que fer la query
 	 * @throws Exception
 	 */
 	public void inicialitzarQuerynormal(String cami) throws Exception{
 		Cami c = new Cami("nom", cami, "descr");
 		QueryActual = new QueryNormal(c);
+	}
+	
+	/**
+	 * Inicialitza una query de tipus normal amb un camí existent
+	 * @param nom Nom del camí que ja existeix
+	 * @throws Exception
+	 */
+	public void inicialitzarQuerynormalNom(String nom) throws Exception{
+		Cami c = CtrlCamins.consultarCamiExt(nom);
+		QueryActual = new QueryNormal(c);
+	}
+	
+	/**
+	 * Guarda el camí de la query actual al conjunt de l'usuari
+	 * @param nom Nom del camí que es guardarà
+	 * @param descr Descripció del camí que es guardarà
+	 * @throws Exception
+	 */
+	public void guardarCamiQuery(String nom, String descr) throws Exception{
+		Cami c = QueryActual.cami;
+		c.setNom(nom);
+		c.setDescripcio(descr);
+		CtrlCamins.afegirCami(c.getNom(), c.getPath(), c.getDescripcio());
 	}
 	
 	/**
