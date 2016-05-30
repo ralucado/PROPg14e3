@@ -83,13 +83,6 @@ public class VistaResultat {
 			}
 		});
 		frame.getContentPane().setLayout(new MigLayout("", "[grow][][][30px:n][][][][][][][][grow][][][][][grow]", "[][][][][grow]"));
-		JButton btnEnrere = new JButton("Enrere");
-		frame.getContentPane().add(btnEnrere, "cell 0 0,alignx left,aligny top");
-		btnEnrere.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.setVisible(false);
-			}
-		});
 		
 		String[] llista = {"","0","1","2","3","4"};
 		JComboBox cmbFiltreLabel = new JComboBox(llista);
