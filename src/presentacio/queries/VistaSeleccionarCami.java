@@ -46,7 +46,6 @@ public class VistaSeleccionarCami extends JDialog{
 		getContentPane().add(scrollPane, "cell 0 0 3 2,grow");
 	}
 	
-	
 	private void init_Seleccionar() {
 		btnSeleccionar = new JButton("Seleccionar");
 		btnSeleccionar.setFont(new Font("Lucida Grande", Font.BOLD, 12));
