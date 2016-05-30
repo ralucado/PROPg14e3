@@ -185,4 +185,25 @@ public class CtrlDominiGraf extends CtrlDomini{
     public void esborrarRelacioTP (String nomT, String nomP) throws Exception{
         ctrlGraf.esborrarRelacioTP(nomT, nomP);
     }
+    
+     public void modificarEntitat(String nom, String nomNou, String labelNova, String tipus) throws Exception{
+    	int id = graf.getIdByNameAndType(nom, tipus);
+    	Entitat e = graf.consultarEntitat(id);
+    	if(nomNou!=null) e.setNom(nomNou);
+    	if(labelNova!=null){
+    		int lid;
+    		switch(labelNova) {
+    		case "DATABASE": lid = 0;
+    				break;
+    		case "DATA_MINING": lid = 1;
+    				break;
+    		case "AI": lid = 2;
+    				break;
+    		case "INFORMATION_RETRIEVAL": lid = 3;
+    				break;
+    		default: lid = 4;
+    		}
+    		e.setLabel(lid);
+    	}
+    }
 }
