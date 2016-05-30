@@ -254,7 +254,7 @@ public class CtrlDomini {
             ctrlCamins.guardarCamins(nomUsuari);
 	}
         
-        protected ConjuntCamins crearConjunt(ArrayList<String[]> camins) throws Exception {
+    protected ConjuntCamins crearConjunt(ArrayList<String[]> camins) throws Exception {
             ConjuntCamins cc = new ConjuntCamins();
             for(int i = 0; i < camins.size(); ++i) {
                 String nom = camins.get(i)[0];

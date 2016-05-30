@@ -5,6 +5,8 @@
 * Query
 * QueryNormal
 * ControladorCamins
+* ControladorQueries
+* myCtrlGraf
 * Presentació: gestió graf (entitats + relacions) + selecció camins
 
 #### Martí
@@ -20,8 +22,11 @@
 
 * HeteSim
 * SparseMatrix
+* SparseMatrixBool
 * SparseVector
 * Pair
+* myCtrlCamins
+* CtrlPresentacio
 * Presentació: gestió camins + selecció camins
 
 #### Arnau
@@ -30,4 +35,10 @@
 * ConjuntClusters
 * QueryClustering
 * CtrlPersistencia
-* Presentacio: gestió usuaris + iniciar sessió
+* myCtrlDomini
+* VistaUsuaris
+* VistaCanvisUsuaris
+* VistaAfegirUsuari
+* VistaModificarUsuari
+* VistaDialog
+* VistaIniciSessio

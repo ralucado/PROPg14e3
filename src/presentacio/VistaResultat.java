@@ -44,7 +44,6 @@ public class VistaResultat {
 		A.add(p);
 		Resultat R = new Resultat(A);
 		//ctrlPresentacio.getDomini().getCtrlQueries().setResultat(R);
-		ctrlPresentacio.openResultat();
 		
 		//VistaResultat window = new VistaResultat(ctrlPresentacio);
 		//window.frame.setVisible(true);
