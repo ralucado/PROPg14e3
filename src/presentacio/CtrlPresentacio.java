@@ -9,7 +9,8 @@ public class CtrlPresentacio {
 	private VistaIniciSessio vIniciSessio;
 	private VistaMenu vMenu;
 	private VistaCamins vCamins;
-	
+	private VistaGestioGraf vGraf;
+ 	
 	public CtrlPresentacio() {
 		try {
 			ctrlDomini = new myCtrlDomini();
@@ -88,7 +89,15 @@ public class CtrlPresentacio {
 	}
 	
 	public void openGraf(){
-		
+		try{
+			vGraf = new VistaGestioGraf(this);
+			vGraf.fesVisible();
+		}
+		catch(Exception e){
+			VistaDialog dialog = new VistaDialog();
+			String[] botons = {"D'acord"};
+			dialog.setDialog("Error al iniciar programa", e.getMessage(), botons, JOptionPane.WARNING_MESSAGE);
+		}
 	}
 	
 	public void openQuery(){
