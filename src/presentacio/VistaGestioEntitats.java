@@ -1,44 +1,31 @@
 package presentacio;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.SystemColor;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
-
-import domini.ctrl.CtrlDominiGraf;
-
-import javax.swing.JSpinner;
-import javax.swing.JTable;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.BorderFactory;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.awt.event.ActionEvent;
-import javax.swing.JScrollPane;
-import net.miginfocom.swing.MigLayout;
-import javax.swing.event.DocumentListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
-import javax.swing.SwingUtilities;
-import javax.swing.JTextField;
+import javax.swing.border.BevelBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
+import net.miginfocom.swing.MigLayout;
 
 public class VistaGestioEntitats{
 
@@ -56,11 +43,6 @@ public class VistaGestioEntitats{
 	
 	
 
-	private String autors[];
-	private String conferencies[];
-	private String termes[];
-	private String papers[];
-	private String buit[] = {};
 	private JTextField textField;
 	
 	//sort
@@ -356,7 +338,7 @@ public class VistaGestioEntitats{
 			try{
 				ArrayList<ArrayList<String>> aux;
 				if(tipus=="Autor"){
-					aux = ((CtrlDominiGraf)ctrl.getDomini()).consultarAutorsExt();
+					aux = ctrl.getDomini().consultarAutorsExt();
 					Collections.sort(aux, new CustomComparator());
 					columnNames = new String[]{"Id", "Nom", "Label"};
 					 rowSorter.setRowFilter(null);
@@ -365,7 +347,7 @@ public class VistaGestioEntitats{
 					 textField.setText("");
 				}
 				else if(tipus=="Conferencia"){
-					aux = ((CtrlDominiGraf)ctrl.getDomini()).consultarConferenciesExt();
+					aux = ctrl.getDomini().consultarConferenciesExt();
 					Collections.sort(aux, new CustomComparator());
 					columnNames = new String[]{"Id", "Nom", "Label"};
 					 rowSorter.setRowFilter(null);
@@ -374,7 +356,7 @@ public class VistaGestioEntitats{
 					 textField.setText("");
 				}
 				else if(tipus=="Paper"){
-					aux = ((CtrlDominiGraf)ctrl.getDomini()).consultarPapersExt();
+					aux = ctrl.getDomini().consultarPapersExt();
 					Collections.sort(aux, new CustomComparator());
 					columnNames = new String[]{"Id", "Nom", "Label"};
 					 rowSorter.setRowFilter(null);
@@ -383,7 +365,7 @@ public class VistaGestioEntitats{
  					textField.setText("");
 				}
 				else if(tipus=="Terme"){
-					aux = ((CtrlDominiGraf)ctrl.getDomini()).consultarTermesExt();
+					aux = ctrl.getDomini().consultarTermesExt();
 					Collections.sort(aux, new CustomComparator());	
 					columnNames = new String[]{"Id", "Nom"};
 					 rowSorter.setRowFilter(null);

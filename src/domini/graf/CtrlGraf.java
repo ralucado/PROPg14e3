@@ -4,7 +4,7 @@ import persistencia.*;
 
 public class CtrlGraf {
 	
-		private Graf graf;
+		protected Graf graf;
 
 		/**
 		 *Pre: -

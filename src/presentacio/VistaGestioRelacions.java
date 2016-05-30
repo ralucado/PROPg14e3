@@ -1,7 +1,5 @@
 package presentacio;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,38 +8,24 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.RowFilter;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import com.sun.javafx.css.Rule;
-
-import domini.ctrl.CtrlDominiGraf;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
-import javax.swing.RowFilter;
-import javax.swing.JLabel;
-import javax.swing.JTable;
-import javax.swing.JTextField;
 
 public class VistaGestioRelacions{
 
@@ -311,7 +295,7 @@ public class VistaGestioRelacions{
 			try{
 				ArrayList<ArrayList<String>> aux;
 				if(tipus == "PA" || tipus=="Autor"){
-					aux = ((CtrlDominiGraf)ctrl.getDomini()).consultarRelacionsAP();
+					aux = ctrl.getDomini().consultarRelacionsAP();
 					Collections.sort(aux, new CustomComparator());
 					 rowSorter.setRowFilter(null);
 					fireTableStructureChanged();
@@ -319,7 +303,7 @@ public class VistaGestioRelacions{
 					 textField.setText("");
 				}
 				else if(tipus=="PC" || tipus=="Conferencia"){
-					aux = ((CtrlDominiGraf)ctrl.getDomini()).consultarRelacionsCP();
+					aux = ctrl.getDomini().consultarRelacionsCP();
 					Collections.sort(aux, new CustomComparator());
 					 rowSorter.setRowFilter(null);
 					fireTableStructureChanged();
@@ -327,7 +311,7 @@ public class VistaGestioRelacions{
 					 textField.setText("");
 				}
 				else if(tipus=="PT" || tipus=="Terme"){
-					aux = ((CtrlDominiGraf)ctrl.getDomini()).consultarRelacionsTP();
+					aux = ctrl.getDomini().consultarRelacionsTP();
 					Collections.sort(aux, new CustomComparator());
 					 rowSorter.setRowFilter(null);
 					fireTableStructureChanged();
