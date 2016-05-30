@@ -62,7 +62,6 @@ public class VistaMenu {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
 				ctrl.openLogIn();
-
 			}
 		});
 		frame.getContentPane().add(btnTancaSessi, "cell 6 9,alignx center");

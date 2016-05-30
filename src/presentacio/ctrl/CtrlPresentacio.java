@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 import domini.ctrl.myCtrlDomini;
 import presentacio.camins.VistaCamins;
 import presentacio.graf.VistaGestioGraf;
+import presentacio.queries.VistaQuery;
 import presentacio.usuaris.VistaIniciSessio;
 import presentacio.usuaris.VistaUsuaris;
 
@@ -14,6 +15,7 @@ public class CtrlPresentacio {
 	private VistaMenu vMenu;
 	private VistaCamins vCamins;
 	private VistaGestioGraf vGraf;
+	private VistaQuery vQuery;
  	
 	public CtrlPresentacio() {
 		try {
@@ -64,14 +66,14 @@ public class CtrlPresentacio {
 		catch (Exception exc) {
 			VistaDialog dialog = new VistaDialog();
 			String[] botons = {"D'acord"};
-			dialog.setDialog("Error al iniciar programa", exc.getMessage(), botons, JOptionPane.WARNING_MESSAGE);
+			dialog.setDialog("Error en obrir la finestra de gestió d'usuaris", exc.getMessage(), botons, JOptionPane.WARNING_MESSAGE);
 		}
 	}
 
 	public void openMenu() {
 		try{
-			vMenu = new VistaMenu(this);
-			vMenu.fesVisible();
+			if (vMenu == null) vMenu = new VistaMenu(this);
+			else vMenu.fesVisible();
 
 		} catch (Exception e) {
 			VistaDialog dialog = new VistaDialog();
@@ -88,7 +90,7 @@ public class CtrlPresentacio {
 		} catch (Exception e) {
 			VistaDialog dialog = new VistaDialog();
 			String[] botons = {"D'acord"};
-			dialog.setDialog("Error al iniciar programa", e.getMessage(), botons, JOptionPane.WARNING_MESSAGE);
+			dialog.setDialog("Error en obrir la finestra de gestió de camins", e.getMessage(), botons, JOptionPane.WARNING_MESSAGE);
 		}
 	}
 	
@@ -100,11 +102,19 @@ public class CtrlPresentacio {
 		catch(Exception e){
 			VistaDialog dialog = new VistaDialog();
 			String[] botons = {"D'acord"};
-			dialog.setDialog("Error al iniciar programa", e.getMessage(), botons, JOptionPane.WARNING_MESSAGE);
+			dialog.setDialog("Error en obrir la finestra de gestió de graf", e.getMessage(), botons, JOptionPane.WARNING_MESSAGE);
 		}
 	}
 	
 	public void openQuery(){
-		
+		try{
+			if (vQuery == null) vQuery = new VistaQuery(this);
+			else vQuery.fesVisible();
+		}
+		catch(Exception e){
+			VistaDialog dialog = new VistaDialog();
+			String[] botons = {"D'acord"};
+			dialog.setDialog("Error en obrir la finestra de consultes", e.getMessage(), botons, JOptionPane.WARNING_MESSAGE);
+		}
 	}
 }
