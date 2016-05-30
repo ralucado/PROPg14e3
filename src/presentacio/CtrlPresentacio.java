@@ -86,4 +86,12 @@ public class CtrlPresentacio {
 			dialog.setDialog("Error al iniciar programa", e.getMessage(), botons, JOptionPane.WARNING_MESSAGE);
 		}
 	}
+	
+	public void openGraf(){
+		
+	}
+	
+	public void openQuery(){
+		
+	}
 }
