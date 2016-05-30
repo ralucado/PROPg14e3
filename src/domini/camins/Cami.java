@@ -1,5 +1,7 @@
 package domini.camins;
-
+import domini.queries.Pair;
+import domini.queries.SparseMatrix;
+import domini.camins.SparseMatrixBool;
 /**
  * Representa un cami, amb un nom, un path d'entitats i una descripcio
  * @author Martiruhay
@@ -9,6 +11,7 @@ public class Cami {
 	protected String nom;
 	protected String descripcio;
 	protected String path;
+	protected SparseMatrixBool matriuL, matriuR;
 	
 	/**
 	 * Creadora amb paràmetres
@@ -21,6 +24,8 @@ public class Cami {
         this.nom = nom;
         this.descripcio = descripcio;
         this.path = path;
+        this.matriuL = null;
+        this.matriuR = null;
     }
 
 	public String getNom() {
@@ -38,7 +43,37 @@ public class Cami {
 	public void setDescripcio(String descripcio) {
 		this.descripcio = descripcio;
 	}
+	
+	public void setMatrius(SparseMatrix mL, SparseMatrix mR){
+		this.matriuL = new SparseMatrixBool(mL);
+		this.matriuR = new SparseMatrixBool(mR);
+	}
+	
+	public void setMatrius(SparseMatrixBool mL, SparseMatrixBool mR){
+		this.matriuL = new SparseMatrixBool(mL);
+		this.matriuR = new SparseMatrixBool(mR);
+	}
 
+	public Pair<SparseMatrixBool,SparseMatrixBool> getMatrius(){
+		Pair<SparseMatrixBool,SparseMatrixBool> p = new Pair<SparseMatrixBool, SparseMatrixBool>(matriuL,matriuR);
+		return p;
+	}
+	
+	public void resetMatrius(){
+		matriuL = matriuR = null;
+	}
+	public boolean teAutor(){
+		return (path.contains("A"));
+	}
+	public boolean tePaper(){
+		return (path.contains("P"));
+	}
+	public boolean teConferencia(){
+		return (path.contains("C"));
+	}
+	public boolean teTerme(){
+		return (path.contains("T"));
+	}
 	public String getPath() {
 		return path;
 	}
@@ -67,4 +102,5 @@ public class Cami {
 		}
 		return false;
 	}
+
 }

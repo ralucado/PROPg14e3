@@ -1,7 +1,10 @@
 package domini.camins;
-
-import persistencia.CtrlPersistencia;
 import java.util.*;
+
+import domini.queries.Pair;
+import domini.queries.SparseMatrix;
+import persistencia.*;
+import domini.graf.*;
 
 public class ControladorCamins {
 	private ConjuntCamins usuari;
@@ -22,6 +25,7 @@ public class ControladorCamins {
 		for(int i = 0; i<caminsUsuari.size(); i++){
 			Cami c = new Cami(caminsUsuari.get(i).get(0), caminsUsuari.get(i).get(1), caminsUsuari.get(i).get(2));
 			this.usuari.afegirCami(c);
+			importarMatriusCami(c.getNom(), "Usuari");
 		}
 		
 		for(int i = 0; i<caminsPredefinits.size(); i++){
@@ -88,6 +92,20 @@ public class ControladorCamins {
 		cami[2] = c.getDescripcio();
 		return cami;
 		
+	}
+	
+	/**
+	 * Consulta un camí existent
+	 * @param nom Nom del camí a consultar
+	 * @return Retorna el camí amb el nom demanat 
+	 * @throws Exception
+	 */
+	public Cami consultarCamiExt(String nom) throws Exception{
+		Cami c;
+		if(predefinits.existeixCami(nom)) c = predefinits.consultarCami(nom);
+		else if(usuari.existeixCami(nom)) c = usuari.consultarCami(nom);
+		else throw new Exception("El camí no existeix");
+		return c;
 	}
 	
 	/**
@@ -169,8 +187,124 @@ public class ControladorCamins {
 			s.add(c.getPath());
 			s.add(c.getDescripcio());
 			caminsUsuari.add(s);
+			exportarMatriusCami(c.getNom(), "Usuari");
 		}
 		CtrlDad.exportarCaminsUsuari(nomUsuari, caminsUsuari);
+		
+		for(Cami c : predefinits.getConjunt().values()){
+			exportarMatriusCami(c.getNom(),"Predefinit");
+		}
+	}
+	
+	/**
+	 * Guarda les matrius d'un camí en un fitxer
+	 * @param nom Nom del camí
+	 * @param tipus Tipus del camí (Predefinit o Usuari)
+	 */
+	public void exportarMatriusCami(String nom, String tipus) throws Exception{
+		Cami c;
+		if(tipus=="Predefinit") c = predefinits.consultarCami(nom);
+		else if(tipus=="Usuari") c = usuari.consultarCami(nom);
+		else throw new Exception("El tipus de camí no és correcte");
+		
+		SparseMatrixBool matriuE, matriuD;
+		Pair<SparseMatrixBool, SparseMatrixBool> matrius = c.getMatrius();
+		matriuE = matrius.first;
+		matriuD = matrius.second;
+		
+		//matriuE
+		ArrayList<ArrayList<String>> matriuE2 = new ArrayList<ArrayList<String>>();
+		ArrayList<HashMap<Integer,Boolean>> rowsE = matriuE.getRows();
+		
+		for(int i = 0; i<rowsE.size(); i++){
+			ArrayList<String> aux = new ArrayList<String>();
+			for(Integer k : rowsE.get(i).keySet()){
+				String clau = String.valueOf(k);
+				aux.add(clau);
+			}
+			matriuE2.add(aux);
+		}
+		ArrayList<String> midesE = new ArrayList<String>();
+		midesE.add(String.valueOf(matriuE.getNRows()));
+		midesE.add(String.valueOf(matriuE.getNCols()));
+		matriuE2.add(midesE);
+		
+		//matriuD
+		ArrayList<ArrayList<String>> matriuD2 = new ArrayList<ArrayList<String>>();
+		ArrayList<HashMap<Integer,Boolean>> rowsD = matriuE.getRows();
+		
+		for(int i = 0; i<rowsD.size(); i++){
+			ArrayList<String> aux = new ArrayList<String>();
+			for(Integer k : rowsD.get(i).keySet()){
+				String clau = String.valueOf(k);
+				aux.add(clau);
+			}
+			matriuE2.add(aux);
+		}
+		
+		ArrayList<String> midesD = new ArrayList<String>();
+		midesD.add(String.valueOf(matriuD.getNRows()));
+		midesD.add(String.valueOf(matriuD.getNCols()));
+		matriuD2.add(midesD);
+		
+		CtrlDad.exportarMatrius(matriuE2, matriuD2, c.getNom());
+		
+	}
+	
+	/**
+	 * Carrega les matrius d'un camí des d'un fitxer
+	 * @param nom Nom del camí
+	 * @param tipus Tipus del camí (Predefinit o Usuari)
+	 */
+	public void importarMatriusCami(String nom, String tipus) throws Exception{
+		Cami c;
+		if(tipus=="Predefinit") c = predefinits.consultarCami(nom);
+		else if(tipus=="Usuari") c = usuari.consultarCami(nom);
+		else throw new Exception("El tipus de camí no és correcte");
+		
+		ArrayList<ArrayList<String>> matriuE = CtrlDad.importarMatriuLeft(c.getPath());
+		ArrayList<ArrayList<String>> matriuD = CtrlDad.importarMatriuRight(c.getPath());
+		
+		//matriuE
+		int nRowsE = Integer.valueOf(matriuE.get(matriuE.size()-1).get(0));
+		int nColsE = Integer.valueOf(matriuE.get(matriuE.size()-1).get(1));
+		SparseMatrixBool matriuE2 = new SparseMatrixBool(nRowsE, nColsE);
+		
+		for(int i = 0; i<matriuE.size()-1;i++){
+			for(int j = 0; j<matriuE.get(i).size(); j++){
+				
+				matriuE2.set(i, j, true);
+			}
+		}
+		
+		
+		//matriuD
+		int nRowsD = Integer.valueOf(matriuE.get(matriuE.size()-1).get(0));
+		int nColsD = Integer.valueOf(matriuE.get(matriuE.size()-1).get(1));
+		SparseMatrixBool matriuD2 = new SparseMatrixBool(nRowsD, nColsD);
+	
+				
+		for(int i = 0; i<matriuD.size();i++){
+			for(int j = 0; j<matriuD.get(i).size(); j++){
+				matriuD2.set(i, j, true);
+			}
+		}
+		
+		c.setMatrius(matriuE2, matriuD2);	
+		
+	}
+
+	/**
+	 * Reseteja les matrius necessaries quan s'ha realitzat un canvi en el graf
+	 * @param c Tipus de l'entitat en que s'ha produit un canvi (P,T,C,A)
+	 */
+	public void resetMatrius(char c){
+		CtrlDad.esborrarMatrius(c);
+		for(Cami ca : usuari.getConjunt().values()){
+			String path = ca.getPath();
+			int k = path.indexOf(c);
+			if(k!=-1) ca.resetMatrius();
+		}
 	}
 	
 	

@@ -1,10 +1,10 @@
 package domini.queries;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.*;
 
 import domini.camins.Cami;
 import domini.graf.Graf;
+import domini.camins.SparseMatrixBool;
+import domini.queries.SparseMatrix;
 public class HeteSim{	
 
 	//PUBLIC ARGUMENTS
@@ -24,14 +24,29 @@ public class HeteSim{
 	 * @return  retorna la matriu de resultats del hetesim per cada parell d'entitats final i inicial del path
 	 */
 	public SparseMatrix getHeteSim(Cami p){
+		SparseMatrix pl = new SparseMatrix(), pr = new SparseMatrix();
+		if(p.getMatrius().first != null){
+			pl = new SparseMatrix(p.getMatrius().first);
+			pr = new SparseMatrix(p.getMatrius().second);
+		}
+		else{
 		ArrayList<EntitatType> left = null;
 		ArrayList<EntitatType> right = null;
 		Pair<ArrayList<EntitatType>, ArrayList<EntitatType>> aux = parsePath(p.getPath()); 
 		left = aux.first;
 		right = aux.second;
 		Collections.reverse(right);
-		System.out.println("Normalitzant");
-		return normalizeHeteSim(   mutiplyMatrixes(  getMatrixesToMultiply(left,right)),    mutiplyMatrixes(  getMatrixesToMultiply(right,left)    ));
+		//System.out.println("Normalitzant");
+		pl = mutiplyMatrixes(  getMatrixesToMultiply(left,right));
+		pr = mutiplyMatrixes(  getMatrixesToMultiply(right,left));
+		p.setMatrius(pl, pr);
+		}
+		return normalizeHeteSim(pl, pr);
+	}
+
+	private SparseMatrix SparseMatrix(SparseMatrixBool first) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/**

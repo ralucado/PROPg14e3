@@ -1,40 +1,39 @@
-package domini.queries;
+package domini.camins;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.*;
-import domini.camins.*;
 
-public class SparseMatrix {
-	ArrayList<SparseVector> rows = new ArrayList<SparseVector>();
-	ArrayList<SparseVector> cols = new ArrayList<SparseVector>();
+import domini.queries.SparseMatrix;
+
+public class SparseMatrixBool {
+	ArrayList<HashMap<Integer,Boolean>> rows = new ArrayList<HashMap<Integer,Boolean>>();
+	ArrayList<HashMap<Integer,Boolean>> cols = new ArrayList<HashMap<Integer,Boolean>>();
 	
+	
+	public SparseMatrixBool(SparseMatrix sm) {
+		initMatrix(sm.getNRows(), sm.getNCols());
+		for (int i = 0; i < sm.getNRows(); ++i) {
+			for (HashMap.Entry<Integer,Float> e : sm.getRow(i).entrySet()){
+				if (e.getValue() > 0.5f) this.set(i, e.getKey(), true);
+			}
+		}
+	}
 	
 	/**
 	 * Crea una matriu buida
 	 */
-	public SparseMatrix() {
+	public SparseMatrixBool() {
 		initMatrix(0,0);
 	}
 	
-	/**
-	 * crea una Matriu de floats a partir d'una de booleans
-	 * @param m es una matriu dispersa de booleans
-	 */
-	public SparseMatrix(SparseMatrixBool m){
-		initMatrix(m.getNRows(),m.getNCols());
-		for (int i = 0; i < m.getNRows(); ++i){
-			for(HashMap.Entry<Integer,Boolean> v : m.getRow(i).entrySet()){
-				this.set(i, v.getKey(), 1.f);
-			}
-		}
-	}
+	
 	/**
 	 * crea una matriu de zeros de tamany nRows x nCols
 	 * @param nRows
 	 * @param nCols
 	 */
-	public SparseMatrix(int nRows, int nCols) {
+	public SparseMatrixBool(int nRows, int nCols) {
 		initMatrix(nRows, nCols);
 	}
 	
@@ -42,47 +41,31 @@ public class SparseMatrix {
 	 * creadora de copia a partir de unaltre SparseMatrix
 	 * @param sm
 	 */
-	public SparseMatrix(SparseMatrix sm) {
-		ArrayList<SparseVector> rows = sm.getRows();
-		for (SparseVector sv : rows) {
-			this.rows.add((SparseVector) sv.clone());
+	@SuppressWarnings("unchecked")
+	public SparseMatrixBool(SparseMatrixBool sm) {
+		ArrayList<HashMap<Integer,Boolean>> rows = sm.getRows();
+		for (HashMap<Integer,Boolean> sv : rows) {
+			this.rows.add((HashMap<Integer,Boolean>) sv.clone());
 		}
-		ArrayList<SparseVector> cols = sm.getCols();
-		for (SparseVector sv : cols) {
-			this.cols.add((SparseVector) sv.clone());
+		ArrayList<HashMap<Integer,Boolean>> cols = sm.getCols();
+		for (HashMap<Integer,Boolean> sv : cols) {
+			this.cols.add((HashMap<Integer,Boolean>) sv.clone());
 		}
 	}
 	
-	public SparseMatrix(ArrayList<SparseVector> v){
+	public SparseMatrixBool(ArrayList<HashMap<Integer,Boolean>> v){
 		for (int i = 0; i < v.size(); ++i) {
 			for (int j = 0; j < v.get(i).size(); ++j) {
 				this.set(i, j, v.get(i).get(j));
 			}
 		}
 	}
-	/**
-	 * converteix la matriu m de tamany nRows x nCols a SparseMatrix
-	 * @param m
-	 * @param nRows
-	 * @param nCols
-	 */
-	public SparseMatrix(Map<Integer, HashSet<Integer>> m,int nRows, int nCols) {
-		initMatrix(nRows, nCols); //crea matriz dispersa nRows*nCols vacia
-		
-		//every row you take...🎶
-		for (Map.Entry<Integer, HashSet<Integer>> i: m.entrySet()) {
-			for (Integer j : m.get(i.getKey())) {
-				set(i.getKey(), j, (float)1);
-			}
-		}
-		//ai crai ebri columna
-	}
 	
 	/**
 	 * 
 	 * @return retorna la llista de columnes de la matriu
 	 */
-	public ArrayList<SparseVector> getCols() {
+	public ArrayList<HashMap<Integer,Boolean>> getCols() {
 		return cols;
 	}
 	
@@ -90,7 +73,7 @@ public class SparseMatrix {
 	 * 
 	 * @return retorna la llista de files de la matriu
 	 */
-	public ArrayList<SparseVector> getRows() {
+	public ArrayList<HashMap<Integer,Boolean>> getRows() {
 		return rows;
 	}
 	
@@ -100,9 +83,9 @@ public class SparseMatrix {
 	 * @param col
 	 * @param value
 	 */
-	void set(int row, int col, Float value) {
-		if (value == null) value = 0.f;
-		if (value == 0.f) {
+	void set(int row, int col, Boolean value) {
+		if (value == null) value = false;
+		if (value == false) {
 			try {
 				if (rows.get(row).containsKey(col)) {
 					rows.get(row).remove(col);
@@ -156,7 +139,7 @@ public class SparseMatrix {
 	 * @param i
 	 * @return
 	 */
-	public SparseVector getRow(int i) {
+	public HashMap<Integer,Boolean> getRow(int i) {
 		return rows.get(i);
 	}
 	
@@ -165,7 +148,7 @@ public class SparseMatrix {
 	 * @param j
 	 * @return
 	 */
-	public SparseVector getCol(int j) {
+	public HashMap<Integer,Boolean> getCol(int j) {
 		return cols.get(j);
 	}
 	
@@ -175,42 +158,19 @@ public class SparseMatrix {
 	 * @param j
 	 * @return
 	 */
-	public Float getValue(int i, int j) {
+	public Boolean getValue(int i, int j) {
 		if (i < rows.size() && rows.get(i).containsKey(j)) return rows.get(i).get(j);
-		else return 0.f;
+		else return false;
 	}
 	
 	/**
 	 * Transposa la matriu
 	 */
 	public void transpose() {
-		ArrayList<SparseVector> aux = rows;
+		ArrayList<HashMap<Integer,Boolean>> aux = rows;
 		rows = cols;
 		cols = aux;
 	}
-	
-	/**
-	 * Multiplica m1 i m2
-	 * @param m1 matriu esquerra
-	 * @param m2 matriu dreta
-	 * @return producte de m1 i m2
-	 */
-	static SparseMatrix multiply(SparseMatrix m1, SparseMatrix m2) {
-		SparseMatrix ret = new SparseMatrix(m1.getNRows(), m2.getNCols());
-		for (int i = 0; i < ret.getNRows(); ++i) {
-			SparseVector v1 = m1.getRow(i);
-			for (int j = 0; j < ret.getNCols(); ++j) {
-				ret.set(i, j, SparseVector.multiply(v1, m2.getCol(j)));
-//				System.out.println("m1.row: " + v1);
-//				System.out.println("m2.col: " + m2.getRow(j));
-//				System.out.println("M1\n" + m1);
-//				System.out.println("M2\n" + m2);
-//				System.out.println("ret\n" + ret);
-			}
-		}
-		return ret;
-	}
-
 	
 	/**
 	 * @override imprimeix els elements de la matriu ordenats
@@ -231,10 +191,10 @@ public class SparseMatrix {
 
 	protected void initMatrix(int nRows, int nCols) {
 		for (int i = 0; i < nRows; ++i) {
-			rows.add(new SparseVector());
+			rows.add(new HashMap<Integer,Boolean>());
 		}
 		for (int i = 0; i < nCols; ++i) {
-			cols.add(new SparseVector());
+			cols.add(new HashMap<Integer,Boolean>());
 		}		
 	}
 }

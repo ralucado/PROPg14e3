@@ -1,1 +1,6 @@
-Co-autors	APA	Els coautors d'un autor.
+Co-authors	APA	Autors que han escrit el mateix paper.
+Same author	PAP	Paper d'un mateix autor.
+Co-terms	TPT	Terms that appear in the same paper.
+Same terms	PTP	Papers that share the same terms.
+Co-conference	CPC	Conferences that hosted the same papers.
+Same conference	PCP	Paper that have been in the same conferences.

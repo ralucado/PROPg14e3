@@ -4,7 +4,10 @@ import persistencia.*;
 
 public class CtrlGraf {
 	
-		protected Graf graf;
+    /**
+     *
+     */
+    protected Graf graf;
 
 		/**
 		 *Pre: -
@@ -17,18 +20,25 @@ public class CtrlGraf {
 	 	/**
 	 	 * Pre: -
 	 	 * Post: graf=grafAux.
+     * @param grafAux
 	 	 */
 	 	public void setGraf(Graf grafAux){
 	 		graf=grafAux;
 	 	}
 	 	
-	 	public Graf consultarGraf(){
+    /**
+     *
+     * @return
+     */
+    public Graf consultarGraf(){
 	 		return graf;
 	 	}
 
 	 	/**
 	 	 * Pre: -
 	 	 * Post: Carrega el graf des de un fitxer, i retorna el graf.
+     * @return 
+     * @throws java.lang.Exception
 	 	 */
 	 	public Graf carregarGraf() throws Exception{
 	         
@@ -37,7 +47,7 @@ public class CtrlGraf {
 
 	         ArrayList<ArrayList<String>> Relacions = ctPer.importarRelacions();
 	         
-	         Map m = new HashMap<Integer,Entitat>();
+	         TreeMap m = new TreeMap<Integer,Entitat>();
 	         
 	         for(int i=0; i<Entitats.size(); i++) {
                      
@@ -84,7 +94,7 @@ public class CtrlGraf {
                      }
 	         }
 	         
-	         Graf g=new Graf(m,Relacions);  
+	         Graf g=new Graf(m,Relacions); 
 
 	         return g;
 	    }
@@ -92,6 +102,7 @@ public class CtrlGraf {
 	 	/**
 	 	 * Pre: -
 	 	 * Post: Guarda el graf actual a un fitxer.
+     * @throws java.lang.Exception
 	 	 */
 	 	public void guardarGraf() throws Exception {
 	 		Map m = graf.getConjuntEntitats();
@@ -157,6 +168,9 @@ public class CtrlGraf {
 	 	/**
 	 	 * Pre: No existeix cap Autor amb nom=nom.
 	 	 * Post: S'ha afegit l'Autor amb nom=nom i label=label al graf.
+     * @param nom
+     * @param label
+     * @throws java.lang.Exception
 	 	 */
 	 	public void altaAutor(String nom, String label) throws Exception {
 	 		Autor a = new Autor(nom);
@@ -182,6 +196,9 @@ public class CtrlGraf {
 	 	/**
 	 	 * Pre: No existeix cap Conferencia amb nom=nom.
 	 	 * Post S'ha afegit la Conferencia amb nom=nom i label=label al graf.
+     * @param nom
+     * @param label
+     * @throws java.lang.Exception
 	 	 */
 	 	public void altaConferencia (String nom, String label) throws Exception{
 	 		Conferencia c = new Conferencia(nom);
@@ -207,6 +224,9 @@ public class CtrlGraf {
 	 	/**
 	 	 * Pre: No existeix cap Paper amb nom=nom.
 	 	 * Post: S'ha afegit el Paper amb nom=nom i label=label al graf.
+     * @param nom
+     * @param label
+     * @throws java.lang.Exception
 	 	 */
 	 	public void altaPaper(String nom, String label) throws Exception{
 	        Paper p = new Paper(nom);
@@ -232,6 +252,8 @@ public class CtrlGraf {
 	 	/**
 	 	 * Pre: No existeix cap Terme amb nom=nom.
 	 	 * Post: S'ha afegit el Terme amb nom=nom al graf.
+     * @param nom
+     * @throws java.lang.Exception
 	 	 */
 	    public void altaTerme(String nom) throws Exception{
 	        Terme t = new Terme(nom);
@@ -241,6 +263,8 @@ public class CtrlGraf {
 	    /**
 	     * Pre: Existeix un Autor amb nom=nom.
 	     * Post: S'ha eliminat l'Autor amb nom=nom del graf.
+     * @param nom
+     * @throws java.lang.Exception
 	     */
 	    public void baixaAutor(String nom) throws Exception{
 	        int id = graf.getIdByNameAndType(nom, "autor");
@@ -250,6 +274,8 @@ public class CtrlGraf {
 	    /**
 	     * Pre: Existeix una Conferencia amb nom=nom.
 	     * Post: S'ha eliminat la Conferencia amb nom=nom del graf.
+     * @param nom
+     * @throws java.lang.Exception
 	     */
 	    public void baixaConferencia(String nom) throws Exception{
 	        int id = graf.getIdByNameAndType(nom, "conferencia");
@@ -259,6 +285,8 @@ public class CtrlGraf {
 	    /**
 	     * Pre: Existeix un Paper amb nom=nom.
 	     * Post: S'ha eliminat el Paper amb nom=nom del graf.
+     * @param nom
+     * @throws java.lang.Exception
 	     */
 	    public void baixaPaper(String nom) throws Exception{
 	        int id = graf.getIdByNameAndType(nom, "paper");
@@ -268,6 +296,8 @@ public class CtrlGraf {
 	    /**
 	     * Pre: Existeix un Terme amb nom=nom.
 	     * Post: S'ha eliminat el Terme amb nom=nom del graf.
+     * @param nom
+     * @throws java.lang.Exception
 	     */
 	    public void baixaTerme(String nom) throws Exception{
 	        int id = graf.getIdByNameAndType(nom, "terme");
@@ -277,6 +307,9 @@ public class CtrlGraf {
 	    /**
 	     * Pre: -
 	     * Post: Retorna un vector amb el nom, el tipus i el label (si en te).
+     * @param id
+     * @return 
+     * @throws java.lang.Exception 
 	     */
 	    public ArrayList<String> consultarEntitat(int id) throws Exception{
 	    	ArrayList<String> list =new ArrayList<String>();
@@ -325,6 +358,9 @@ public class CtrlGraf {
 	    /**
 	     * Pre: Existeix un Autor amb nom=nom.
 	     * Post: Retorna un vector amb el nom i el label de l'Autor.
+     * @param nom
+     * @return 
+     * @throws java.lang.Exception 
 	     */
 	    public ArrayList<String> consultarAutor(String nom) throws Exception{
 	    	int id = graf.getIdByNameAndType(nom, "autor");
@@ -356,6 +392,9 @@ public class CtrlGraf {
 	    /**
 	     * Pre: Existeix una Conferencia amb nom=nom.
 	     * Post: Retorna un vector amb el nom i el label de la Conferencia.
+     * @param nom
+     * @return 
+     * @throws java.lang.Exception 
 	     */
 	    public ArrayList<String> consultarConferencia(String nom) throws Exception{
 	    	int id = graf.getIdByNameAndType(nom, "conferencia");
@@ -387,6 +426,9 @@ public class CtrlGraf {
 	    /**
 	     * Pre: Existeix un Paper amb nom=nom.
 	     * Post: Retorna un vector amb el nom i el label del Paper.
+     * @param nom
+     * @return 
+     * @throws java.lang.Exception 
 	     */
 	    public ArrayList<String> consultarPaper(String nom) throws Exception{
 	    	int id = graf.getIdByNameAndType(nom, "paper");
@@ -418,6 +460,10 @@ public class CtrlGraf {
 	    /**
 	     * Pre: Existeix una Entitat amb nom=nom i tipus=tipus.
 	     * Post: Retorna el label en format String.
+     * @param nom
+     * @param tipus
+     * @return 
+     * @throws java.lang.Exception
 	     */
 	    public String consultarLabel(String nom, String tipus) throws Exception{
 	    	int id = graf.getIdByNameAndType(nom, tipus);
@@ -462,6 +508,8 @@ public class CtrlGraf {
 	    /**
 	     * Pre: -
 	     * Post: Retorna un vector de vectors amb el nom i el tipus de totes les entitats del graf.
+     * @return 
+     * @throws java.lang.Exception 
 	     */
 	    public ArrayList<ArrayList<String>> consultarConjuntEntitats() throws Exception{
 	    	
@@ -486,6 +534,8 @@ public class CtrlGraf {
 	    /**
 	     * Pre: -
 	     * Post: Retorna un vector amb el nom de tots els Autors del graf.
+     * @return 
+     * @throws java.lang.Exception
 	     */
 	    public ArrayList<String> consultarAutors() throws Exception{
 	    	ArrayList<String> list=new ArrayList<String>();
@@ -501,6 +551,8 @@ public class CtrlGraf {
 	    /**
 	     * Pre: -
 	     * Post: Retorna un vector amb el nom de totes les Conferencies del graf.
+     * @return 
+     * @throws java.lang.Exception 
 	     */
 	    public ArrayList<String> consultarConferencies() throws Exception{
 	    	ArrayList<String> list=new ArrayList<String>();
@@ -516,6 +568,8 @@ public class CtrlGraf {
 	    /**
 	     * Pre: -
 	     * Post: Retorna un vector amb el nom de tots els Papers del graf.
+     * @return 
+     * @throws java.lang.Exception 
 	     */
 	    public ArrayList<String> consultarPapers() throws Exception{
 	    	ArrayList<String> list=new ArrayList<String>();
@@ -531,6 +585,8 @@ public class CtrlGraf {
 	    /**
 	     * Pre: -
 	     * Post: Retorna un vector amb el nom de tots els Termes del graf.
+     * @return 
+     * @throws java.lang.Exception
 	     */
 	    public ArrayList<String> consultarTermes() throws Exception{
 	    	ArrayList<String> list=new ArrayList<String>();
@@ -546,6 +602,9 @@ public class CtrlGraf {
 	    /**
 	     * Pre: Existeix un Autor amb nom=nomA i un Paper amb nom=nomP.
 	     * Post: S'ha afegit la relacio entre l'Autor amb nom=nomA i el Paper amb nom=nomP.
+     * @param nomA
+     * @param nomP
+     * @throws java.lang.Exception
 	     */
 	    public void afegirRelacioAP (String nomA, String nomP) throws Exception{
 	        int id1 = graf.getIdByNameAndType(nomA, "autor");
@@ -556,6 +615,9 @@ public class CtrlGraf {
 	    /**
 	     * Pre: Existeix una Conferencia amb nom=nomC i un Paper amb nom=nomP.
 	     * Post: S'ha afegit la relacio entre la Conferencia amb nom=nomC i el Paper amb nom=nomP.
+     * @param nomC
+     * @param nomP
+     * @throws java.lang.Exception
 	     */
 	    public void afegirRelacioCP (String nomC, String nomP) throws Exception{
 	        int id1 = graf.getIdByNameAndType(nomC, "conferencia");
@@ -566,6 +628,9 @@ public class CtrlGraf {
 	    /**
 	     * Pre: Existeix un Terme amb nom=nomT i un Paper amb nom=nomP.
 	     * Post: S'ha afegit la relacio entre el Terme amb nom=nomT i el Paper amb nom=nomP.
+     * @param nomT
+     * @param nomP
+     * @throws java.lang.Exception
 	     */
 	    public void afegirRelacioTP (String nomT, String nomP) throws Exception{
 	        int id1 = graf.getIdByNameAndType(nomT, "terme");
@@ -576,6 +641,9 @@ public class CtrlGraf {
 	    /**
 	     * Pre: Existeix una relacio entre l'Autor amb nom=nomA i el Paper amb nom=nomP.
 	     * Post: S'ha esborrat la relacio entre l'Autor amb nom=nomA i el Paper amb nom=nomP.
+     * @param nomA
+     * @param nomP
+     * @throws java.lang.Exception
 	     */
 	    public void esborrarRelacioAP (String nomA, String nomP) throws Exception{
 	        int id1 = graf.getIdByNameAndType(nomA, "autor");
@@ -586,6 +654,9 @@ public class CtrlGraf {
 	    /**
 	     * Pre: Existeix una relacio entre la Conferencia amb nom=nomC i el Paper amb nom=nomP.
 	     * Post: S'ha esborrat la relacio entre la Conferencia amb nom=nomC i el Paper amb nom=nomP.
+     * @param nomC
+     * @param nomP
+     * @throws java.lang.Exception
 	     */
 	    public void esborrarRelacioCP (String nomC, String nomP) throws Exception{
 	        int id1 = graf.getIdByNameAndType(nomC, "conferencia");
@@ -596,6 +667,9 @@ public class CtrlGraf {
 	    /**
 	     * Pre: Existeix una relacio entre el Terme amb nom=nomT i el Paper amb nom=nomP.
 	     * Post: S'ha esborrat la relacio entre el Terme amb nom=nomT i el Paper amb nom=nomP.
+     * @param nomT
+     * @param nomP
+     * @throws java.lang.Exception
 	     */
 	    public void esborrarRelacioTP (String nomT, String nomP) throws Exception{
 	        int id1 = graf.getIdByNameAndType(nomT, "terme");
