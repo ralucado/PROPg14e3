@@ -18,8 +18,7 @@ public class CtrlPersistencia {
 	
 	public static void main(String[] args) {
 		CtrlPersistencia ctrl = new CtrlPersistencia();
-		try {ctrl.esborrarMatrius('C');}
-		catch (Exception e) {System.out.println(e.getMessage());}
+		System.out.println(ctrl.existeixenMatrius("PA"));
 	}
 	
 	/**
@@ -367,5 +366,13 @@ public class CtrlPersistencia {
 				carpeta.delete();
 			}
 		}
+	}
+	
+	public boolean existeixenMatrius(String cami) {
+		File f = new File(dataLocation + "Camins/Matrius/" + cami);
+		if(f.exists() && f.isDirectory()) {
+			return true;
+		}
+		return false;
 	}
 }

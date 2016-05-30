@@ -1,23 +1,22 @@
 package presentacio.camins;
 
-import java.awt.EventQueue;
-import java.util.ArrayList;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.JScrollPane;
-import net.miginfocom.swing.MigLayout;
-import presentacio.ctrl.CtrlPresentacio;
-import presentacio.ctrl.VistaDialog;
-
-import javax.swing.JTable;
-import javax.swing.JButton;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.ActionEvent;
-import java.awt.Font;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
+
+import net.miginfocom.swing.MigLayout;
+import presentacio.ctrl.CtrlPresentacio;
+import presentacio.ctrl.VistaDialog;
 
 public class VistaCamins {
 

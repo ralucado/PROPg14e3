@@ -1,38 +1,27 @@
 package presentacio.graf;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Point;
 import java.awt.SystemColor;
-import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
-import domini.graf.Label;
 import net.miginfocom.swing.MigLayout;
 import presentacio.ctrl.CtrlPresentacio;
 import presentacio.ctrl.VistaDialog;
 
-import javax.swing.JComboBox;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.ListModel;
-
+@SuppressWarnings("serial")
 public class VistaAfegirEntitat extends JDialog {
 
 	private JTextField textField;
-	private JComboBox comboBox_1;
-	private JComboBox comboBox_1_1;
 	private CtrlPresentacio ctrl;
 	private String[] labels = {"UNKNOWN", "DATABSE", "DATA_MINING", "AI", "INFORMATION_RETRIVAL"};
 	private String[] tipusE = {"", "Paper", "Autor", "Conferencia", "Terme"};
@@ -53,7 +42,7 @@ public class VistaAfegirEntitat extends JDialog {
 		getContentPane().setLayout(new MigLayout("", "[][][50px,grow][200px,grow][][][50px,grow][200px,grow][][]", "[][50px][][][][][][50px]"));
 		
 		//seleció label
-		JComboBox comboBox_1_1 = new JComboBox(labels);
+		JComboBox<?> comboBox_1_1 = new JComboBox<Object>(labels);
 		comboBox_1_1.setBounds(255, 37, 113, 24);
 		getContentPane().add(comboBox_1_1, "cell 3 6,alignx left,aligny top");
 				
@@ -71,7 +60,7 @@ public class VistaAfegirEntitat extends JDialog {
 		getContentPane().add(lblTipusDentitat, "cell 0 0,alignx left,aligny center");
 		
 		//selecció tipus	
-		JComboBox comboBox = new JComboBox(tipusE);
+		JComboBox<?> comboBox = new JComboBox<Object>(tipusE);
 		comboBox.addItemListener(new ItemListener(){
 			public void itemStateChanged(ItemEvent ie){
 				String tipusAnterior = tipus;

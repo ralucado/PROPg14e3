@@ -601,11 +601,23 @@ public class Graf {
         return true;
     }
 
+    /**
+     * Retorna la ID d'un paper segons la seva posició al graf
+     * @param pos posició del paper al graf
+     * @return ID del paper
+     * @throws Exception ...
+     */
     public int getIdByPositionPaper(int pos) throws Exception {
         if (pos < nPapers && pos >= 0) return posicioAIdPaper.get(pos);
         else throw new Exception("Posicio "+pos+" invalida a les matrius de Papers");
     }
 
+    /**
+     * 
+     * @param pos
+     * @return
+     * @throws Exception
+     */
     public int getIdByPositionAutor(int pos) throws Exception  {
        if (pos < nAutors && pos >= 0) return posicioAIdAutor.get(pos);
        else throw new Exception("Posicio "+pos+" invalida a la matriu paperAutor");
