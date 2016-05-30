@@ -1,3 +1,5 @@
 user1	test	0
-admin	test2	1
+admin	admin	1
 arnau	test	0
+raluA	admin	1
+ralu	test	0
