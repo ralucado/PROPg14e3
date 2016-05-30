@@ -32,7 +32,7 @@ import javax.swing.JTextField;
 		private JComboBox comboBox_1;
 		private JComboBox comboBox_1_1;
 		private CtrlPresentacio ctrl;
-		private String[] labels = {"", "UNKNOWN", "DATABSE", "DATA_MINING", "AI", "INFORMATION_RETRIVAL"};
+		private String[] labels = {"", "UNKNOWN", "DATABASE", "DATA_MINING", "AI", "INFORMATION_RETRIEVAL"};
 		
 		//Entitat
 		private String nomAct;
@@ -65,6 +65,7 @@ import javax.swing.JTextField;
 			textField.setBounds(30, 98, 114, 19);
 			getContentPane().add(textField, "cell 3 1,growx,aligny center");
 			textField.setColumns(10);
+			textField.setText(nomAct);
 			
 			//label selecció label
 			JLabel lblLabel = new JLabel("Nova label:");
@@ -130,6 +131,7 @@ import javax.swing.JTextField;
 						}
 				}
 			});
+			comboBox_1_1_1.setSelectedItem(label);
 			
 			getContentPane().add(okButton, "cell 0 9");
 			
@@ -148,11 +150,12 @@ import javax.swing.JTextField;
 		/**
 		 * Create the dialog.
 		 */
-		public VistaModificarEntitat(CtrlPresentacio ctrl, JFrame owner, String tipus, String nomAct) {
+		public VistaModificarEntitat(CtrlPresentacio ctrl, JFrame owner, String tipus, String nomAct, String label) {
 			super(owner, true);
 			this.ctrl = ctrl;
 			this.nomAct = nomAct;
 			this.tipus = tipus;
+			this.label = label;
 			initComponents();		
 			setVisible(true);
 			setLocationRelativeTo(null);
