@@ -1,4 +1,4 @@
-package presentacio;
+package presentacio.graf;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -15,6 +15,8 @@ import javax.swing.border.EmptyBorder;
 
 import domini.graf.Label;
 import net.miginfocom.swing.MigLayout;
+import presentacio.ctrl.CtrlPresentacio;
+import presentacio.ctrl.VistaDialog;
 
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;

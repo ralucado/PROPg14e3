@@ -1,4 +1,4 @@
-package presentacio;
+package presentacio.usuaris;
 
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -11,6 +11,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+
+import presentacio.ctrl.CtrlPresentacio;
+import presentacio.ctrl.VistaDialog;
 
 @SuppressWarnings("serial")
 public class VistaModificarUsuari extends VistaCanvisUsuari {
@@ -79,6 +82,7 @@ public class VistaModificarUsuari extends VistaCanvisUsuari {
 					} else {
 						if (!username.equals(usernameIni)) {
 							try {
+								System.out.println("TRRY");
 								ctrl.getDomini().modificarNomUsuari(usernameIni, username);
 							} catch (Exception ex) {
 								(new VistaDialog()).setDialog("Error al modificar nom d'usuari", ex.getMessage(), botons, JOptionPane.WARNING_MESSAGE);

@@ -1,9 +1,12 @@
-package presentacio;
+package presentacio.queries;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import net.miginfocom.swing.MigLayout;
+import presentacio.ctrl.CtrlPresentacio;
+import presentacio.ctrl.VistaDialog;
+
 import javax.swing.JButton;
 import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;

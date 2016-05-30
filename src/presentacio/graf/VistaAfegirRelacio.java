@@ -1,4 +1,4 @@
-package presentacio;
+package presentacio.graf;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.SystemColor;
@@ -32,6 +32,8 @@ import javax.swing.event.ListSelectionListener;
 import domini.graf.CtrlGraf;
 import domini.graf.Entitat;
 import net.miginfocom.swing.MigLayout;
+import presentacio.ctrl.CtrlPresentacio;
+import presentacio.ctrl.VistaDialog;
 
 import javax.swing.event.ListSelectionEvent;
 

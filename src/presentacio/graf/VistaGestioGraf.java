@@ -1,4 +1,4 @@
-package presentacio;
+package presentacio.graf;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Frame;
@@ -19,6 +19,8 @@ import java.awt.GridLayout;
 import java.awt.CardLayout;
 import javax.swing.SpringLayout;
 import net.miginfocom.swing.MigLayout;
+import presentacio.ctrl.CtrlPresentacio;
+
 import javax.swing.JTabbedPane;
 
 public class VistaGestioGraf{

@@ -1,4 +1,4 @@
-package presentacio;
+package presentacio.ctrl;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;

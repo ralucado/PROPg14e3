@@ -1,8 +1,8 @@
-package presentacio;
+package presentacio.ctrl;
 
 import javax.swing.JOptionPane;
 
-public class TestPresentacioUsuaris {
+public class TestPresentacio {
 	public static void main(String[] args) {
 		javax.swing.SwingUtilities.invokeLater (
 	      new Runnable() {
@@ -14,6 +14,7 @@ public class TestPresentacioUsuaris {
 	        	  catch (Exception exc) {
 	        		  String[] botons = {"D'acord"};
 	      			  (new VistaDialog()).setDialog("No s'ha pogut iniciar sessió", exc.getMessage(), botons, JOptionPane.WARNING_MESSAGE);
+	      			  
 	        	  }
       	}});
 	}

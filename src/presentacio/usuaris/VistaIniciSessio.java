@@ -1,4 +1,4 @@
-package presentacio;
+package presentacio.usuaris;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -12,6 +12,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import presentacio.ctrl.CtrlPresentacio;
+import presentacio.ctrl.VistaDialog;
 
 public class VistaIniciSessio {
 	

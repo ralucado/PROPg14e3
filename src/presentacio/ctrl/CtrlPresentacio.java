@@ -1,7 +1,11 @@
-package presentacio;
+package presentacio.ctrl;
 
 import javax.swing.JOptionPane;
 import domini.ctrl.myCtrlDomini;
+import presentacio.camins.VistaCamins;
+import presentacio.graf.VistaGestioGraf;
+import presentacio.usuaris.VistaIniciSessio;
+import presentacio.usuaris.VistaUsuaris;
 
 public class CtrlPresentacio {
 	private myCtrlDomini ctrlDomini;

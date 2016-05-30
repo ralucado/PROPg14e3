@@ -1,4 +1,4 @@
-package presentacio;
+package presentacio.usuaris;
 
 import java.awt.EventQueue;
 
@@ -9,6 +9,9 @@ import java.awt.GridBagConstraints;
 import java.awt.Font;
 import java.awt.Insets;
 import javax.swing.SwingConstants;
+
+import presentacio.ctrl.CtrlPresentacio;
+
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;

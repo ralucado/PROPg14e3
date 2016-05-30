@@ -1,4 +1,4 @@
-package presentacio;
+package presentacio.usuaris;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -18,6 +18,8 @@ import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
 import net.miginfocom.swing.MigLayout;
+import presentacio.ctrl.CtrlPresentacio;
+import presentacio.ctrl.VistaDialog;
 
 public class VistaUsuaris {
 

@@ -1,4 +1,4 @@
-package presentacio;
+package presentacio.ctrl;
 
 import java.awt.EventQueue;
 import java.util.ArrayList;
@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.JScrollPane;
 import net.miginfocom.swing.MigLayout;
+
 import javax.swing.JTable;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;

@@ -1,4 +1,4 @@
-package presentacio;
+package presentacio.camins;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -11,6 +11,8 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import presentacio.ctrl.CtrlPresentacio;
 
 @SuppressWarnings("serial")
 public class VistaCanvisCami extends JDialog {
