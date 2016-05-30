@@ -8,11 +8,14 @@ import javax.swing.JButton;
 import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.Action;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.JScrollPane;
@@ -27,6 +30,7 @@ public class VistaResultat {
 	private JTextField nEntitats;
 	private JTable resultats;
 	private ResTableModel resData;
+	private JFrame parent;
 
 	/**
 	 * Launch the application.
@@ -39,7 +43,7 @@ public class VistaResultat {
 		Pair<Entitat,Float> p = new Pair<Entitat,Float>(au,0F);
 		A.add(p);
 		Resultat R = new Resultat(A);
-		ctrlPresentacio.getDomini().getCtrlQueries().setResultat(R);
+		//ctrlPresentacio.getDomini().getCtrlQueries().setResultat(R);
 		ctrlPresentacio.openResultat();
 		
 		//VistaResultat window = new VistaResultat(ctrlPresentacio);
@@ -51,8 +55,10 @@ public class VistaResultat {
 	 * Create the application.
 	 * @wbp.parser.entryPoint
 	 */
-	public VistaResultat(CtrlPresentacio ctrl) {
+	public VistaResultat(CtrlPresentacio ctrl, JFrame parent) {
+		this.parent = parent;
 		initialize();
+		this.resData = new ResTableModel();
 	}
 
 	/**
@@ -60,9 +66,21 @@ public class VistaResultat {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new MigLayout("", "[grow][][][][][grow][][][][grow]", "[][][][][grow]"));
+		frame.setBounds(100, 100, 570, 300);
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				e.getWindow().dispose();
+				try {
+					ctrl.getDomini().guardarCjtUsuaris();
+				} catch (Exception exc) {
+					String[] botons = {"D'acord"};
+					(new VistaDialog()).setDialog("No s'ha pogut desar el conjunt d'usuaris", exc.getMessage(), botons, JOptionPane.ERROR_MESSAGE);
+				}
+				ctrl.openMenu();
+			}
+		});
+		frame.getContentPane().setLayout(new MigLayout("", "[grow][][][30px:n][][][][][][][][grow][][][][][grow]", "[][][][][grow]"));
 		JButton btnEnrere = new JButton("Enrere");
 		frame.getContentPane().add(btnEnrere, "cell 0 0,alignx left,aligny top");
 		btnEnrere.addActionListener(new ActionListener() {
@@ -73,39 +91,50 @@ public class VistaResultat {
 		
 		String[] llista = {"","0","1","2","3","4"};
 		JComboBox cmbFiltreLabel = new JComboBox(llista);
-		frame.getContentPane().add(cmbFiltreLabel, "cell 2 0,growx");
+		frame.getContentPane().add(cmbFiltreLabel, "cell 1 0,growx");
 		
 		JButton FiltreLabel = new JButton("FiltreLabel");
-		frame.getContentPane().add(FiltreLabel, "cell 3 0,alignx left");
+		frame.getContentPane().add(FiltreLabel, "cell 2 0,alignx left");
 		
 		nEntitats = new JTextField();
-		frame.getContentPane().add(nEntitats, "cell 4 0 2 1,growx");
-		nEntitats.setColumns(2);
+		frame.getContentPane().add(nEntitats, "cell 3 0,growx");
+		nEntitats.setColumns(4);
 		
 		JButton btnFiltran = new JButton("FiltraN");
 		btnFiltran.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (! nEntitats.getText().equals("")){
-					ctrl.getDomini().getCtrlQueries().getResultat().filtrarN(Integer.parseInt(nEntitats.getText()));
+					try{
+						ctrl.getDomini().getCtrlQueries().filtrarResultatN(Integer.parseInt(nEntitats.getText()));
+					}catch(Exception E){}
 					resData.updateData();
 				}
 			}
 		});
-		frame.getContentPane().add(btnFiltran, "cell 6 0,alignx right,aligny top");
+		frame.getContentPane().add(btnFiltran, "cell 4 0,alignx right,aligny top");
+		
+		JButton btnDesferFiltre = new JButton("Desfer Filtre");
+		btnDesferFiltre.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try{ctrl.getDomini().getCtrlQueries().resultatDesferFiltre();}catch(Exception E){};
+				resData.updateData();
+			}
+		});
+		frame.getContentPane().add(btnDesferFiltre, "cell 5 0");
+		
+		resultats = new JTable(resData);
 		
 		JButton NetejaFiltres = new JButton("Neteja Filtres");
 		NetejaFiltres.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ctrl.getDomini().getCtrlQueries().getResultat().netejaFiltres();
+				try{ctrl.getDomini().getCtrlQueries().netejaFiltresResultat();}catch(Exception E){}
 				resData.updateData();
 			}
 		});
-		frame.getContentPane().add(NetejaFiltres, "cell 7 0,alignx right,aligny top");
-		
-		resultats = new JTable(resData);
+		frame.getContentPane().add(NetejaFiltres, "cell 6 0,alignx right,aligny top");
 		
 		JScrollPane scrollPane = new JScrollPane();
-		frame.getContentPane().add(scrollPane, "cell 0 1 8 4,grow");
+		frame.getContentPane().add(scrollPane, "cell 0 1 15 4,grow");
 		//scrollPane.setViewportView(resultats);
 		
 		frame.setVisible(true);
@@ -117,7 +146,7 @@ public class VistaResultat {
 		protected String[][] data;
 		
 		public ResTableModel() {
-			this.data = ctrl.getDomini().getCtrlQueries().getResultat().getDadesString();
+			try{this.data = ctrl.getDomini().getCtrlQueries().getDadesNormal();}catch(Exception E){}
 		}
 		
 		public String getColumnName(int column) {
@@ -133,7 +162,7 @@ public class VistaResultat {
 		}
 		
 		public void updateData() {
-			data = ctrl.getDomini().getCtrlQueries().getResultat().getDadesString();
+			try{this.data = ctrl.getDomini().getCtrlQueries().getDadesNormal();}catch(Exception E){}
 			fireTableDataChanged();
 		}
 
