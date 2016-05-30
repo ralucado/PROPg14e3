@@ -82,7 +82,7 @@ public class VistaMenu {
 				ctrl.openGraf();
 			}
 		});
-		frame.getContentPane().add(btnGraf, "cell 6 7");
+		frame.getContentPane().add(btnGraf, "cell 6 7,alignx center");
 
 	}
 
