@@ -26,7 +26,7 @@ public class myCtrlDomini extends CtrlDomini {
         ctrlGraf.setGraf(graf);
        
         persistencia = new CtrlPersistencia();
-        queries = new ControladorQueries(ctrlGraf);
+        queries = new ControladorQueries(ctrlGraf, ctrlCamins);
 	}
 	
 	public void logIn(String nom, String constrasenya) throws Exception {
