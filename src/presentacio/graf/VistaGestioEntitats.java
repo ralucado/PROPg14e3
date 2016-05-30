@@ -238,7 +238,7 @@ public class VistaGestioEntitats{
 				if(row!=-1){
 					row = table.convertRowIndexToModel(row);
 					
-					new VistaModificarEntitat(ctrl, frame, tipusActual, model.getValueAt(row, 1));
+					new VistaModificarEntitat(ctrl, frame, tipusActual, model.getValueAt(row, 1), model.getValueAt(row, 2));
 					
 					model.updateData(tipusActual);
 				}
