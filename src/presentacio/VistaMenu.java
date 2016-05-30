@@ -25,6 +25,8 @@ public class VistaMenu {
 	private JButton btnUsuaris;
 	private JButton btnQuery;
 	private JButton btnTancaSessi;
+	private JButton btnGraf;
+	
 	public VistaMenu(CtrlPresentacio ctrl) throws Exception {
 		this.ctrl = ctrl;
 		init();
@@ -46,7 +48,7 @@ public class VistaMenu {
 			}
 		});
 		frame.setLocationRelativeTo(null);
-		frame.getContentPane().setLayout(new MigLayout("", "[][][][][][grow][][grow][]", "[grow][][grow][][grow][][grow][][grow]"));
+		frame.getContentPane().setLayout(new MigLayout("", "[][][][][][grow][][grow][]", "[grow][][grow][][grow][][grow][][grow][][grow]"));
 				
 	}
 	
@@ -55,6 +57,7 @@ public class VistaMenu {
 		init_usuaris();
 		init_camins();
 		init_query();
+		init_graf();
 		init_tancaSessi();
 	}
 
@@ -68,7 +71,19 @@ public class VistaMenu {
 
 			}
 		});
-		frame.getContentPane().add(btnTancaSessi, "cell 6 7,alignx center");
+		frame.getContentPane().add(btnTancaSessi, "cell 6 9,alignx center");
+	}
+	
+	private void init_graf(){
+		btnGraf = new JButton("Graf");
+		btnGraf.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				ctrl.openGraf();
+			}
+		});
+		frame.getContentPane().add(btnGraf, "cell 6 7");
+
 	}
 
 	private void init_query() {
@@ -76,6 +91,8 @@ public class VistaMenu {
 		btnQuery.setFont(new Font("Lucida Grande", Font.BOLD, 12));
 		btnQuery.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				ctrl.openQuery();
 			}
 		});
 		frame.getContentPane().add(btnQuery, "cell 6 5,alignx center");
