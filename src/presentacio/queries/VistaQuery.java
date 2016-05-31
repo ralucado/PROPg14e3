@@ -10,6 +10,7 @@ import javax.swing.*;
 import net.miginfocom.swing.MigLayout;
 import presentacio.ctrl.CtrlPresentacio;
 import presentacio.ctrl.VistaDialog;
+import presentacio.queries.*;
 
 public class VistaQuery{
 	private CtrlPresentacio ctrl;
@@ -83,6 +84,11 @@ public class VistaQuery{
 				//System.out.println(" OK!");
 			}
 			System.out.println(" OK Query!");
+			
+			//WTF?!
+			//VistaResultat v = new VistaResultat(ctrl);
+			//WTF?!
+			
 		}catch(Exception E){
 			E.printStackTrace();
 		}

@@ -1,27 +1,30 @@
 package presentacio.queries;
 
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import net.miginfocom.swing.MigLayout;
+import presentacio.ctrl.CtrlPresentacio;
+import presentacio.ctrl.VistaDialog;
+
+import javax.swing.JButton;
+import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
+import javax.swing.Action;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
-
-import domini.graf.Autor;
-import domini.graf.Entitat;
-import domini.queries.Pair;
-import domini.queries.Resultat;
-import net.miginfocom.swing.MigLayout;
-import presentacio.ctrl.CtrlPresentacio;
-import presentacio.ctrl.VistaDialog;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import domini.queries.*;
+import domini.graf.*;
 
 public class VistaResultat {
 
