@@ -39,7 +39,7 @@ public class SparseMatrix {
 	}
 	
 	/**
-	 * creadora de copia a partir de unaltre SparseMatrix
+	 * Creadora de copia a partir de unaltre SparseMatrix
 	 * @param sm
 	 */
 	public SparseMatrix(SparseMatrix sm) {
@@ -53,6 +53,10 @@ public class SparseMatrix {
 		}
 	}
 	
+	/**
+	 * Crea una matriu dispersa de floats a partir d'un ArrayList de SparseVector
+	 * @param v
+	 */
 	public SparseMatrix(ArrayList<SparseVector> v){
 		for (int i = 0; i < v.size(); ++i) {
 			for (int j = 0; j < v.get(i).size(); ++j) {
@@ -100,7 +104,7 @@ public class SparseMatrix {
 	 * @param col
 	 * @param value
 	 */
-	void set(int row, int col, Float value) {
+	public void set(int row, int col, Float value) {
 		if (value == null) value = 0.f;
 		if (value == 0.f) {
 			try {
@@ -146,7 +150,7 @@ public class SparseMatrix {
 	 * @param nRows
 	 * @param nCols
 	 */
-	void setSize(int nRows, int nCols) {
+	public void setSize(int nRows, int nCols) {
 		initMatrix( nRows, nCols);
 	}
 	
@@ -228,7 +232,6 @@ public class SparseMatrix {
 		return s;
 	}
 	
-
 	protected void initMatrix(int nRows, int nCols) {
 		for (int i = 0; i < nRows; ++i) {
 			rows.add(new SparseVector());

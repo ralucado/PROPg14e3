@@ -44,11 +44,6 @@ public class HeteSim{
 		return normalizeHeteSim(pl, pr);
 	}
 
-	private SparseMatrix SparseMatrix(SparseMatrixBool first) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	/**
 	 * 
 	 * @param p es el cami per el queal calcular

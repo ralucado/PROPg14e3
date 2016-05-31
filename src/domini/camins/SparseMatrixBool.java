@@ -10,7 +10,11 @@ public class SparseMatrixBool {
 	ArrayList<HashMap<Integer,Boolean>> rows = new ArrayList<HashMap<Integer,Boolean>>();
 	ArrayList<HashMap<Integer,Boolean>> cols = new ArrayList<HashMap<Integer,Boolean>>();
 	
-	
+	/**
+	 * Crea una matriu dispersa de booleans a partir d'una matriu dispersa de floats
+	 * Arrodoneix a true a partir de 0.5f
+	 * @param sm
+	 */
 	public SparseMatrixBool(SparseMatrix sm) {
 		initMatrix(sm.getNRows(), sm.getNCols());
 		for (int i = 0; i < sm.getNRows(); ++i) {
@@ -21,7 +25,7 @@ public class SparseMatrixBool {
 	}
 	
 	/**
-	 * Crea una matriu buida
+	 * Crea una matriu buida de tamany 0x0
 	 */
 	public SparseMatrixBool() {
 		initMatrix(0,0);
@@ -29,7 +33,7 @@ public class SparseMatrixBool {
 	
 	
 	/**
-	 * crea una matriu de zeros de tamany nRows x nCols
+	 * Crea una matriu buida de tamany nRows x nCols
 	 * @param nRows
 	 * @param nCols
 	 */
@@ -38,7 +42,7 @@ public class SparseMatrixBool {
 	}
 	
 	/**
-	 * creadora de copia a partir de unaltre SparseMatrix
+	 * creadora de copia a partir de unaltre SparseMatrixBool
 	 * @param sm
 	 */
 	@SuppressWarnings("unchecked")
@@ -53,6 +57,10 @@ public class SparseMatrixBool {
 		}
 	}
 	
+	/**
+	 * Crea una matriu dispersa de booleans
+	 * @param v
+	 */
 	public SparseMatrixBool(ArrayList<HashMap<Integer,Boolean>> v){
 		for (int i = 0; i < v.size(); ++i) {
 			for (int j = 0; j < v.get(i).size(); ++j) {
@@ -83,7 +91,7 @@ public class SparseMatrixBool {
 	 * @param col
 	 * @param value
 	 */
-	void set(int row, int col, Boolean value) {
+	public void set(int row, int col, Boolean value) {
 		if (value == null) value = false;
 		if (value == false) {
 			try {
@@ -129,7 +137,7 @@ public class SparseMatrixBool {
 	 * @param nRows
 	 * @param nCols
 	 */
-	void setSize(int nRows, int nCols) {
+	public void setSize(int nRows, int nCols) {
 		initMatrix( nRows, nCols);
 	}
 	
