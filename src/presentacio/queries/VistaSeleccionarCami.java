@@ -54,7 +54,7 @@ public class VistaSeleccionarCami extends JDialog{
 				if (table.getSelectedRow() == -1)
 					(new VistaDialog()).setDialog("Cami no seleccionat", "No has seleccionat cap cami!", botons, JOptionPane.WARNING_MESSAGE);
 				else {
-					vq.setCami(caminsData.getValueAt(table.getSelectedRow(), 1));
+					vq.setCami(caminsData.getValueAt(table.getSelectedRow(), 0),caminsData.getValueAt(table.getSelectedRow(), 1));
 					dispose();
 				}
 			}
