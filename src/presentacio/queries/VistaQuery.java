@@ -16,6 +16,7 @@ public class VistaQuery{
 	private CtrlPresentacio ctrl;
 	public JFrame frame;
 	public String cami;
+	private ArrayList<String> resClustering;
 	
 	public VistaQuery(CtrlPresentacio ctrl) throws Exception {
 		this.ctrl = ctrl;
@@ -24,6 +25,7 @@ public class VistaQuery{
 	}
 	
 	private void init() {
+		resClustering = new ArrayList<String>();
 		frame = new JFrame();
 		frame.setSize(600, 400);
 		frame.addWindowListener(new WindowAdapter() {
@@ -52,8 +54,8 @@ public class VistaQuery{
 		frame.setVisible(true);
 	}
 
-	public void setCami(String nom) {
-		this.cami = nom;
+	public void setCami(String path) {
+		this.cami = path;
 	}
 	
 	//EXECUTAR
@@ -73,7 +75,7 @@ public class VistaQuery{
 			}
 			System.out.println(" OK Query!");
 
-			VistaResultat v = new VistaResultat(ctrl, cami);
+			new VistaResultatNew(ctrl, this);
 			
 		}catch(Exception E){
 			E.printStackTrace();
@@ -84,17 +86,33 @@ public class VistaQuery{
 		try{
 			if (camiNou){
 				ctrl.getDomini().inicialitzarQueryClustering(cami,k);
-				ctrl.getDomini().executarClustering();
+				resClustering = formatejaRes(ctrl.getDomini().executarClustering());
 			}
 			else {
 				ctrl.getDomini().inicialitzarQueryClusteringlNom(cami, k);
-				ctrl.getDomini().executarClustering();
+				resClustering = formatejaRes(ctrl.getDomini().executarClustering());
 			}
 			System.out.println(" OK Clustering!");
 		}catch (Exception E){
 			E.printStackTrace();
 		}
+		new VistaResultatClustering(ctrl,frame,this);
 		fesVisible();
+	}
+	
+	public ArrayList<String> getData(){
+		return resClustering;
+	}
+	
+	public ArrayList<String> formatejaRes(ArrayList<ArrayList<String>> res){
+		ArrayList<String> a = new ArrayList<String>();
+		for (int i = 0; i < res.size(); ++i){
+			for (int j = 0; j < res.get(i).size(); ++j){
+				a.add(res.get(i).get(j));
+			}
+			a.add("");
+		}
+		return a;
 	}
 
 }
