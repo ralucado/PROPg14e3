@@ -54,7 +54,7 @@ public class VistaResultatNew {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 539, 293);
+		frame.setBounds(100, 100, 744, 304);
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -133,6 +133,11 @@ public class VistaResultatNew {
 		
 		//DESAR CAMI
 		JButton btnDesarCami = new JButton("Desar Cami");
+		btnDesarCami.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new VistaDescripcio(ctrl, vQ.nomCami, vQ.pathCami);
+			}
+		});
 		frame.getContentPane().add(btnDesarCami, "cell 6 0");
 		
 		JLabel lblCami = new JLabel("Cami: ");
