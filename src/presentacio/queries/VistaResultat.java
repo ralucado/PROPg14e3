@@ -100,7 +100,7 @@ public class VistaResultat {
 			public void actionPerformed(ActionEvent e) {
 				if (! nEntitats.getText().equals("")){
 					try{
-						ctrl.getDomini().getCtrlQueries().filtrarResultatN(Integer.parseInt(nEntitats.getText()));
+						ctrl.getDomini().filtrarResultatN(Integer.parseInt(nEntitats.getText()));
 					}catch(Exception E){}
 					resData.updateData();
 				}
@@ -111,7 +111,7 @@ public class VistaResultat {
 		JButton btnDesferFiltre = new JButton("Desfer Filtre");
 		btnDesferFiltre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try{ctrl.getDomini().getCtrlQueries().resultatDesferFiltre();}catch(Exception E){};
+				try{ctrl.getDomini().resultatDesferFiltre();}catch(Exception E){};
 				resData.updateData();
 			}
 		});
@@ -122,7 +122,7 @@ public class VistaResultat {
 		JButton NetejaFiltres = new JButton("Neteja Filtres");
 		NetejaFiltres.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try{ctrl.getDomini().getCtrlQueries().netejaFiltresResultat();}catch(Exception E){}
+				try{ctrl.getDomini().netejaFiltresResultat();}catch(Exception E){}
 				resData.updateData();
 			}
 		});
@@ -141,7 +141,7 @@ public class VistaResultat {
 		protected String[][] data;
 		
 		public ResTableModel() {
-			try{this.data = ctrl.getDomini().getCtrlQueries().getDadesNormal();}catch(Exception E){}
+			try{this.data = ctrl.getDomini().getDadesNormal();}catch(Exception E){}
 		}
 		
 		public String getColumnName(int column) {
@@ -157,7 +157,7 @@ public class VistaResultat {
 		}
 		
 		public void updateData() {
-			try{this.data = ctrl.getDomini().getCtrlQueries().getDadesNormal();}catch(Exception E){}
+			try{this.data = ctrl.getDomini().getDadesNormal();}catch(Exception E){}
 			fireTableDataChanged();
 		}
 
