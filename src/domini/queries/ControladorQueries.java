@@ -164,7 +164,7 @@ public class ControladorQueries{
 	 * @return Llista de parelles d'Entitat i valor d'HeteSim que formen el resultat a mostrar
 	 * @throws Exception La query no és de tipus normal
 	 */
-	public ArrayList<Pair<Entitat, Float>> executarQuery() throws Exception{ // String -> Integer
+	public ArrayList<Pair<Entitat, Float>> executarQuery() throws Exception{
 		if(QueryActual.esNormal()){
 			ArrayList<Pair<Integer, Float>> resultat = ((QueryNormal) QueryActual).executa(HS);
 			ArrayList<Pair<Entitat, Float>> r = new ArrayList<Pair<Entitat,Float>>();
@@ -174,23 +174,24 @@ public class ControladorQueries{
 				int id = 0;
 				int pos = resultat.get(i).first;
 				Float hs = resultat.get(i).second;
-				if(c=='A'){
-					id = CtrlGraf.consultarGraf().getIdByPositionAutor(pos);
+				if(hs!=0){
+					if(c=='A'){
+						id = CtrlGraf.consultarGraf().getIdByPositionAutor(pos);
+					}
+					else if(c=='P'){
+						id = CtrlGraf.consultarGraf().getIdByPositionPaper(pos);
+					}
+					else if(c=='C'){
+						id = CtrlGraf.consultarGraf().getIdByPositionConferencia(pos);
+					}
+					else if(c=='T'){
+						id = CtrlGraf.consultarGraf().getIdByPositionTerme(pos);
+					}
+					Entitat e = CtrlGraf.consultarGraf().consultarEntitat(id);
+					
+					Pair<Entitat, Float> p = new Pair<Entitat,Float>(e,hs);
+					r.add(p);
 				}
-				else if(c=='P'){
-					id = CtrlGraf.consultarGraf().getIdByPositionPaper(pos);
-				}
-				else if(c=='C'){
-					id = CtrlGraf.consultarGraf().getIdByPositionConferencia(pos);
-				}
-				else if(c=='T'){
-					id = CtrlGraf.consultarGraf().getIdByPositionTerme(pos);
-				}
-				Entitat e = CtrlGraf.consultarGraf().consultarEntitat(id);
-				
-				Pair<Entitat, Float> p = new Pair<Entitat,Float>(e,hs);
-				r.add(p);
-				
 			}
 			ResultatActual = new Resultat(r);
 			afegirQueryRecent();
