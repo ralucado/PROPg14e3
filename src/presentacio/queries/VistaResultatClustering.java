@@ -20,10 +20,11 @@ import presentacio.ctrl.VistaDialog;
 public class VistaResultatClustering extends JDialog{
 
 	private JFrame frame;
-	private JTable table;
+	//private JTable table;
 	private CtrlPresentacio ctrl;
 	private VistaQuery vQ;
 	private ClusterTableModel clusterData;
+	private JTable table_1;
 
 	/**
 	 * Create the application.
@@ -32,7 +33,14 @@ public class VistaResultatClustering extends JDialog{
 		super(parent,true);
 		this.ctrl = ctrl;
 		this.vQ = vq;
+		getContentPane().setLayout(new MigLayout("", "[][][][][][][grow]", "[][][][][grow]"));
 		clusterData = new ClusterTableModel();
+		
+		table_1 = new JTable(clusterData);
+		table_1.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		JScrollPane scrollPane = new JScrollPane(table_1);
+		getContentPane().add(scrollPane);
+		scrollPane.setViewportView(table_1);
 		initialize();
 	}
 
@@ -40,17 +48,10 @@ public class VistaResultatClustering extends JDialog{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		init_table();
 		setSize(600, 400);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-	}
-	
-	private void init_table() {
-		getContentPane().setLayout(new MigLayout("", "[][438px,grow][]", "[25px][229px,grow][]"));
-		table = new JTable(clusterData);
-		JScrollPane scrollPane = new JScrollPane(table);
-		frame.getContentPane().add(scrollPane);
+		setVisible(true);
 	}
 	
 	private class ClusterTableModel extends AbstractTableModel {
