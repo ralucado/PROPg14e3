@@ -1,10 +1,11 @@
 package presentacio.queries;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JTabbedPane;
+import java.util.*;
+import javax.swing.*;
 
 import net.miginfocom.swing.MigLayout;
 import presentacio.ctrl.CtrlPresentacio;
@@ -47,9 +48,11 @@ public class VistaQuery{
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frame.getContentPane().add(tabbedPane, "cell 0 1,grow");
+		
 		//Normal
 		VistaCrearQuery qN = new VistaCrearQuery(ctrl, this);
 		tabbedPane.addTab("Query Normal", qN.frame.getContentPane());
+		
 		//Clustering
 		VistaCrearClustering qC = new VistaCrearClustering(ctrl, this);
 		tabbedPane.addTab("Query Clustering", qC.frame.getContentPane());
@@ -63,17 +66,43 @@ public class VistaQuery{
 		this.cami = nom;
 	}
 	
-	public void executarNormal(){
+	//EXECUTAR
+	public void executarNormal(boolean camiNou, String entitat){
 		try{
-			ctrl.getDomini().inicialitzarQuerynormalNom(cami);
-			ctrl.getDomini().executarQuery();
-		}catch(Exception E){}
+			//System.out.println(" 
+			if (camiNou){
+				ctrl.getDomini().inicialitzarQuerynormal(cami);
+				ctrl.getDomini().seleccionarEntitatInicial(entitat);
+				ctrl.getDomini().executarQuery();
+				//System.out.println(" OK!");
+			}
+			else{
+				ctrl.getDomini().inicialitzarQuerynormalNom(cami);
+				ctrl.getDomini().seleccionarEntitatInicial(entitat);
+				ctrl.getDomini().executarQuery();
+				//System.out.println(" OK!");
+			}
+			System.out.println(" OK Query!");
+		}catch(Exception E){
+			E.printStackTrace();
+		}
 	}
 	
-	public void executarClustering(){
+	public void executarClustering(boolean camiNou, int k){
 		try{
-			ctrl.getDomini().inicialitzarQueryClusteringlNom(cami);
-		}catch (Exception E){}
+			if (camiNou){
+				ctrl.getDomini().inicialitzarQueryClustering(cami,k);
+				ctrl.getDomini().executarClustering();
+			}
+			else {
+				ctrl.getDomini().inicialitzarQueryClusteringlNom(cami);
+				ctrl.getDomini().executarClustering();
+			}
+			System.out.println(" OK Clustering!");
+		}catch (Exception E){
+			E.printStackTrace();
+		}
+		fesVisible();
 	}
 
 }

@@ -1,31 +1,34 @@
 package presentacio.queries;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.EventQueue;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
+import presentacio.ctrl.*;
+import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
-import net.miginfocom.swing.MigLayout;
-import presentacio.ctrl.CtrlPresentacio;
-import presentacio.ctrl.VistaDialog;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 public class VistaCrearClustering {
 
 	public JFrame frame;
 	private CtrlPresentacio ctrl;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField textCami;
+	private JTextField textNum;
 	private JButton btnSeleccionarCam;
 	private JButton btnExecutar;
 	private VistaQuery vQ;
+	private boolean camiNou;
 	
 	/**
 	 * Create the application.
 	 */
 	public VistaCrearClustering(CtrlPresentacio ctrl, VistaQuery vq) {
+		this.ctrl = ctrl;
+		this.vQ = vq;
+		camiNou = true;
 		initialize();
 	}
 
@@ -41,24 +44,26 @@ public class VistaCrearClustering {
 		JLabel lblCam = new JLabel("Cam\u00ED: ");
 		frame.getContentPane().add(lblCam, "cell 0 1,alignx left");
 		
-		textField = new JTextField();
-		frame.getContentPane().add(textField, "flowx,cell 1 1,growx");
-		textField.setColumns(10);
+		textCami = new JTextField();
+		frame.getContentPane().add(textCami, "flowx,cell 1 1,growx");
+		textCami.setColumns(10);
 		
 		JLabel lblEntitatInicial = new JLabel("Nombre de clusters: ");
 		frame.getContentPane().add(lblEntitatInicial, "cell 0 3,alignx left");
 		
-		textField_1 = new JTextField();
-		frame.getContentPane().add(textField_1, "cell 1 3,growx");
-		textField_1.setColumns(10);
+		textNum = new JTextField();
+		frame.getContentPane().add(textNum, "cell 1 3,growx");
+		textNum.setColumns(10);
 		
+		//SELECCIONAR CAMI
 		btnSeleccionarCam = new JButton("Seleccionar cam\u00ED");
 		btnSeleccionarCam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					new VistaSeleccionarCami(ctrl, vQ.frame, vQ);
-					textField.setText(vQ.cami);
-					textField.setEditable(false);
+					textCami.setText(vQ.cami);
+					textCami.setEditable(false);
+					camiNou = false;
 				} catch (Exception exc) {
 					String[] botons = {"D'acord"};
 					(new VistaDialog()).setDialog("No s'ha pogut obrir la finestra de seleccio", exc.getMessage(), botons, JOptionPane.ERROR_MESSAGE);
@@ -67,19 +72,23 @@ public class VistaCrearClustering {
 		});
 		frame.getContentPane().add(btnSeleccionarCam, "cell 1 1");
 		
+		//EXECUTAR
 		btnExecutar = new JButton("Executar");
 		btnExecutar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (textField_1.getText().length() < 1){
+				if (textNum.getText().length() < 1){
 					String[] botons = {"D'acord"};
-					(new VistaDialog()).setDialog("Has d'introduir un nombre vï¿½lid", "", botons, JOptionPane.ERROR_MESSAGE);
+					(new VistaDialog()).setDialog("Has d'introduir un nombre vàlid", "", botons, JOptionPane.ERROR_MESSAGE);
 				}
-				else if (textField.getText().length() < 1){
+				else if (textCami.getText().length() < 1){
 					String[] botons = {"D'acord"};
-					(new VistaDialog()).setDialog("Has d'introduir un camï¿½", "", botons, JOptionPane.ERROR_MESSAGE);
+					(new VistaDialog()).setDialog("Has d'introduir un camí", "", botons, JOptionPane.ERROR_MESSAGE);
 				}
 				else{
-					vQ.executarClustering();
+					if (camiNou){
+						vQ.setCami(textCami.getText());
+					}
+					vQ.executarClustering(camiNou, Integer.parseInt(textNum.getText()));
 				}
 			}
 		});

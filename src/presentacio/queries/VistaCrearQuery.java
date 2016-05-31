@@ -1,35 +1,38 @@
 package presentacio.queries;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
+import java.awt.EventQueue;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-
+import presentacio.ctrl.*;
+import presentacio.graf.*;
 import net.miginfocom.swing.MigLayout;
-import presentacio.ctrl.CtrlPresentacio;
-import presentacio.ctrl.VistaDialog;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
 
 
 public class VistaCrearQuery {
 
 	public JFrame frame;
 	private CtrlPresentacio ctrl;
-	private JTextField textField;
+	private JTextField textCami;
 	private VistaQuery vQ;
+	private JTextField textEntitat;
+	private boolean camiNou;
 
 	/**
 	 * Create the application.
 	 */
 	public VistaCrearQuery(CtrlPresentacio ctrl, VistaQuery vq) {
-		initialize();
+		camiNou = true;
 		//marti pls
 		this.ctrl = ctrl;
 		vQ = vq;
 		//facepalm
+		initialize();
 	}
 
 	/**
@@ -39,55 +42,90 @@ public class VistaCrearQuery {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 485, 313);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new MigLayout("", "[][grow]", "[][][][][][][][]"));
+		frame.getContentPane().setLayout(new MigLayout("", "[][grow 1000][grow]", "[][][][][][][][]"));
 		
 		JLabel lblCami = new JLabel("Cami: ");
 		frame.getContentPane().add(lblCami, "cell 0 1,alignx left");
 		
-		textField = new JTextField();
-		frame.getContentPane().add(textField, "flowx,cell 1 1,growx");
-		textField.setColumns(10);
+		textCami = new JTextField();
+		frame.getContentPane().add(textCami, "flowx,cell 2 1,growx");
+		textCami.setColumns(10);
 		
+		//SELECCIONAR CAMI
 		JButton btnNewButton = new JButton("Seleccionar Cam\u00ED");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					//se li ha de passar la frame actual, no la frame del vista query
 					new VistaSeleccionarCami(ctrl, frame, vQ);
-					textField.setText(vQ.cami);
-					textField.setEditable(false);
+					textCami.setText(vQ.cami);
+					textCami.setEditable(false);
+					camiNou = false;
 				} catch (Exception exc) {
 					String[] botons = {"D'acord"};
 					(new VistaDialog()).setDialog("No s'ha pogut obrir la finestra de seleccio", exc.getMessage(), botons, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
-		frame.getContentPane().add(btnNewButton, "cell 1 1");
+		frame.getContentPane().add(btnNewButton, "cell 2 1");
 		
 		JLabel lblEntitatInicial = new JLabel("Entitat inicial: ");
-		frame.getContentPane().add(lblEntitatInicial, "cell 0 3,alignx left");
+		frame.getContentPane().add(lblEntitatInicial, "cell 0 3,alignx trailing");
 		
+		//SELECCIONAR ENTITAT INICIAL
 		JButton btnSeleccionarEntitatInicial = new JButton("Seleccionar entitat inicial");
 		btnSeleccionarEntitatInicial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//new VistaEntitatsDialog(...);
+				if (textCami.getText().length() < 1){
+					String[] botons = {"D'acord"};
+					(new VistaDialog()).setDialog("Primer has de seleccionar un camí vàlid", "", botons, JOptionPane.ERROR_MESSAGE);
+				}
+				else{
+					ArrayList<String> A = new ArrayList<String>();
+					String s;
+					switch(textCami.getText().charAt(0)){
+					case 'T':
+						s = "Terme"; break;
+					case 'A':
+						s = "Autor"; break;
+					case 'C':
+						s = "Conferencia"; break;
+					default:
+						s = "Paper";
+					}
+					new VistaEntitatsDialog(ctrl,frame,s,A);
+					textEntitat.setText(A.get(0));
+				}
 			}
 		});
-		frame.getContentPane().add(btnSeleccionarEntitatInicial, "cell 1 3");
+		frame.getContentPane().add(btnSeleccionarEntitatInicial, "cell 2 3,alignx right");
 		
+		textEntitat = new JTextField();
+		frame.getContentPane().add(textEntitat, "cell 1 3,growx");
+		textEntitat.setColumns(10);
+		textEntitat.setEditable(false);
+		
+		//EXECUTAR
 		JButton btnExecutar = new JButton("Executar");
 		btnExecutar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (textField.getText().length() < 1){
+				if (textCami.getText().length() < 1){
 					String[] botons = {"D'acord"};
 					(new VistaDialog()).setDialog("Has d'introduir un camï¿½", "", botons, JOptionPane.ERROR_MESSAGE);
 				}
-				else{
-					vQ.executarNormal();
+				else if (textEntitat.getText().length() < 1){
+					String[] botons = {"D'acord"};
+					(new VistaDialog()).setDialog("Has de seleccionar entitat inicial", "", botons, JOptionPane.ERROR_MESSAGE);
+				}
+				else {
+					if (camiNou){
+						vQ.setCami(textCami.getText());
+					}
+					vQ.executarNormal(camiNou, textEntitat.getText());
 				}
 			}
 		});
-		frame.getContentPane().add(btnExecutar, "cell 1 7,alignx right,aligny bottom");
+		frame.getContentPane().add(btnExecutar, "cell 2 7,alignx right,aligny bottom");
 	}
 
 }
