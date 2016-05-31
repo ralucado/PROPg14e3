@@ -24,8 +24,8 @@ public class TestHeteSim {
 
 	public static void main (String [ ] args) throws Exception {
     	int N_PAPERS = 3, N_AUTORS=4, N_CONFERENCIES = 3, N_TERMS = 0;
-    	int N_FIRST = N_PAPERS, N_SECOND = N_AUTORS;
-    	String PATH = "PAPCPA";
+    	int N_FIRST = N_AUTORS, N_SECOND = N_CONFERENCIES;
+    	String PATH = "APCPCPCPCPCPCPCPCPCPC";
     	
     	
     	
@@ -83,6 +83,7 @@ public class TestHeteSim {
     	g.afegirRelacio(12, 11);
     	g.afegirRelacio(22, 11);
     	g.afegirRelacio(22, 21);
+    	g.afegirRelacio(22, 31);
     		//tambe es poden deixar entitats sense relacionar
     	
     	//Terme->Paper
@@ -103,8 +104,8 @@ public class TestHeteSim {
     	
     	System.out.println("\nEl mateix per cada entitat inicial\n");
     	
-    	for(Integer i = 1; i < N_FIRST; ++i){
-    		
+    	for(Integer i = 1; i <= N_FIRST; ++i){
+    		System.out.println(i);
     		int id1;
 			if(N_FIRST == N_PAPERS) id1 = g.getPositionByIdPaper(10*i+1);
 			else if (N_FIRST == N_AUTORS) id1 = g.getPositionByIdAutor(10*i);
@@ -117,8 +118,8 @@ public class TestHeteSim {
     	
     	System.out.println("\nEl mateix per cada entitat inicial i final\n");
     	
-    	for(int i = 1; i < N_FIRST; ++i){
-    		for (int j = 1; j < N_SECOND; ++j){
+    	for(int i = 1; i <= N_FIRST; ++i){
+    		for (int j = 1; j <= N_SECOND; ++j){
     			
     			
     			int id1;

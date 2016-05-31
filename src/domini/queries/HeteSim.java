@@ -30,24 +30,8 @@ public class HeteSim{
 	 * @return  retorna la matriu de resultats del hetesim per cada parell d'entitats final i inicial del path
 	 */
 	public SparseMatrix getHeteSim(Cami p){
-		SparseMatrix pl = new SparseMatrix(), pr = new SparseMatrix();
-		if(p.getMatrius().first != null){
-			pl = new SparseMatrix(p.getMatrius().first);
-			pr = new SparseMatrix(p.getMatrius().second);
-		}
-		else{
-		ArrayList<EntitatType> left = null;
-		ArrayList<EntitatType> right = null;
-		Pair<ArrayList<EntitatType>, ArrayList<EntitatType>> aux = parsePath(p.getPath()); 
-		left = aux.first;
-		right = aux.second;
-		Collections.reverse(right);
-		//System.out.println("Normalitzant");
-		pl = mutiplyMatrixes(  getMatrixesToMultiply(left,right));
-		pr = mutiplyMatrixes(  getMatrixesToMultiply(right,left));
-		p.setMatrius(pl, pr);
-		}
-		return normalizeHeteSim(pl, pr);
+		Pair<SparseMatrix,SparseMatrix> mat = getPathMatrixes(p);
+		return normalizeHeteSim(mat.first, mat.second);
 	}
 
 	/**
@@ -58,19 +42,11 @@ public class HeteSim{
 	 */
 	
 	public ArrayList<Pair<Integer,Float>> getHeteSim(Cami p, int posEntitat){
-
-		ArrayList<Pair<Integer,Float>> ret = new ArrayList<Pair<Integer,Float>>();
-		SparseMatrix hete = getHeteSim(p);
-		for(int j = 0; j < hete.getNCols(); ++j){
-
-			if(hete.getRow(posEntitat).containsKey(j)){
-				Pair<Integer,Float> aux = new Pair<Integer,Float>(j,hete.getValue(posEntitat,j));
-				ret.add(aux);
-			}
-		}
-		return ret;
+		Pair<SparseMatrix,SparseMatrix> mat = getPathMatrixes(p);
+		return normalizeHetesimEnt(mat.first, mat.second, posEntitat);
+		
 	}
-	
+
 	/**
 	 * 
 	 * @param p es el cami per el queal calcular
@@ -80,8 +56,8 @@ public class HeteSim{
 	 */
 	
 	public Float getHeteSim(Cami p, int posEntitat1, int posEntitat2){
-		SparseMatrix hete = getHeteSim(p);
-		return hete.getValue(posEntitat1, posEntitat2);
+		Pair<SparseMatrix,SparseMatrix> mat = getPathMatrixes(p);
+		return normalizeHetesim2Ent(mat.first, mat.second, posEntitat1, posEntitat2);
 	}
 	
 	
@@ -140,6 +116,28 @@ public class HeteSim{
 			this.transposeMatrix = trans;
 			this.pathType = t;
 		}
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private Pair<SparseMatrix,SparseMatrix> getPathMatrixes(Cami p) {
+		SparseMatrix pl = new SparseMatrix(), pr = new SparseMatrix();
+		if(p.getMatrius().first != null){
+			pl = new SparseMatrix(p.getMatrius().first);
+			pr = new SparseMatrix(p.getMatrius().second);
+		}
+		else{
+			ArrayList<EntitatType> left = null;
+			ArrayList<EntitatType> right = null;
+			Pair<ArrayList<EntitatType>, ArrayList<EntitatType>> aux = parsePath(p.getPath()); 
+			left = aux.first;
+			right = aux.second;
+			Collections.reverse(right);
+			//System.out.println("Normalitzant");
+			pl = mutiplyMatrixes(  getMatrixesToMultiply(left,right));
+			pr = mutiplyMatrixes(  getMatrixesToMultiply(right,left));
+			p.setMatrius(pl, pr);
+		}
+		return new Pair(pl,pr);
 	}
 	
 	/**
@@ -202,7 +200,7 @@ public class HeteSim{
 				float div = (float)(top/bot);
 				if (Math.abs(bot) < 0.000001) div =  0.f;
 				if (div > 1) div = 1.f;
-				else result.set(i, j,div);
+				result.set(i, j,div);
 				
 			}
 		}
@@ -210,7 +208,34 @@ public class HeteSim{
 		return result;
 	}
 	
+	private ArrayList<Pair<Integer, Float>> normalizeHetesimEnt(SparseMatrix left, SparseMatrix right, int i) {
+		ArrayList<Pair<Integer, Float>> result = new ArrayList<Pair<Integer, Float>>(right.getNRows());
+		System.out.println("Dins norm");
+		for (int j = 0; j < right.getNRows(); ++j) {
+			//if (j%500 == 0) System.out.println("it - I: "+i+" - J: " + j);
+			float top = SparseVector.multiply(left.getRow(i),right.getRow(j)); 	//agafem la fila enlloc de la columna de right
+			double bot = left.getRow(i).norm()*right.getRow(j).norm();			//ja que esta transposada respecte a la formula del paper
+			float div = (float)(top/bot);
+			if (Math.abs(bot) < 0.000001) div =  0.f;
+			if (div > 1) div = 1.f;
+			result.add(new Pair<Integer,Float>(j,div));
+			
+		}
+		
+		return result;
+	}
 	
+	private Float normalizeHetesim2Ent(SparseMatrix left, SparseMatrix right, int i, int j) {
+		System.out.println("Dins norm");
+		//if (j%500 == 0) System.out.println("it - I: "+i+" - J: " + j);
+		float top = SparseVector.multiply(left.getRow(i),right.getRow(j)); 	//agafem la fila enlloc de la columna de right
+		double bot = left.getRow(i).norm()*right.getRow(j).norm();			//ja que esta transposada respecte a la formula del paper
+		float div = (float)(top/bot);
+		if (Math.abs(bot) < 0.000001) div =  0.f;
+		if (div > 1) div = 1.f;
+
+		return div;
+	}
 	
 	/**
 	 * Transforma un string al seu equivalent en entitats afegint la entitat intermitja si escau
