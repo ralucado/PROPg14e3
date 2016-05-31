@@ -285,7 +285,7 @@ public class ControladorCamins {
 				SparseMatrixBool matriuD2 = new SparseMatrixBool(nRowsD, nColsD);
 			
 						
-				for(int i = 0; i<matriuD.size();i++){
+				for(int i = 0; i<matriuD.size()-1;i++){
 					for(int j = 0; j<matriuD.get(i).size(); j++){
 						matriuD2.set(i, j, true);
 					}
