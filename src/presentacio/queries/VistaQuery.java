@@ -10,7 +10,7 @@ import javax.swing.*;
 import net.miginfocom.swing.MigLayout;
 import presentacio.ctrl.CtrlPresentacio;
 import presentacio.ctrl.VistaDialog;
-import presentacio.queries.*;
+import presentacio.queries.VistaResultat;
 
 public class VistaQuery{
 	private CtrlPresentacio ctrl;
@@ -80,7 +80,7 @@ public class VistaQuery{
 			System.out.println(" OK Query!");
 			
 			//WTF?!
-			//VistaResultat v = new VistaResultat(ctrl);
+			VistaResultat v = new VistaResultat(ctrl);
 			//WTF?!
 			
 		}catch(Exception E){
@@ -90,19 +90,17 @@ public class VistaQuery{
 	
 	public void executarClustering(boolean camiNou, int k){
 		try{
-			System.out.println(cami);
 			if (camiNou){
 				ctrl.getDomini().inicialitzarQueryClustering(cami,k);
 				ctrl.getDomini().executarClustering();
 			}
 			else {
-				ctrl.getDomini().inicialitzarQueryClusteringlNom(cami,k);
+				ctrl.getDomini().inicialitzarQueryClusteringlNom(cami);
 				ctrl.getDomini().executarClustering();
 			}
 			System.out.println(" OK Clustering!");
 		}catch (Exception E){
-			String[] botons = {"D'acord"};
-			(new VistaDialog()).setDialog("Error al executar la query", E.getMessage(), botons, JOptionPane.ERROR_MESSAGE);
+			E.printStackTrace();
 		}
 		fesVisible();
 	}
