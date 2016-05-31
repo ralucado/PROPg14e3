@@ -59,13 +59,7 @@ public class VistaResultatNew {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				e.getWindow().dispose();
-				try {
-					ctrl.getDomini().guardarCamins(ctrl.getDomini().getUsuariActual());
-				} catch (Exception exc) {
-					String[] botons = {"D'acord"};
-					(new VistaDialog()).setDialog("No s'ha pogut desar el conjunt de camins", exc.getMessage(), botons, JOptionPane.ERROR_MESSAGE);
-				}
-				ctrl.openMenu();
+				//ctrl.openMenu();
 			}
 		});
 		frame.setLocationRelativeTo(null);
