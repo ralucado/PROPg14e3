@@ -1,18 +1,33 @@
 package presentacio.graf;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.SystemColor;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.awt.Frame;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTabbedPane;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.SystemColor;
+import java.awt.GridLayout;
+import java.awt.CardLayout;
+import javax.swing.SpringLayout;
 import net.miginfocom.swing.MigLayout;
 import presentacio.ctrl.CtrlPresentacio;
+import presentacio.ctrl.VistaDialog;
+
+import javax.swing.JTabbedPane;
 
 public class VistaGestioGraf{
 
@@ -34,18 +49,25 @@ public class VistaGestioGraf{
 	}
 	
 	private void initComponents(){
+		
+		try{
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+		}
+		catch(Exception e){}
+		
 		//frame
 		frame = new JFrame();
 		frame.getContentPane().setBackground(SystemColor.control);
 		frame.getContentPane().setForeground(Color.BLACK);
+		frame.setSize(800, 600);
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				e.getWindow().dispose();
 				ctrl.openMenu();
+				
 			}
 		});
-		frame.setSize(800, 600);
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(new MigLayout("", "[400px,grow]", "[10px][][400px,grow]"));
 		
@@ -85,4 +107,3 @@ public class VistaGestioGraf{
 	}
 
 }
-
