@@ -379,4 +379,8 @@ public class myCtrlDomini extends CtrlDomini {
 	public boolean existeixCami(String nom){
 		return ((myCtrlCamins) ctrlCamins).existeixCami(nom);
 	}
+	
+	public int consultarIdEntitat(String nom, String tipus) throws Exception{
+		return graf.getIdByNameAndType(nom, tipus);
+	}
 }
