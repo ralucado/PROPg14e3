@@ -17,11 +17,6 @@ public class VistaQuery{
 	public JFrame frame;
 	public String cami;
 	
-	public static void main(String[] args){
-		try{new VistaQuery(new CtrlPresentacio());}catch(Exception e){}
-	}
-	
-	
 	public VistaQuery(CtrlPresentacio ctrl) throws Exception {
 		this.ctrl = ctrl;
 		init();

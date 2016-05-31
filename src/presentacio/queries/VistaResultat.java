@@ -78,12 +78,13 @@ public class VistaResultat {
 				ctrl.openMenu();
 			}
 		});
-		frame.getContentPane().setLayout(new MigLayout("", "[grow][][][30px:n][][][][][][][][grow][][][][][grow]", "[][][][][grow]"));
+		frame.getContentPane().setLayout(new MigLayout("", "[grow][left][][30px:n,left][][][][][][][][grow][][][][][grow]", "[][][][][grow]"));
 		
-		String[] llista = {"","0","1","2","3","4"};
+		String[] llista = {"","DATABASE","DATA_MINING","AI","INFORMATION_RETRIEVAL","UNKNOWN","NO_LABEL"};
 		JComboBox cmbFiltreLabel = new JComboBox(llista);
 		frame.getContentPane().add(cmbFiltreLabel, "cell 1 0,growx");
 		
+		//FILTRE LABEL
 		JButton FiltreLabel = new JButton("FiltreLabel");
 		frame.getContentPane().add(FiltreLabel, "cell 2 0,alignx left");
 		
@@ -91,6 +92,7 @@ public class VistaResultat {
 		frame.getContentPane().add(nEntitats, "cell 3 0,growx");
 		nEntitats.setColumns(4);
 		
+		//FILTRA N
 		JButton btnFiltran = new JButton("FiltraN");
 		btnFiltran.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -102,8 +104,9 @@ public class VistaResultat {
 				}
 			}
 		});
-		frame.getContentPane().add(btnFiltran, "cell 4 0,alignx right,aligny top");
+		frame.getContentPane().add(btnFiltran, "cell 4 0,alignx left,aligny top");
 		
+		//DESFER FILTRE
 		JButton btnDesferFiltre = new JButton("Desfer Filtre");
 		btnDesferFiltre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -111,10 +114,11 @@ public class VistaResultat {
 				resData.updateData();
 			}
 		});
-		frame.getContentPane().add(btnDesferFiltre, "cell 5 0");
+		frame.getContentPane().add(btnDesferFiltre, "cell 5 0,alignx left");
 		
 		resultats = new JTable(resData);
 		
+		//NETEJA FILTRES
 		JButton NetejaFiltres = new JButton("Neteja Filtres");
 		NetejaFiltres.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -122,7 +126,7 @@ public class VistaResultat {
 				resData.updateData();
 			}
 		});
-		frame.getContentPane().add(NetejaFiltres, "cell 6 0,alignx right,aligny top");
+		frame.getContentPane().add(NetejaFiltres, "cell 6 0,alignx left,aligny top");
 		
 		JScrollPane scrollPane = new JScrollPane();
 		frame.getContentPane().add(scrollPane, "cell 0 1 15 4,grow");
