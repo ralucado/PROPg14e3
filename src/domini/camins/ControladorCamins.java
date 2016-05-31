@@ -243,7 +243,7 @@ public class ControladorCamins {
 					String clau = String.valueOf(k);
 					aux.add(clau);
 				}
-				matriuE2.add(aux);
+				matriuD2.add(aux);
 			}
 			
 			ArrayList<String> midesD = new ArrayList<String>();
