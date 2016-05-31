@@ -5,10 +5,13 @@ import java.awt.Frame;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
@@ -20,6 +23,7 @@ import java.awt.CardLayout;
 import javax.swing.SpringLayout;
 import net.miginfocom.swing.MigLayout;
 import presentacio.ctrl.CtrlPresentacio;
+import presentacio.ctrl.VistaDialog;
 
 import javax.swing.JTabbedPane;
 
@@ -47,9 +51,15 @@ public class VistaGestioGraf{
 		frame = new JFrame();
 		frame.getContentPane().setBackground(SystemColor.control);
 		frame.getContentPane().setForeground(Color.BLACK);
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				e.getWindow().dispose();
+				ctrl.openMenu();
+			}
+		});
 		frame.setSize(800, 600);
 		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("", "[400px,grow]", "[10px][][400px,grow]"));
 		
 		//label titol
