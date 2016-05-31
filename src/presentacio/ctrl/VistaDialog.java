@@ -4,6 +4,11 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+/**
+ * 
+ * @author Arnau Blanch Cortès
+ *
+ */
 @SuppressWarnings("serial")
 public class VistaDialog extends JDialog {
 

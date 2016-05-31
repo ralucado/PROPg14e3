@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 import domini.graf.*;
 
+/**
+ * Representa el resultat d'una query normal
+ * @author Martí Lloveras Rosales
+ *
+ */
 public class Resultat {
 	private ArrayList<Pair<Entitat,Float>> entitats;
 	private ArrayList<Pair<Entitat,Float>> entitats_visibles;

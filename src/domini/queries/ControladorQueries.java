@@ -21,7 +21,8 @@ public class ControladorQueries{
 	
 	/**
 	 * Creadora de ControladorQueries
-	 * @param CtrlGraf Controlador del graf
+	 * @param CtrlGraf controlador del graf
+	 * @param CtrlCamins controlador de camins
 	 */
 	public ControladorQueries(CtrlGraf CtrlGraf, ControladorCamins CtrlCamins){
 		this.CtrlGraf = CtrlGraf;
@@ -34,7 +35,7 @@ public class ControladorQueries{
 	 * Inicialitza una query de tipus clustering
 	 * @param cami Camí sobre el que fer la query
 	 * @param k Número de clústers
-	 * @throws Exception 
+	 * @throws Exception ...
 	 */
 	public void inicialitzarQueryClustering(String cami, int k) throws Exception{
 		Cami c = new Cami("nom", cami, "descr");
@@ -44,7 +45,7 @@ public class ControladorQueries{
 	/**
 	 * Inicialitza una query de tipus clustering amb un camí existent
 	 * @param nom Nom del camí que ja existeix
-	 * @throws Exception
+	 * @throws Exception ...
 	 */
 	public void inicialitzarQueryClusteringlNom(String nom) throws Exception{
 		Cami c = CtrlCamins.consultarCamiExt(nom);
@@ -54,7 +55,7 @@ public class ControladorQueries{
 	/**
 	 * Inicialitza una query de tipus normal amb un camí no existent
 	 * @param cami Camí sobre el que fer la query
-	 * @throws Exception
+	 * @throws Exception ...
 	 */
 	public void inicialitzarQuerynormal(String cami) throws Exception{
 		Cami c = new Cami("nom", cami, "descr");
@@ -64,7 +65,7 @@ public class ControladorQueries{
 	/**
 	 * Inicialitza una query de tipus normal amb un camí existent
 	 * @param nom Nom del camí que ja existeix
-	 * @throws Exception
+	 * @throws Exception ...
 	 */
 	public void inicialitzarQuerynormalNom(String nom) throws Exception{
 		Cami c = CtrlCamins.consultarCamiExt(nom);
@@ -75,7 +76,7 @@ public class ControladorQueries{
 	 * Guarda el camí de la query actual al conjunt de l'usuari
 	 * @param nom Nom del camí que es guardarà
 	 * @param descr Descripció del camí que es guardarà
-	 * @throws Exception
+	 * @throws Exception ...
 	 */
 	public void guardarCamiQuery(String nom, String descr) throws Exception{
 		Cami c = QueryActual.cami;
@@ -387,7 +388,7 @@ public class ControladorQueries{
 	 * @param i Número de la query recent a consultar (0 és la query més recent)
 	 * @return Vector de Strings amb les característiques de la query consultada
 	 * @throws Exception No hi ha queries recents
-	 * @throws Exception i>=3
+	 * @throws Exception i és més gran o igual 3
 	 */
 	public String[] consultarQueryRecent(int i) throws Exception{
 		if(UltimesQueries.size()==0) throw new Exception("No hi ha queries recents");

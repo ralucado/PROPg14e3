@@ -2,8 +2,11 @@ package domini.usuaris;
 import java.util.HashMap;
 import java.util.Set;
 
-
-
+/**
+ * Representa un conjunt d'usuaris.
+ * @author Grup 14.2
+ *
+ */
 public class ConjuntUsuaris {
 	
   //ATRIBUTS	

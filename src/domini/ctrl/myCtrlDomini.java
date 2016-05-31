@@ -127,7 +127,7 @@ public class myCtrlDomini extends CtrlDomini {
 	 * Inicialitza una query de tipus clustering
 	 * @param cami Camí sobre el que fer la query
 	 * @param k Número de clústers
-	 * @throws Exception 
+	 * @throws Exception ...
 	 */
 	public void inicialitzarQueryClustering(String cami, int k) throws Exception{
 		queries.inicialitzarQueryClustering(cami, k);
@@ -136,7 +136,7 @@ public class myCtrlDomini extends CtrlDomini {
 	/**
 	 * Inicialitza una query de tipus clustering amb un camí existent
 	 * @param nom Nom del camí que ja existeix
-	 * @throws Exception
+	 * @throws Exception ...
 	 */
 	public void inicialitzarQueryClusteringlNom(String nom) throws Exception{
 		queries.inicialitzarQueryClusteringlNom(nom);
@@ -145,7 +145,7 @@ public class myCtrlDomini extends CtrlDomini {
 	/**
 	 * Inicialitza una query de tipus normal amb un camí no existent
 	 * @param cami Camí sobre el que fer la query
-	 * @throws Exception
+	 * @throws Exception ...
 	 */
 	public void inicialitzarQuerynormal(String cami) throws Exception{
 		queries.inicialitzarQuerynormal(cami);
@@ -154,7 +154,7 @@ public class myCtrlDomini extends CtrlDomini {
 	/**
 	 * Inicialitza una query de tipus normal amb un camí existent
 	 * @param nom Nom del camí que ja existeix
-	 * @throws Exception
+	 * @throws Exception ...
 	 */
 	public void inicialitzarQuerynormalNom(String nom) throws Exception{
 		queries.inicialitzarQueryClusteringlNom(nom);
@@ -164,7 +164,7 @@ public class myCtrlDomini extends CtrlDomini {
 	 * Guarda el camí de la query actual al conjunt de l'usuari
 	 * @param nom Nom del camí que es guardarà
 	 * @param descr Descripció del camí que es guardarà
-	 * @throws Exception
+	 * @throws Exception ...
 	 */
 	public void guardarCamiQuery(String nom, String descr) throws Exception{
 		queries.guardarCamiQuery(nom, descr);
@@ -310,7 +310,7 @@ public class myCtrlDomini extends CtrlDomini {
 	 * @param i Número de la query recent a consultar (0 és la query més recent)
 	 * @return Vector de Strings amb les característiques de la query consultada
 	 * @throws Exception No hi ha queries recents
-	 * @throws Exception i>=3
+	 * @throws Exception si i és superior o igual a 3
 	 */
 	public String[] consultarQueryRecent(int i) throws Exception{
 		return queries.consultarQueryRecent(i);

@@ -2,6 +2,7 @@ package domini.graf;
 
 /**
  * Representa un Autor
+ * @author Grup 14.1
  */
 public class Autor extends Entitat {
 

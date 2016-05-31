@@ -1,10 +1,16 @@
 package domini.queries;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 
 import domini.camins.Cami;
 import domini.graf.Graf;
-import domini.camins.SparseMatrixBool;
-import domini.queries.SparseMatrix;
+
+/**
+ * Realitza el càlcul de HeteSim.
+ * @author Cristina Raluca Vijulie
+ *
+ */
 public class HeteSim{	
 
 	//PUBLIC ARGUMENTS

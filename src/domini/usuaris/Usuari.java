@@ -1,5 +1,10 @@
 package domini.usuaris;
 
+/**
+ * Representa un usuari.
+ * @author Grup 14.2
+ *
+ */
 public class Usuari {
 	
 	protected String nom;

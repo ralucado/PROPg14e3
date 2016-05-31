@@ -4,7 +4,7 @@ import java.util.*;
 /**
  * 
  * La classe <tt>Cluster</tt> representa un conjunt d'elements. Un cluster té un <i>medoide</i>, que és l'element més similar a la resta.
- * @author Arnau Blanch
+ * @author Arnau Blanch Cortès
  * 
  */
 public class Cluster {
@@ -78,9 +78,8 @@ public class Cluster {
 	 * Retorna l'element a la posició <tt>i</tt> del clúster
 	 * @param i posició de l'element
 	 * @return element a la posició especificada
-	 * @throws IndexOutOfBoundsException si l'índex 'i' està fora de rang (i &lt; 0 o i &gt;= mida clúster)
+	 * @throws Exception si l'índex 'i' està fora de rang (i &lt; 0 o i &gt;= mida clúster)
 	 */
-	
 	public int get(int i) throws Exception {
 		if (i < 0 || i >= list.size()) throw new IndexOutOfBoundsException("índex fora de rang");
 		return list.get(i);

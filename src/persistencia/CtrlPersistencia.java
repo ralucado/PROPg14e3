@@ -46,7 +46,7 @@ public class CtrlPersistencia {
 	
 	/**
 	 * Retorna l'extensió dels fitxers
-	 * @return
+	 * @return extensió dels fitxers
 	 */
 	public String getFileExtension() {
 		return fileExtension;
@@ -54,7 +54,7 @@ public class CtrlPersistencia {
 	
 	/**
 	 * Canvia l'extensió dels fitxers
-	 * @param ext
+	 * @param ext extensió dels fitxers
 	 */
 	public void setFileExtension(String ext) {
 		fileExtension = ext;

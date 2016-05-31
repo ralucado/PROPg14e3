@@ -5,6 +5,11 @@ import java.text.DecimalFormat;
 import java.util.*;
 import domini.camins.*;
 
+/**
+ * 
+ * @author Cristina Raluca Vijulie
+ *
+ */
 public class SparseMatrix {
 	ArrayList<SparseVector> rows = new ArrayList<SparseVector>();
 	ArrayList<SparseVector> cols = new ArrayList<SparseVector>();

@@ -8,6 +8,11 @@ import presentacio.queries.VistaQuery;
 import presentacio.usuaris.VistaIniciSessio;
 import presentacio.usuaris.VistaUsuaris;
 
+/**
+ * 
+ * @author Cristina Raluca Vijulie
+ *
+ */
 public class CtrlPresentacio {
 	private myCtrlDomini ctrlDomini;
 	private VistaUsuaris vUsuaris;

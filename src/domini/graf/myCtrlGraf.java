@@ -5,6 +5,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Extensió del controlador de graf
+ * @author Marc Villanueva Cuadrench
+ */
 public class myCtrlGraf extends CtrlGraf {
 
 	public myCtrlGraf() throws Exception {

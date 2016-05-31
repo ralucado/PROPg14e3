@@ -4,6 +4,7 @@ import java.util.*;
 
 /**
  * Representa un graf (conjunt de dades) que conté entitats i les relacions entre elles
+ * @author Grup 14.1
  */
 public class Graf {
 
@@ -601,27 +602,56 @@ public class Graf {
         return true;
     }
 
+    /**
+     * Retorna la ID d'un paper a partir de la seva posició al graf
+     * @param pos posició al graf
+     * @return ID del paper
+     * @throws Exception ...
+     */
     public int getIdByPositionPaper(int pos) throws Exception {
         if (pos < nPapers && pos >= 0) return posicioAIdPaper.get(pos);
         else throw new Exception("Posicio "+pos+" invalida a les matrius de Papers");
     }
-
+    
+    /**
+     * Retorna la ID d'un autor a partir de la seva posició al graf
+     * @param pos posició al graf
+     * @return ID de l'autor
+     * @throws Exception ...
+     */
     public int getIdByPositionAutor(int pos) throws Exception  {
        if (pos < nAutors && pos >= 0) return posicioAIdAutor.get(pos);
        else throw new Exception("Posicio "+pos+" invalida a la matriu paperAutor");
     }
 
+    /**
+     * Retorna la ID d'una conferència a partir de la seva posició al graf
+     * @param pos posició al graf
+     * @return ID de la conferència
+     * @throws Exception ...
+     */
     public int getIdByPositionConferencia(int pos) throws Exception  {
         if (pos < nConferencies && pos >= 0) return posicioAIdConferencia.get(pos);
         else throw new Exception("Posicio "+pos+" invalida a la matriu paperConferencia");
     }
 
+    /**
+     * Retorna la ID d'un terme a partir de la seva posició al graf
+     * @param pos posició al graf
+     * @return ID del terme
+     * @throws Exception ...
+     */
     public int getIdByPositionTerme(int pos) throws Exception  {
         if (pos < nTermes && pos >= 0) return posicioAIdTerme.get(pos);
         else throw new Exception("Posicio "+pos+" invalida a la matriu paperTerme");
     }
 
-
+    /**
+     * Retorna la posició d'un paper a partir de la seva ID
+     * @param id identificador del paper
+     * @return posició al graf
+     * @throws Exception ...
+     */
     public int getPositionByIdPaper(int id) throws Exception  {
         if (existeixEntitat(id)) {
             if (consultarEntitat(id).isPaper()) return posicioPaper.get(id);
@@ -630,6 +660,12 @@ public class Graf {
         else throw new Exception("No existeix cap entitat amb id "+id);
     }
 
+    /**
+     * Retorna la posició d'un autor a partir de la seva ID
+     * @param id identificador del autor
+     * @return posició al graf
+     * @throws Exception ...
+     */
     public int getPositionByIdAutor(int id) throws Exception  {
         if (existeixEntitat(id)) {
             if (consultarEntitat(id).isAutor()) return posicioAutor.get(id);
@@ -638,6 +674,12 @@ public class Graf {
         else throw new Exception("No existeix cap entitat amb id "+id);
     }
 
+    /**
+     * Retorna la posició d'una conferència a partir de la seva ID
+     * @param id identificador de la conferència
+     * @return posició al graf
+     * @throws Exception ...
+     */
     public int getPositionByIdConferencia(int id) throws Exception  {
         if (existeixEntitat(id)) {
             if (consultarEntitat(id).isConferencia()) return posicioConferencia.get(id);
@@ -646,6 +688,12 @@ public class Graf {
         else throw new Exception("No existeix cap entitat amb id "+id);
     }
 
+    /**
+     * Retorna la posició d'un terme a partir de la seva ID
+     * @param id identificador del terme
+     * @return posició al graf
+     * @throws Exception ...
+     */
     public int getPositionByIdTerme(int id) throws Exception  {
         if (existeixEntitat(id)) {
             if (consultarEntitat(id).isTerme()) return posicioTerme.get(id);
@@ -654,31 +702,55 @@ public class Graf {
         else throw new Exception("No existeix cap entitat amb id "+id);
     }
 
+    /**
+     * Retorna el número de conferències del graf
+     * @return núm. conferències
+     */
     public int getnConferencies() {
         return nConferencies;
     }
 
-
+    /**
+     * Retorna el número de termes del graf
+     * @return núm. termes
+     */
     public int getnTermes() {
         return nTermes;
     }
 
+    /**
+     * Retorna el número d'autors del graf
+     * @return núm. autors
+     */
     public int getnAutors() {
         return nAutors;
     }
 
+    /**
+     * Retorna el número de termes del graf
+     * @return núm. termes
+     */
     public int getnPapers() {
         return nPapers;
     }
 
+    /**
+     * Imprimeix l'estat de paperAutor
+     */
     public void imprimirPaperAutor() {
         paperAutor.imprimirEstat();
     } //PARA EL DRIVER
 
+    /**
+     * Imprimeix l'estat de paperConferencia
+     */
     public void imprimirPaperConferencia() {
         paperConferencia.imprimirEstat();
     } //PARA EL DRIVER
 
+    /**
+     * Imprimeix l'estat de paperTerme
+     */
     public void imprimirPaperTerme() {
         paperTerme.imprimirEstat();
     } //PARA EL DRIVER
@@ -688,7 +760,8 @@ public class Graf {
         private Integer files, columnes;
         private Map<Integer,HashSet<Integer>> matriuDispersa;
 
-        public Map<Integer,HashSet<Integer>> getMatriuDispersa() {
+        @SuppressWarnings("unused")
+		public Map<Integer,HashSet<Integer>> getMatriuDispersa() {
             return matriuDispersa;
         }
 
@@ -811,11 +884,13 @@ public class Graf {
             System.out.println("----------------------");
         }
 
-        public Integer getFiles() {
+        @SuppressWarnings("unused")
+		public Integer getFiles() {
             return files;
         }
 
-        public Integer getColumnes() {
+        @SuppressWarnings("unused")
+		public Integer getColumnes() {
             return columnes;
         }
 	}

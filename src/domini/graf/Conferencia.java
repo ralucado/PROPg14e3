@@ -2,6 +2,7 @@ package domini.graf;
 
 /**
  * Representa una conferència
+ * @author Grup 14.1
  */
 public class Conferencia extends Entitat {
 	

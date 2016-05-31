@@ -2,6 +2,7 @@ package domini.graf;
 
 /**
  * Representa una entitat
+ * @author Grup 14.1
  */
 public class Entitat {
 	protected int id;

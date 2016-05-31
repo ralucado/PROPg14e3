@@ -1,5 +1,12 @@
 package domini.queries;
 
+/**
+ * Representa una parella d'element
+ * @author Cristina Raluca Vijulie
+ *
+ * @param <T1> primer element parella
+ * @param <T2> segon element parella
+ */
 public class Pair<T1,T2> {
 	public T1 first;
 	public T2 second;

@@ -2,6 +2,7 @@ package domini.graf;
 
 /**
  * Representa un Terme
+ * @author Grup 14.1
  */
 public class Terme extends Entitat {
 	

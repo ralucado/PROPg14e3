@@ -1,7 +1,16 @@
 package domini.graf;
-import java.util.*;
-import persistencia.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
+import persistencia.CtrlPersistencia;
+
+/**
+ * És el controlador del graf.
+ * @author Enunciat 14.2
+ */
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class CtrlGraf {
 	
@@ -19,7 +28,7 @@ public class CtrlGraf {
 	 	
 	 	/**
 	 	 * Assigna al CtrlGraf el graf <tt>grafAux</tt>.
-     * @param grafAux
+	 	 * @param grafAux graf a assignar
 	 	 */
 	 	public void setGraf(Graf grafAux){
 	 		graf=grafAux;
@@ -605,8 +614,8 @@ public class CtrlGraf {
     
     /**
      * S'ha afegit la relacio entre el Terme amb nom=nomT i el Paper amb nom=nomP.
-	 * @param nomT
-	 * @param nomP
+	 * @param nomT nom del terme
+	 * @param nomP nom del paper
 	 * @throws Exception ...
      */
     public void afegirRelacioTP (String nomT, String nomP) throws Exception{

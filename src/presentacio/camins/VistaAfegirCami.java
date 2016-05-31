@@ -13,6 +13,11 @@ import javax.swing.SwingConstants;
 import presentacio.ctrl.CtrlPresentacio;
 import presentacio.ctrl.VistaDialog;
 
+/**
+ * 
+ * @author Cristina Raluca Vijulie
+ *
+ */
 @SuppressWarnings("serial")
 public class VistaAfegirCami extends VistaCanvisCami{
 	

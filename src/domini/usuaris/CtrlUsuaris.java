@@ -3,6 +3,11 @@ package domini.usuaris;
 import persistencia.*;
 import java.util.*;
 
+/**
+ * És el controlador d'usuaris.
+ * @author Grup 14.2
+ *
+ */
 public class CtrlUsuaris {
     
     protected Usuari usuari;
@@ -148,7 +153,7 @@ public class CtrlUsuaris {
     /**
 	 * Modifica la contrasenya de l'usuari amb nom = <tt>nom</tt> per tal que contrasenya = <tt>nova_contra</tt>.
 	 * @param nom nom de l'usuari a modificar
-	 * @param nova_contra nova contrasenya de l'usuari
+	 * @param novaContrasenya nova contrasenya de l'usuari
 	 * @throws Exception retorna excepció si el conjunt del controlador no conté cap usuari amb nom = <tt>nom</tt> o si l'usuari del controlador no és administrador
 	 */
     public void modificarContrasenya(String nom, String novaContrasenya) throws Exception{
