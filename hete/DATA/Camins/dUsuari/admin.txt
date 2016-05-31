@@ -1,0 +1,5 @@
+Conferències autor	APC	Conferències on participa un autor
+hearreglatelbuuuuug	APA	apa
+critic	APCPA	autors amb papers a la mateixa conferencia
+test	TPTPTPTP	tp!
+watwat	PTPTPTPTP	wtf
