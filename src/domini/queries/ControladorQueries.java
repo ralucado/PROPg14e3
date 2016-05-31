@@ -1,5 +1,7 @@
 package domini.queries;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import domini.camins.Cami;
 import domini.camins.ControladorCamins;
@@ -164,7 +166,7 @@ public class ControladorQueries{
 	 * @return Llista de parelles d'Entitat i valor d'HeteSim que formen el resultat a mostrar
 	 * @throws Exception La query no és de tipus normal
 	 */
-	public ArrayList<Pair<Entitat, Float>> executarQuery() throws Exception{
+	public ArrayList<Pair<Entitat, Float>> executarQuery() throws Exception{ // String -> Integer
 		if(QueryActual.esNormal()){
 			ArrayList<Pair<Integer, Float>> resultat = ((QueryNormal) QueryActual).executa(HS);
 			ArrayList<Pair<Entitat, Float>> r = new ArrayList<Pair<Entitat,Float>>();
@@ -193,6 +195,7 @@ public class ControladorQueries{
 					r.add(p);
 				}
 			}
+			Collections.sort(r, new Comparador());
 			ResultatActual = new Resultat(r);
 			afegirQueryRecent();
 			return ResultatActual.getVisibles();
@@ -479,4 +482,12 @@ public class ControladorQueries{
     	return ResultatActual.getDadesString();
     }
 	
+    private class Comparador implements Comparator<Pair<Entitat, Float>> {
+        @Override
+        public int compare(Pair<Entitat, Float> a1, Pair<Entitat, Float> a2) {
+           if(a1.second < a2.second) return 1;
+           else return 0;
+        }
+    }
+    
 }
