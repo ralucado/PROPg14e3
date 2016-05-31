@@ -48,7 +48,10 @@ public class ControladorQueries{
 	 * @throws Exception ...
 	 */
 	public void inicialitzarQueryClusteringlNom(String nom) throws Exception{
+		System.out.println("ctrlQueries");
+		System.out.println(CtrlCamins);
 		Cami c = CtrlCamins.consultarCamiExt(nom);
+		System.out.println(c.getNom() + " = " + c.getPath() + " = " + c.getDescripcio());
 		QueryActual = new QueryNormal(c);
 	}
 	

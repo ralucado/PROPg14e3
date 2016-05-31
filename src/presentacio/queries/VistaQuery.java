@@ -90,6 +90,7 @@ public class VistaQuery{
 	
 	public void executarClustering(boolean camiNou, int k){
 		try{
+			System.out.println(cami);
 			if (camiNou){
 				ctrl.getDomini().inicialitzarQueryClustering(cami,k);
 				ctrl.getDomini().executarClustering();

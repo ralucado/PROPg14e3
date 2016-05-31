@@ -104,7 +104,9 @@ public class ControladorCamins {
 	 * @throws Exception ...
 	 */
 	public Cami consultarCamiExt(String nom) throws Exception{
+		System.out.println("ctrlCamins");
 		Cami c;
+		System.out.println("NOM: "+nom);
 		if(predefinits.existeixCami(nom)) c = predefinits.consultarCami(nom);
 		else if(usuari.existeixCami(nom)) c = usuari.consultarCami(nom);
 		else throw new Exception("El camí no existeix");

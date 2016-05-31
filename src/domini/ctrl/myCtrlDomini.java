@@ -30,7 +30,6 @@ public class myCtrlDomini extends CtrlDomini {
         ctrlGraf.setGraf(graf);
        
         persistencia = new CtrlPersistencia();
-        queries = new ControladorQueries(ctrlGraf, ctrlCamins);
 	}
 	
 	/**
@@ -46,6 +45,7 @@ public class myCtrlDomini extends CtrlDomini {
             ctrlCamins = new myCtrlCamins(usuari.getNom());
             caminsUsuari = crearConjunt(ctrlCamins.consultarCaminsUsuari());
             caminsPredefinits = crearConjunt(ctrlCamins.consultarCaminsPredefinits());
+            queries = new ControladorQueries(ctrlGraf, ctrlCamins);
         }
         else throw new Exception("Contrasenya incorrecta");
 	}
