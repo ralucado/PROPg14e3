@@ -23,11 +23,13 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableRowSorter;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import domini.queries.*;
 import domini.graf.*;
 import javax.swing.JPanel;
+import javax.swing.table.TableRowSorter;
 
 public class VistaResultatNew {
 
@@ -37,6 +39,7 @@ public class VistaResultatNew {
 	private ResTableModel resData;
 	private JTable table;
 	private VistaQuery vQ;
+	private TableRowSorter rowSorter;
 
 	public VistaResultatNew(CtrlPresentacio ctrl, VistaQuery vQ) {
 		this.ctrl = ctrl;
@@ -68,10 +71,14 @@ public class VistaResultatNew {
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(new MigLayout("", "[100px:1000px,grow,left][][grow][][][][]", "[][][][][grow]"));
 		
+		//TABLE
 		table = new JTable(resData);
 		table.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		JScrollPane scrollPane = new JScrollPane(table);
 		frame.getContentPane().add(scrollPane, "cell 0 3 6 2,grow");
+		//sorter
+		rowSorter = new TableRowSorter<>(table.getModel());
+		table.setRowSorter(rowSorter);
 
 		//nENTITATS
 		nEntitats = new JTextField();
@@ -139,7 +146,7 @@ public class VistaResultatNew {
 		
 		JLabel label = new JLabel("");
 		frame.getContentPane().add(label, "cell 2 1");
-		label.setText(vQ.cami);
+		label.setText(vQ.pathCami);
 		
 	}
 	

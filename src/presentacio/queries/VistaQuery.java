@@ -10,12 +10,12 @@ import javax.swing.*;
 import net.miginfocom.swing.MigLayout;
 import presentacio.ctrl.CtrlPresentacio;
 import presentacio.ctrl.VistaDialog;
-import presentacio.queries.VistaResultat;
 
 public class VistaQuery{
 	private CtrlPresentacio ctrl;
 	public JFrame frame;
-	public String cami;
+	public String pathCami;
+	public String nomCami;
 	private ArrayList<String> resClustering;
 	
 	public VistaQuery(CtrlPresentacio ctrl) throws Exception {
@@ -54,21 +54,22 @@ public class VistaQuery{
 		frame.setVisible(true);
 	}
 
-	public void setCami(String path) {
-		this.cami = path;
+	public void setCami(String nom, String path) {
+		this.nomCami = nom;
+		this.pathCami = path;
 	}
 	
 	//EXECUTAR
 	public void executarNormal(boolean camiNou, String entitat){
 		try{
 			if (camiNou){
-				ctrl.getDomini().inicialitzarQuerynormal(cami);
+				ctrl.getDomini().inicialitzarQuerynormal(pathCami);
 				ctrl.getDomini().seleccionarEntitatInicial(entitat);
 				ctrl.getDomini().executarQuery();
 				//System.out.println(" OK!");
 			}
 			else{
-				ctrl.getDomini().inicialitzarQuerynormalNom(cami);
+				ctrl.getDomini().inicialitzarQuerynormalNom(nomCami);
 				ctrl.getDomini().seleccionarEntitatInicial(entitat);
 				ctrl.getDomini().executarQuery();
 				//System.out.println(" OK!");
@@ -85,11 +86,11 @@ public class VistaQuery{
 	public void executarClustering(boolean camiNou, int k){
 		try{
 			if (camiNou){
-				ctrl.getDomini().inicialitzarQueryClustering(cami,k);
+				ctrl.getDomini().inicialitzarQueryClustering(pathCami,k);
 				resClustering = formatejaRes(ctrl.getDomini().executarClustering());
 			}
 			else {
-				ctrl.getDomini().inicialitzarQueryClusteringlNom(cami, k);
+				ctrl.getDomini().inicialitzarQueryClusteringlNom(nomCami, k);
 				resClustering = formatejaRes(ctrl.getDomini().executarClustering());
 			}
 			System.out.println(" OK Clustering!");

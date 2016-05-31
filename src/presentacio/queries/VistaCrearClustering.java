@@ -61,7 +61,7 @@ public class VistaCrearClustering {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					new VistaSeleccionarCami(ctrl, vQ.frame, vQ);
-					textCami.setText(vQ.cami);
+					textCami.setText(vQ.pathCami);
 					textCami.setEditable(false);
 					camiNou = false;
 				} catch (Exception exc) {
@@ -86,7 +86,7 @@ public class VistaCrearClustering {
 				}
 				else{
 					if (camiNou){
-						vQ.setCami(textCami.getText());
+						vQ.setCami("",textCami.getText());
 					}
 					vQ.executarClustering(camiNou, Integer.parseInt(textNum.getText()));
 				}

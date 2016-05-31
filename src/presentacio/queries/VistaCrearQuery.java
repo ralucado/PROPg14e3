@@ -58,7 +58,7 @@ public class VistaCrearQuery {
 				try {
 					//se li ha de passar la frame actual, no la frame del vista query
 					new VistaSeleccionarCami(ctrl, frame, vQ);
-					textCami.setText(vQ.cami);
+					textCami.setText(vQ.pathCami);
 					textCami.setEditable(false);
 					camiNou = false;
 				} catch (Exception exc) {
@@ -119,7 +119,7 @@ public class VistaCrearQuery {
 				}
 				else {
 					if (camiNou){
-						vQ.setCami(textCami.getText());
+						vQ.setCami("",textCami.getText());
 					}
 					vQ.executarNormal(camiNou, textEntitat.getText());
 				}
