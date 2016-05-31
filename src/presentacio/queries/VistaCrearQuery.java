@@ -24,6 +24,10 @@ public class VistaCrearQuery {
 	 */
 	public VistaCrearQuery(CtrlPresentacio ctrl, VistaQuery vq) {
 		initialize();
+		//marti pls
+		this.ctrl = ctrl;
+		vQ = vq;
+		//facepalm
 	}
 
 	/**
@@ -46,7 +50,8 @@ public class VistaCrearQuery {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					new VistaSeleccionarCami(ctrl, vQ.frame, vQ);
+					//se li ha de passar la frame actual, no la frame del vista query
+					new VistaSeleccionarCami(ctrl, frame, vQ);
 					textField.setText(vQ.cami);
 					textField.setEditable(false);
 				} catch (Exception exc) {
@@ -73,7 +78,7 @@ public class VistaCrearQuery {
 			public void actionPerformed(ActionEvent e) {
 				if (textField.getText().length() < 1){
 					String[] botons = {"D'acord"};
-					(new VistaDialog()).setDialog("Has d'introduir un camí", "", botons, JOptionPane.ERROR_MESSAGE);
+					(new VistaDialog()).setDialog("Has d'introduir un camï¿½", "", botons, JOptionPane.ERROR_MESSAGE);
 				}
 				else{
 					vQ.executarNormal();
