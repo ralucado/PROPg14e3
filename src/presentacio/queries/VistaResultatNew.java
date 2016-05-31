@@ -66,13 +66,12 @@ public class VistaResultatNew {
 			}
 		});
 		frame.setLocationRelativeTo(null);
-		frame.getContentPane().setLayout(new MigLayout("", "[grow][][grow][][][][]", "[][][][][grow]"));
+		frame.getContentPane().setLayout(new MigLayout("", "[100px:1000px,grow,left][][grow][][][][]", "[][][][][grow]"));
 		
 		table = new JTable(resData);
-		
 		table.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		JScrollPane scrollPane = new JScrollPane(table);
-		frame.getContentPane().add(scrollPane, "cell 0 3 7 2,grow");
+		frame.getContentPane().add(scrollPane, "cell 0 3 6 2,grow");
 
 		//nENTITATS
 		nEntitats = new JTextField();
@@ -95,7 +94,7 @@ public class VistaResultatNew {
 		
 		//COMBOBOX
 		String[] llista = {"","DATABASE","DATA_MINING","AI","INFORMATION_RETRIEVAL","UNKNOWN","NO_LABEL"};
-		JComboBox comboBox = new JComboBox();
+		JComboBox comboBox = new JComboBox(llista);
 		frame.getContentPane().add(comboBox, "cell 2 0,growx");
 		
 		//FILTRE LABEL
@@ -105,6 +104,7 @@ public class VistaResultatNew {
 				if (comboBox.getSelectedIndex() != 0){
 					try{ctrl.getDomini().filtrarResultatLabel(comboBox.getSelectedIndex()-1);}
 					catch(Exception E){}
+					resData.updateData();
 				}
 			}
 		});

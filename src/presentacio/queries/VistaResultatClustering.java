@@ -1,26 +1,38 @@
 package presentacio.queries;
 
-import java.awt.EventQueue;
-import presentacio.ctrl.*;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
-import java.awt.GridLayout;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
 
-public class VistaResultatClustering {
+import net.miginfocom.swing.MigLayout;
+import presentacio.ctrl.CtrlPresentacio;
+import presentacio.ctrl.VistaDialog;
+
+public class VistaResultatClustering extends JDialog{
 
 	private JFrame frame;
 	private JTable table;
 	private CtrlPresentacio ctrl;
+	private VistaQuery vQ;
+	private ClusterTableModel clusterData;
 
 	/**
 	 * Create the application.
 	 */
-	public VistaResultatClustering(CtrlPresentacio ctrl) {
+	public VistaResultatClustering(CtrlPresentacio ctrl, JFrame parent, VistaQuery vq) {
+		super(parent,true);
+		this.ctrl = ctrl;
+		this.vQ = vq;
+		clusterData = new ClusterTableModel();
 		initialize();
 	}
 
@@ -28,22 +40,52 @@ public class VistaResultatClustering {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				e.getWindow().dispose();
-				ctrl.openMenu();
-			}
-		});
-		frame.getContentPane().setLayout(new GridLayout(1, 0, 0, 0));
-		
-		JScrollPane scrollPane = new JScrollPane();
-		frame.getContentPane().add(scrollPane);
-		
-		table = new JTable();
-		scrollPane.setViewportView(table);
+		init_table();
+		setSize(600, 400);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 	}
+	
+	private void init_table() {
+		getContentPane().setLayout(new MigLayout("", "[][438px,grow][]", "[25px][229px,grow][]"));
+		table = new JTable(clusterData);
+		JScrollPane scrollPane = new JScrollPane(table);
+		frame.getContentPane().add(scrollPane);
+	}
+	
+	private class ClusterTableModel extends AbstractTableModel {
+		private static final long serialVersionUID = 1L;
+		protected String[] columnNames = {"Nom"};
+		protected ArrayList<String> data;
+		
+		public ClusterTableModel() {
+			try {
+				this.data = vQ.getData();
 
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		public String getColumnName(int column) {
+			return columnNames[column];
+		}
+	
+		public boolean isCellEditable(int row, int column) {
+			return false;
+		}
+
+		public int getRowCount() {
+			return data.size();
+		}
+
+		public int getColumnCount() {
+			return columnNames.length;
+		}
+
+		public String getValueAt(int rowIndex, int columnIndex) {
+			return data.get(rowIndex);
+		}
+	}
 }
