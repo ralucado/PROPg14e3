@@ -25,6 +25,7 @@ public class VistaAfegirUsuari extends VistaCanvisUsuari {
 	
 	
 	protected void inicialitzaCompPropis() {
+		setTitle("Afegir nou usuari");
 		JLabel lblTitle = new JLabel("Afegir nou usuari");
 		lblTitle.setHorizontalAlignment(SwingConstants.LEFT);
 		lblTitle.setFont(new Font("Lucida Grande", Font.BOLD, 15));

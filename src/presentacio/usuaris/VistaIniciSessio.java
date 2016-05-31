@@ -2,9 +2,16 @@ package presentacio.usuaris;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,6 +22,8 @@ import javax.swing.SwingConstants;
 
 import presentacio.ctrl.CtrlPresentacio;
 import presentacio.ctrl.VistaDialog;
+import java.awt.Canvas;
+import javax.swing.JPanel;
 
 public class VistaIniciSessio {
 	
@@ -24,10 +33,18 @@ public class VistaIniciSessio {
 	private JTextField usuariField;
 	private JPasswordField contrasenyaField;
 	private JButton btnLogIn;
+	private JPanel panel;
+	private JLabel lblNewLabel;
 
 	public VistaIniciSessio(CtrlPresentacio ctrl) {
 		this.ctrl = ctrl;
-		inicialitzarComponents();
+		try {
+			inicialitzarComponents();
+		}
+		catch (Exception e) {
+			String[] botons = {"D'acord"};
+			(new VistaDialog()).setDialog("Error al iniciar components", e.getMessage(), botons, JOptionPane.WARNING_MESSAGE);
+		}
 		this.frame.setVisible(true);
 	}
 	
@@ -51,37 +68,31 @@ public class VistaIniciSessio {
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws IOException 
 	 */
-	private void inicialitzarComponents() {
+	private void inicialitzarComponents() throws IOException {
 		// Frame
 		frame = new JFrame();
 		frame.setResizable(false);
-		frame.setSize(220, 210);
+		frame.setSize(416, 241);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
-		// Títol ("Inici de sessió")
-		JLabel lblTitol = new JLabel("Inici de sessió");
-		lblTitol.setForeground(Color.BLACK);
-		lblTitol.setFont(new Font("SansSerif", Font.BOLD, 18));
-		lblTitol.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitol.setBounds(20, 6, 180, 25);
-		frame.getContentPane().add(lblTitol);
+		frame.setTitle("PathSearcher");
 		
 		// Label: nom d'usuari
 		JLabel lblUsuari = new JLabel("Nom d'usuari:");
 		lblUsuari.setLabelFor(usuariField);
 		lblUsuari.setFont(new Font("Lucida Grande", Font.BOLD, 14));
 		lblUsuari.setHorizontalAlignment(SwingConstants.CENTER);
-		lblUsuari.setBounds(40, 35, 140, 20);
+		lblUsuari.setBounds(248, 34, 140, 20);
 		frame.getContentPane().add(lblUsuari);
 		
 		// Camp: nom d'usuari
 		usuariField = new JTextField();
 		usuariField.setForeground(Color.DARK_GRAY);
 		usuariField.setHorizontalAlignment(SwingConstants.CENTER);
-		usuariField.setBounds(40, 55, 140, 30);
+		usuariField.setBounds(248, 54, 140, 30);
 		frame.getContentPane().add(usuariField);
 		usuariField.setColumns(10);
 		
@@ -90,14 +101,14 @@ public class VistaIniciSessio {
 		lblContrasenya.setLabelFor(contrasenyaField);
 		lblContrasenya.setHorizontalAlignment(SwingConstants.CENTER);
 		lblContrasenya.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-		lblContrasenya.setBounds(40, 85, 145, 20);
+		lblContrasenya.setBounds(248, 84, 145, 20);
 		frame.getContentPane().add(lblContrasenya);
 		
 		// Camp: contrasenya (amb ocultació)
 		contrasenyaField = new JPasswordField();
 		contrasenyaField.setHorizontalAlignment(SwingConstants.CENTER);
 		contrasenyaField.setForeground(Color.DARK_GRAY);
-		contrasenyaField.setBounds(40, 105, 140, 30);
+		contrasenyaField.setBounds(248, 104, 140, 30);
 		frame.getContentPane().add(contrasenyaField);
 		
 		// Botó: iniciar sessió
@@ -124,9 +135,22 @@ public class VistaIniciSessio {
 				}}
 			}
 		});
-		btnLogIn.setBounds(40, 145, 140, 30);
+		btnLogIn.setBounds(248, 144, 140, 30);
 		frame.getContentPane().add(btnLogIn);
 		frame.getRootPane().setDefaultButton(btnLogIn);
+		BufferedImage logo = ImageIO.read(new File("logo.png"));
 		
+		lblNewLabel = new JLabel(new ImageIcon(logo));
+		lblNewLabel.setBounds(5, 6, 230, 207);
+		frame.getContentPane().add(lblNewLabel);
+		
+		
+		
+
+		/*LogoPanel p= new JLabel(new ImageIcon(logo));
+		lblLogo.setBounds(6, 6, 190, 154);
+		frame.getContentPane().add(lblLogo);
+		*/
 	}
+	
 }

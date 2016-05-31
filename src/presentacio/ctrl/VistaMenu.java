@@ -5,12 +5,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import net.miginfocom.swing.MigLayout;
+import javax.swing.JLabel;
 
 public class VistaMenu {
 
@@ -21,6 +26,7 @@ public class VistaMenu {
 	private JButton btnQuery;
 	private JButton btnTancaSessi;
 	private JButton btnGraf;
+	private JLabel lblNewLabel;
 	
 	public VistaMenu(CtrlPresentacio ctrl) throws Exception {
 		this.ctrl = ctrl;
@@ -34,16 +40,24 @@ public class VistaMenu {
 	
 	private void init_frame() {
 		frame = new JFrame();
-		frame.setSize(600, 400);
+		frame.setSize(384, 298);
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				e.getWindow().dispose();
+				try {
+					ctrl.getDomini().logOut();
+				}
+				catch (Exception e1) {
+					String[] botons = {"D'acord"};
+	      			(new VistaDialog()).setDialog("No s'ha pogut tancar sessió", e1.getMessage(), botons, JOptionPane.WARNING_MESSAGE);
+				}
 				ctrl.openLogIn();
 			}
 		});
+		frame.setTitle("PathSearcher");
 		frame.setLocationRelativeTo(null);
-		frame.getContentPane().setLayout(new MigLayout("", "[][][][][][grow][][grow][]", "[grow][][grow][][grow][][grow][][grow][][grow]"));
+		frame.getContentPane().setLayout(new MigLayout("", "[][][][][85.00][grow][]", "[grow][][grow][][grow][][grow][][grow][][grow]"));
 				
 	}
 	
@@ -77,6 +91,8 @@ public class VistaMenu {
 	
 	private void init_graf(){
 		btnGraf = new JButton("Graf");
+		btnGraf.setFont(new Font("Lucida Grande", Font.BOLD, 12));
+		btnQuery.setFont(new Font("Lucida Grande", Font.BOLD, 12));
 		btnGraf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
@@ -122,6 +138,14 @@ public class VistaMenu {
 				ctrl.openUsuaris();
 			}
 		});
+		{
+			try {BufferedImage logo = ImageIO.read(new File("logo.png"));
+			lblNewLabel = new JLabel(new ImageIcon(logo));
+			frame.getContentPane().add(lblNewLabel, "cell 0 1 5 9");
+			}
+			catch (Exception e) {String[] botons = {"D'acord"};
+  			(new VistaDialog()).setDialog("Error al iniciar components", e.getMessage(), botons, JOptionPane.WARNING_MESSAGE);}
+		}
 		frame.getContentPane().add(btnUsuaris, "cell 6 1,alignx center");
 	}
 }

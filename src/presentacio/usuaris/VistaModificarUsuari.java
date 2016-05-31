@@ -29,7 +29,8 @@ public class VistaModificarUsuari extends VistaCanvisUsuari {
 	}
 
 	protected void inicialitzaCompPropis() {
-		JLabel lblTitle = new JLabel("Modifica l'usuari");
+		setTitle("Modificar usuari");
+		JLabel lblTitle = new JLabel("Modificar usuari");
 		lblTitle.setHorizontalAlignment(SwingConstants.LEFT);
 		lblTitle.setFont(new Font("Lucida Grande", Font.BOLD, 15));
 		GridBagConstraints gbc_lblAfegirNouUsuari = new GridBagConstraints();
