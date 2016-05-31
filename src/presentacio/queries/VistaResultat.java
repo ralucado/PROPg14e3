@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import javax.swing.Action;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -26,51 +27,60 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import domini.queries.*;
 import domini.graf.*;
+import javax.swing.JPanel;
 
-public class VistaResultat {
+public class VistaResultat{
 
 	public JFrame frame;
 	private CtrlPresentacio ctrl;
 	private JTextField nEntitats;
-	private JTable resultats;
 	private ResTableModel resData;
-	private JFrame parent;
+	private VistaQuery vQ;
 
 	/**
 	 * Create the application.
 	 * @wbp.parser.entryPoint
 	 */
-	public VistaResultat(CtrlPresentacio ctrl, String cami) {
-		this.parent = parent;
-		initialize();
+	public VistaResultat(CtrlPresentacio ctrl, String cami, JFrame parent, VistaQuery vq) {
+		this.ctrl = ctrl;
+		this.vQ = vq;
 		this.resData = new ResTableModel();
+		frame.setVisible(true);
+		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 614, 335);
-		frame.addWindowListener(new WindowAdapter() {
+		setSize(600, 400);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		/*frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				e.getWindow().dispose();
 				ctrl.openMenu();
 			}
-		});
-		frame.getContentPane().setLayout(new MigLayout("", "[grow][left][][30px:n,left][][][][][][][][][grow][][][][][grow]", "[][][][][grow]"));
+		});*/
+		
+		getContentPane().setLayout(new MigLayout("", "[][438px,grow][]", "[25px][229px,grow][]"));
+		JScrollPane scrollPane = new JScrollPane();
+		
+		JPanel panel = new JPanel();
+		scrollPane.setColumnHeaderView(panel);
+		getContentPane().add(scrollPane, "cell 0 0 3 2,grow");
 		
 		String[] llista = {"","DATABASE","DATA_MINING","AI","INFORMATION_RETRIEVAL","UNKNOWN","NO_LABEL"};
 		JComboBox cmbFiltreLabel = new JComboBox(llista);
-		frame.getContentPane().add(cmbFiltreLabel, "cell 1 0,alignx left");
+		getContentPane().add(cmbFiltreLabel, "cell 1 0,alignx left");
 		
 		//FILTRE LABEL
 		JButton FiltreLabel = new JButton("FiltreLabel");
-		frame.getContentPane().add(FiltreLabel, "cell 2 0,alignx left");
+		getContentPane().add(FiltreLabel, "cell 2 0,alignx left");
 		
 		nEntitats = new JTextField();
-		frame.getContentPane().add(nEntitats, "cell 3 0,growx");
+		getContentPane().add(nEntitats, "cell 3 0,growx");
 		nEntitats.setColumns(4);
 		
 		//FILTRA N
@@ -85,7 +95,7 @@ public class VistaResultat {
 				}
 			}
 		});
-		frame.getContentPane().add(btnFiltran, "cell 4 0,alignx left,aligny top");
+		getContentPane().add(btnFiltran, "cell 4 0,alignx left,aligny top");
 		
 		//DESFER FILTRE
 		JButton btnDesferFiltre = new JButton("Desfer Filtre");
@@ -95,7 +105,7 @@ public class VistaResultat {
 				resData.updateData();
 			}
 		});
-		frame.getContentPane().add(btnDesferFiltre, "cell 5 0,alignx left");
+		getContentPane().add(btnDesferFiltre, "cell 5 0,alignx left");
 		
 		//NETEJA FILTRES
 		JButton NetejaFiltres = new JButton("Neteja Filtres");
@@ -105,7 +115,7 @@ public class VistaResultat {
 				resData.updateData();
 			}
 		});
-		frame.getContentPane().add(NetejaFiltres, "cell 6 0,alignx left,aligny top");
+		getContentPane().add(NetejaFiltres, "cell 6 0,alignx left,aligny top");
 		
 		//DESAR CAMI
 		JButton btnDesarCam = new JButton("Desar Cam\u00ED");
@@ -113,14 +123,9 @@ public class VistaResultat {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		frame.getContentPane().add(btnDesarCam, "cell 7 0");
+		getContentPane().add(btnDesarCam, "cell 7 0");
 		
-		resultats = new JTable(resData);
-		resultats.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		JScrollPane scrollPane = new JScrollPane(resultats);
-		frame.getContentPane().add(scrollPane, "cell 0 1 16 4,grow");
-		
-		frame.setVisible(true);
+		setVisible(true);
 	}
 	
 	private class ResTableModel extends AbstractTableModel {
