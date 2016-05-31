@@ -1,27 +1,39 @@
 package presentacio.graf;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Point;
 import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.TextField;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
+import domini.graf.Label;
 import net.miginfocom.swing.MigLayout;
 import presentacio.ctrl.CtrlPresentacio;
 import presentacio.ctrl.VistaDialog;
 
-@SuppressWarnings("serial")
+import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.ListModel;
+import javax.swing.UIManager;
+
 public class VistaAfegirEntitat extends JDialog {
 
 	private JTextField textField;
+	private JComboBox comboBox_1;
+	private JComboBox comboBox_1_1;
 	private CtrlPresentacio ctrl;
 	private String[] labels = {"UNKNOWN", "DATABSE", "DATA_MINING", "AI", "INFORMATION_RETRIVAL"};
 	private String[] tipusE = {"", "Paper", "Autor", "Conferencia", "Terme"};
@@ -32,6 +44,12 @@ public class VistaAfegirEntitat extends JDialog {
 	private String label = "UNKNOWN";
 
 	private void initComponents(){
+		
+		try{
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+		}
+		catch(Exception e){}
+		
 		//frame
 		
 		setBackground(SystemColor.control);
@@ -42,7 +60,7 @@ public class VistaAfegirEntitat extends JDialog {
 		getContentPane().setLayout(new MigLayout("", "[][][50px,grow][200px,grow][][][50px,grow][200px,grow][][]", "[][50px][][][][][][50px]"));
 		
 		//seleció label
-		JComboBox<?> comboBox_1_1 = new JComboBox<Object>(labels);
+		JComboBox comboBox_1_1 = new JComboBox(labels);
 		comboBox_1_1.setBounds(255, 37, 113, 24);
 		getContentPane().add(comboBox_1_1, "cell 3 6,alignx left,aligny top");
 				
@@ -60,7 +78,7 @@ public class VistaAfegirEntitat extends JDialog {
 		getContentPane().add(lblTipusDentitat, "cell 0 0,alignx left,aligny center");
 		
 		//selecció tipus	
-		JComboBox<?> comboBox = new JComboBox<Object>(tipusE);
+		JComboBox comboBox = new JComboBox(tipusE);
 		comboBox.addItemListener(new ItemListener(){
 			public void itemStateChanged(ItemEvent ie){
 				String tipusAnterior = tipus;
@@ -112,7 +130,6 @@ public class VistaAfegirEntitat extends JDialog {
 					d.setDialog("Error", "Omple tots els camps",new String[]{"Acceptar"}, JOptionPane.ERROR_MESSAGE);
 				}
 				else{
-					System.out.println("Entitat amb nom: "+nom+", tipus: "+tipus+" i label: "+label);
 					try{
 						if(tipus=="Paper") ctrl.getDomini().altaPaper(nom, label);
 						else if(tipus=="Autor") ctrl.getDomini().altaAutor(nom, label);
@@ -122,7 +139,8 @@ public class VistaAfegirEntitat extends JDialog {
 						dispose();
 					}
 					catch(Exception e2){
-						System.out.println(e2.getMessage());
+						VistaDialog d = new VistaDialog();
+						d.setDialog("Error", e2.getMessage(),new String[]{"Acceptar"}, JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			}
