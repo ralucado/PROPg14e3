@@ -334,9 +334,8 @@ public class myCtrlDomini extends CtrlDomini {
     /**
      * Consulta les relacions entre entitats tipus Autor i tipus Paper
      * @return Matriu d'Strings. Representa una llista de relacions amb el format (nomE1, nomE2)
-     * @throws Exception ...
      */
-	public ArrayList<ArrayList<String>> consultarRelacionsAP() throws Exception{
+	public ArrayList<ArrayList<String>> consultarRelacionsAP() throws Exception {
     	return ((myCtrlGraf) ctrlGraf).consultarRelacionsAP();
     }
     
@@ -345,7 +344,7 @@ public class myCtrlDomini extends CtrlDomini {
      * @return Matriu d'Strings. Representa una llista de relacions amb el format (nomE1, nomE2)
      * @throws Exception ...
      */
-    public ArrayList<ArrayList<String>> consultarRelacionsCP() throws Exception{
+    public ArrayList<ArrayList<String>> consultarRelacionsCP() throws Exception {
     	return ((myCtrlGraf) ctrlGraf).consultarRelacionsCP();
     }
     
@@ -354,13 +353,13 @@ public class myCtrlDomini extends CtrlDomini {
      * @return Matriu d'Strings. Representa una llista de relacions amb el format (nomE1, nomE2)
      * @throws Exception ...
      */
-    public ArrayList<ArrayList<String>> consultarRelacionsTP() throws Exception{
+    public ArrayList<ArrayList<String>> consultarRelacionsTP() throws Exception {
     	return ((myCtrlGraf) ctrlGraf).consultarRelacionsTP();
     }
     
     /**
      * Consulta totes les dades de les entitats del tipus Autor
-     * @return Matriu d'Strings. Representa una llista d'Autors amb el format (id, nom, label)
+     * @return Matriu d'Strings. Representa una llista dels autors en el format (id, nom, label)
      * @throws Exception ...
      */
     public ArrayList<ArrayList<String>> consultarAutorsExt() throws Exception {
@@ -369,7 +368,7 @@ public class myCtrlDomini extends CtrlDomini {
 
     /**
      * Consulta totes les dades de les entitats del tipus Paper
-     * @return Matriu d'Strings. Representa una llista de Papers amb el format (id, nom, label)
+     * @return Matriu d'Strings. Representa una llista dels papers en el format (id, nom, label)
      * @throws Exception ...
      */
     public ArrayList<ArrayList<String>> consultarPapersExt() throws Exception {
@@ -378,7 +377,7 @@ public class myCtrlDomini extends CtrlDomini {
 
     /**
      * Consulta totes les dades de les entitats del tipus Conferencia
-     * @return Matriu d'Strings. Representa una llista de Conferencies amb el format (id, nom, label)
+     * @return Matriu d'Strings. Representa una llista de les conferencies en el format (id, nom, label)
      * @throws Exception ...
      */
     public ArrayList<ArrayList<String>> consultarConferenciesExt() throws Exception {
@@ -387,7 +386,7 @@ public class myCtrlDomini extends CtrlDomini {
     
     /**
      * Consulta totes les dades de les entitats del tipus Terme
-     * @return Matriu d'Strings. Representa una llista de Termes amb el format (id, nom)
+     * @return Matriu d'Strings. Representa una llista dels termes en el format (id, nom)
      * @throws Exception ...
      */
     public ArrayList<ArrayList<String>> consultarTermesExt() throws Exception {
@@ -406,13 +405,13 @@ public class myCtrlDomini extends CtrlDomini {
 	}
 
 	/**
-	 * Modifica una entitat del graf
-	 * @param nom Nom de l'entitat a modificar
-	 * @param nomNou Nom nou de l'entitat a modificar
-	 * @param labelNova Label nova de l'entitat a modificar
-	 * @param tipus Tipus de l'entitat
-	 * @throws Exception ...
-	 */
+     * Modifica una entitat del graf
+     * @param nom Nom de l'entitat a modificar
+     * @param nomNou Nom nou de l'entitat
+     * @param label Nova Label nova de l'entitat
+     * @param tipus Tipus de l'entitat
+     * @throws Exception ...
+     */
 	public void modificarEntitat(String nom, String  nomNou, String labelNova, String tipus) throws Exception {
 		((myCtrlGraf) ctrlGraf).modificarEntitat(nom, nomNou, labelNova, tipus);
 		
@@ -428,13 +427,13 @@ public class myCtrlDomini extends CtrlDomini {
 	}
 	
 	/**
-	 * Consulta l'Id d'una entitat
-	 * @param nom Nom de l'entitat
-	 * @param tipus Tipus de l'entitat
-	 * @return Id de l'entitat
-	 * @throws Exception ...
-	 */
+     * Retorna l'ID d'una entitat a partir del nom i el tipus
+     * @param nomEntitat nom d'entitat
+     * @param tipus tipus d'entitat
+     * @return ID de l'entitat
+     * @throws Exception ...
+     */
 	public int consultarIdEntitat(String nom, String tipus) throws Exception{
-		return graf.getIdByNameAndType(nom, tipus);
+		return ((myCtrlGraf) ctrlGraf).consultarIdEntitat(nom, tipus);
 	}
 }

@@ -118,7 +118,6 @@ public class myCtrlGraf extends CtrlGraf {
      * @return Matriu d'Strings. Representa una llista dels papers en el format (id, nom, label)
      * @throws Exception ...
      */
-
     public ArrayList<ArrayList<String>> consultarPapersExt() throws Exception {
     	ArrayList<ArrayList<String>> papers = new ArrayList<ArrayList<String>>();
     	
@@ -227,5 +226,15 @@ public class myCtrlGraf extends CtrlGraf {
     		e.setLabel(lid);
     	}
     }
-     
+    
+    /**
+     * Retorna l'ID d'una entitat a partir del nom i el tipus
+     * @param nomEntitat nom d'entitat
+     * @param tipus tipus d'entitat
+     * @return ID de l'entitat
+     * @throws Exception ...
+     */
+    public int consultarIdEntitat(String nom, String tipus) throws Exception{
+		return graf.getIdByNameAndType(nom, tipus);
+	}
 }

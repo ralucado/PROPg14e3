@@ -3,7 +3,7 @@ import domini.queries.Pair;
 import domini.queries.SparseMatrix;
 /**
  * Representa un cami, amb un nom, un path d'entitats i una descripcio
- * @author Martiruhay
+ * @author Martí Lloveras Rosales
  *
  */
 public class Cami {
