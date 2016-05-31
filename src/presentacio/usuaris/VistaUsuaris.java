@@ -76,7 +76,6 @@ public class VistaUsuaris {
 		btnAfegirUsuari.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new VistaAfegirUsuari(ctrl, frame);
-				System.out.println("Addició acabada");
 				usersData.updateData();
 			}
 		});
@@ -93,7 +92,6 @@ public class VistaUsuaris {
 					(new VistaDialog()).setDialog("Usuari no seleccionat", "No has seleccionat cap usuari a modificar!", botons, JOptionPane.WARNING_MESSAGE);
 				else {
 					new VistaModificarUsuari(ctrl, frame, usersData.getValueAt(table.getSelectedRow(), 0));
-					System.out.println("Modificació acabada");
 					usersData.updateData();
 				}
 			}
@@ -155,7 +153,6 @@ public class VistaUsuaris {
 			try {
 				Set<String> nomsUsuaris = ctrl.getDomini().consultarConjunt();
 				for (String nom : nomsUsuaris) {
-					System.out.println("EI");
 					ArrayList<String> usuari = ctrl.getDomini().consultarUsuari(nom);
 					d.put(usuari.get(0), usuari.get(1));
 				}

@@ -8,6 +8,7 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -61,7 +62,14 @@ public class VistaMenu {
 		btnTancaSessi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
+				try {
+					ctrl.getDomini().logOut();
+				} catch (Exception e1) {
+					String[] botons = {"D'acord"};
+	      			(new VistaDialog()).setDialog("No s'ha pogut tancar sessió", e1.getMessage(), botons, JOptionPane.WARNING_MESSAGE);
+				}
 				ctrl.openLogIn();
+				
 			}
 		});
 		frame.getContentPane().add(btnTancaSessi, "cell 6 9,alignx center");

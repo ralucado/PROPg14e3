@@ -327,8 +327,8 @@ public class CtrlPersistencia {
 	 * @throws Exception pot retornar IOException
 	 */
 	public void exportarMatrius(ArrayList<ArrayList<String>> matrixLeft, ArrayList<ArrayList<String>> matrixRight, String cami) throws Exception {
-		exportar("Camins/Matrius" + cami + "/left", matrixLeft);
-		exportar("Camins/Matrius" + cami + "/right", matrixRight);
+		exportar("Camins/Matrius/" + cami + "/left", matrixLeft);
+		exportar("Camins/Matrius/" + cami + "/right", matrixRight);
 	}
 	
 	/**
