@@ -1,6 +1,7 @@
 package presentacio.queries;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import net.miginfocom.swing.MigLayout;
@@ -36,24 +37,10 @@ public class VistaResultat {
 	private JFrame parent;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		/*CtrlPresentacio ctrlPresentacio = new CtrlPresentacio();
-		ArrayList<Pair<Entitat,Float>> A = new ArrayList<Pair<Entitat,Float>>();
-		Autor au = new Autor("Burlao");
-		Pair<Entitat,Float> p = new Pair<Entitat,Float>(au,0F);
-		A.add(p);
-		Resultat R = new Resultat(A);
-		VistaResultat window = new VistaResultat(ctrlPresentacio);
-		window.frame.setVisible(true);*/
-	}
-
-	/**
 	 * Create the application.
 	 * @wbp.parser.entryPoint
 	 */
-	public VistaResultat(CtrlPresentacio ctrl) {
+	public VistaResultat(CtrlPresentacio ctrl, String cami) {
 		this.parent = parent;
 		initialize();
 		this.resData = new ResTableModel();
@@ -64,25 +51,19 @@ public class VistaResultat {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 570, 300);
+		frame.setBounds(100, 100, 614, 335);
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				e.getWindow().dispose();
-				try {
-					ctrl.getDomini().guardarCjtUsuaris();
-				} catch (Exception exc) {
-					String[] botons = {"D'acord"};
-					(new VistaDialog()).setDialog("No s'ha pogut desar el conjunt d'usuaris", exc.getMessage(), botons, JOptionPane.ERROR_MESSAGE);
-				}
 				ctrl.openMenu();
 			}
 		});
-		frame.getContentPane().setLayout(new MigLayout("", "[grow][left][][30px:n,left][][][][][][][][grow][][][][][grow]", "[][][][][grow]"));
+		frame.getContentPane().setLayout(new MigLayout("", "[grow][left][][30px:n,left][][][][][][][][][grow][][][][][grow]", "[][][][][grow]"));
 		
 		String[] llista = {"","DATABASE","DATA_MINING","AI","INFORMATION_RETRIEVAL","UNKNOWN","NO_LABEL"};
 		JComboBox cmbFiltreLabel = new JComboBox(llista);
-		frame.getContentPane().add(cmbFiltreLabel, "cell 1 0,growx");
+		frame.getContentPane().add(cmbFiltreLabel, "cell 1 0,alignx left");
 		
 		//FILTRE LABEL
 		JButton FiltreLabel = new JButton("FiltreLabel");
@@ -116,8 +97,6 @@ public class VistaResultat {
 		});
 		frame.getContentPane().add(btnDesferFiltre, "cell 5 0,alignx left");
 		
-		resultats = new JTable(resData);
-		
 		//NETEJA FILTRES
 		JButton NetejaFiltres = new JButton("Neteja Filtres");
 		NetejaFiltres.addActionListener(new ActionListener() {
@@ -128,9 +107,18 @@ public class VistaResultat {
 		});
 		frame.getContentPane().add(NetejaFiltres, "cell 6 0,alignx left,aligny top");
 		
-		JScrollPane scrollPane = new JScrollPane();
-		frame.getContentPane().add(scrollPane, "cell 0 1 15 4,grow");
-		//scrollPane.setViewportView(resultats);
+		//DESAR CAMI
+		JButton btnDesarCam = new JButton("Desar Cam\u00ED");
+		btnDesarCam.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		frame.getContentPane().add(btnDesarCam, "cell 7 0");
+		
+		resultats = new JTable(resData);
+		resultats.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		JScrollPane scrollPane = new JScrollPane(resultats);
+		frame.getContentPane().add(scrollPane, "cell 0 1 16 4,grow");
 		
 		frame.setVisible(true);
 	}
