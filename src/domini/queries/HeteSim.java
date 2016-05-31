@@ -192,16 +192,18 @@ public class HeteSim{
 		SparseMatrix result = new SparseMatrix();
 		result.setSize(left.getNRows(),right.getNRows());
 		System.out.println("Dins norm");
+		ArrayList<Float> normj = new ArrayList<Float>(result.getNCols());
 		for (int i = 0; i < result.getNRows(); ++i) {
+			System.out.println("normalitzant fila "+i+" de "+result.getNRows()+". Gracies per la seva espera.");
+			float normi = left.getRow(i).norm();
 			for (int j = 0; j < result.getNCols(); ++j) {
-				//if (j%500 == 0) System.out.println("it - I: "+i+" - J: " + j);
+				if(i == 0) normj.add(j, right.getRow(j).norm());
 				float top = SparseVector.multiply(left.getRow(i),right.getRow(j)); 	//agafem la fila enlloc de la columna de right
-				double bot = left.getRow(i).norm()*right.getRow(j).norm();			//ja que esta transposada respecte a la formula del paper
+				double bot =normi*normj.get(j);			//ja que esta transposada respecte a la formula del paper
 				float div = (float)(top/bot);
 				if (Math.abs(bot) < 0.000001) div =  0.f;
-				if (div > 1) div = 1.f;
-				result.set(i, j,div);
-				
+				else if (div > 1) div = 1.f;
+				result.set(i, j, div);				
 			}
 		}
 		
@@ -211,13 +213,14 @@ public class HeteSim{
 	private ArrayList<Pair<Integer, Float>> normalizeHetesimEnt(SparseMatrix left, SparseMatrix right, int i) {
 		ArrayList<Pair<Integer, Float>> result = new ArrayList<Pair<Integer, Float>>(right.getNRows());
 		System.out.println("Dins norm");
+		float normi = left.getRow(i).norm();
 		for (int j = 0; j < right.getNRows(); ++j) {
 			//if (j%500 == 0) System.out.println("it - I: "+i+" - J: " + j);
 			float top = SparseVector.multiply(left.getRow(i),right.getRow(j)); 	//agafem la fila enlloc de la columna de right
-			double bot = left.getRow(i).norm()*right.getRow(j).norm();			//ja que esta transposada respecte a la formula del paper
+			double bot = normi*right.getRow(j).norm();			//ja que esta transposada respecte a la formula del paper
 			float div = (float)(top/bot);
 			if (Math.abs(bot) < 0.000001) div =  0.f;
-			if (div > 1) div = 1.f;
+			else if (div > 1) div = 1.f;
 			result.add(new Pair<Integer,Float>(j,div));
 			
 		}
@@ -232,7 +235,7 @@ public class HeteSim{
 		double bot = left.getRow(i).norm()*right.getRow(j).norm();			//ja que esta transposada respecte a la formula del paper
 		float div = (float)(top/bot);
 		if (Math.abs(bot) < 0.000001) div =  0.f;
-		if (div > 1) div = 1.f;
+		else if (div > 1) div = 1.f;
 
 		return div;
 	}
