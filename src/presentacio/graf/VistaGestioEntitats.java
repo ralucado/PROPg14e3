@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -18,6 +20,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
+import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -64,7 +67,10 @@ public class VistaGestioEntitats{
 	
 	private void initComponents(){
 		
-		
+		try{
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+		}
+		catch(Exception e){}
 
 		//frame
 		frame = new JFrame();
@@ -73,7 +79,7 @@ public class VistaGestioEntitats{
 		frame.setSize(800, 600);
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(new MigLayout("", "[62px,grow][62px,grow][62px,grow][62px,grow][][]", "[50px,grow][][][300px,grow][50px,grow][50px,grow][][][][][][][][]"));
-		
+
 		//taula / scrollpane
 				JScrollPane scrollPane = new JScrollPane();
 				scrollPane.setBounds(205, 10, 200, 250);
@@ -94,6 +100,8 @@ public class VistaGestioEntitats{
 					}
 				});
 				
+				
+				
 		//Botó papers
 		btnPapers = new JButton("Papers");
 		frame.getContentPane().add(btnPapers, "cell 0 0,growx,aligny center");
@@ -111,6 +119,7 @@ public class VistaGestioEntitats{
 		});
 		btnPapers.setBounds(37, 22, 143, 25);
 		btnPapers.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+		model.updateData("Papers");
 				
 				//Botó autors
 				btnAutors = new JButton("Autors");
@@ -236,9 +245,13 @@ public class VistaGestioEntitats{
 			public void actionPerformed(ActionEvent e) {
 				int row = table.getSelectedRow();
 				if(row!=-1){
+					
+					String nom = (String)table.getValueAt(row, 1);
+					String label = null;
+					if(tipusActual!="Terme") label = (String) table.getValueAt(row, 2);
 					row = table.convertRowIndexToModel(row);
 					
-					new VistaModificarEntitat(ctrl, frame, tipusActual, model.getValueAt(row, 1), model.getValueAt(row, 2));
+					new VistaModificarEntitat(ctrl, frame, tipusActual, nom, label);
 					
 					model.updateData(tipusActual);
 				}
@@ -282,8 +295,8 @@ public class VistaGestioEntitats{
 							ctrl.getDomini().esborrarEntitat(entitat, tipusActual);
 							model.updateData(tipusActual);
 						} catch (Exception e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+							VistaDialog d1 = new VistaDialog();
+							d1.setDialog("Error", e1.getMessage(),new String[]{"Acceptar"}, JOptionPane.ERROR_MESSAGE);
 						}
 						
 					}
@@ -309,9 +322,13 @@ public class VistaGestioEntitats{
 	public VistaGestioEntitats(CtrlPresentacio ctrl, JFrame owner) {
 		this.ctrl = ctrl;
 		initComponents();
-		
-		//frame.setVisible(true);
-		frame.setLocationRelativeTo(owner);
+		btnPapers.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+		btnConferencies.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+		btnTermes.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+		btnAutors.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+		tipusActual = "Paper";
+		model.updateData(tipusActual);
+		frame.setLocationRelativeTo(owner);	
 	}
 	
 	private class EntTableModel extends AbstractTableModel {
@@ -345,8 +362,11 @@ public class VistaGestioEntitats{
 					columnNames = new String[]{"Id", "Nom", "Label"};
 					 rowSorter.setRowFilter(null);
 					fireTableStructureChanged();
-					this.data = aux;	
+					this.data = aux;
 					 textField.setText("");
+					 table.getColumnModel().getColumn(0).setPreferredWidth(5);
+					 table.getColumnModel().getColumn(1).setPreferredWidth(165);
+					 table.getColumnModel().getColumn(2).setPreferredWidth(30);
 				}
 				else if(tipus=="Conferencia"){
 					aux = ctrl.getDomini().consultarConferenciesExt();
@@ -356,6 +376,9 @@ public class VistaGestioEntitats{
 					fireTableStructureChanged();
 					this.data = aux;
 					 textField.setText("");
+					 table.getColumnModel().getColumn(0).setPreferredWidth(5);
+					 table.getColumnModel().getColumn(1).setPreferredWidth(165);
+					 table.getColumnModel().getColumn(2).setPreferredWidth(30);
 				}
 				else if(tipus=="Paper"){
 					aux = ctrl.getDomini().consultarPapersExt();
@@ -365,6 +388,9 @@ public class VistaGestioEntitats{
 					fireTableStructureChanged();
  					this.data = aux;
  					textField.setText("");
+ 					 table.getColumnModel().getColumn(0).setPreferredWidth(5);
+					 table.getColumnModel().getColumn(1).setPreferredWidth(165);
+					 table.getColumnModel().getColumn(2).setPreferredWidth(30);
 				}
 				else if(tipus=="Terme"){
 					aux = ctrl.getDomini().consultarTermesExt();
@@ -373,12 +399,12 @@ public class VistaGestioEntitats{
 					 rowSorter.setRowFilter(null);
 					fireTableStructureChanged();
 					this.data = aux;
-				
 					 textField.setText("");
 				}
 			}
 			catch(Exception e){
-				e.printStackTrace();
+				VistaDialog d1 = new VistaDialog();
+				d1.setDialog("Error", e.getMessage(),new String[]{"Acceptar"}, JOptionPane.ERROR_MESSAGE);
 			}
 			
 			fireTableDataChanged();
@@ -399,17 +425,5 @@ public class VistaGestioEntitats{
             }
         }
 	
-	}
-	
-	boolean similar(String a, String b){
-		int k = a.length();
-		for(int i = 0; i+k<b.length(); i++){
-			String subB = b.substring(i, i+k-1);
-			if(subB.equals(a)) return true;
-		}
-		return false;
-	}
-	
-	
-	
+	}	
 }
