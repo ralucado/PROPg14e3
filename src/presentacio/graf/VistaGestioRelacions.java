@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -18,6 +20,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
+import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -61,6 +64,10 @@ public class VistaGestioRelacions{
 	
 	private void initComponents(){
 		
+		try{
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+		}
+		catch(Exception e){}
 		
 		//frame
 		frame = new JFrame();
@@ -69,6 +76,7 @@ public class VistaGestioRelacions{
 		frame.setLocationRelativeTo(null);
 		frame.setSize(800, 600);
 		frame.getContentPane().setLayout(new MigLayout("", "[62px][62px,grow][62px,grow][62px,grow][][][]", "[50px][][350px,grow][][][][][][]"));
+
 		
 		//taula
 		JScrollPane scrollPane = new JScrollPane();
@@ -85,7 +93,18 @@ public class VistaGestioRelacions{
 					String e1 = (String) table.getValueAt(table.getSelectedRow(), 0);
 					String e2 = (String) table.getValueAt(table.getSelectedRow(), 1);
 
-					new VistaDetallsRelacio(ctrl, frame, e1, e2, "Paper", tipusE1);
+					try{
+						String idE1 = String.valueOf(ctrl.getDomini().consultarIdEntitat(e1, "Paper"));
+						String idE2 = String.valueOf(ctrl.getDomini().consultarIdEntitat(e2, tipusE1));
+						new VistaDetallsRelacio(ctrl, frame, e1, e2, "Paper", tipusE1, idE1, idE2);
+					}
+					catch(Exception e3){
+						VistaDialog d2 = new VistaDialog();
+						d2.setDialog("Error", e3.getMessage(),new String[]{"Acceptar"}, JOptionPane.ERROR_MESSAGE);
+					}
+					
+					
+					
 				}
 			}
 		});							
@@ -161,18 +180,7 @@ public class VistaGestioRelacions{
 		});
 		btnPA.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 		
-		/*//enrere
-		JButton button = new JButton(".");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				new GestioGraf(ctrl, frame);
-				frame.dispose();
-			}
-		});
-		
-		button.setBounds(12, 4, 39, 13);
-		frame.getContentPane().add(button, "cell 0 0,alignx center");*/
-		
+
 		btnPA.setBounds(37, 22, 143, 25);
 		frame.getContentPane().add(btnPA, "cell 1 0,alignx center");
 		
@@ -227,26 +235,24 @@ public class VistaGestioRelacions{
 				public void actionPerformed(ActionEvent e) {
 					int row = table.getSelectedRow();
 					if(row!=-1){
-						row = table.convertRowIndexToModel(row);
-						nomE1 = model.getValueAt(row, 0);
-						nomE2 = model.getValueAt(row, 1);
+						nomE1 = (String)table.getValueAt(row, 0);
+						nomE2 = (String)table.getValueAt(row, 1);
 						VistaDialog d = new VistaDialog();
 						int k = d.setDialog("Confirmació", "Vols esborrar la relació '"+nomE1+" - "+nomE2+"' ?",new String[]{"Esborrar", "Cancelar"}, JOptionPane.QUESTION_MESSAGE);
 						if(k==0){
 							try {
 								
-								if(tipusE1=="Autor"){
-									System.out.println(nomE1+" "+nomE2);
+								if(tipusE1.equals("Autor")){
 									ctrl.getDomini().esborrarRelacioAP(nomE2, nomE1);
 								}
-								else if(tipusE1=="Conferencia") ctrl.getDomini().esborrarRelacioCP(nomE2, nomE1);
-								else if(tipusE1=="Terme") ctrl.getDomini().esborrarRelacioTP(nomE2, nomE1);
+								else if(tipusE1.equals("Conferencia")) ctrl.getDomini().esborrarRelacioCP(nomE2, nomE1);
+								else if(tipusE1.equals("Terme")) ctrl.getDomini().esborrarRelacioTP(nomE2, nomE1);
 								
 								model.updateData(tipusE1);
 								
 							} catch (Exception e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
+								VistaDialog d2 = new VistaDialog();
+								d2.setDialog("Error", e1.getMessage(),new String[]{"Acceptar"}, JOptionPane.ERROR_MESSAGE);
 							}
 							
 						}
@@ -268,7 +274,11 @@ public class VistaGestioRelacions{
 	public VistaGestioRelacions(CtrlPresentacio ctrl, JFrame owner) {
 		this.ctrl = ctrl;
 		initComponents();
-		//frame.setVisible(true);
+		btnPA.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+		btnPT.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+		btnPC.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+		model.updateData("PA");
+		tipusE1 = "Autor";
 		frame.setLocationRelativeTo(owner);
 	}
 	
@@ -303,6 +313,8 @@ public class VistaGestioRelacions{
 					fireTableStructureChanged();
 					this.data = aux;	
 					 textField.setText("");
+					 table.getColumnModel().getColumn(0).setPreferredWidth(120);
+					 table.getColumnModel().getColumn(1).setPreferredWidth(50);
 				}
 				else if(tipus=="PC" || tipus=="Conferencia"){
 					aux = ctrl.getDomini().consultarRelacionsCP();
@@ -311,6 +323,8 @@ public class VistaGestioRelacions{
 					fireTableStructureChanged();
 					this.data = aux;
 					 textField.setText("");
+					 table.getColumnModel().getColumn(0).setPreferredWidth(120);
+					 table.getColumnModel().getColumn(1).setPreferredWidth(50);
 				}
 				else if(tipus=="PT" || tipus=="Terme"){
 					aux = ctrl.getDomini().consultarRelacionsTP();
@@ -319,10 +333,13 @@ public class VistaGestioRelacions{
 					fireTableStructureChanged();
 					this.data = aux;
 					 textField.setText("");
+					 table.getColumnModel().getColumn(0).setPreferredWidth(120);
+					 table.getColumnModel().getColumn(1).setPreferredWidth(50);
 				}
 			}
 			catch(Exception e){
-				e.printStackTrace();
+				VistaDialog d = new VistaDialog();
+				d.setDialog("Error", e.getMessage(),new String[]{"Acceptar"}, JOptionPane.ERROR_MESSAGE);
 			}
 		}
 
