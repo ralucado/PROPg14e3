@@ -1,7 +1,9 @@
 package domini.usuaris;
 
-import persistencia.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Set;
+
+import persistencia.CtrlPersistencia;
 
 /**
  * És el controlador d'usuaris.

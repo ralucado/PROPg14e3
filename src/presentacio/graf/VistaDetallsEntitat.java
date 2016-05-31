@@ -1,32 +1,17 @@
 package presentacio.graf;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Point;
 import java.awt.SystemColor;
-import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.UIManager;
 
-import domini.graf.Label;
 import net.miginfocom.swing.MigLayout;
 import presentacio.ctrl.CtrlPresentacio;
-
-import javax.swing.JComboBox;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.ListModel;
-import javax.swing.UIManager;
 
 public class VistaDetallsEntitat extends JDialog {
 

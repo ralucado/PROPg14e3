@@ -2,7 +2,8 @@ package domini.queries;
 
 import java.util.ArrayList;
 
-import domini.graf.*;
+import domini.graf.Autor;
+import domini.graf.Entitat;
 
 /**
  * Representa el resultat d'una query normal

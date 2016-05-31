@@ -1,7 +1,6 @@
 package domini.camins;
 import domini.queries.Pair;
 import domini.queries.SparseMatrix;
-import domini.camins.SparseMatrixBool;
 /**
  * Representa un cami, amb un nom, un path d'entitats i una descripcio
  * @author Martiruhay

@@ -1,18 +1,17 @@
 package presentacio.queries;
 
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import net.miginfocom.swing.MigLayout;
-import presentacio.ctrl.CtrlPresentacio;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTree;
 import javax.swing.table.AbstractTableModel;
+
+import net.miginfocom.swing.MigLayout;
+import presentacio.ctrl.CtrlPresentacio;
 
 public class VistaQueriesRecents {
 

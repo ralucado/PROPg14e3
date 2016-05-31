@@ -1,5 +1,5 @@
 package domini.camins;
-import java.util.*;
+import java.util.HashMap;
 
 /**
  * Representa un conjunt de camins definits

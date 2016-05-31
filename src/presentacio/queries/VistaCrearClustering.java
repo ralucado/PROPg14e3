@@ -1,16 +1,17 @@
 package presentacio.queries;
 
-import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import presentacio.ctrl.*;
-import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+
+import net.miginfocom.swing.MigLayout;
+import presentacio.ctrl.CtrlPresentacio;
+import presentacio.ctrl.VistaDialog;
 public class VistaCrearClustering {
 
 	public JFrame frame;
@@ -71,11 +72,11 @@ public class VistaCrearClustering {
 			public void actionPerformed(ActionEvent e) {
 				if (textField_1.getText().length() < 1){
 					String[] botons = {"D'acord"};
-					(new VistaDialog()).setDialog("Has d'introduir un nombre vàlid", "", botons, JOptionPane.ERROR_MESSAGE);
+					(new VistaDialog()).setDialog("Has d'introduir un nombre vï¿½lid", "", botons, JOptionPane.ERROR_MESSAGE);
 				}
 				else if (textField.getText().length() < 1){
 					String[] botons = {"D'acord"};
-					(new VistaDialog()).setDialog("Has d'introduir un camí", "", botons, JOptionPane.ERROR_MESSAGE);
+					(new VistaDialog()).setDialog("Has d'introduir un camï¿½", "", botons, JOptionPane.ERROR_MESSAGE);
 				}
 				else{
 					vQ.executarClustering();

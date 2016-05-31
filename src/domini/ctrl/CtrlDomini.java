@@ -1,10 +1,18 @@
 package domini.ctrl;
 
-import domini.camins.*;
-import domini.graf.*;
-import domini.usuaris.*;
 import java.util.ArrayList;
 import java.util.Set;
+
+import domini.camins.Cami;
+import domini.camins.ConjuntCamins;
+import domini.camins.ControladorCamins;
+import domini.camins.ExcepcioCamiExistent;
+import domini.camins.ExcepcioCamiNoExistent;
+import domini.graf.CtrlGraf;
+import domini.graf.Graf;
+import domini.usuaris.ConjuntUsuaris;
+import domini.usuaris.CtrlUsuaris;
+import domini.usuaris.Usuari;
 
 public class CtrlDomini {
 	

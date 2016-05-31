@@ -2,7 +2,8 @@ package domini.camins;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import domini.queries.SparseMatrix;
 

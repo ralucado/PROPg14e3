@@ -1,6 +1,7 @@
 package presentacio.ctrl;
 
 import javax.swing.JOptionPane;
+
 import domini.ctrl.myCtrlDomini;
 import presentacio.camins.VistaCamins;
 import presentacio.graf.VistaGestioGraf;

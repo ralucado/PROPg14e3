@@ -2,13 +2,12 @@ package domini.queries;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
 
 import domini.graf.Entitat;
 import domini.graf.Graf;
-
-import java.util.Iterator;
 
 /**
  * La classe <tt>ConjuntClusters</tt> representa un conjunt de clústers i un conjunt d'elements que no pertanyen a cap clúster.

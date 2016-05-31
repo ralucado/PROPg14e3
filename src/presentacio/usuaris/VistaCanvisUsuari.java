@@ -1,24 +1,20 @@
 package presentacio.usuaris;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
-import java.awt.Font;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
-import javax.swing.SwingConstants;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import presentacio.ctrl.CtrlPresentacio;
-
-import javax.swing.JTextField;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import presentacio.ctrl.CtrlPresentacio;
 
 public abstract class VistaCanvisUsuari extends JDialog {
 	

@@ -1,6 +1,11 @@
 package domini.graf;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Representa un graf (conjunt de dades) que conté entitats i les relacions entre elles
