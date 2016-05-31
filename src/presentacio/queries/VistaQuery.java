@@ -59,7 +59,6 @@ public class VistaQuery{
 	//EXECUTAR
 	public void executarNormal(boolean camiNou, String entitat){
 		try{
-			//System.out.println(" 
 			if (camiNou){
 				ctrl.getDomini().inicialitzarQuerynormal(cami);
 				ctrl.getDomini().seleccionarEntitatInicial(entitat);
@@ -73,10 +72,8 @@ public class VistaQuery{
 				//System.out.println(" OK!");
 			}
 			System.out.println(" OK Query!");
-			
-			//WTF?!
-			VistaResultat v = new VistaResultat(ctrl);
-			//WTF?!
+
+			VistaResultat v = new VistaResultat(ctrl, cami);
 			
 		}catch(Exception E){
 			E.printStackTrace();
