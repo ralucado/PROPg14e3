@@ -238,7 +238,8 @@ public class VistaEntitatsDialog extends JDialog {
 				}
 			}
 			catch(Exception e){
-				e.printStackTrace();
+				VistaDialog d = new VistaDialog();
+				d.setDialog("Error", e.getMessage(),new String[]{"Acceptar"}, JOptionPane.ERROR_MESSAGE);
 			}
 			
 			fireTableDataChanged();
