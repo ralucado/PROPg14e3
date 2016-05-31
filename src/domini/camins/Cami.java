@@ -28,56 +28,119 @@ public class Cami {
         this.matriuR = null;
     }
 
+	/**
+	 * Consulta el nom del camí
+	 * @return String amb el nom del camí
+	 */
 	public String getNom() {
 		return nom;
 	}
 
+	/**
+	 * Posa el nom del camí a nom
+	 * @param nom Nom del camí 
+	 */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 
+	/**
+	 * Consulta la descripció del camí
+	 * @return String amb la descripció del camí
+	 */
 	public String getDescripcio() {
 		return descripcio;
 	}
 
+	/**
+	 * Posa la descripció del camí a descripcio
+	 * @param descripcio Descripció del camí
+	 */
 	public void setDescripcio(String descripcio) {
 		this.descripcio = descripcio;
 	}
 	
+	/**
+	 * Posa la matriu esquerra del camí a mL i la matriu dreta a mR
+	 * @param mL Matriu esquerra
+	 * @param mR Matriu dreta
+	 */
 	public void setMatrius(SparseMatrix mL, SparseMatrix mR){
 		this.matriuL = new SparseMatrixBool(mL);
 		this.matriuR = new SparseMatrixBool(mR);
 	}
 	
+	/**
+	 * Posa la matriu esquerra del camí a mL i la matriu dreta a mR
+	 * @param mL Matriu esquerra
+	 * @param mR Matriu dreta
+	 */
 	public void setMatrius(SparseMatrixBool mL, SparseMatrixBool mR){
 		this.matriuL = new SparseMatrixBool(mL);
 		this.matriuR = new SparseMatrixBool(mR);
 	}
 
+	/**
+	 * Consulta les matrius del camí
+	 * @return Pair de les dues matrius
+	 */
 	public Pair<SparseMatrixBool,SparseMatrixBool> getMatrius(){
 		Pair<SparseMatrixBool,SparseMatrixBool> p = new Pair<SparseMatrixBool, SparseMatrixBool>(matriuL,matriuR);
 		return p;
 	}
 	
+	/**
+	 * Reseteja les matrius del camí
+	 */
 	public void resetMatrius(){
 		matriuL = matriuR = null;
 	}
+	
+	/**
+	 * Comprova si el camí té algun node de tipus autor
+	 * @return
+	 */
 	public boolean teAutor(){
 		return (path.contains("A"));
 	}
+	
+	/**
+	 * Comprova si el camí té algun node de tipus paper
+	 * @return
+	 */
 	public boolean tePaper(){
 		return (path.contains("P"));
 	}
+	
+	/**
+	 * Comprova si el camí té algun node de tipus conferencia
+	 * @return
+	 */
 	public boolean teConferencia(){
 		return (path.contains("C"));
 	}
+	
+	/**
+	 * Comprova si el camí té algun node de tipus terme
+	 * @return
+	 */
 	public boolean teTerme(){
 		return (path.contains("T"));
 	}
+	
+	/**
+	 * Consulta el path del camí
+	 * @return String amb el path del camí
+	 */
 	public String getPath() {
 		return path;
 	}
 
+	/**
+	 * Posa el path del camí a path
+	 * @param path Path del camí
+	 * @throws Exception El path és incorrecte
+	 */
 	public void setPath(String path) throws Exception{
 		if (badPath(path)) throw new Exception("! Path incorrecte");
 		this.path = path;
