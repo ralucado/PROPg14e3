@@ -10,6 +10,7 @@ import domini.graf.Entitat;
  * @author Martí Lloveras Rosales
  *
  */
+@SuppressWarnings("unchecked")
 public class Resultat {
 	private ArrayList<Pair<Entitat,Float>> entitats;
 	private ArrayList<Pair<Entitat,Float>> entitats_visibles;
@@ -34,11 +35,11 @@ public class Resultat {
     }
     
     
-    
-/*
- * PRE: L'array entitats esta plena de Entitats del mateix tipus (Autor, Paper, Conferencia, Terme).
- * POST: Es crea el Resultat a partir de l'array entitats.
- */
+  
+    /**
+     * Es crea el Resultat a partir de l'array entitats.
+     * @param entitats entitats del resultat
+     */
     public Resultat (ArrayList<Pair<Entitat,Float>> entitats) {
         this.entitats = entitats;
         entitats_visibles = new ArrayList<Pair<Entitat,Float>>();
@@ -48,11 +49,10 @@ public class Resultat {
         }
     }
     
-    /*
-     * PRE: L'array entitats esta plena de Entitats del mateix tipus 
-       (Autor, Paper, Conferencia, Terme).
-     * POST: Es crea el Resultata partir de l'array entitats i el nombre maxim
-       d'entitats visibles es canvia per filtreN.
+    /**
+     * Es crea el Resultat a partir de l'array entitats i el nombre màxim d'entitats visibles es canvia per filtreN.
+     * @param entitats entitats del resultat
+     * @param filtreN núm. entitats visibles
      */
     public Resultat (ArrayList<Pair<Entitat,Float>> entitats, int filtreN) {
         this.entitats = entitats;
@@ -62,14 +62,13 @@ public class Resultat {
         }
     }
     
-    /*
-     * PRE: Cert.
-     * POST: El nombre maxim d'entitats visibles del resultat es canvia per quantsVisibles.
+    /**
+     * El nombre maxim d'entitats visibles del resultat es canvia per quantsVisibles.
        Si quantsVisibles és més gran que el nombre total d'entitats, es faran visibles el 
        nombre màxim d'entitats possibles.
+     * @param n núm. entitats visibles
      */
-    
-    public void filtrarN(int n) {
+	public void filtrarN(int n) {
     	anterior = (ArrayList<Pair<Entitat,Float>>)entitats_visibles.clone();
     	if (n > entitats_visibles.size()){
     		for (int i = entitats_visibles.size(); i < n; ++i){
@@ -83,10 +82,11 @@ public class Resultat {
     	}
     }
 
-    /*
-     * PRE: 0 <= idLabel <= 4.
-     * POST: Es filtren totes les entitats amb label igual a idLabel.
-     */
+	/**
+	 * Es filtren totes les entitats amb label = <tt>idLabel</tt>.
+	 * @param idLabel ID del label a filtrar (0 <= idLabel <= 4)
+	 * @throws Exception ...
+	 */
     public void filtrarLabelEq(int idLabel) throws Exception {
     	if (idLabel < 0 || idLabel > 4) throw new Exception("idLabel ha d'estar entre 0 i 4 (inclosos)");
     	if (entitats.get(0).first.isTerme()) return;
@@ -102,9 +102,10 @@ public class Resultat {
         }
     }
 
-    /*
-     * PRE: 0 <= idLabel <= 4.
-     * POST: Es filtren totes les entitats amb label diferent a idLabel.
+    /**
+     * Es filtren totes les entitats amb label != <tt>idLabel</tt>.
+     * @param idLabel ID del label a filtrar (0 <= idLabel <= 4)
+     * @throws Exception ...
      */
     public void filtrarLabelDif(int idLabel) throws Exception {
     	if (idLabel < 0 || idLabel > 4) throw new Exception("S'incompleix 0 <= idLabel <= 4");
@@ -121,9 +122,10 @@ public class Resultat {
         }
     }
     
-    /*
-     * PRE: L'entitat amb id = idEntitat ha d'existir dins el resultat.
-     * POST: Es filtra l'entitat amb id = idEntitat.
+    /**
+     * Es filtra l'entitat amb id = idEntitat.
+     * @param idEntitat ID de l'entitat a filtrar
+     * @throws Exception ...
      */
     public void filtrarEntitat(int idEntitat) throws Exception {
     	boolean trobat = false;
@@ -138,11 +140,10 @@ public class Resultat {
         
     }
     
-    /*
-     * PRE: Cert.
-     * POST: Es netegen tots els filtres existents i el nombre maxim d'entitats 
-       visibles es canvia pel definit per defecte. Si el definit per defecte �s m�s 
-       gran que el nombre total d'entitats, es faran visibles el nombre m�xim d'entitats 
+    /**
+     * Es netegen tots els filtres existents i el nombre maxim d'entitats 
+       visibles es canvia pel definit per defecte. Si el definit per defecte és més 
+       gran que el nombre total d'entitats, es faran visibles el nombre màxim d'entitats 
        possibles.
      */
     public void netejaFiltres() {
@@ -153,61 +154,63 @@ public class Resultat {
     	}
     }
     
+    /**
+     * Desfa l'últim filtre.
+     */
     public void desferFiltre(){
     	entitats_visibles = anterior;
     }
     
-    /*
-     * PRE: Cert.
-     * POST: Es retorna cert si el resultat conté Autors.
+    /**
+     * Es retorna cert si el resultat conté Autors.
+     * @return 'true' si és d'autors; altrament, 'false'
      */
     public boolean isAutor() {
     	return (entitats.get(0).first.isAutor());
     }
     
-    /*
-     * PRE: Cert.
-     * POST: Es retorna cert si el resultat conté Papers.
+    /**
+     * Es retorna cert si el resultat conté Papers.
+     * @return 'true' si és de papers; altrament, 'false'
      */
     public boolean isPaper() {
     	return (entitats.get(0).first.isPaper());	
     }
     
-    /*
-     * PRE: Cert.
-     * POST: Es retorna cert si el resultat conté Conferencies.
+    /**
+     * Es retorna cert si el resultat conté Conferencies.
+     * @return 'true' si és de conferències; altrament, 'false'
      */
     public boolean isConferencia() {
     	return (entitats.get(0).first.isConferencia());	
     }
     
-    /*
-     * PRE: Cert.
-     * POST: Es retorna cert si el resultat conté Termes.
+    /**
+     * Es retorna cert si el resultat conté Termes.
+     * @return 'true' si és de termes; altrament, 'false'
      */
     public boolean isTerme() {
     	return (entitats.get(0).first.isTerme());
     }
     
-    /*
-     * PRE: Cert.
-     * POST: Es retorna l'array d'entitats.
+    /**
+     * Es retorna l'array d'entitats.
+     * @return conjunt d'entitats
      */
     public ArrayList<Pair<Entitat,Float>> getEntitats() {
     	return entitats;
     }
     
-    /*
-     * PRE: Cert.
-     * POST: Es retorna l'array que indica les entitats visibles.
+    /**
+     * Es retorna l'array que indica les entitats visibles.
+     * @return conjunt en
      */
     public ArrayList<Pair<Entitat,Float>> getVisibles() {
     	return entitats_visibles;
     }
     
-    /*
-     * PRE: Cert.
-     * POST: S'imprimeixen per pantalla les entitats visibles del resultat.
+    /**
+     * S'imprimeixen per pantalla les entitats visibles del resultat.
      */
     public void print() {
     	for(int i = 0; i < entitats_visibles.size(); ++i) {
@@ -216,6 +219,10 @@ public class Resultat {
     	
     }   
     
+    /**
+     * Retorna el resultat a través d'strings
+     * @return resultat en strings
+     */
     public String[][] getDadesString(){
     	String[][] resultat = new String[entitats_visibles.size()][3];
     	for(int i = 0; i < entitats_visibles.size(); ++i){
