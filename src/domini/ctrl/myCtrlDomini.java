@@ -352,6 +352,7 @@ public class myCtrlDomini extends CtrlDomini {
      * Consulta les relacions entre entitats tipus Terme i tipus Paper
      * @return Matriu d'Strings. Representa una llista de relacions amb el format (nomE1, nomE2)
      * @throws Exception ...
+     */
     public ArrayList<ArrayList<String>> consultarRelacionsTP() throws Exception {
     	return ((myCtrlGraf) ctrlGraf).consultarRelacionsTP();
     }
