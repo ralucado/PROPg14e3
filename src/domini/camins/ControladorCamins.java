@@ -353,7 +353,7 @@ public class ControladorCamins {
 	 * @throws Exception ...
 	 */
 	private void modificarNomCami(String nom, String nomNou) throws Exception{
-		usuari.consultarCami(nom).setNom(nomNou);
+		usuari.modificarNomCami(nom, nomNou);
 	}
 	
 	/**
