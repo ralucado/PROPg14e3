@@ -11,12 +11,20 @@ import java.util.Set;
  */
 public class myCtrlGraf extends CtrlGraf {
 
+	/**
+	 * Creadora de myCtrlGraf
+	 * @throws Exception ...
+	 */
 	public myCtrlGraf() throws Exception {
 		super();
 	}
 	
-	public ArrayList<ArrayList<String>> consultarRelacionsAP(){
-    	try{
+	/**
+	 * Consulta les relacions d'Autor a Paper
+	 * @return Matriu d'Strings . Representa una llista de les relacions en el format (nomE1, nomE2)
+	 * @throws Exception ...
+	 */
+	public ArrayList<ArrayList<String>> consultarRelacionsAP() throws Exception{
         	ArrayList<ArrayList<String>> rel = new ArrayList<ArrayList<String>>();
             Map<Integer,HashSet<Integer>> TP = graf.getPaperAutor();
            
@@ -31,16 +39,14 @@ public class myCtrlGraf extends CtrlGraf {
                 }
             }
             return rel;
-            
-        	}
-        	catch(Exception e){
-        		System.out.println("a");
-        	}
-			return null;
     }
     
-    public ArrayList<ArrayList<String>> consultarRelacionsCP(){
-    	try{
+	/**
+	 * Consulta les relacions de Conferencia a Paper
+	 * @return Matriu d'Strings . Representa una llista de les relacions en el format (nomE1, nomE2)
+	 * @throws Exception ...
+	 */
+    public ArrayList<ArrayList<String>> consultarRelacionsCP() throws Exception{
         	ArrayList<ArrayList<String>> rel = new ArrayList<ArrayList<String>>();
             Map<Integer,HashSet<Integer>> TP = graf.getPaperConferencia();
             
@@ -56,16 +62,14 @@ public class myCtrlGraf extends CtrlGraf {
             }
          
             return rel;
-            
-        	}
-        	catch(Exception e){
-        		System.out.println("a");
-        	}
-			return null;
     }
     
-    public ArrayList<ArrayList<String>> consultarRelacionsTP(){
-    	try{
+    /**
+	 * Consulta les relacions de terme a Paper
+	 * @return Matriu d'Strings . Representa una llista de les relacions en el format (nomE1, nomE2)
+	 * @throws Exception ...
+	 */
+    public ArrayList<ArrayList<String>> consultarRelacionsTP() throws Exception{
         	ArrayList<ArrayList<String>> rel = new ArrayList<ArrayList<String>>();
             Map<Integer,HashSet<Integer>> TP = graf.getPaperTerme();
             
@@ -81,14 +85,13 @@ public class myCtrlGraf extends CtrlGraf {
             }
          
             return rel;
-            
-        	}
-        	catch(Exception e){
-        		System.out.println("a");
-        	}
-			return null;
     }
     
+    /**
+     * Consulta tots els autors del graf i la seva informació
+     * @return Matriu d'Strings. Representa una llista dels autors en el format (id, nom, label)
+     * @throws Exception ...
+     */
     public ArrayList<ArrayList<String>> consultarAutorsExt() throws Exception {
     	ArrayList<ArrayList<String>> autors = new ArrayList<ArrayList<String>>();
     	int n = graf.getnAutors();
@@ -109,6 +112,12 @@ public class myCtrlGraf extends CtrlGraf {
     	}
     	return autors;
     }
+    
+    /**
+     * Consulta tots els papers del graf i la seva informació
+     * @return Matriu d'Strings. Representa una llista dels papers en el format (id, nom, label)
+     * @throws Exception ...
+     */
 
     public ArrayList<ArrayList<String>> consultarPapersExt() throws Exception {
     	ArrayList<ArrayList<String>> papers = new ArrayList<ArrayList<String>>();
@@ -128,6 +137,11 @@ public class myCtrlGraf extends CtrlGraf {
     	return papers;
     }
 
+    /**
+     * Consulta totes les conferencies del graf i la seva informació
+     * @return Matriu d'Strings. Representa una llista de les conferencies en el format (id, nom, label)
+     * @throws Exception ...
+     */
     public ArrayList<ArrayList<String>> consultarConferenciesExt() throws Exception {
     	ArrayList<ArrayList<String>> confs = new ArrayList<ArrayList<String>>();
     	int n = graf.getnConferencies();
@@ -149,6 +163,11 @@ public class myCtrlGraf extends CtrlGraf {
     	return confs;
     }	
     
+    /**
+     * Consulta tots els termes del graf i la seva informació
+     * @return Matriu d'Strings. Representa una llista dels termes en el format (id, nom)
+     * @throws Exception ...
+     */
     public ArrayList<ArrayList<String>> consultarTermesExt() throws Exception {
     	ArrayList<ArrayList<String>> termes = new ArrayList<ArrayList<String>>();
     	int n = graf.getnTermes();
@@ -169,12 +188,26 @@ public class myCtrlGraf extends CtrlGraf {
     	return termes;
     }
     
+    /**
+     * Esborra una entitat del graf
+     * @param nom Nom de l'entitat a esborrar
+     * @param tipus Tipus de l'entitat a esborrar
+     * @throws Exception ...
+     */
     public void esborrarEntitat(String nom, String tipus) throws Exception{
     	int id = graf.getIdByNameAndType(nom, tipus);
     	graf.eliminarEntitat(id);
     }
     
-     public void modificarEntitat(String nom, String  nomNou, String labelNova, String tipus) throws Exception {
+    /**
+     * Modifica una entitat del graf
+     * @param nom Nom de l'entitat a modificar
+     * @param nomNou Nom nou de l'entitat
+     * @param label Nova Label nova de l'entitat
+     * @param tipus Tipus de l'entitat
+     * @throws Exception ...
+     */
+    public void modificarEntitat(String nom, String  nomNou, String labelNova, String tipus) throws Exception {
     	int id = graf.getIdByNameAndType(nom, tipus);
     	Entitat e = graf.consultarEntitat(id);
     	if(nomNou!=null) e.setNom(nomNou);
