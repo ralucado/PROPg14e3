@@ -338,15 +338,15 @@ public class myCtrlDomini extends CtrlDomini {
     
     // Graf
 
-	public ArrayList<ArrayList<String>> consultarRelacionsAP(){
+	public ArrayList<ArrayList<String>> consultarRelacionsAP() throws Exception {
     	return ((myCtrlGraf) ctrlGraf).consultarRelacionsAP();
     }
     
-    public ArrayList<ArrayList<String>> consultarRelacionsCP(){
+    public ArrayList<ArrayList<String>> consultarRelacionsCP() throws Exception {
     	return ((myCtrlGraf) ctrlGraf).consultarRelacionsCP();
     }
     
-    public ArrayList<ArrayList<String>> consultarRelacionsTP(){
+    public ArrayList<ArrayList<String>> consultarRelacionsTP() throws Exception {
     	return ((myCtrlGraf) ctrlGraf).consultarRelacionsTP();
     }
     
