@@ -6,7 +6,11 @@ public class myCtrlCamins extends ControladorCamins {
 	public myCtrlCamins(String usuari) throws Exception {
 		super(usuari);
 	}
-	
+	/**
+	 * Retorna un boolea en funcio de si existeix o no el cami identificat per nom
+	 * @param nom: el nom del cami
+	 * @return indica si el cami existeix o no
+	 */
 	public boolean existeixCami(String nom){
         try {
             ArrayList<String[]> predef = consultarCaminsPredefinits();
