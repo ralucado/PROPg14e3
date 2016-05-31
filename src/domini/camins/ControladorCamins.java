@@ -1,10 +1,9 @@
 package domini.camins;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import domini.queries.Pair;
-import domini.queries.SparseMatrix;
-import persistencia.*;
-import domini.graf.*;
+import persistencia.CtrlPersistencia;
 
 public class ControladorCamins {
 	private ConjuntCamins usuari;
@@ -14,6 +13,7 @@ public class ControladorCamins {
 	/**
 	 * Creadora de ControladorCamins
 	 * @param usuari Nom de l'usuari actual
+	 * @throws Exception ...
 	 */
 	public ControladorCamins(String usuari) throws Exception{			
 		CtrlDad = new CtrlPersistencia();
@@ -70,6 +70,7 @@ public class ControladorCamins {
 	 * Consulta el camí de l'usuari amb nom=nom
 	 * @param nom Nom del camí a consultar
 	 * @return Retorna els atributs d'un camí en forma d'Array: [nom,path,descripcio]
+	 * @throws Exception ...
 	 */
 	public String[] consultarCamiUsuari(String nom) throws Exception{			
 		String cami[] = new String[3];
@@ -84,6 +85,7 @@ public class ControladorCamins {
 	 * Consulta el camí predefinit amb nom=nom
 	 * @param nom Nom del camí a consultar
 	 * @return Retorna els atributs d'un camí en forma d'Array: [nom,path,descripcio]
+	 * @throws Exception ...
 	 */
 	public String[] consultarCamiPredefinit(String nom) throws Exception{		
 		String cami[] = new String[3];
@@ -99,7 +101,7 @@ public class ControladorCamins {
 	 * Consulta un camí existent
 	 * @param nom Nom del camí a consultar
 	 * @return Retorna el camí amb el nom demanat 
-	 * @throws Exception
+	 * @throws Exception ...
 	 */
 	public Cami consultarCamiExt(String nom) throws Exception{
 		Cami c;
@@ -151,6 +153,7 @@ public class ControladorCamins {
 	/**
 	 * Consulta tots els camins de l'usuari
 	 * @return Retorna una matriu de Strings. Cada fila representa un camí, que té el nom, el path i la descripció un a cada columna.
+	 * @throws Exception ...
 	 */
 	public ArrayList<String[]> consultarCaminsUsuari() throws Exception{	
 		
@@ -165,6 +168,7 @@ public class ControladorCamins {
 	/**
 	 * Consulta tots els camins predefinits
 	 * @return Retorna una matriu de Strings. Cada fila representa un camí, que té el nom, el path i la descripció un a cada columna.
+	 * @throws Exception ...
 	 */
 	public ArrayList<String[]> consultarCaminsPredefinits() throws Exception{
 		
@@ -179,6 +183,7 @@ public class ControladorCamins {
 	/**
 	 * Guarda tots els camins de l'usuari en un fitxer
 	 * @param nomUsuari Nom de l'usuari actual
+	 * @throws Exception ...
 	 */
 	public void guardarCamins(String nomUsuari) throws Exception{		
 		ArrayList<ArrayList<String>> caminsUsuari = new ArrayList<ArrayList<String>>();
@@ -200,6 +205,7 @@ public class ControladorCamins {
 	/**
 	 * Guarda les matrius d'un camí en un fitxer
 	 * @param c Camí que es vol guardar les matrius
+	 * @throws Exception ...
 	 */
 	public void exportarMatriusCami(Cami c) throws Exception{
 
@@ -251,6 +257,7 @@ public class ControladorCamins {
 	/**
 	 * Carrega les matrius d'un camí des d'un fitxer
 	 * @param c Camí a importar les matrius
+	 * @throws Exception ...
 	 */
 	 public void importarMatriusCami(Cami c) throws Exception{
 		if(CtrlDad.existeixenMatrius(c.getPath())){
@@ -307,7 +314,7 @@ public class ControladorCamins {
 	 * Consulta el camí de l'usuari número n ordenat per nom
 	 * @param n Número del camí
 	 * @return Retorna els atributs d'un camí en forma d'Array: [nom,path,descripcio]
-	 * @throws Exception
+	 * @throws Exception ...
 	 */
 	private String[] consultarCamiUsuariN(int n) throws Exception{		
 		HashMap<String,Cami> camins = usuari.getConjunt();
@@ -324,7 +331,7 @@ public class ControladorCamins {
 	 * Consulta el camí predefinit número n ordenat per nom
 	 * @param n Número del camí
 	 * @return Retorna els atributs d'un camí en forma d'Array: [nom,path,descripcio]
-	 * @throws Exception
+	 * @throws Exception ...
 	 */
 	private String[] consultarCamiPredefinitN(int n) throws Exception{			
 		HashMap<String,Cami> camins = predefinits.getConjunt();
@@ -341,7 +348,7 @@ public class ControladorCamins {
 	 * Modifica el nom del camí de l'usuari amb nom nom
 	 * @param nom Nom del camí a modificar
 	 * @param nomNou Nom nou que se li assignarà al camí
-	 * @throws Exception
+	 * @throws Exception ...
 	 */
 	private void modificarNomCami(String nom, String nomNou) throws Exception{
 		usuari.consultarCami(nom).setNom(nomNou);
@@ -351,7 +358,7 @@ public class ControladorCamins {
 	 * Modifica el path del camí de l'usuari amb nom nom
 	 * @param nom Nom del camí a modificar
 	 * @param nomNou Path nou que se li assignarà al camí
-	 * @throws Exception
+	 * @throws Exception ...
 	 */
 	private void modificarPathCami(String nom, String pathNou) throws Exception{
 		usuari.consultarCami(nom).setPath(pathNou);
@@ -361,7 +368,7 @@ public class ControladorCamins {
 	 * Modifica la descripció del camí de l'usuari amb nom nom
 	 * @param nom Nom del camí a modificar
 	 * @param nomNou Descripció nova que se li assignarà al camí
-	 * @throws Exception
+	 * @throws Exception ...
 	 */
 	private void modificarDescrCami(String nom, String descrNou) throws Exception{
 		usuari.consultarCami(nom).setDescripcio(descrNou);

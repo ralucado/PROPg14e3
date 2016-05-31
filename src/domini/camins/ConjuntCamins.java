@@ -27,7 +27,7 @@ public class ConjuntCamins {
 	
 	/**
 	 * Retorna el mapa que representa el conjunt de camins
-	 * @return 
+	 * @return conjunt de camins
 	 */
 	public HashMap<String,Cami> getConjunt(){
 		return conjunt;
@@ -36,6 +36,7 @@ public class ConjuntCamins {
 	/**
 	 * Afegeix un camí al conjunt
 	 * @param c Camí a afegir
+	 * @throws Exception si el nom és repetit
 	 */
 	public void afegirCami(Cami c)throws Exception{
 		if (conjunt.containsKey(c.getNom())) throw new Exception("! Nom repetit");
@@ -45,6 +46,7 @@ public class ConjuntCamins {
 	/**
 	 * Elimina un camí del conjunt
 	 * @param nom Nom del camí a eliminar
+	 * @throws Exception si el camí no existeix
 	 */
 	public void eliminarCami(String nom) throws Exception{
 		if (!conjunt.containsKey(nom)) throw new Exception("! No existeix el cami");
@@ -55,6 +57,7 @@ public class ConjuntCamins {
 	 * Consulta un camí del conjunt
 	 * @param nom Nom del camí a consultar
 	 * @return Retorna el camí consultat
+	 * @throws Exception si el camí no existeix
 	 */
 	public Cami consultarCami(String nom) throws Exception{
 		if (!conjunt.containsKey(nom)) throw new Exception("! No existeix el cami");

@@ -1,15 +1,12 @@
 package domini.ctrl;
 import java.util.ArrayList;
 
-import domini.camins.Cami;
 import domini.camins.ConjuntCamins;
 import domini.camins.myCtrlCamins;
 import domini.graf.Entitat;
 import domini.graf.myCtrlGraf;
 import domini.queries.ControladorQueries;
 import domini.queries.Pair;
-import domini.queries.QueryClustering;
-import domini.queries.QueryNormal;
 import domini.usuaris.CtrlUsuaris;
 import domini.usuaris.Usuari;
 import persistencia.CtrlPersistencia;
@@ -18,6 +15,10 @@ public class myCtrlDomini extends CtrlDomini {
 	private CtrlPersistencia persistencia;
 	private ControladorQueries queries;
 	
+	/**
+	 * Crea un nou myCtrlDomini i inicialitza els components de la capa de domini
+	 * @throws Exception ...
+	 */
 	public myCtrlDomini() throws Exception {
         ctrlUsuari = new CtrlUsuaris();
         ctrlGraf = new myCtrlGraf();
@@ -32,6 +33,11 @@ public class myCtrlDomini extends CtrlDomini {
         queries = new ControladorQueries(ctrlGraf, ctrlCamins);
 	}
 	
+	/**
+	 * Inicia sessió al programa amb el nom <tt>nom</tt> i la contrasenya <tt>constrasenya</tt>
+	 * @throws Exception ...
+	 */
+	@Override
 	public void logIn(String nom, String constrasenya) throws Exception {
         Usuari aux = ctrlUsuari.carregarUsuari(nom);
         if (aux.getContrasenya().equals(constrasenya)){
@@ -42,72 +48,80 @@ public class myCtrlDomini extends CtrlDomini {
             caminsPredefinits = crearConjunt(ctrlCamins.consultarCaminsPredefinits());
         }
         else throw new Exception("Contrasenya incorrecta");
-}
+	}
 	
+	// Usuaris
+	
+	/**
+	 * Retorna si l'usuari actual és administrador
+	 * @return 'true' si l'usuari actual és administrador; altrament, 'false'
+	 */
 	public boolean esAdmin() {
 		return ctrlUsuari.getUsuari().esAdmin();
 	}
 	
+	/**
+	 * Retorna el nom d'usuari de l'usuari actual
+	 * @return nom de l'usuari actual
+	 */
 	public String getUsuariActual() {
 		return usuari.getNom();
 	}
 	
+	/**
+	 * Retorna la contrasenya de l'usuari <tt>user</tt>
+	 * @param user nom d'usuari
+	 * @return contrasenya de l'usuari
+	 * @throws Exception ...
+	 */
 	public String getContrasenya(String user) throws Exception {
 		return conjuntUsuaris.consultarContrasenya(user);
 	}
 	
-	public ControladorQueries getCtrlQueries(){
-		return queries;
-	}
-	
+	/**
+	 * Crea un usuari amb nom = <tt>nom</tt>, contrasenya = <tt>contrasenya</tt> i admin = <tt>false</tt>, i l'afegeix al conjunt del controlador. A més, li crea un nou fitxer de camins buit.
+	 * @param nom nom de l'usuari a crear
+	 * @param contrasenya contrasenya de l'usuari a crear
+	 * @throws Exception retorna excepció si el conjunt d'usuaris del controlador ja conté un usuari amb el mateix nom o si l'usuari del controlador no és administrador
+	 */
 	public void altaUsuari(String nom, String contrasenya) throws Exception {
 		super.altaUsuari(nom, contrasenya);
 		persistencia.creaFitxerCamins(nom);
 	}
 	
+	/**
+	 * Crea un usuari amb nom = <tt>nom</tt>, contrasenya = <tt>contrasenya</tt> i admin = <tt>false</tt>, i l'afegeix al conjunt del controlador, augmentant el nº d'admins. A més, li crea un nou fitxer de camins buit.
+	 * @param nom nom de l'usuari a crear
+	 * @param contrasenya contrasenya de l'usuari a crear
+	 * @throws Exception retorna excepció si el conjunt d'usuaris del controlador ja conté un usuari amb el mateix nom o si l'usuari del controlador no és administrador
+	 */
 	public void altaAdmin(String nom, String contrasenya) throws Exception {
 		super.altaAdmin(nom, contrasenya);
 		persistencia.creaFitxerCamins(nom);
 	}
 	
+	/**
+	 * Elimina del conjunt del controlador l'usuari nom = <tt>nom</tt> i en cas de ser Admin, disminueix el nº d'admins. A més, elimina el seu fitxer de camins.
+	 * @param nom nom de l'usuari a eliminar
+	 * @throws Exception retorna excepció si el conjunt del controlador no conté cap usuari amb el mateix nom, si l'usuari és l'únic administrador del conjunt o si l'usuari del controlador no és administrador
+	 */
 	public void baixaUsuari(String nom) throws Exception {
         super.baixaUsuari(nom);
         persistencia.esborraFitxerCamins(nom);
 	}
 	
+	/**
+	 * Modifica el nom de l'usuari amb nom=nomActual per tal que nom=nomNou. A més, reanomena el fitxer de camins.
+	 * @param nomActual nom actual de l'usuari
+	 * @param nomNou nom nou de l'usuari
+	 * @throws Exception retorna excepció si el conjunt del controlador no conté cap usuari amb nom = <tt>nomActual</tt> o si l'usuari del controlador no és administrador
+	 */
 	public void modificarNomUsuari(String nomActual, String nomNou) throws Exception {
 	    super.modificarNomUsuari(nomActual, nomNou);
 	    persistencia.reanomenaFitxerCamins(nomActual, nomNou);
-	}
+	}    
 	
-	public ArrayList<ArrayList<String>> consultarRelacionsAP(){
-    	return ((myCtrlGraf) ctrlGraf).consultarRelacionsAP();
-    }
-    
-    public ArrayList<ArrayList<String>> consultarRelacionsCP(){
-    	return ((myCtrlGraf) ctrlGraf).consultarRelacionsCP();
-    }
-    
-    public ArrayList<ArrayList<String>> consultarRelacionsTP(){
-    	return ((myCtrlGraf) ctrlGraf).consultarRelacionsTP();
-    }
-    
-    public ArrayList<ArrayList<String>> consultarAutorsExt() throws Exception {
-    	return ((myCtrlGraf) ctrlGraf).consultarAutorsExt();
-    }
-
-    public ArrayList<ArrayList<String>> consultarPapersExt() throws Exception {
-    	return ((myCtrlGraf) ctrlGraf).consultarPapersExt();
-    }
-
-    public ArrayList<ArrayList<String>> consultarConferenciesExt() throws Exception {
-    	return ((myCtrlGraf) ctrlGraf).consultarConferenciesExt();
-    }	
-    
-    public ArrayList<ArrayList<String>> consultarTermesExt() throws Exception {
-    	return ((myCtrlGraf) ctrlGraf).consultarTermesExt();
-    }
-    
+	// Queries
     
     /**
 	 * Inicialitza una query de tipus clustering
@@ -320,7 +334,37 @@ public class myCtrlDomini extends CtrlDomini {
     public String[][] getDadesNormal() throws Exception{
     	return queries.getDadesNormal();
     }
+    
+    // Graf
 
+	public ArrayList<ArrayList<String>> consultarRelacionsAP(){
+    	return ((myCtrlGraf) ctrlGraf).consultarRelacionsAP();
+    }
+    
+    public ArrayList<ArrayList<String>> consultarRelacionsCP(){
+    	return ((myCtrlGraf) ctrlGraf).consultarRelacionsCP();
+    }
+    
+    public ArrayList<ArrayList<String>> consultarRelacionsTP(){
+    	return ((myCtrlGraf) ctrlGraf).consultarRelacionsTP();
+    }
+    
+    public ArrayList<ArrayList<String>> consultarAutorsExt() throws Exception {
+    	return ((myCtrlGraf) ctrlGraf).consultarAutorsExt();
+    }
+
+    public ArrayList<ArrayList<String>> consultarPapersExt() throws Exception {
+    	return ((myCtrlGraf) ctrlGraf).consultarPapersExt();
+    }
+
+    public ArrayList<ArrayList<String>> consultarConferenciesExt() throws Exception {
+    	return ((myCtrlGraf) ctrlGraf).consultarConferenciesExt();
+    }	
+    
+    public ArrayList<ArrayList<String>> consultarTermesExt() throws Exception {
+    	return ((myCtrlGraf) ctrlGraf).consultarTermesExt();
+    }
+    
 	public void esborrarEntitat(String nom, String tipus) throws Exception {
 		((myCtrlGraf) ctrlGraf).esborrarEntitat(nom, tipus);
 		

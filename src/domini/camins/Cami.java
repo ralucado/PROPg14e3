@@ -18,6 +18,7 @@ public class Cami {
 	 * @param nom Nom del nou camí
 	 * @param path Path d'entitats del nou camí
 	 * @param descripcio Descripció del nou camí
+	 * @throws Exception si el path és incorrecte
 	 */
 	public Cami(String nom, String path, String descripcio) throws Exception {
 		if (badPath(path)) throw new Exception("! Path incorrecte");
