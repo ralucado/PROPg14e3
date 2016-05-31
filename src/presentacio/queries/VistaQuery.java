@@ -96,12 +96,13 @@ public class VistaQuery{
 				ctrl.getDomini().executarClustering();
 			}
 			else {
-				ctrl.getDomini().inicialitzarQueryClusteringlNom(cami);
+				ctrl.getDomini().inicialitzarQueryClusteringlNom(cami,k);
 				ctrl.getDomini().executarClustering();
 			}
 			System.out.println(" OK Clustering!");
 		}catch (Exception E){
-			E.printStackTrace();
+			String[] botons = {"D'acord"};
+			(new VistaDialog()).setDialog("Error al executar la query", E.getMessage(), botons, JOptionPane.ERROR_MESSAGE);
 		}
 		fesVisible();
 	}

@@ -136,10 +136,11 @@ public class myCtrlDomini extends CtrlDomini {
 	/**
 	 * Inicialitza una query de tipus clustering amb un camí existent
 	 * @param nom Nom del camí que ja existeix
+	 * @param Número de clústers
 	 * @throws Exception ...
 	 */
-	public void inicialitzarQueryClusteringlNom(String nom) throws Exception{
-		queries.inicialitzarQueryClusteringlNom(nom);
+	public void inicialitzarQueryClusteringlNom(String nom, int k) throws Exception{
+		queries.inicialitzarQueryClusteringlNom(nom, k);
 	}
 	
 	/**
@@ -157,7 +158,7 @@ public class myCtrlDomini extends CtrlDomini {
 	 * @throws Exception ...
 	 */
 	public void inicialitzarQuerynormalNom(String nom) throws Exception{
-		queries.inicialitzarQueryClusteringlNom(nom);
+		queries.inicialitzarQuerynormalNom(nom);
 	}
 	
 	/**

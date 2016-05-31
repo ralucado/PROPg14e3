@@ -47,12 +47,9 @@ public class ControladorQueries{
 	 * @param nom Nom del camí que ja existeix
 	 * @throws Exception ...
 	 */
-	public void inicialitzarQueryClusteringlNom(String nom) throws Exception{
-		System.out.println("ctrlQueries");
-		System.out.println(CtrlCamins);
+	public void inicialitzarQueryClusteringlNom(String nom, int k) throws Exception{
 		Cami c = CtrlCamins.consultarCamiExt(nom);
-		System.out.println(c.getNom() + " = " + c.getPath() + " = " + c.getDescripcio());
-		QueryActual = new QueryNormal(c);
+		QueryActual = new QueryClustering(c, k, HS);
 	}
 	
 	/**
