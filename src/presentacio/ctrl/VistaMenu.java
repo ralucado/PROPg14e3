@@ -11,11 +11,6 @@ import javax.swing.JFrame;
 
 import net.miginfocom.swing.MigLayout;
 
-/**
- * 
- * @author Cristina Raluca Vijulie
- *
- */
 public class VistaMenu {
 
 	private CtrlPresentacio ctrl;

@@ -18,11 +18,6 @@ import net.miginfocom.swing.MigLayout;
 import presentacio.ctrl.CtrlPresentacio;
 import presentacio.ctrl.VistaDialog;
 
-/**
- * 
- * @author Cristina Raluca Vijulie
- *
- */
 public class VistaCamins {
 
 	private CtrlPresentacio ctrl;

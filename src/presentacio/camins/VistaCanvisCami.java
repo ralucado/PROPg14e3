@@ -14,11 +14,6 @@ import javax.swing.JTextField;
 
 import presentacio.ctrl.CtrlPresentacio;
 
-/**
- * 
- * @author Cristina Raluca Vijulie
- *
- */
 @SuppressWarnings("serial")
 public class VistaCanvisCami extends JDialog {
 	
