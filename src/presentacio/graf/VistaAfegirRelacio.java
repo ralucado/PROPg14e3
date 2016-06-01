@@ -18,6 +18,11 @@ import net.miginfocom.swing.MigLayout;
 import presentacio.ctrl.CtrlPresentacio;
 import presentacio.ctrl.VistaDialog;
 
+/**
+ * És la vista per afegir relacions entre entitats al graf.
+ * @author Marc Villanueva Cuadrench
+ *
+ */
 @SuppressWarnings("serial")
 public class VistaAfegirRelacio extends JDialog {
 

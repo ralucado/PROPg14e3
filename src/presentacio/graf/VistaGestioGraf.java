@@ -13,6 +13,11 @@ import javax.swing.SwingConstants;
 import net.miginfocom.swing.MigLayout;
 import presentacio.ctrl.CtrlPresentacio;
 
+/**
+ * És la vista per gestionar el graf (relacions i entitats).
+ * @author Marc Villanueva Cuadrench
+ *
+ */
 public class VistaGestioGraf{
 
 	private JFrame frame;

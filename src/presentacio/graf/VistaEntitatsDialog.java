@@ -29,6 +29,11 @@ import net.miginfocom.swing.MigLayout;
 import presentacio.ctrl.CtrlPresentacio;
 import presentacio.ctrl.VistaDialog;
 
+/**
+ * És la vista per a seleccionar una entitat d'un tipus concret.
+ * @author Marc Villanueva Cuadrench
+ *
+ */
 @SuppressWarnings("serial")
 public class VistaEntitatsDialog extends JDialog {
 

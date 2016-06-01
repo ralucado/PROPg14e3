@@ -12,6 +12,10 @@ import presentacio.queries.VistaQuery;
 import presentacio.usuaris.VistaIniciSessio;
 import presentacio.usuaris.VistaUsuaris;
 
+/**
+ * És el controlador de la capa de presentació.
+ * @author Cristina Raluca Vijulie
+ */
 public class CtrlPresentacio {
 	private myCtrlDomini ctrlDomini;
 	private VistaUsuaris vUsuaris;
@@ -21,6 +25,9 @@ public class CtrlPresentacio {
 	private VistaGestioGraf vGraf;
 	private VistaQuery vQuery;
  	
+	/**
+	 * Crea un nou CtrlPresentacio.
+	 */
 	public CtrlPresentacio() {
 		try {
 			ctrlDomini = new myCtrlDomini();
@@ -43,10 +50,17 @@ public class CtrlPresentacio {
 		}
 	}
 	
+	/**
+	 * Retorna el controlador de domini
+	 * @return controlador de domini
+	 */
 	public myCtrlDomini getDomini() {
 		return ctrlDomini;
 	}
 	
+	/**
+	 * Obre la vista d'inici de sessió.
+	 */
 	public void openLogIn() {
 		if (vIniciSessio == null)
 			vIniciSessio = new VistaIniciSessio(this);
@@ -57,26 +71,13 @@ public class CtrlPresentacio {
 		}
 	}
 	
+	/**
+	 * Obre la vista de gestió d'usuaris.
+	 */
 	public void openUsuaris() {
 		try {
-			if (ctrlDomini.esAdmin()) {
-				if (vUsuaris == null) vUsuaris = new VistaUsuaris(this);
-				else vUsuaris.fesVisible();
-			}
-			else {
-				VistaDialog dialog = new VistaDialog();
-				String[] botons = {"D'acord"};
-				dialog.setDialog("Error al iniciar programa", "No tens permís per accedir-hi!", botons, JOptionPane.WARNING_MESSAGE);
-				try {
-					ctrlDomini.logOut();
-				}
-				catch (Exception exc2) {
-					VistaDialog dialog2 = new VistaDialog();
-					String[] botons2 = {"D'acord"};
-					dialog2.setDialog("Error al iniciar programa", exc2.getMessage(), botons2, JOptionPane.WARNING_MESSAGE);
-				}
-				openLogIn();
-			}
+			if (vUsuaris == null) vUsuaris = new VistaUsuaris(this);
+			else vUsuaris.fesVisible();
 		}
 		catch (Exception exc) {
 			VistaDialog dialog = new VistaDialog();
@@ -85,6 +86,9 @@ public class CtrlPresentacio {
 		}
 	}
 
+	/**
+	 * Obre la vista del menú principal.
+	 */
 	public void openMenu() {
 		try{
 			if (vMenu == null) vMenu = new VistaMenu(this);
@@ -97,6 +101,9 @@ public class CtrlPresentacio {
 		}
 	}
 
+	/**
+	 * Obre la vista de gestió de camins.
+	 */
 	public void openCamins() {
 		try{
 			vCamins = new VistaCamins(this);
@@ -109,6 +116,9 @@ public class CtrlPresentacio {
 		}
 	}
 	
+	/**
+	 * Obre la vista de gestió del graf.
+	 */
 	public void openGraf(){
 		try{
 			vGraf = new VistaGestioGraf(this);
@@ -121,6 +131,9 @@ public class CtrlPresentacio {
 		}
 	}
 	
+	/**
+	 * Obre la vista per a realitzar queries.
+	 */
 	public void openQuery(){
 		try{
 			vQuery = new VistaQuery(this);

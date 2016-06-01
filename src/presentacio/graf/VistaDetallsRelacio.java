@@ -11,6 +11,11 @@ import javax.swing.JLabel;
 
 import net.miginfocom.swing.MigLayout;
 
+/**
+ * És la vista que mostra els detalls d'una relació entre entitats.
+ * @author Marc Villanueva Cuadrench
+ *
+ */
 @SuppressWarnings("serial")
 public class VistaDetallsRelacio extends JDialog {
 

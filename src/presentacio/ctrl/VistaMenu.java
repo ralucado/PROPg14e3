@@ -17,6 +17,10 @@ import javax.swing.JOptionPane;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 
+/**
+ * És la vista del menú principal del programa.
+ * @author Cristina Raluca Vijulie
+ */
 public class VistaMenu {
 
 	private CtrlPresentacio ctrl;
@@ -28,12 +32,20 @@ public class VistaMenu {
 	private JButton btnGraf;
 	private JLabel lblNewLabel;
 	
+	/**
+	 * Crea una nova VistaMenu
+	 * @param ctrl controlador de presentació
+	 * @throws Exception ...
+	 */
 	public VistaMenu(CtrlPresentacio ctrl) throws Exception {
 		this.ctrl = ctrl;
 		init();
 		frame.setVisible(true);
 	}
 	
+	/**
+	 * Fa visible la vista.
+	 */
 	public void fesVisible() {
 		frame.setVisible(true);
 	}

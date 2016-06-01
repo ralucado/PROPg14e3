@@ -18,6 +18,11 @@ import net.miginfocom.swing.MigLayout;
 import presentacio.ctrl.CtrlPresentacio;
 import presentacio.ctrl.VistaDialog;
 
+/**
+ * És la vista per modificar entitats del graf.
+ * @author Marc Villanueva Cuadrench
+ *
+ */
 @SuppressWarnings({"rawtypes", "serial", "unchecked"})
 public class VistaModificarEntitat extends JDialog {
 

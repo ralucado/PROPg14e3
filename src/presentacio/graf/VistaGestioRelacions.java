@@ -29,6 +29,11 @@ import net.miginfocom.swing.MigLayout;
 import presentacio.ctrl.CtrlPresentacio;
 import presentacio.ctrl.VistaDialog;
 
+/**
+ * És la vista per gestionar les relacions del graf.
+ * @author Marc Villanueva Cuadrench
+ *
+ */
 public class VistaGestioRelacions{
 
 	public JFrame frame;

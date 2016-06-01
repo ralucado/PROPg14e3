@@ -4,29 +4,29 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+/**
+ * És la vista per fer diàlegs per tractament d'excepcions, avisos o preguntes Sí/No, entre d'altres usos.
+ * @author Arnau Blanch Cortès
+ *
+ */
 @SuppressWarnings("serial")
 public class VistaDialog extends JDialog {
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			VistaDialog dialog = new VistaDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
+	 * Crea una nova VistaDialog buida.
 	 */
 	public VistaDialog() {
 		
 	}
 	
+	/**
+	 * Emplena els elements del VistaDialog a partir dels paràmetres i retorna quin botó se selecciona.
+	 * @param title títol del diàleg
+	 * @param text text del diàleg
+	 * @param buttons botons del diàleg
+	 * @param type tipus de diàleg
+	 * @return posició del botó que s'ha premut
+	 */
 	public int setDialog(String title, String text, String[] buttons, int type) {
 		
 		JOptionPane optionPane = new JOptionPane(text, type);

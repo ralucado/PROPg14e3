@@ -29,6 +29,11 @@ import net.miginfocom.swing.MigLayout;
 import presentacio.ctrl.CtrlPresentacio;
 import presentacio.ctrl.VistaDialog;
 
+/**
+ * És la vista per gestionar les entitats del graf.
+ * @author Marc Villanueva Cuadrench
+ *
+ */
 public class VistaGestioEntitats{
 
 	public JFrame frame;

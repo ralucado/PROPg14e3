@@ -18,6 +18,10 @@ import net.miginfocom.swing.MigLayout;
 import presentacio.ctrl.CtrlPresentacio;
 import presentacio.ctrl.VistaDialog;
 
+/**
+ * És la vista per afegir entitats al graf.
+ * @author Marc Villanueva Cuadrench
+ */
 @SuppressWarnings({"unused", "rawtypes", "serial", "unchecked"})
 public class VistaAfegirEntitat extends JDialog {
 
