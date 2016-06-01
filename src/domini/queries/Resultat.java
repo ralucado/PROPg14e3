@@ -2,6 +2,7 @@ package domini.queries;
 
 import java.util.ArrayList;
 
+import domini.graf.Autor;
 import domini.graf.Entitat;
 
 /**
@@ -73,13 +74,15 @@ public class Resultat {
     	if (entitats.get(0).first.isTerme()) return;
     	anterior = (ArrayList<Pair<Entitat,Float>>)entitats_visibles.clone();
     	Entitat e;
-        for(int i = 0; i < entitats_visibles.size(); ++i) {
+    	System.out.println(entitats_visibles.size());
+        for(int i = 0; i < entitats_visibles.size();) {
         	e = entitats_visibles.get(i).first;
-        	if(e.isAutor() || e.isConferencia() || e.isPaper()) {
         		if(e.getLabel() != idLabel){
         			entitats_visibles.remove(i);
         		}
-        	}
+        		else{
+        			++i;
+        		}
         }
     }
 
