@@ -50,6 +50,11 @@ public class VistaCrearQuery {
 		frame.getContentPane().add(lblCami, "cell 0 1,alignx left");
 		
 		textCami = new JTextField();
+		textCami.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				camiNou = true;
+			}
+		});
 		frame.getContentPane().add(textCami, "flowx,cell 2 1,growx");
 		textCami.setColumns(10);
 		
@@ -84,8 +89,11 @@ public class VistaCrearQuery {
 				}
 				else{
 					ArrayList<String> A = new ArrayList<String>();
-					String s;
+					String s = null;
+					Boolean camiValid = true;
 					switch(textCami.getText().charAt(0)){
+					case 'P':
+						s = "Paper"; break;
 					case 'T':
 						s = "Terme"; break;
 					case 'A':
@@ -93,10 +101,20 @@ public class VistaCrearQuery {
 					case 'C':
 						s = "Conferencia"; break;
 					default:
-						s = "Paper";
+						camiValid = false;
+						String[] botons = {"D'acord"};
+						(new VistaDialog()).setDialog("Primer has de seleccionar un cami valid", "", botons, JOptionPane.ERROR_MESSAGE);
 					}
-					new VistaEntitatsDialog(ctrl,frame,s,A);
-					textEntitat.setText(A.get(0));
+					if (camiValid){
+						try{
+						new VistaEntitatsDialog(ctrl,frame,s,A);
+						if (A.size() > 0) textEntitat.setText(A.get(0));
+						}
+						catch (Exception exc){
+							String[] botons = {"D'acord"};
+							(new VistaDialog()).setDialog("Error", exc.getMessage(), botons, JOptionPane.ERROR_MESSAGE);
+						}
+					}
 				}
 			}
 		});
@@ -113,7 +131,7 @@ public class VistaCrearQuery {
 			public void actionPerformed(ActionEvent e) {
 				if (textCami.getText().length() < 1){
 					String[] botons = {"D'acord"};
-					(new VistaDialog()).setDialog("Has d'introduir un cam�", "", botons, JOptionPane.ERROR_MESSAGE);
+					(new VistaDialog()).setDialog("Has d'introduir un cami", "", botons, JOptionPane.ERROR_MESSAGE);
 				}
 				else if (textEntitat.getText().length() < 1){
 					String[] botons = {"D'acord"};
@@ -123,7 +141,13 @@ public class VistaCrearQuery {
 					if (camiNou){
 						vQ.setCami("",textCami.getText());
 					}
+					try{
 					vQ.executarNormal(camiNou, textEntitat.getText());
+					}
+					catch (Exception exc){
+						String[] botons = {"D'acord"};
+						(new VistaDialog()).setDialog("Error en executar la query", exc.getMessage(), botons, JOptionPane.ERROR_MESSAGE);
+					}
 					frame.dispose();
 				}
 			}

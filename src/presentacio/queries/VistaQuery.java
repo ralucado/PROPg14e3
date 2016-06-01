@@ -60,8 +60,7 @@ public class VistaQuery{
 	}
 	
 	//EXECUTAR
-	public void executarNormal(boolean camiNou, String entitat){
-		try{
+	public void executarNormal(boolean camiNou, String entitat) throws Exception{
 			if (camiNou){
 				ctrl.getDomini().inicialitzarQuerynormal(pathCami);
 				ctrl.getDomini().seleccionarEntitatInicial(entitat);
@@ -77,10 +76,6 @@ public class VistaQuery{
 			System.out.println(" OK Query!");
 
 			new VistaResultatNew(ctrl, this);
-			
-		}catch(Exception E){
-			E.printStackTrace();
-		}
 	}
 	
 	public void executarClustering(boolean camiNou, int k){
