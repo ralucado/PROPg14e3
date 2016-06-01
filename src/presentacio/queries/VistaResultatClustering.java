@@ -11,6 +11,7 @@ import javax.swing.table.AbstractTableModel;
 
 import net.miginfocom.swing.MigLayout;
 import presentacio.ctrl.CtrlPresentacio;
+import javax.swing.JLabel;
 
 @SuppressWarnings("serial")
 public class VistaResultatClustering extends JDialog{
@@ -33,6 +34,9 @@ public class VistaResultatClustering extends JDialog{
 		JScrollPane scrollPane = new JScrollPane(table_1);
 		getContentPane().add(scrollPane, "cell 1 1,grow");
 		scrollPane.setViewportView(table_1);
+		
+		JLabel lblNoEsMostren = new JLabel("No es mostren les entitats que no s'han assignat a cap cluster");
+		getContentPane().add(lblNoEsMostren, "cell 1 2");
 		initialize();
 	}
 

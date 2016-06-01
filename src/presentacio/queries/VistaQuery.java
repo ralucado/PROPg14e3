@@ -102,6 +102,7 @@ public class VistaQuery{
 	public ArrayList<String> formatejaRes(ArrayList<ArrayList<String>> res){
 		ArrayList<String> a = new ArrayList<String>();
 		for (int i = 0; i < res.size(); ++i){
+			a.add("----- CLUSTER " + i+1 + " -----");
 			for (int j = 0; j < res.get(i).size(); ++j){
 				a.add(res.get(i).get(j));
 			}
