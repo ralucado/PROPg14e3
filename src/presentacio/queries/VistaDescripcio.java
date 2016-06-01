@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import presentacio.ctrl.*;
 
@@ -36,7 +38,13 @@ public class VistaDescripcio {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				e.getWindow().dispose();
+				ctrl.openQuery();
+			}
+		});
 		frame.getContentPane().setLayout(new MigLayout("", "[grow][][][][][grow]", "[][][][grow]"));
 		
 		JLabel lblEscriuLaDescripci = new JLabel("Escriu la descripci\u00F3 i el nom del nou cam\u00ED: ");
