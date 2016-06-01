@@ -136,7 +136,7 @@ public class myCtrlDomini extends CtrlDomini {
 	/**
 	 * Inicialitza una query de tipus clustering amb un camí existent
 	 * @param nom Nom del camí que ja existeix
-	 * @param Número de clústers
+	 * @param k Número de clústers
 	 * @throws Exception ...
 	 */
 	public void inicialitzarQueryClusteringlNom(String nom, int k) throws Exception{
@@ -334,6 +334,7 @@ public class myCtrlDomini extends CtrlDomini {
     /**
      * Consulta les relacions entre entitats tipus Autor i tipus Paper
      * @return Matriu d'Strings. Representa una llista de relacions amb el format (nomE1, nomE2)
+     * @throws Exception ...
      */
 	public ArrayList<ArrayList<String>> consultarRelacionsAP() throws Exception {
     	return ((myCtrlGraf) ctrlGraf).consultarRelacionsAP();
@@ -408,7 +409,7 @@ public class myCtrlDomini extends CtrlDomini {
      * Modifica una entitat del graf
      * @param nom Nom de l'entitat a modificar
      * @param nomNou Nom nou de l'entitat
-     * @param label Nova Label nova de l'entitat
+     * @param labelNova Nova Label nova de l'entitat
      * @param tipus Tipus de l'entitat
      * @throws Exception ...
      */
@@ -428,7 +429,7 @@ public class myCtrlDomini extends CtrlDomini {
 	
 	/**
      * Retorna l'ID d'una entitat a partir del nom i el tipus
-     * @param nomEntitat nom d'entitat
+     * @param nom nom d'entitat
      * @param tipus tipus d'entitat
      * @return ID de l'entitat
      * @throws Exception ...
