@@ -91,8 +91,8 @@ public class CtrlPresentacio {
 	 */
 	public void openMenu() {
 		try{
-			if (vMenu == null) vMenu = new VistaMenu(this);
-			else vMenu.fesVisible();
+			vMenu = new VistaMenu(this);
+			vMenu.fesVisible();
 
 		} catch (Exception e) {
 			VistaDialog dialog = new VistaDialog();
