@@ -33,13 +33,13 @@ public class VistaResultatClustering extends JDialog{
 		super(parent,true);
 		this.ctrl = ctrl;
 		this.vQ = vq;
-		getContentPane().setLayout(new MigLayout("", "[][][][][][][grow]", "[][][][][grow]"));
+		getContentPane().setLayout(new MigLayout("", "[][438px,grow][]", "[25px][229px,grow][]"));
 		clusterData = new ClusterTableModel();
 		
 		table_1 = new JTable(clusterData);
 		table_1.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		JScrollPane scrollPane = new JScrollPane(table_1);
-		getContentPane().add(scrollPane);
+		getContentPane().add(scrollPane, "cell 1 1,grow");
 		scrollPane.setViewportView(table_1);
 		initialize();
 	}

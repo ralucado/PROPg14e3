@@ -7,6 +7,8 @@ import presentacio.graf.*;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
