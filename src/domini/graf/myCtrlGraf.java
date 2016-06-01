@@ -202,7 +202,7 @@ public class myCtrlGraf extends CtrlGraf {
      * Modifica una entitat del graf
      * @param nom Nom de l'entitat a modificar
      * @param nomNou Nom nou de l'entitat
-     * @param label Nova Label nova de l'entitat
+     * @param labelNova Nova Label nova de l'entitat
      * @param tipus Tipus de l'entitat
      * @throws Exception ...
      */
@@ -229,8 +229,8 @@ public class myCtrlGraf extends CtrlGraf {
     
     /**
      * Retorna l'ID d'una entitat a partir del nom i el tipus
-     * @param nomEntitat nom d'entitat
-     * @param tipus tipus d'entitat
+     * @param nom Nom d'entitat
+     * @param tipus Tipus d'entitat
      * @return ID de l'entitat
      * @throws Exception ...
      */
