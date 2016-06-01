@@ -100,7 +100,7 @@ public class QueryClustering extends Query {
 				
 		Boolean changed = true;
 		int it = 0;
-		while (changed && it < 1000) { // Atura si ha convergit o s'ha arribat a la 10.000a iteració
+		while (changed && it < 10000) { // Atura si ha convergit o s'ha arribat a la 10.000a iteració
 			cjt.updateMedoids(M); // Recalculem els medoides de cada clúster
 
 			changed = false;
