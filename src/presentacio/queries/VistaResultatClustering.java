@@ -39,7 +39,7 @@ public class VistaResultatClustering extends JDialog{
 		table_1 = new JTable(clusterData);
 		table_1.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		JScrollPane scrollPane = new JScrollPane(table_1);
-		getContentPane().add(scrollPane);
+		getContentPane().add(scrollPane, "grow");
 		scrollPane.setViewportView(table_1);
 		initialize();
 	}
