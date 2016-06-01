@@ -36,6 +36,7 @@ public class VistaAfegirRelacio extends JDialog {
 	
 	
 	private String[] tipusE = {"", "Autor", "Conferencia", "Terme"};
+	
 	private void initComponents(){
 		
 		

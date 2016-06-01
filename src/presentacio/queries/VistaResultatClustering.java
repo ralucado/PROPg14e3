@@ -64,7 +64,7 @@ public class VistaResultatClustering extends JDialog{
 
 			} catch (Exception e) {
 				String[] botons = {"D'acord"};
-				(new VistaDialog()).setDialog("Error", "No s'ha pogut obrir el resultat de clustering", botons, JOptionPane.ERROR_MESSAGE);
+				(new VistaDialog()).setDialog("No s'ha pogut obrir el resultat de clustering", e.getMessage(), botons, JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		

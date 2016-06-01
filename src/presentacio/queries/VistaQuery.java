@@ -11,6 +11,11 @@ import net.miginfocom.swing.MigLayout;
 import presentacio.ctrl.CtrlPresentacio;
 import presentacio.ctrl.VistaDialog;
 
+/**
+ * 
+ * @author Martí Lloveras Rosales
+ *
+ */
 public class VistaQuery{
 	private CtrlPresentacio ctrl;
 	public JFrame frame;
@@ -18,6 +23,11 @@ public class VistaQuery{
 	public String nomCami;
 	private ArrayList<String> resClustering;
 	
+	/**
+	 * 
+	 * @param ctrl Controlador de presentació
+	 * @throws Exception
+	 */
 	public VistaQuery(CtrlPresentacio ctrl) throws Exception {
 		this.ctrl = ctrl;
 		init();
@@ -25,6 +35,9 @@ public class VistaQuery{
 		pathCami = new String();
 	}
 	
+	/**
+	 * Inicialitza els components
+	 */
 	private void init() {
 		resClustering = new ArrayList<String>();
 		frame = new JFrame();
@@ -51,16 +64,28 @@ public class VistaQuery{
 		tabbedPane.addTab("Query Clustering", qC.frame.getContentPane());
 	}
 	
+	/**
+	 * Fa visible la finestra
+	 */
 	public void fesVisible() {
 		frame.setVisible(true);
 	}
-
+	
+	/**Actualitza els camps
+	 * @param nom Nom del camí de la query a realitzar
+	 * @param path Path del camí de la query a realitzar
+	 */
 	public void setCami(String nom, String path) {
 		this.nomCami = nom;
 		this.pathCami = path;
 	}
 	
-	//EXECUTAR
+	/**
+	 * Executa una query
+	 * @param camiNou Indica si el camí és del sistema o se n'introdueix un de nou
+	 * @param entitat Entitat inicial
+	 * @throws Exception
+	 */
 	public void executarNormal(boolean camiNou, String entitat) throws Exception{
 			if (camiNou){
 				ctrl.getDomini().inicialitzarQuerynormal(pathCami);
@@ -76,6 +101,11 @@ public class VistaQuery{
 			new VistaResultatNew(ctrl, this);
 	}
 	
+	/**
+	 * Executa clustering
+	 * @param camiNou Camí a fer servir
+	 * @param k Nombre de clusters
+	 */
 	public void executarClustering(boolean camiNou, int k){
 		try{
 			if (camiNou){
@@ -86,19 +116,27 @@ public class VistaQuery{
 				ctrl.getDomini().inicialitzarQueryClusteringlNom(nomCami, k);
 				resClustering = formatejaRes(ctrl.getDomini().executarClustering());
 			}
-			System.out.println(" OK Clustering!");
+			new VistaResultatClustering(ctrl,frame,this);
 		}catch (Exception E){
 			String[] botons = {"D'acord"};
-			(new VistaDialog()).setDialog("Error", "No s'ha pogut executar clustering", botons, JOptionPane.ERROR_MESSAGE);
+			(new VistaDialog()).setDialog("No s'ha pogut executar clustering", E.getMessage(), botons, JOptionPane.ERROR_MESSAGE);
 		}
-		new VistaResultatClustering(ctrl,frame,this);
 		fesVisible();
 	}
 	
+	/**
+	 * Obté el resultat de clustering tal com es mostrarà
+	 * @return Resultat de clustering mostrable
+	 */
 	public ArrayList<String> getData(){
 		return resClustering;
 	}
 	
+	/**
+	 * Prepara el resultat de clustering tal com es mostrarà a la pantalla
+	 * @param res Resultat de clustering sense tractar
+	 * @return Resultat formatejat
+	 */
 	public ArrayList<String> formatejaRes(ArrayList<ArrayList<String>> res){
 		ArrayList<String> a = new ArrayList<String>();
 		for (int i = 0; i < res.size(); ++i){

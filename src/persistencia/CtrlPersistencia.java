@@ -368,6 +368,11 @@ public class CtrlPersistencia {
 		}
 	}
 	
+	/**
+	 * Retorna si la carpeta de dades ja conté una carpeta per a les matrius corresponents al camí
+	 * @param cami camí
+	 * @return 'true' si ja té carpeta; altrament, 'false'
+	 */
 	public boolean existeixenMatrius(String cami) {
 		File f = new File(dataLocation + "Camins/Matrius/" + cami);
 		if(f.exists() && f.isDirectory()) {

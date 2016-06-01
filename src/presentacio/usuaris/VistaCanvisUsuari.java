@@ -16,6 +16,11 @@ import javax.swing.JTextField;
 
 import presentacio.ctrl.CtrlPresentacio;
 
+/**
+ * És la vista per fer canvis als usuaris.
+ * @author Arnau Blanch Cortès
+ *
+ */
 @SuppressWarnings("serial")
 public abstract class VistaCanvisUsuari extends JDialog {
 	
@@ -28,6 +33,11 @@ public abstract class VistaCanvisUsuari extends JDialog {
 	protected JPasswordField passwordField;
 	
 
+	/**
+	 * Crea una nova VistaCanvisUsuari.
+	 * @param ctrl controlador de presentació
+	 * @param parent frame pare
+	 */
 	public VistaCanvisUsuari(CtrlPresentacio ctrl, JFrame parent) {
 		super(parent, true);
 		this.ctrl = ctrl;

@@ -48,7 +48,7 @@ public class Cluster {
 	 * @throws Exception si l'entitat m ja existia al clúster
 	 * @throws IllegalArgumentException si <tt>e</tt> no és vàl·lida
 	 */
-	public void add(int e) throws Exception {
+	public void add(Integer e) throws Exception {
 		if (e < 0) throw new IllegalArgumentException("La posició d'entitat no és vàl·lida");
 		else if (!list.contains(e)) list.add(e);
 		else throw new Exception("La posició d'entitat ja existia al clúster");

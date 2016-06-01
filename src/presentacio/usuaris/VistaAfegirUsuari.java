@@ -14,9 +14,18 @@ import javax.swing.SwingConstants;
 import presentacio.ctrl.CtrlPresentacio;
 import presentacio.ctrl.VistaDialog;
 
+/**
+ * És la vista per afegir un usuari al programa.
+ * @author Arnau Blanch Cortès
+ */
 @SuppressWarnings("serial")
 public class VistaAfegirUsuari extends VistaCanvisUsuari {
 	
+	/**
+	 * Crea una nova VistaAfegirUsuari
+	 * @param ctrl controlador de presentació
+	 * @param parent frame pare
+	 */
 	public VistaAfegirUsuari(CtrlPresentacio ctrl, JFrame parent) {
 		super(ctrl, parent);
 		inicialitzaCompPropis();
