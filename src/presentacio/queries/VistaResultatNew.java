@@ -135,7 +135,7 @@ public class VistaResultatNew {
 		JButton btnDesarCami = new JButton("Desar Cami");
 		btnDesarCami.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new VistaDescripcio(ctrl, vQ.nomCami, vQ.pathCami);
+				new VistaDescripcio(ctrl, vQ.pathCami);
 			}
 		});
 		frame.getContentPane().add(btnDesarCami, "cell 6 0");
