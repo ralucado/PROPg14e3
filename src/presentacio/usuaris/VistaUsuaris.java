@@ -21,6 +21,11 @@ import net.miginfocom.swing.MigLayout;
 import presentacio.ctrl.CtrlPresentacio;
 import presentacio.ctrl.VistaDialog;
 
+/**
+ * És la vista per gestionar els usuaris del programa.
+ * @author Arnau Blanch Cortès
+ *
+ */
 public class VistaUsuaris {
 
 	private CtrlPresentacio ctrl;
@@ -31,6 +36,11 @@ public class VistaUsuaris {
 	private JButton btnModificarUsuari;
 	private JButton btnEliminarUsuari;
 
+	/**
+	 * Crea una nova VistaUsuaris
+	 * @param ctrl controlador de presentació
+	 * @throws Exception ...
+	 */
 	public VistaUsuaris(CtrlPresentacio ctrl) throws Exception {
 		if (!ctrl.getDomini().esAdmin()) throw new Exception("No tens permís per accedir-hi!");
 		this.ctrl = ctrl;
@@ -39,6 +49,9 @@ public class VistaUsuaris {
 		frame.setVisible(true);
 	}
 	
+	/**
+	 * Fa visible la vista.
+	 */
 	public void fesVisible() {
 		frame.setVisible(true);
 	}

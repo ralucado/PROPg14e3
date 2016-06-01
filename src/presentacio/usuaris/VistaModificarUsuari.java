@@ -15,12 +15,23 @@ import javax.swing.SwingConstants;
 import presentacio.ctrl.CtrlPresentacio;
 import presentacio.ctrl.VistaDialog;
 
+/**
+ * És la vista per modificar les dades d'un usuari.
+ * @author Arnau Blanch Cortès
+ *
+ */
 @SuppressWarnings("serial")
 public class VistaModificarUsuari extends VistaCanvisUsuari {
 	private String usernameIni;
 	private String passwordIni;
 	private boolean esAdminIni;
 	
+	/**
+	 * Crea una nova VistaModificarUsuari
+	 * @param ctrl controlador de presentació
+	 * @param parent frame pare
+	 * @param username nom d'usuari
+	 */
 	public VistaModificarUsuari(CtrlPresentacio ctrl, JFrame parent, String username) {
 		super(ctrl, parent);
 		this.usernameIni = username;

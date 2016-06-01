@@ -21,6 +21,11 @@ import javax.swing.SwingConstants;
 import presentacio.ctrl.CtrlPresentacio;
 import presentacio.ctrl.VistaDialog;
 
+/**
+ * És la vista per iniciar sessió al programa.
+ * @author Arnau Blanch Cortès
+ *
+ */
 public class VistaIniciSessio {
 	
 	private CtrlPresentacio ctrl;
@@ -31,6 +36,10 @@ public class VistaIniciSessio {
 	private JButton btnLogIn;
 	private JLabel lblNewLabel;
 
+	/**
+	 * Crea una nova VistaIniciSessio
+	 * @param ctrl controlador de presentació
+	 */
 	public VistaIniciSessio(CtrlPresentacio ctrl) {
 		this.ctrl = ctrl;
 		try {
@@ -43,28 +52,22 @@ public class VistaIniciSessio {
 		this.frame.setVisible(true);
 	}
 	
+	/**
+	 * Fa visible la vista.
+	 */
 	public void fesVisible() {
 		frame.setVisible(true);
 	}
 	
-	public void activa() {
-		frame.setEnabled(true);
-	}
-	
-	public void desactiva() {
-		frame.setEnabled(false);
-	}
-	
+	/**
+	 * Resetejar els components de la vista.
+	 */
 	public void reset() {
 		usuariField.setText("");
 		contrasenyaField.setText("");
 		frame.getRootPane().setDefaultButton(btnLogIn);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 * @throws IOException 
-	 */
 	private void inicialitzarComponents() throws IOException {
 		// Frame
 		frame = new JFrame();
