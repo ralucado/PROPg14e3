@@ -116,12 +116,11 @@ public class VistaQuery{
 				ctrl.getDomini().inicialitzarQueryClusteringlNom(nomCami, k);
 				resClustering = formatejaRes(ctrl.getDomini().executarClustering());
 			}
-			System.out.println(" OK Clustering!");
+			new VistaResultatClustering(ctrl,frame,this);
 		}catch (Exception E){
 			String[] botons = {"D'acord"};
-			(new VistaDialog()).setDialog("Error", "No s'ha pogut executar clustering", botons, JOptionPane.ERROR_MESSAGE);
+			(new VistaDialog()).setDialog("No s'ha pogut executar clustering", E.getMessage(), botons, JOptionPane.ERROR_MESSAGE);
 		}
-		new VistaResultatClustering(ctrl,frame,this);
 		fesVisible();
 	}
 	

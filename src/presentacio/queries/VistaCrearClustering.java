@@ -67,7 +67,7 @@ public class VistaCrearClustering {
 					camiNou = false;
 				} catch (Exception exc) {
 					String[] botons = {"D'acord"};
-					(new VistaDialog()).setDialog("Error","No s'ha pogut obrir la finestra de seleccio", botons, JOptionPane.ERROR_MESSAGE);
+					(new VistaDialog()).setDialog("No s'ha pogut obrir la finestra de seleccio",exc.getMessage(), botons, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -79,11 +79,11 @@ public class VistaCrearClustering {
 			public void actionPerformed(ActionEvent e) {
 				if (textNum.getText().length() < 1){
 					String[] botons = {"D'acord"};
-					(new VistaDialog()).setDialog("Has d'introduir un nombre valid", "", botons, JOptionPane.ERROR_MESSAGE);
+					(new VistaDialog()).setDialog("", "Has d'introduir un nombre valid", botons, JOptionPane.ERROR_MESSAGE);
 				}
 				else if (textCami.getText().length() < 1){
 					String[] botons = {"D'acord"};
-					(new VistaDialog()).setDialog("Has d'introduir un cami", "", botons, JOptionPane.ERROR_MESSAGE);
+					(new VistaDialog()).setDialog("Error", "Has d'introduir un cami", botons, JOptionPane.ERROR_MESSAGE);
 				}
 				else{
 					if (camiNou){
