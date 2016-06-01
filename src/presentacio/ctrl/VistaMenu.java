@@ -104,7 +104,8 @@ public class VistaMenu {
 	private void init_graf(){
 		btnGraf = new JButton("Graf");
 		btnGraf.setFont(new Font("Lucida Grande", Font.BOLD, 12));
-		btnQuery.setFont(new Font("Lucida Grande", Font.BOLD, 12));
+		btnGraf.setFont(new Font("Lucida Grande", Font.BOLD, 12));
+		if (!ctrl.getDomini().esAdmin()) btnGraf.setEnabled(false);
 		btnGraf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
