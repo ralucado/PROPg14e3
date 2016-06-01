@@ -22,6 +22,7 @@ public class VistaQuery{
 		this.ctrl = ctrl;
 		init();
 		frame.setVisible(true);
+		pathCami = new String();
 	}
 	
 	private void init() {

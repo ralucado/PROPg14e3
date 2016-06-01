@@ -65,9 +65,11 @@ public class VistaCrearQuery {
 				try {
 					//se li ha de passar la frame actual, no la frame del vista query
 					new VistaSeleccionarCami(ctrl, frame, vQ);
+					if(!vQ.pathCami.isEmpty()){
 					textCami.setText(vQ.pathCami);
 					//textCami.setEditable(false);
 					camiNou = false;
+					}
 				} catch (Exception exc) {
 					String[] botons = {"D'acord"};
 					(new VistaDialog()).setDialog("No s'ha pogut obrir la finestra de seleccio", exc.getMessage(), botons, JOptionPane.ERROR_MESSAGE);
