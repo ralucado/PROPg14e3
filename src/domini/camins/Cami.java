@@ -98,7 +98,7 @@ public class Cami {
 	
 	/**
 	 * Comprova si el camí té algun node de tipus autor
-	 * @return
+	 * @return True si té algun node d'autor, sino false
 	 */
 	public boolean teAutor(){
 		return (path.contains("A"));
@@ -106,7 +106,7 @@ public class Cami {
 	
 	/**
 	 * Comprova si el camí té algun node de tipus paper
-	 * @return
+	 * @return True si té algun node de paper, sino false
 	 */
 	public boolean tePaper(){
 		return (path.contains("P"));
@@ -114,7 +114,7 @@ public class Cami {
 	
 	/**
 	 * Comprova si el camí té algun node de tipus conferencia
-	 * @return
+	 * @return True si té algun node de conferencia, sino false
 	 */
 	public boolean teConferencia(){
 		return (path.contains("C"));
@@ -122,7 +122,7 @@ public class Cami {
 	
 	/**
 	 * Comprova si el camí té algun node de tipus terme
-	 * @return
+	 * @return True si té algun node de terme, sino false
 	 */
 	public boolean teTerme(){
 		return (path.contains("T"));

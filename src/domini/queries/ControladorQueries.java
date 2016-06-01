@@ -47,6 +47,7 @@ public class ControladorQueries{
 	/**
 	 * Inicialitza una query de tipus clustering amb un camí existent
 	 * @param nom Nom del camí que ja existeix
+	 * @param k Número de clusters
 	 * @throws Exception ...
 	 */
 	public void inicialitzarQueryClusteringlNom(String nom, int k) throws Exception{

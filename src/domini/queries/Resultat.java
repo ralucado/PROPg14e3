@@ -84,8 +84,8 @@ public class Resultat {
 
 	/**
 	 * Es filtren totes les entitats amb label = <tt>idLabel</tt>.
-	 * @param idLabel ID del label a filtrar (0 <= idLabel <= 4)
-	 * @throws Exception ...
+	 * @param idLabel ID del label a filtrar
+	 * @throws Exception IdLabel ha d'estar entre 0 i 4 (inclosos)
 	 */
     public void filtrarLabelEq(int idLabel) throws Exception {
     	if (idLabel < 0 || idLabel > 4) throw new Exception("idLabel ha d'estar entre 0 i 4 (inclosos)");
@@ -104,8 +104,8 @@ public class Resultat {
 
     /**
      * Es filtren totes les entitats amb label != <tt>idLabel</tt>.
-     * @param idLabel ID del label a filtrar (0 <= idLabel <= 4)
-     * @throws Exception ...
+     * @param idLabel ID del label a filtrar
+     * @throws Exception IdLabel ha d'estar entre 0 i 4 (inclosos)
      */
     public void filtrarLabelDif(int idLabel) throws Exception {
     	if (idLabel < 0 || idLabel > 4) throw new Exception("S'incompleix 0 <= idLabel <= 4");
@@ -235,18 +235,3 @@ public class Resultat {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
