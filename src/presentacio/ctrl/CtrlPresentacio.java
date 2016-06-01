@@ -109,8 +109,8 @@ public class CtrlPresentacio {
 	
 	public void openQuery(){
 		try{
-			if (vQuery == null) vQuery = new VistaQuery(this);
-			else vQuery.fesVisible();
+			vQuery = new VistaQuery(this);
+			vQuery.fesVisible();
 		}
 		catch(Exception e){
 			VistaDialog dialog = new VistaDialog();
