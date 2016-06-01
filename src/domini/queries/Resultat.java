@@ -16,24 +16,6 @@ public class Resultat {
 	private ArrayList<Pair<Entitat,Float>> entitats_visibles;
 	private ArrayList<Pair<Entitat,Float>> anterior;
     private static final int VISIBLES_PER_DEFECTE = 20;
-
-    public static void main (String[] args){
-    	ArrayList<Pair<Entitat,Float>> A = new ArrayList<Pair<Entitat,Float>>();
-    	A.add(new Pair<Entitat,Float>(new Autor("Burlao"),0.1F));
-    	A.add(new Pair<Entitat,Float>(new Autor("Burlao2"),0.2F));
-    	A.add(new Pair<Entitat,Float>(new Autor("Marti"),0.6F));
-    	A.add(new Pair<Entitat,Float>(new Autor("Pacoo"),0.5F));
-    	Resultat R = new Resultat(A);
-    	System.out.println(R.entitats_visibles.size());
-    	R.print();
-    	R.filtrarN(2);
-    	System.out.println(R.entitats_visibles.size());
-    	R.print();
-    	R.filtrarN(3);
-    	System.out.println(R.entitats_visibles.size());
-    	R.print();
-    }
-    
     
   
     /**
@@ -88,12 +70,12 @@ public class Resultat {
 	 * @throws Exception IdLabel ha d'estar entre 0 i 4 (inclosos)
 	 */
     public void filtrarLabelEq(int idLabel) throws Exception {
-    	if (idLabel < 0 || idLabel > 4) throw new Exception("idLabel ha d'estar entre 0 i 4 (inclosos)");
+    	//if (idLabel < 0 || idLabel > 4) throw new Exception("idLabel ha d'estar entre 0 i 4 (inclosos)");
     	if (entitats.get(0).first.isTerme()) return;
     	anterior = (ArrayList<Pair<Entitat,Float>>)entitats_visibles.clone();
     	Entitat e;
-        for(int i = 0; i < entitats.size(); ++i) {
-        	e = entitats.get(i).first;
+        for(int i = 0; i < entitats_visibles.size(); ++i) {
+        	e = entitats_visibles.get(i).first;
         	if(e.isAutor() || e.isConferencia() || e.isPaper()) {
         		if(e.getLabel() != idLabel){
         			entitats_visibles.remove(i);
@@ -108,12 +90,12 @@ public class Resultat {
      * @throws Exception IdLabel ha d'estar entre 0 i 4 (inclosos)
      */
     public void filtrarLabelDif(int idLabel) throws Exception {
-    	if (idLabel < 0 || idLabel > 4) throw new Exception("S'incompleix 0 <= idLabel <= 4");
+    	//if (idLabel < 0 || idLabel > 4) throw new Exception("S'incompleix 0 <= idLabel <= 4");
     	if (entitats.get(0).first.isTerme()) return;
     	anterior = (ArrayList<Pair<Entitat,Float>>)entitats_visibles.clone();
     	Entitat e;
-        for(int i = 0; i < entitats.size(); ++i) {
-        	e = entitats.get(i).first;
+        for(int i = 0; i < entitats_visibles.size(); ++i) {
+        	e = entitats_visibles.get(i).first;
         	if(e.isAutor() || e.isConferencia() || e.isPaper()) {
         		if(e.getLabel() == idLabel){
         			entitats_visibles.remove(i);
