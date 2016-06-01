@@ -1,19 +1,19 @@
 package presentacio.queries;
 
-import java.awt.EventQueue;
-import javax.swing.JFrame;
-import presentacio.ctrl.*;
-import presentacio.graf.*;
-import net.miginfocom.swing.MigLayout;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.JButton;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.awt.event.ActionEvent;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+import net.miginfocom.swing.MigLayout;
+import presentacio.ctrl.CtrlPresentacio;
+import presentacio.ctrl.VistaDialog;
+import presentacio.graf.VistaEntitatsDialog;
 
 
 public class VistaCrearQuery {

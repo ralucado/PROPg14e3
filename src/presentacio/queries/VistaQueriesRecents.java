@@ -1,6 +1,5 @@
 package presentacio.queries;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,29 +16,11 @@ public class VistaQueriesRecents {
 
 	private JFrame frame;
 	private JTable table;
-	private CtrlPresentacio ctrl;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VistaQueriesRecents window = new VistaQueriesRecents(new CtrlPresentacio());
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
 	 */
 	public VistaQueriesRecents(CtrlPresentacio ctrl) {
-		this.ctrl = ctrl;
 		initialize();
 	}
 
@@ -73,7 +54,7 @@ public class VistaQueriesRecents {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 	}
-	
+	@SuppressWarnings("unused")
 	private class RecQueTableModel extends AbstractTableModel {
 		private static final long serialVersionUID = 1L;
 		protected String[] columnNames = {"Entitat", "Label", "Hetesim"};

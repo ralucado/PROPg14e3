@@ -2,7 +2,6 @@ package domini.queries;
 
 import java.util.ArrayList;
 
-import domini.graf.Autor;
 import domini.graf.Entitat;
 
 /**

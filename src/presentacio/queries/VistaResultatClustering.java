@@ -1,27 +1,20 @@
 package presentacio.queries;
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
 import net.miginfocom.swing.MigLayout;
 import presentacio.ctrl.CtrlPresentacio;
-import presentacio.ctrl.VistaDialog;
 
+@SuppressWarnings("serial")
 public class VistaResultatClustering extends JDialog{
 
-	private JFrame frame;
-	//private JTable table;
-	private CtrlPresentacio ctrl;
 	private VistaQuery vQ;
 	private ClusterTableModel clusterData;
 	private JTable table_1;
@@ -31,7 +24,6 @@ public class VistaResultatClustering extends JDialog{
 	 */
 	public VistaResultatClustering(CtrlPresentacio ctrl, JFrame parent, VistaQuery vq) {
 		super(parent,true);
-		this.ctrl = ctrl;
 		this.vQ = vq;
 		getContentPane().setLayout(new MigLayout("", "[][438px,grow][]", "[25px][229px,grow][]"));
 		clusterData = new ClusterTableModel();
