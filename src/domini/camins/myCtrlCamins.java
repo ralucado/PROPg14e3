@@ -2,7 +2,17 @@ package domini.camins;
 
 import java.util.ArrayList;
 
+/**
+ * Extensió de ControladorCamins
+ * @author Cristina Raluca Vijulie
+ */
 public class myCtrlCamins extends ControladorCamins {
+	
+	/**
+	 * Crea un nou myCtrlCamins per a l'usuari <tt>usuari</tt>
+	 * @param usuari nom de l'usuari
+	 * @throws Exception ...
+	 */
 	public myCtrlCamins(String usuari) throws Exception {
 		super(usuari);
 	}
