@@ -1,12 +1,15 @@
 package domini.camins;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import domini.queries.SparseMatrix;
 
+/**
+ * 
+ * @author Cristina Raluca Vijulie
+ *
+ */
 public class SparseMatrixBool {
 	ArrayList<HashMap<Integer,Boolean>> rows = new ArrayList<HashMap<Integer,Boolean>>();
 	ArrayList<HashMap<Integer,Boolean>> cols = new ArrayList<HashMap<Integer,Boolean>>();

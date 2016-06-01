@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 
 import presentacio.ctrl.CtrlPresentacio;
 
+@SuppressWarnings("serial")
 public abstract class VistaCanvisUsuari extends JDialog {
 	
 	protected CtrlPresentacio ctrl;

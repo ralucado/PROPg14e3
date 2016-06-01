@@ -5,8 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -20,7 +18,6 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
-import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -67,10 +64,6 @@ public class VistaGestioEntitats{
 	
 	private void initComponents(){
 		
-		try{
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
-		}
-		catch(Exception e){}
 
 		//frame
 		frame = new JFrame();
@@ -91,10 +84,10 @@ public class VistaGestioEntitats{
 						if(e.getClickCount()==2 && table.getSelectedRow()!=-1){
 							String id = (String) table.getValueAt(table.getSelectedRow(), 0);
 							String nom = (String) table.getValueAt(table.getSelectedRow(), 1);
-							if(tipusActual=="Terme") new VistaDetallsEntitat(ctrl, frame, id, nom, "", tipusActual);
+							if(tipusActual=="Terme") new VistaDetallsEntitat(frame, id, nom, "", tipusActual);
 							else{
 								String label = (String) table.getValueAt(table.getSelectedRow(),2);
-								new VistaDetallsEntitat(ctrl, frame, id, nom, label, tipusActual);
+								new VistaDetallsEntitat(frame, id, nom, label, tipusActual);
 							}
 						}
 					}

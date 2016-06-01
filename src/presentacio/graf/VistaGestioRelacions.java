@@ -5,8 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -20,7 +18,6 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
-import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -64,11 +61,6 @@ public class VistaGestioRelacions{
 	
 	private void initComponents(){
 		
-		try{
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
-		}
-		catch(Exception e){}
-		
 		//frame
 		frame = new JFrame();
 		frame.setBackground(SystemColor.control);
@@ -96,7 +88,7 @@ public class VistaGestioRelacions{
 					try{
 						String idE1 = String.valueOf(ctrl.getDomini().consultarIdEntitat(e1, "Paper"));
 						String idE2 = String.valueOf(ctrl.getDomini().consultarIdEntitat(e2, tipusE1));
-						new VistaDetallsRelacio(ctrl, frame, e1, e2, "Paper", tipusE1, idE1, idE2);
+						new VistaDetallsRelacio(frame, e1, e2, "Paper", tipusE1, idE1, idE2);
 					}
 					catch(Exception e3){
 						VistaDialog d2 = new VistaDialog();

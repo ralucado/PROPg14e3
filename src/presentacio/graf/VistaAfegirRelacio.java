@@ -1,45 +1,24 @@
 package presentacio.graf;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.Color;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Collections;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JSeparator;
-import javax.swing.ListSelectionModel;
-
-import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollBar;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.event.ListSelectionListener;
 
-import domini.graf.CtrlGraf;
-import domini.graf.Entitat;
 import net.miginfocom.swing.MigLayout;
 import presentacio.ctrl.CtrlPresentacio;
 import presentacio.ctrl.VistaDialog;
 
-import javax.swing.event.ListSelectionEvent;
-
+@SuppressWarnings("serial")
 public class VistaAfegirRelacio extends JDialog {
 
 	private String tipusE1;
@@ -48,27 +27,14 @@ public class VistaAfegirRelacio extends JDialog {
 
 	private String nomE2;
 	private String labelE2;
-	private JList list;
 	private CtrlPresentacio ctrl;
 	
 	
-	private String[] labels = {"UNKNOWN", "DATABSE", "DATA_MINING", "AI", "INFORMATION_RETRIVAL"};
 	private String[] tipusE = {"", "Autor", "Conferencia", "Terme"};
-	private String autors[];
-	private String conferencies[];
-	private String termes[];
-	private String papers[];
-	private String buit[] = {};
-	
 	private void initComponents(){
 		
-		try{
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
-		}
-		catch(Exception e){}
 		
-		//frame
-		JFrame frame = new JFrame();
+		new JFrame();
 		
 		setBackground(SystemColor.control);
 		setForeground(Color.BLACK);
@@ -118,7 +84,7 @@ public class VistaAfegirRelacio extends JDialog {
 		});
 		
 		//escollir tipus 1
-		JComboBox comboBox = new JComboBox(tipusE);
+		JComboBox<?> comboBox = new JComboBox<Object>(tipusE);
 		comboBox.setBounds(216, 56, 47, 24);
 		comboBox.addItemListener(new ItemListener(){
 			public void itemStateChanged(ItemEvent ie){

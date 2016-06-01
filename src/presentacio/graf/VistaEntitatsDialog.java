@@ -29,6 +29,7 @@ import net.miginfocom.swing.MigLayout;
 import presentacio.ctrl.CtrlPresentacio;
 import presentacio.ctrl.VistaDialog;
 
+@SuppressWarnings("serial")
 public class VistaEntitatsDialog extends JDialog {
 
 	private JFrame frame;
@@ -64,10 +65,10 @@ public class VistaEntitatsDialog extends JDialog {
 						if(e.getClickCount()==2 && table.getSelectedRow()!=-1){
 							String id = (String) table.getValueAt(table.getSelectedRow(), 0);
 							String nom = (String) table.getValueAt(table.getSelectedRow(), 1);
-							if(tipusActual=="Terme") new VistaDetallsEntitat(ctrl, frame, id, nom, "", tipusActual);
+							if(tipusActual=="Terme") new VistaDetallsEntitat(frame, id, nom, "", tipusActual);
 							else{
 								String label = (String) table.getValueAt(table.getSelectedRow(),2);
-								new VistaDetallsEntitat(ctrl, frame, id, nom, label, tipusActual);
+								new VistaDetallsEntitat(frame, id, nom, label, tipusActual);
 							}
 						}
 					}

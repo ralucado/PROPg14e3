@@ -1,39 +1,21 @@
 package presentacio.graf;
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.awt.Frame;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.SystemColor;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.ActionEvent;
+import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Color;
-import java.awt.SystemColor;
-import java.awt.GridLayout;
-import java.awt.CardLayout;
-import javax.swing.SpringLayout;
 import net.miginfocom.swing.MigLayout;
 import presentacio.ctrl.CtrlPresentacio;
-import presentacio.ctrl.VistaDialog;
-
-import javax.swing.JTabbedPane;
 
 public class VistaGestioGraf{
 
 	private JFrame frame;
-	private JButton btnGestionarEntitats;
-	private JButton btnGestionarRelacions;
 	private CtrlPresentacio ctrl;
 
 	public void fesVisible(){
@@ -49,11 +31,6 @@ public class VistaGestioGraf{
 	}
 	
 	private void initComponents(){
-		
-		try{
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
-		}
-		catch(Exception e){}
 		
 		//frame
 		frame = new JFrame();

@@ -2,8 +2,6 @@ package presentacio.usuaris;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -22,8 +20,6 @@ import javax.swing.SwingConstants;
 
 import presentacio.ctrl.CtrlPresentacio;
 import presentacio.ctrl.VistaDialog;
-import java.awt.Canvas;
-import javax.swing.JPanel;
 
 public class VistaIniciSessio {
 	
@@ -33,7 +29,6 @@ public class VistaIniciSessio {
 	private JTextField usuariField;
 	private JPasswordField contrasenyaField;
 	private JButton btnLogIn;
-	private JPanel panel;
 	private JLabel lblNewLabel;
 
 	public VistaIniciSessio(CtrlPresentacio ctrl) {
@@ -144,13 +139,7 @@ public class VistaIniciSessio {
 		lblNewLabel.setBounds(5, 6, 230, 207);
 		frame.getContentPane().add(lblNewLabel);
 		
-		
-		
 
-		/*LogoPanel p= new JLabel(new ImageIcon(logo));
-		lblLogo.setBounds(6, 6, 190, 154);
-		frame.getContentPane().add(lblLogo);
-		*/
 	}
 	
 }

@@ -1,6 +1,9 @@
 package presentacio.ctrl;
 
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UIManager.*;
+
 
 import domini.ctrl.myCtrlDomini;
 import presentacio.camins.VistaCamins;
@@ -21,6 +24,17 @@ public class CtrlPresentacio {
 	public CtrlPresentacio() {
 		try {
 			ctrlDomini = new myCtrlDomini();
+
+			try {
+			    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+			        if ("Nimbus".equals(info.getName())) {
+			            UIManager.setLookAndFeel(info.getClassName());
+			            break;
+			        }
+			    }
+			} catch (Exception e) {
+			    // If Nimbus is not available, you can set the GUI to another look and feel.
+			}
 		}
 		catch (Exception exc) {
 			VistaDialog dialog = new VistaDialog();

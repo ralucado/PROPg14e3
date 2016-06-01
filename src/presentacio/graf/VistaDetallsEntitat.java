@@ -1,36 +1,19 @@
 package presentacio.graf;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Point;
 import java.awt.SystemColor;
-import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import domini.graf.Label;
-import net.miginfocom.swing.MigLayout;
-import presentacio.ctrl.CtrlPresentacio;
-
-import javax.swing.JComboBox;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.ListModel;
-import javax.swing.UIManager;
 
+import net.miginfocom.swing.MigLayout;
+
+@SuppressWarnings("serial")
 public class VistaDetallsEntitat extends JDialog {
 
-	private CtrlPresentacio ctrl;
 	private String tipusE;
 	private String labelE;
 	private String nomE;
@@ -39,10 +22,6 @@ public class VistaDetallsEntitat extends JDialog {
 
 	private void initComponents(){
 		
-		try{
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
-		}
-		catch(Exception e){}
 		
 		//frame
 		
@@ -89,14 +68,13 @@ public class VistaDetallsEntitat extends JDialog {
 	
 	/**
 	 * Creadora de VistaDetallsEntitat
-	 * @param ctrl Controlador de presentació
 	 * @param owner Frame que obra la vista
 	 * @param id Id de l'entitat
 	 * @param nom Nom de l'entitat
 	 * @param label Label de l'entita
 	 * @param tipus Tipus de l'entitat
 	 */
-	public VistaDetallsEntitat(CtrlPresentacio ctrl, JFrame owner, String id, String nom, String label, String tipus) {
+	public VistaDetallsEntitat(JFrame owner, String id, String nom, String label, String tipus) {
 		super(owner, true);
 		this.setTitle("Detalls de l'entitat");
 		
@@ -104,7 +82,6 @@ public class VistaDetallsEntitat extends JDialog {
 		this.labelE = label;
 		this.tipusE = tipus;
 		this.idE = id;
-		this.ctrl = ctrl;
 		initComponents();
 		this.setSize(500, 300);
 		setVisible(true);
