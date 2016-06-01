@@ -110,7 +110,7 @@ public class VistaResultatNew {
 						ctrl.getDomini().filtrarResultatLabel(comboBox.getSelectedIndex()-1);}
 					catch(Exception E){
 						String[] botons = {"D'acord"};
-						(new VistaDialog()).setDialog("Error", "No s'ha pogut filtrar el resultat", botons, JOptionPane.ERROR_MESSAGE);
+						(new VistaDialog()).setDialog("No s'ha pogut filtrar el resultat", E.getMessage(), botons, JOptionPane.ERROR_MESSAGE);
 					}
 					resData.updateData();
 				}
@@ -187,7 +187,7 @@ public class VistaResultatNew {
 			try{this.data = ctrl.getDomini().getDadesNormal();}
 			catch(Exception E){
 				String[] botons = {"D'acord"};
-				(new VistaDialog()).setDialog("Error", "Error al preparar el resultat", botons, JOptionPane.ERROR_MESSAGE);
+				(new VistaDialog()).setDialog("Error al preparar el resultat", E.getMessage(), botons, JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		
@@ -207,7 +207,7 @@ public class VistaResultatNew {
 			try{this.data = ctrl.getDomini().getDadesNormal();}
 			catch(Exception E){
 				String[] botons = {"D'acord"};
-				(new VistaDialog()).setDialog("Error", "Error al preparar el resultat", botons, JOptionPane.ERROR_MESSAGE);
+				(new VistaDialog()).setDialog("Error al preparar el resultat", E.getMessage(), botons, JOptionPane.ERROR_MESSAGE);
 			}
 			fireTableDataChanged();
 		}

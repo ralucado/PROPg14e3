@@ -56,7 +56,7 @@ public class VistaDescripcio {
 				try{ctrl.getDomini().afegirCami(nom, path, descr);}
 				catch(Exception E){
 					String[] botons = {"D'acord"};
-					(new VistaDialog()).setDialog("Error", "No s'ha pogut afegir el cami", botons, JOptionPane.ERROR_MESSAGE);
+					(new VistaDialog()).setDialog("No s'ha pogut afegir el cami", E.getMessage(), botons, JOptionPane.ERROR_MESSAGE);
 				}
 				frame.dispose();
 			}
