@@ -32,10 +32,8 @@ public class VistaCrearQuery {
  */
 	public VistaCrearQuery(CtrlPresentacio ctrl, VistaQuery vq) {
 		camiNou = true;
-		//marti pls
 		this.ctrl = ctrl;
 		vQ = vq;
-		//facepalm
 		initialize();
 	}
 
