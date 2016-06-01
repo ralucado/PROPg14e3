@@ -161,7 +161,9 @@ public class VistaAfegirEntitat extends JDialog {
 	
 	
 	/**
-	 * Create the dialog.
+	 * Creadora de VistaAfegirEntitat
+	 * @param ctrl Controlador de presentació
+	 * @param owner Frame que obra la vista
 	 */
 	public VistaAfegirEntitat(CtrlPresentacio ctrl, JFrame owner) {
 		super(owner, true);

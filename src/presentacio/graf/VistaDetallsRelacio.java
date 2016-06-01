@@ -92,7 +92,15 @@ public class VistaDetallsRelacio extends JDialog {
 	
 	
 	/**
-	 * Create the dialog.
+	 * Creadora de VistaDetallsRelacio
+	 * @param ctrl Controlador de presentació
+	 * @param owner Frame que obra la vista 
+	 * @param nom1 Nom de l'entitat 1
+	 * @param nom2 Nom de l'entitat 2
+	 * @param tipus1 Tipus de l'entitat 1 
+	 * @param tipus2 Tipus de l'entitat 2
+	 * @param idE1 Id de l'entitat 1
+	 * @param idE2 Id de l'entitat 2
 	 */
 	public VistaDetallsRelacio(CtrlPresentacio ctrl, JFrame owner, String nom1, String nom2, String tipus1, String tipus2, String idE1, String idE2) {
 		super(owner, true);

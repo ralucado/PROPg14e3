@@ -126,7 +126,12 @@ import javax.swing.UIManager;
 		
 		
 		/**
-		 * Create the dialog.
+		 * Creadora VistaModificarEntitat
+		 * @param ctrl Controlador presentació
+		 * @param owner Frame que obra la vista
+		 * @param tipus Tipus de l'entitat a modificar
+		 * @param nomAct Nom actual de l'entitat a modificar
+		 * @param label Label actual de l'entitat a modificar
 		 */
 		public VistaModificarEntitat(CtrlPresentacio ctrl, JFrame owner, String tipus, String nomAct, String label) {
 			super(owner, true);

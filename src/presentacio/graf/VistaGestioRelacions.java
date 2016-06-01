@@ -269,7 +269,9 @@ public class VistaGestioRelacions{
 		
 	}
 	/**
-	 * Create the frame.
+	 * Creadora VistaGestioRelacions
+	 * @param ctrl Controlador presentació
+	 * @param owner Frame que obra la vista
 	 */
 	public VistaGestioRelacions(CtrlPresentacio ctrl, JFrame owner) {
 		this.ctrl = ctrl;

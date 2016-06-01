@@ -316,8 +316,9 @@ public class VistaGestioEntitats{
 
 	
 	/**
-	 * Create the frame.
-	 * @wbp.parser.entryPoint
+	 * Creadora de VistaGestioEntitats
+	 * @param ctrl Controlador de presentació
+	 * @param owner Frame que obra la vista
 	 */
 	public VistaGestioEntitats(CtrlPresentacio ctrl, JFrame owner) {
 		this.ctrl = ctrl;

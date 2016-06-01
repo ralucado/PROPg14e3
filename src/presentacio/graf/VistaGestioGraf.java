@@ -97,7 +97,8 @@ public class VistaGestioGraf{
 	}
 
 	/**
-	 * Create the frame.
+	 * Creadora de VistaGestioGraf
+	 * @param ctrl Controlador de presentació
 	 */
 	public VistaGestioGraf(CtrlPresentacio ctrl) {
 		this.ctrl = ctrl;

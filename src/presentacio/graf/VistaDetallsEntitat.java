@@ -88,7 +88,13 @@ public class VistaDetallsEntitat extends JDialog {
 	
 	
 	/**
-	 * Create the dialog.
+	 * Creadora de VistaDetallsEntitat
+	 * @param ctrl Controlador de presentació
+	 * @param owner Frame que obra la vista
+	 * @param id Id de l'entitat
+	 * @param nom Nom de l'entitat
+	 * @param label Label de l'entita
+	 * @param tipus Tipus de l'entitat
 	 */
 	public VistaDetallsEntitat(CtrlPresentacio ctrl, JFrame owner, String id, String nom, String label, String tipus) {
 		super(owner, true);
