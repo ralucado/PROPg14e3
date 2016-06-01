@@ -54,7 +54,7 @@ public class VistaResultatNew {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 744, 304);
+		frame.setBounds(100, 100, 1000, 304);
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -69,7 +69,7 @@ public class VistaResultatNew {
 		table = new JTable(resData);
 		table.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		JScrollPane scrollPane = new JScrollPane(table);
-		frame.getContentPane().add(scrollPane, "cell 0 3 6 2,grow");
+		frame.getContentPane().add(scrollPane, "cell 0 3 7 2,grow");
 		//sorter
 		rowSorter = new TableRowSorter<>(table.getModel());
 		table.setRowSorter(rowSorter);
@@ -94,7 +94,7 @@ public class VistaResultatNew {
 		frame.getContentPane().add(btnFiltran, "cell 1 0");
 		
 		//COMBOBOX
-		String[] llista = {"","DATABASE","DATA_MINING","AI","INFORMATION_RETRIEVAL","UNKNOWN","NO_LABEL"};
+		String[] llista = {"","DATABASE","DATA_MINING","AI","INFORMATION_RETRIEVAL","UNKNOWN"};
 		JComboBox comboBox = new JComboBox(llista);
 		frame.getContentPane().add(comboBox, "cell 2 0,growx");
 		
