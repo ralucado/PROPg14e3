@@ -24,7 +24,10 @@ public class VistaResultatClustering extends JDialog{
 	private JTable table_1;
 
 	/**
-	 * Create the application.
+	 * Crea una nova VistaResultatClustering
+	 * @param ctrl controlador de presentació
+	 * @param parent frame pare
+	 * @param vq vista de la query
 	 */
 	public VistaResultatClustering(CtrlPresentacio ctrl, JFrame parent, VistaQuery vq) {
 		super(parent,true);

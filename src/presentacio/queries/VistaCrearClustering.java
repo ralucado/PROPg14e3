@@ -24,7 +24,9 @@ public class VistaCrearClustering {
 	private boolean camiNou;
 	
 	/**
-	 * Create the application.
+	 * Crea una nova VistaCrearClustering
+	 * @param ctrl controlador de presentació
+	 * @param vq vista de la query
 	 */
 	public VistaCrearClustering(CtrlPresentacio ctrl, VistaQuery vq) {
 		this.ctrl = ctrl;

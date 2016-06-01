@@ -26,7 +26,7 @@ public class VistaQuery{
 	/**
 	 * 
 	 * @param ctrl Controlador de presentació
-	 * @throws Exception
+	 * @throws Exception ...
 	 */
 	public VistaQuery(CtrlPresentacio ctrl) throws Exception {
 		this.ctrl = ctrl;
@@ -84,7 +84,7 @@ public class VistaQuery{
 	 * Executa una query
 	 * @param camiNou Indica si el camí és del sistema o se n'introdueix un de nou
 	 * @param entitat Entitat inicial
-	 * @throws Exception
+	 * @throws Exception ...
 	 */
 	public void executarNormal(boolean camiNou, String entitat) throws Exception{
 			if (camiNou){

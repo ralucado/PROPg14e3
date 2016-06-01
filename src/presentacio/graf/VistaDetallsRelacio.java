@@ -76,7 +76,6 @@ public class VistaDetallsRelacio extends JDialog {
 	
 	/**
 	 * Creadora de VistaDetallsRelacio
-	 * @param ctrl Controlador de presentació
 	 * @param owner Frame que obra la vista 
 	 * @param nom1 Nom de l'entitat 1
 	 * @param nom2 Nom de l'entitat 2
