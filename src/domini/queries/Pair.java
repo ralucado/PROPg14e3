@@ -11,9 +11,11 @@ public class Pair<T1,T2> {
 	public T1 first;
 	public T2 second;
 	
-	/**
-	 * @post first = f, second = s
-	 */
+/**
+ * Crea un parell amb els objectes f i s
+ * @param f objecte que estara a l'argument first
+ * @param s objecte que estara a l'argument second
+ */
 	public Pair(T1 f, T2 s){
 		first = f;
 		second = s;

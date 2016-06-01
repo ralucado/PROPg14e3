@@ -37,7 +37,7 @@ public class HeteSim{
 	/**
 	 * 
 	 * @param p es el cami per el queal calcular
-	 * @param n es l'entitat inicial per la qual volem calcular l'hetesim
+	 * @param posEntitat es la posicio en el graf de l'entitat inicial per la qual volem calcular l'hetesim
 	 * @return el resultat es el valor hetesim de cada entitat final relacionada amb la entitat inicial n seleccionada
 	 */
 	
@@ -50,8 +50,8 @@ public class HeteSim{
 	/**
 	 * 
 	 * @param p es el cami per el queal calcular
-	 * @param n1 es l'entitat inicial de la qual volem calcular l'hetesim
-	 * @param n2 es l'entitat final de la qual volem calcular l'hetesim
+	 * @param posEntitat1 es la posició en el graf de l'entitat inicial de la qual volem calcular l'hetesim
+	 * @param posEntitat2 es la posició en el graf de l'entitat final de la qual volem calcular l'hetesim
 	 * @return ens retorna el valor hetesim entre les dues entitats seleccionades per el path especificat
 	 */
 	

@@ -23,9 +23,11 @@ public class VistaCrearQuery {
 	private JTextField textEntitat;
 	private boolean camiNou;
 
-	/**
-	 * Create the application.
-	 */
+/**
+ * Create the application.
+ * @param ctrl Control presentacio
+ * @param vq VistaQuery
+ */
 	public VistaCrearQuery(CtrlPresentacio ctrl, VistaQuery vq) {
 		camiNou = true;
 		//marti pls
@@ -78,7 +80,7 @@ public class VistaCrearQuery {
 			public void actionPerformed(ActionEvent e) {
 				if (textCami.getText().length() < 1){
 					String[] botons = {"D'acord"};
-					(new VistaDialog()).setDialog("Primer has de seleccionar un camí vàlid", "", botons, JOptionPane.ERROR_MESSAGE);
+					(new VistaDialog()).setDialog("Primer has de seleccionar un cami valid", "", botons, JOptionPane.ERROR_MESSAGE);
 				}
 				else{
 					ArrayList<String> A = new ArrayList<String>();

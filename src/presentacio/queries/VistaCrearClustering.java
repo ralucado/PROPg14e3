@@ -78,11 +78,11 @@ public class VistaCrearClustering {
 			public void actionPerformed(ActionEvent e) {
 				if (textNum.getText().length() < 1){
 					String[] botons = {"D'acord"};
-					(new VistaDialog()).setDialog("Has d'introduir un nombre vàlid", "", botons, JOptionPane.ERROR_MESSAGE);
+					(new VistaDialog()).setDialog("Has d'introduir un nombre valid", "", botons, JOptionPane.ERROR_MESSAGE);
 				}
 				else if (textCami.getText().length() < 1){
 					String[] botons = {"D'acord"};
-					(new VistaDialog()).setDialog("Has d'introduir un camí", "", botons, JOptionPane.ERROR_MESSAGE);
+					(new VistaDialog()).setDialog("Has d'introduir un cami", "", botons, JOptionPane.ERROR_MESSAGE);
 				}
 				else{
 					if (camiNou){

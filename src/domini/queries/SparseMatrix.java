@@ -40,8 +40,8 @@ public class SparseMatrix {
 	}
 	/**
 	 * crea una matriu de zeros de tamany nRows x nCols
-	 * @param nRows
-	 * @param nCols
+	 * @param nRows nombre de files
+	 * @param nCols nombre de columnes
 	 */
 	public SparseMatrix(int nRows, int nCols) {
 		initMatrix(nRows, nCols);
@@ -49,7 +49,7 @@ public class SparseMatrix {
 	
 	/**
 	 * Creadora de copia a partir de unaltre SparseMatrix
-	 * @param sm
+	 * @param sm matriu de dades que es vol clonar
 	 */
 	public SparseMatrix(SparseMatrix sm) {
 		ArrayList<SparseVector> rows = sm.getRows();
@@ -64,7 +64,7 @@ public class SparseMatrix {
 	
 	/**
 	 * Crea una matriu dispersa de floats a partir d'un ArrayList de SparseVector
-	 * @param v
+	 * @param v dades
 	 */
 	public SparseMatrix(ArrayList<SparseVector> v){
 		for (int i = 0; i < v.size(); ++i) {
@@ -75,9 +75,9 @@ public class SparseMatrix {
 	}
 	/**
 	 * converteix la matriu m de tamany nRows x nCols a SparseMatrix
-	 * @param m
-	 * @param nRows
-	 * @param nCols
+	 * @param m matriu inicial
+	 * @param nRows nombre de files de m
+	 * @param nCols nombre de columnes de m
 	 */
 	public SparseMatrix(Map<Integer, HashSet<Integer>> m,int nRows, int nCols) {
 		initMatrix(nRows, nCols); //crea matriz dispersa nRows*nCols vacia
@@ -109,9 +109,9 @@ public class SparseMatrix {
 	
 	/**
 	 * Posa el valor indicat per value a la columna i fila indicades per row i col
-	 * @param row
-	 * @param col
-	 * @param value
+	 * @param row fila
+	 * @param col columna
+	 * @param value valor
 	 */
 	public void set(int row, int col, Float value) {
 		if (value == null) value = 0.f;
@@ -140,7 +140,7 @@ public class SparseMatrix {
 
 	/**
 	 * Retorna el nombre de files de la matriu
-	 * @return
+	 * @return nombre de files de la matriu
 	 */
 	public int getNRows() {
 		return rows.size();
@@ -148,7 +148,7 @@ public class SparseMatrix {
 	
 	/**
 	 * Retorna el nombre de columnes de la matriu
-	 * @return
+	 * @return nombre de columnes de la matriu
 	 */
 	public int getNCols() {
 		return cols.size();
@@ -156,8 +156,8 @@ public class SparseMatrix {
 	
 	/**
 	 * Transforma la matriu en una matriu de zeros del tamany indicat
-	 * @param nRows
-	 * @param nCols
+	 * @param nRows nombre de files
+	 * @param nCols nombre de columnes
 	 */
 	public void setSize(int nRows, int nCols) {
 		initMatrix( nRows, nCols);
@@ -166,8 +166,8 @@ public class SparseMatrix {
 	
 	/**
 	 * retorna la fila amb index i
-	 * @param i
-	 * @return
+	 * @param i fila a retornar
+	 * @return fila amb index i
 	 */
 	public SparseVector getRow(int i) {
 		return rows.get(i);
@@ -175,8 +175,8 @@ public class SparseMatrix {
 	
 	/**
 	 * retorna la columna amb index j
-	 * @param j
-	 * @return
+	 * @param j columna a retornar
+	 * @return columna amb index j
 	 */
 	public SparseVector getCol(int j) {
 		return cols.get(j);
@@ -184,9 +184,9 @@ public class SparseMatrix {
 	
 	/**
 	 * retorna el valor albergat en la posicio ij
-	 * @param i
-	 * @param j
-	 * @return
+	 * @param i index de la fila
+	 * @param j index de la columna
+	 * @return valor en la posicio (i,j)
 	 */
 	public Float getValue(int i, int j) {
 		if (i < rows.size() && rows.get(i).containsKey(j)) return rows.get(i).get(j);
@@ -225,9 +225,9 @@ public class SparseMatrix {
 	}
 
 	
-	/**
-	 * @override imprimeix els elements de la matriu ordenats
-	 */
+/**
+ * Escriu la matriu en un format facil de llegir
+ */
 	public String toString() {
 		String s = new String();
 		DecimalFormat df = new DecimalFormat("##.###");

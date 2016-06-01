@@ -14,7 +14,7 @@ public class SparseMatrixBool {
 	/**
 	 * Crea una matriu dispersa de booleans a partir d'una matriu dispersa de floats
 	 * Arrodoneix a true a partir de 0.5f
-	 * @param sm
+	 * @param sm matriu inicial
 	 */
 	public SparseMatrixBool(SparseMatrix sm) {
 		initMatrix(sm.getNRows(), sm.getNCols());
@@ -35,8 +35,8 @@ public class SparseMatrixBool {
 	
 	/**
 	 * Crea una matriu buida de tamany nRows x nCols
-	 * @param nRows
-	 * @param nCols
+	 * @param nRows nombre de files
+	 * @param nCols nombre de columnes
 	 */
 	public SparseMatrixBool(int nRows, int nCols) {
 		initMatrix(nRows, nCols);
@@ -44,7 +44,7 @@ public class SparseMatrixBool {
 	
 	/**
 	 * creadora de copia a partir de unaltre SparseMatrixBool
-	 * @param sm
+	 * @param sm matriu de dades inicial
 	 */
 	@SuppressWarnings("unchecked")
 	public SparseMatrixBool(SparseMatrixBool sm) {
@@ -60,7 +60,7 @@ public class SparseMatrixBool {
 	
 	/**
 	 * Crea una matriu dispersa de booleans
-	 * @param v
+	 * @param v dades inicials
 	 */
 	public SparseMatrixBool(ArrayList<HashMap<Integer,Boolean>> v){
 		for (int i = 0; i < v.size(); ++i) {
@@ -88,9 +88,9 @@ public class SparseMatrixBool {
 	
 	/**
 	 * Posa el valor indicat per value a la columna i fila indicades per row i col
-	 * @param row
-	 * @param col
-	 * @param value
+	 * @param row fila
+	 * @param col columna
+	 * @param value valor
 	 */
 	public void set(int row, int col, Boolean value) {
 		if (value == null) value = false;
@@ -119,7 +119,7 @@ public class SparseMatrixBool {
 
 	/**
 	 * Retorna el nombre de files de la matriu
-	 * @return
+	 * @return nombre de files
 	 */
 	public int getNRows() {
 		return rows.size();
@@ -127,7 +127,7 @@ public class SparseMatrixBool {
 	
 	/**
 	 * Retorna el nombre de columnes de la matriu
-	 * @return
+	 * @return nombre de columnes de la matriu
 	 */
 	public int getNCols() {
 		return cols.size();
@@ -135,8 +135,8 @@ public class SparseMatrixBool {
 	
 	/**
 	 * Transforma la matriu en una matriu de zeros del tamany indicat
-	 * @param nRows
-	 * @param nCols
+	 * @param nRows nombre de files
+	 * @param nCols nombre de columnes
 	 */
 	public void setSize(int nRows, int nCols) {
 		initMatrix( nRows, nCols);
@@ -145,8 +145,8 @@ public class SparseMatrixBool {
 	
 	/**
 	 * retorna la fila amb index i
-	 * @param i
-	 * @return
+	 * @param i posicio de la fila
+	 * @return fila en la posicio i
 	 */
 	public HashMap<Integer,Boolean> getRow(int i) {
 		return rows.get(i);
@@ -154,8 +154,8 @@ public class SparseMatrixBool {
 	
 	/**
 	 * retorna la columna amb index j
-	 * @param j
-	 * @return
+	 * @param j posicio de la columna
+	 * @return columna en la posicio j
 	 */
 	public HashMap<Integer,Boolean> getCol(int j) {
 		return cols.get(j);
@@ -163,9 +163,9 @@ public class SparseMatrixBool {
 	
 	/**
 	 * retorna el valor albergat en la posicio ij
-	 * @param i
-	 * @param j
-	 * @return
+	 * @param i posicio de la fila
+	 * @param j posicio de la columna
+	 * @return element de la posicio (i,j)
 	 */
 	public Boolean getValue(int i, int j) {
 		if (i < rows.size() && rows.get(i).containsKey(j)) return rows.get(i).get(j);
@@ -181,16 +181,14 @@ public class SparseMatrixBool {
 		cols = aux;
 	}
 	
-	/**
-	 * @override imprimeix els elements de la matriu ordenats
-	 */
+/**
+ * imprimeix la matriu en un format llegible
+ */
 	public String toString() {
 		String s = new String();
-		DecimalFormat df = new DecimalFormat("##.###");
-		df.setRoundingMode(RoundingMode.DOWN);
 		for (int i = 0; i < getNRows(); ++i) {
 			for (int j = 0; j < getNCols(); ++j) {
-				s+=df.format(getValue(i, j))+ " ";
+				s+=(getValue(i, j)).toString()+ " ";
 			}
 			s+= '\n';
 		} 
