@@ -1,36 +1,27 @@
 package presentacio.queries;
 
-import java.awt.EventQueue;
 import java.awt.Font;
-
-import javax.swing.JFrame;
-import net.miginfocom.swing.MigLayout;
-import presentacio.ctrl.CtrlPresentacio;
-import presentacio.ctrl.VistaDialog;
-
-import javax.swing.JButton;
-import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
 
-import javax.swing.Action;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableRowSorter;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import domini.queries.*;
-import domini.graf.*;
-import javax.swing.JPanel;
-import javax.swing.table.TableRowSorter;
 
+import net.miginfocom.swing.MigLayout;
+import presentacio.ctrl.CtrlPresentacio;
+import presentacio.ctrl.VistaDialog;
+
+@SuppressWarnings({"rawtypes","unchecked"})
 public class VistaResultatNew {
 
 	private JFrame frame;
@@ -156,27 +147,6 @@ public class VistaResultatNew {
 		label.setText(vQ.pathCami);
 		
 	}
-	
-	private void init_frame() {
-		frame = new JFrame();
-		frame.setSize(600, 400);
-		frame.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				e.getWindow().dispose();
-				try {
-					ctrl.getDomini().guardarCamins(ctrl.getDomini().getUsuariActual());
-				} catch (Exception exc) {
-					String[] botons = {"D'acord"};
-					(new VistaDialog()).setDialog("No s'ha pogut desar el conjunt de camins", exc.getMessage(), botons, JOptionPane.ERROR_MESSAGE);
-				}
-				ctrl.openMenu();
-			}
-		});
-		frame.setLocationRelativeTo(null);
-		frame.getContentPane().setLayout(new MigLayout("", "[452px,grow]", "[][218px,grow]"));
-	}
-
 	
 	private class ResTableModel extends AbstractTableModel {
 		private static final long serialVersionUID = 1L;

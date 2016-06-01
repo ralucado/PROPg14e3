@@ -2,7 +2,7 @@ package presentacio.ctrl;
 
 import javax.swing.JOptionPane;
 
-public class TestPresentacio {
+public class PathSearcher {
 	public static void main(String[] args) {
 		javax.swing.SwingUtilities.invokeLater (
 	      new Runnable() {
