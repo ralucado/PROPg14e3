@@ -196,6 +196,7 @@ public class HeteSim{
 		for (int i = 0; i < result.getNRows(); ++i) {
 			System.out.println("normalitzant fila "+i+" de "+result.getNRows()+". Gracies per la seva espera.");
 			float normi = left.getRow(i).norm();
+			
 			for (int j = 0; j < result.getNCols(); ++j) {
 				if(i == 0) normj.add(j, right.getRow(j).norm());
 				float top = SparseVector.multiply(left.getRow(i),right.getRow(j)); 	//agafem la fila enlloc de la columna de right

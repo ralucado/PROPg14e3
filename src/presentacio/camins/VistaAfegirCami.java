@@ -39,14 +39,21 @@ public class VistaAfegirCami extends VistaCanvisCami{
 		
 		btnAccepta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					ctrl.getDomini().afegirCami(nomField.getText(), pathField.getText(), descField.getText());
-					dispose();
-				}
-				catch (Exception e2) {
+				if(nomField.getText().isEmpty() || pathField.getText().isEmpty()){
 					VistaDialog dialog = new VistaDialog();
 					String[] botons = {"D'acord"};
-					dialog.setDialog("No s'ha pogut afegir el cami", e2.getMessage(), botons, JOptionPane.ERROR_MESSAGE);
+					dialog.setDialog("Dades insuficients!", "Has d'omplir obligatoriament els camps Nom i Path", botons, JOptionPane.ERROR_MESSAGE);
+				}
+				else{
+					try {
+						ctrl.getDomini().afegirCami(nomField.getText(), pathField.getText(), descField.getText());
+						dispose();
+					}
+					catch (Exception e2) {
+						VistaDialog dialog = new VistaDialog();
+						String[] botons = {"D'acord"};
+						dialog.setDialog("No s'ha pogut afegir el cami", e2.getMessage(), botons, JOptionPane.ERROR_MESSAGE);
+					}
 				}
 			}
 		});

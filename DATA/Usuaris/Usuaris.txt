@@ -1,9 +1,10 @@
 noAdmin	admin	0
 marc	villanueva	1
 chema_alonso	hacker777	1
-admin	admin	1
+admin	adminadmin	1
 ralu	test	0
 somelmillorequipdeprop	period	1
 arnau	test	0
 raluA	admin	1
 marti	marti_hacker	1
+nouUser	test	0

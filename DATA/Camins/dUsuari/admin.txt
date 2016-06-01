@@ -1,5 +1,1 @@
-app	AP	app
-hearreglatelbuuuuug	APA	apa
-critic	APCPA	autors amb papers a la mateixa conferencia
-Conferències	APC	Conferències on partic
-cami raro	APCP	wtf
+sudo	APT	get update
