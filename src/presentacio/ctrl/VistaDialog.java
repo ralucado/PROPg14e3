@@ -37,7 +37,7 @@ public class VistaDialog extends JDialog {
 		dialogOptionPane.setVisible(true);
 		optionPane.getOptions();
 		
-		String vsel = (String) optionPane.getValue();
+		String vsel = String.valueOf(optionPane.getValue());
 		int isel;
 		for (isel = 0; isel < buttons.length && !buttons[isel].equals(vsel); isel++);
 		
