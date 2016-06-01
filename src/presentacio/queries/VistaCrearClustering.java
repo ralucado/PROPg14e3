@@ -67,7 +67,7 @@ public class VistaCrearClustering {
 					camiNou = false;
 				} catch (Exception exc) {
 					String[] botons = {"D'acord"};
-					(new VistaDialog()).setDialog("No s'ha pogut obrir la finestra de seleccio", exc.getMessage(), botons, JOptionPane.ERROR_MESSAGE);
+					(new VistaDialog()).setDialog("Error","No s'ha pogut obrir la finestra de seleccio", botons, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

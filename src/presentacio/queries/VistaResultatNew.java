@@ -86,7 +86,10 @@ public class VistaResultatNew {
 				if (! nEntitats.getText().equals("")){
 					try{
 						ctrl.getDomini().filtrarResultatN(Integer.parseInt(nEntitats.getText()));
-					}catch(Exception E){}
+					}catch(Exception E){
+						String[] botons = {"D'acord"};
+						(new VistaDialog()).setDialog("Error", "No s'ha pogut filtrar el resultat", botons, JOptionPane.ERROR_MESSAGE);
+					}
 					resData.updateData();
 				}
 			}
@@ -106,7 +109,8 @@ public class VistaResultatNew {
 					try{
 						ctrl.getDomini().filtrarResultatLabel(comboBox.getSelectedIndex()-1);}
 					catch(Exception E){
-						E.printStackTrace();
+						String[] botons = {"D'acord"};
+						(new VistaDialog()).setDialog("Error", "No s'ha pogut filtrar el resultat", botons, JOptionPane.ERROR_MESSAGE);
 					}
 					resData.updateData();
 				}
@@ -118,7 +122,8 @@ public class VistaResultatNew {
 		JButton btnDesferfiltre = new JButton("Desfer Filtre");
 		btnDesferfiltre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try{ctrl.getDomini().resultatDesferFiltre();}catch(Exception E){};
+				try{ctrl.getDomini().resultatDesferFiltre();}
+				catch(Exception E){};
 				resData.updateData();
 			}
 		});
@@ -179,7 +184,11 @@ public class VistaResultatNew {
 		protected String[][] data;
 		
 		public ResTableModel() {
-			try{this.data = ctrl.getDomini().getDadesNormal();}catch(Exception E){}
+			try{this.data = ctrl.getDomini().getDadesNormal();}
+			catch(Exception E){
+				String[] botons = {"D'acord"};
+				(new VistaDialog()).setDialog("Error", "Error al preparar el resultat", botons, JOptionPane.ERROR_MESSAGE);
+			}
 		}
 		
 		public String getColumnName(int column) {
@@ -195,7 +204,11 @@ public class VistaResultatNew {
 		}
 		
 		public void updateData() {
-			try{this.data = ctrl.getDomini().getDadesNormal();}catch(Exception E){}
+			try{this.data = ctrl.getDomini().getDadesNormal();}
+			catch(Exception E){
+				String[] botons = {"D'acord"};
+				(new VistaDialog()).setDialog("Error", "Error al preparar el resultat", botons, JOptionPane.ERROR_MESSAGE);
+			}
 			fireTableDataChanged();
 		}
 

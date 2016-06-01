@@ -114,7 +114,7 @@ public class VistaCrearQuery {
 						}
 						catch (Exception exc){
 							String[] botons = {"D'acord"};
-							(new VistaDialog()).setDialog("Error", exc.getMessage(), botons, JOptionPane.ERROR_MESSAGE);
+							(new VistaDialog()).setDialog("Error", "No s'ha pogut obrir la finestra de seleccionar entitat", botons, JOptionPane.ERROR_MESSAGE);
 						}
 					}
 				}

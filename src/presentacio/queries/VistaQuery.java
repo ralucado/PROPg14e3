@@ -4,10 +4,12 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 
 import net.miginfocom.swing.MigLayout;
 import presentacio.ctrl.CtrlPresentacio;
+import presentacio.ctrl.VistaDialog;
 
 public class VistaQuery{
 	private CtrlPresentacio ctrl;
@@ -64,15 +66,12 @@ public class VistaQuery{
 				ctrl.getDomini().inicialitzarQuerynormal(pathCami);
 				ctrl.getDomini().seleccionarEntitatInicial(entitat);
 				ctrl.getDomini().executarQuery();
-				//System.out.println(" OK!");
 			}
 			else{
 				ctrl.getDomini().inicialitzarQuerynormalNom(nomCami);
 				ctrl.getDomini().seleccionarEntitatInicial(entitat);
 				ctrl.getDomini().executarQuery();
-				//System.out.println(" OK!");
 			}
-			System.out.println(" OK Query!");
 
 			new VistaResultatNew(ctrl, this);
 	}
@@ -89,7 +88,8 @@ public class VistaQuery{
 			}
 			System.out.println(" OK Clustering!");
 		}catch (Exception E){
-			E.printStackTrace();
+			String[] botons = {"D'acord"};
+			(new VistaDialog()).setDialog("Error", "No s'ha pogut executar clustering", botons, JOptionPane.ERROR_MESSAGE);
 		}
 		new VistaResultatClustering(ctrl,frame,this);
 		fesVisible();

@@ -11,7 +11,10 @@ import javax.swing.table.AbstractTableModel;
 
 import net.miginfocom.swing.MigLayout;
 import presentacio.ctrl.CtrlPresentacio;
+import presentacio.ctrl.VistaDialog;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 @SuppressWarnings("serial")
 public class VistaResultatClustering extends JDialog{
@@ -60,8 +63,8 @@ public class VistaResultatClustering extends JDialog{
 				this.data = vQ.getData();
 
 			} catch (Exception e) {
-				e.printStackTrace();
-				System.out.println(e.getMessage());
+				String[] botons = {"D'acord"};
+				(new VistaDialog()).setDialog("Error", "No s'ha pogut obrir el resultat de clustering", botons, JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		
