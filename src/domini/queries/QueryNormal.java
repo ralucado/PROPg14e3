@@ -18,8 +18,8 @@ public class QueryNormal extends Query{
 
 	/**
 	 * Crea una instancia de QueryNormal amb el camí passat com a paràmetre
-	 * @param c
-	 * @throws Exception
+	 * @param c Camí de la query
+	 * @throws Exception ...
 	 */
 	public QueryNormal(Cami c) throws Exception{
 		super.cami = c;
@@ -162,3 +162,4 @@ public class QueryNormal extends Query{
 		
 	}
 }
+
